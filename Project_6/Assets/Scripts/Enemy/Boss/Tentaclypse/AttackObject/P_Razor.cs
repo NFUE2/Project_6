@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Razor : MonoBehaviour
+public class P_Razor : MonoBehaviour
 {
     private bool isAttackable = false;
     private float stateChangeTime = 0.75f;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AllRoundAttackObject : MonoBehaviour
+public class P_AllRoundAttackObject : MonoBehaviour
 {
     private GameObject boss;
     private P_Tentaclypse tentaclypse;
