@@ -4,7 +4,10 @@ using UnityEngine;
 public class P_Tentaclypse : P_BossMonster
 {
     [SerializeField] private P_BossData tentaclypseData;
+    public GameObject target;
     private P_Dummy currentTarget;
+    public GameObject razorObject;
+    public GameObject attackPatternManager;
 
     private void Start()
     {
@@ -13,6 +16,8 @@ public class P_Tentaclypse : P_BossMonster
         bossPower = tentaclypseData.BossPower;
         bossHp = tentaclypseData.BossHp;
         currentState = P_BossState.Idle;
+        // 패턴 추가 정보
+        SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseRazorAttack>());
         // 플레이어 정보 수집
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         dummies = new List<GameObject>();
@@ -27,7 +32,15 @@ public class P_Tentaclypse : P_BossMonster
         if(targetSettingTriggerTime >= targetSettingTime)
         {
             targetSettingTriggerTime = 0;
-            var target = SetTarget();
+            if(target != null)
+            {
+                bool isTargetDead = currentTarget.IsDead();
+                if (isTargetDead)
+                {
+                    dummies.Remove(target);
+                }
+            }
+            target = SetTarget();
             // 확인용 임시코드
             currentTarget = target.GetComponent<P_Dummy>();
             Debug.Log($"{currentTarget.dummyName} 주시 중");
@@ -39,8 +52,10 @@ public class P_Tentaclypse : P_BossMonster
     {
         if (currentTarget != null)
         {
+            int index = Random.Range(0,patterns.Count);
+            patterns[index].ExecuteAttack();
             // 확인용 임시코드
-            Debug.Log($"크와앙!! {currentTarget.dummyName}를 잡아 먹어버리겠당!");
+            //Debug.Log($"크와앙!! {currentTarget.dummyName}를 잡아 먹어버리겠당!");
             currentState = P_BossState.Idle;
             // 확인용 임시코드
         }

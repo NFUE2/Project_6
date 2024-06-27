@@ -10,6 +10,11 @@ public enum P_BossState
     Dead
 }
 
+public interface IAttackPattern
+{
+    public void ExecuteAttack();
+}
+
 public abstract class P_BossMonster : MonoBehaviour
 {
     public string bossName;
@@ -17,6 +22,7 @@ public abstract class P_BossMonster : MonoBehaviour
     public float bossHp;
     public List<GameObject> dummies;
     protected P_BossState currentState;
+    protected List<IAttackPattern> patterns = new List<IAttackPattern>();
 
     public float targetSettingTime;
     public float targetSettingTriggerTime;
@@ -33,6 +39,11 @@ public abstract class P_BossMonster : MonoBehaviour
             attackTriggerTime = 0;
             currentState = P_BossState.Attacking;
         }
+    }
+
+    public void SetAttackPattern(IAttackPattern newAttackPattern)
+    {
+        patterns.Add(newAttackPattern);
     }
 
     void HandleState()
