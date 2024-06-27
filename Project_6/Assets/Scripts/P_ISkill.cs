@@ -5,5 +5,4 @@ using UnityEngine;
 public interface P_ISkill
 {
     void SkillAction();
-
 }
