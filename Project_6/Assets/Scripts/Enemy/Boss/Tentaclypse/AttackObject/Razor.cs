@@ -5,9 +5,9 @@ using UnityEngine;
 public class Razor : MonoBehaviour
 {
     private bool isAttackable = false;
-    private float stateChangeTime = 1;
+    private float stateChangeTime = 0.75f;
     private float stateChangeTriggerTime;
-    private float objectDestroyTime = 0.5f;
+    private float objectDestroyTime = 0.25f;
     private float objectDestroyTriggerTime;
     private GameObject boss;
     private P_Tentaclypse tentaclypse;

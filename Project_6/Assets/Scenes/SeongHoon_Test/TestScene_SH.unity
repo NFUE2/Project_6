@@ -388,6 +388,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &500974416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500974418}
+  - component: {fileID: 500974417}
+  m_Layer: 0
+  m_Name: AttackPatternManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500974417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500974416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d78be1b3ef3fd46b3c21305f228ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &500974418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500974416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545352352
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,8 +576,8 @@ GameObject:
   - component: {fileID: 1249613885}
   - component: {fileID: 1249613884}
   m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
+  m_Name: Tentaclypse
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -555,10 +599,13 @@ MonoBehaviour:
   bossHp: 0
   dummies: []
   targetSettingTime: 5
-  targetSettingTriggerTime: 0
-  attackCoolDown: 3
+  targetSettingTriggerTime: 5
+  attackCoolDown: 5
   attackTriggerTime: 0
   tentaclypseData: {fileID: 11400000, guid: e66aec7d1c97e4b49be7ea039c58a0fd, type: 2}
+  target: {fileID: 0}
+  razorObject: {fileID: 9132095129911206727, guid: 4c8ee3156313e5f4e84cbb7564bb5d13, type: 3}
+  attackPatternManager: {fileID: 500974416}
 --- !u!50 &1249613885
 Rigidbody2D:
   serializedVersion: 4
@@ -1228,3 +1275,4 @@ SceneRoots:
   - {fileID: 1994551185}
   - {fileID: 1704195395}
   - {fileID: 461824394}
+  - {fileID: 500974418}

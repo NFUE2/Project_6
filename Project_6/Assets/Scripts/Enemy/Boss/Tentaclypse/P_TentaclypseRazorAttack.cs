@@ -24,7 +24,7 @@ public class P_TentaclypseRazorAttack : MonoBehaviour, IAttackPattern
 
     private IEnumerator RazorObjectCoroutine()
     {
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 5; i++)
         {
             Vector3 razorPosition = target.transform.position;
             var razor = Instantiate(razorObject, transform);

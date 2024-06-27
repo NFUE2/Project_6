@@ -6,8 +6,11 @@ public class P_Tentaclypse : P_BossMonster
     [SerializeField] private P_BossData tentaclypseData;
     public GameObject target;
     private P_Dummy currentTarget;
-    public GameObject razorObject;
+
+    [Header("Attack Pattern")]
     public GameObject attackPatternManager;
+    public GameObject razorObject;
+    public GameObject allRoundAttackObject;
 
     private void Start()
     {
@@ -18,6 +21,8 @@ public class P_Tentaclypse : P_BossMonster
         currentState = P_BossState.Idle;
         // 패턴 추가 정보
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseRazorAttack>());
+        SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseAllRoundShotAttack>());
+
         // 플레이어 정보 수집
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         dummies = new List<GameObject>();
