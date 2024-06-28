@@ -5,29 +5,47 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+enum SceneType
+{
+    intro,
+    Main
+}
+
 public class P_Network : MonoBehaviourPunCallbacks
 {
-    public TextMeshProUGUI text;
-    public GameObject startBtn;
+    public TextMeshProUGUI text,count;
+    
 
     private void Awake()
     {
         //서버접속
         PhotonNetwork.ConnectUsingSettings();
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void Update() => text.text = PhotonNetwork.NetworkClientState.ToString();
+    private void Update()
+    {
+        text.text = PhotonNetwork.NetworkClientState.ToString();
+        if (PhotonNetwork.InRoom) count.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+    }
 
     public void JoinRoom()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinRandomOrCreateRoom();
+        StartCoroutine(SceneChaneCheck(ClientState.Joined,SceneType.Main));
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    IEnumerator SceneChaneCheck(ClientState state,SceneType type)
     {
-        if(PhotonNetwork.IsMasterClient)
+        ClientState curState = PhotonNetwork.NetworkClientState;
+
+        while (curState != state)
         {
-            startBtn.SetActive(false);
+            curState = PhotonNetwork.NetworkClientState;
+            yield return null;
         }
+
+        PhotonNetwork.LoadLevel((int)type);
     }
 }
