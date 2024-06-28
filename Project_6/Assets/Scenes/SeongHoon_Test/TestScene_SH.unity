@@ -635,6 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossName: 
   bossPower: 0
+  maxHp: 0
   bossHp: 0
   dummies: []
   targetSettingTime: 5
