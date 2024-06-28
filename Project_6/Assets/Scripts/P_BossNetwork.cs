@@ -10,10 +10,16 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
     public Image image;
     public GameObject boss;
 
+    public static P_BossNetwork instance;
+    public int count = 0;
+    public GameObject gamestartButton;
+
     private void Awake()
     {
+        instance = this;
         pv = GetComponent<PhotonView>();
     }
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -36,7 +42,14 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
     public void BossActiveRPC()
     {
         boss.SetActive(true);
+        gamestartButton.SetActive(false);
     }
 
+    public void PlusCount()
+    {
+        count++;
+        if (count >= 4)
+            gamestartButton.SetActive(true);
+    }
 
 }

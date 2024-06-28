@@ -12,9 +12,7 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
     PhotonView pv;
 
     public GameObject panel;
-    public GameObject gameStartButton;
 
-    int count = 0;
 
     private void Awake()
     {
@@ -26,6 +24,7 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
     {
         //전체 동기화
         pv.RPC("OnClickRPC",RpcTarget.MasterClient);
+        P_BossNetwork.instance.PlusCount();
         int playerNum = PhotonNetwork.LocalPlayer.ActorNumber;
 
         PhotonNetwork.Instantiate(go.name,Vector2.zero + Vector2.right * playerNum,Quaternion.identity);
@@ -37,10 +36,6 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
     private void OnClickRPC()
     {
         button.interactable = false;
-        count++;
-
-        if (count >= 4 && PhotonNetwork.IsMasterClient)
-            gameStartButton.SetActive(true);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
