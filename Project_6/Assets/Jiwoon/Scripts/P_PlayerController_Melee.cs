@@ -11,21 +11,22 @@ public class PlayerController_Melee : MonoBehaviour
     public Animator animator; // 공격 애니메이터
     public BoxCollider2D meleeCollider;
     private P_SwordE P_SwordE;
-
+    private P_SwordQ P_SwordQ;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isJumping;
     private Camera mainCamera;
-    private SpriteRenderer spriteRenderer;
     private PlayerControls playerControls;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         playerControls = new PlayerControls(); // 추가: PlayerControls 인스턴스 생성
         meleeCollider.enabled = false; // 콜라이더 비활성화
+        P_SwordE = GetComponent<P_SwordE>();
+        P_SwordQ = GetComponent<P_SwordQ>();
+
     }
 
     private void Update()
@@ -47,7 +48,7 @@ public class PlayerController_Melee : MonoBehaviour
 
         playerControls.Player.SkillQ.performed += ctx => SkillQ();
         playerControls.Player.SkillE.performed += ctx => SkillE();
-        // playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+        //playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
     }
 
     private void OnDisable()
@@ -121,11 +122,13 @@ public class PlayerController_Melee : MonoBehaviour
 
     private void SkillQ()
     {
-
+        Debug.Log("SkillQ 사용");
+        P_SwordQ.SkillAction();
     }
 
     private void SkillE()
     {
-
+        Debug.Log("SkillE 사용");
+        P_SwordE.SkillAction();
     }
 }

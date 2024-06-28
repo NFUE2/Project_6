@@ -7,7 +7,7 @@ public class PlayerCondition : MonoBehaviour
 {
     public float maxHealth = 100f; // 최대 체력
     private float currentHealth;
-    public Image currentHpBar;
+    //public Image currentHpBar;
 
     private void Awake()
     {
@@ -21,9 +21,7 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(maxHealth);
-        Debug.Log(currentHealth);
-        currentHpBar.fillAmount = currentHealth / maxHealth;
+        //currentHpBar.fillAmount = currentHealth / maxHealth;
     }
 
     // 데미지를 받는 메서드
@@ -34,7 +32,7 @@ public class PlayerCondition : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            currentHpBar.fillAmount = 0;    
+            //currentHpBar.fillAmount = 0;    
             Die();
         }
     }

@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 4171062370086466351}
   - component: {fileID: 4404171072473838084}
   - component: {fileID: 8977575657748809050}
+  - component: {fileID: 4641016725949181671}
+  - component: {fileID: 4282614974121979400}
   m_Layer: 0
-  m_Name: Player_closedistance
+  m_Name: P_Player_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,6 +199,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &4641016725949181671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940865410465219502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c56e221651ce5f4688e9f80d33a9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 8521390195919853251, guid: 2de9e0baf850eb44ebd1b577d68e7267, type: 3}
+  animator: {fileID: 0}
+--- !u!114 &4282614974121979400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940865410465219502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fe52487536c8f4386e00369921ce9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3197255201787416853
 GameObject:
   m_ObjectHideFlags: 0
