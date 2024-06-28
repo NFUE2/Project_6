@@ -327,8 +327,8 @@ GameObject:
   - component: {fileID: 5997769800550438212}
   - component: {fileID: 1849537572430368465}
   - component: {fileID: 1310914263992408540}
-  - component: {fileID: 1342693721821341072}
-  - component: {fileID: 7136906609851079547}
+  - component: {fileID: 2275098260950604350}
+  - component: {fileID: 4471793825532053257}
   m_Layer: 0
   m_Name: P_Player_Hammer
   m_TagString: Untagged
@@ -511,7 +511,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
---- !u!114 &1342693721821341072
+  boss: {fileID: 0}
+  bossMonster: {fileID: 0}
+  currentHpBar: {fileID: 0}
+--- !u!114 &2275098260950604350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,12 +523,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3833822381116069660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c56e221651ce5f4688e9f80d33a9111, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f3eb25772196254f927b77994585473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 8521390195919853251, guid: 2de9e0baf850eb44ebd1b577d68e7267, type: 3}
-  animator: {fileID: 0}
---- !u!114 &7136906609851079547
+  maxChargingTime: 1
+--- !u!114 &4471793825532053257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,9 +536,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3833822381116069660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fe52487536c8f4386e00369921ce9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8abb5fb0e5e82e541a615b915c77e8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shield: {fileID: 0}
+  shieldTime: 0
 --- !u!1 &4412223140309943800
 GameObject:
   m_ObjectHideFlags: 0
