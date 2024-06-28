@@ -13,7 +13,7 @@ public class P_GunQ : MonoBehaviour, P_ISkill
 
     private void Awake()
     {
-        hand = GetComponent<P_SkillTest>().hand;
+        //hand = GetComponent<P_SkillTest>().hand;
     }
 
     public void SkillAction()
@@ -34,7 +34,7 @@ public class P_GunQ : MonoBehaviour, P_ISkill
         for(int i = 0; i < 6; i++)
         {
             float fireAngle = Random.Range(-3f, 3f);
-            GameObject go = Instantiate(bullet, hand.GetChild(0).position, Quaternion.identity);
+            GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
             go.transform.localEulerAngles = hand.localEulerAngles + new Vector3(0, 0,fireAngle);
 
             yield return new WaitForSeconds(0.1f);
