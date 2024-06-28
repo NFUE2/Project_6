@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,8 @@ public class PlayerController_Hammer : MonoBehaviour
     private P_HammerQ P_HammerQ;
     private P_HammerE P_HammerE;
 
+    PhotonView pv;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +33,7 @@ public class PlayerController_Hammer : MonoBehaviour
         P_HammerQ = GetComponent<P_HammerQ>();
         P_HammerE = GetComponent<P_HammerE>();
 
+        pv.GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -39,6 +43,8 @@ public class PlayerController_Hammer : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();

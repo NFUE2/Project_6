@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,8 @@ public class PlayerController_Melee : MonoBehaviour
     private Camera mainCamera;
     private PlayerControls playerControls;
 
+    PhotonView pv;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +30,7 @@ public class PlayerController_Melee : MonoBehaviour
         P_SwordE = GetComponent<P_SwordE>();
         P_SwordQ = GetComponent<P_SwordQ>();
 
+        pv.GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -36,6 +40,8 @@ public class PlayerController_Melee : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();

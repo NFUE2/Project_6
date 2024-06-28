@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Photon.Pun;
 
 public class PlayerController_Gun : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerController_Gun : MonoBehaviour
     private P_GunQ  P_gunQ;
     private P_GunE  P_gunE;
 
+    PhotonView pv;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +36,8 @@ public class PlayerController_Gun : MonoBehaviour
         playerControls = new PlayerControls(); // 추가: PlayerControls 인스턴스 생성
         P_gunQ = GetComponent<P_GunQ>();
         P_gunE = GetComponent<P_GunE>();
+
+        pv.GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -42,6 +47,8 @@ public class PlayerController_Gun : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
