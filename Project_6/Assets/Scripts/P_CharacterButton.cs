@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,10 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
     Button button;
     PhotonView pv;
 
-    GameObject character;
+    public GameObject panel;
+    public GameObject gameStartButton;
+
+    int count = 0;
 
     private void Awake()
     {
@@ -26,13 +30,17 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
 
         PhotonNetwork.Instantiate(go.name,Vector2.zero + Vector2.right * playerNum,Quaternion.identity);
 
-        GameObject.Find("Window_ChooseCharacter").SetActive(false);
+        panel.SetActive(false);
     }
 
     [PunRPC]
     private void OnClickRPC()
     {
         button.interactable = false;
+        count++;
+
+        if (count >= 4 && PhotonNetwork.IsMasterClient)
+            gameStartButton.SetActive(true);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
