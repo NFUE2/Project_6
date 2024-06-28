@@ -34,8 +34,10 @@ public class P_GunQ : MonoBehaviour, P_ISkill
         for(int i = 0; i < 6; i++)
         {
             float fireAngle = Random.Range(-3f, 3f);
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(mousePos.y,mousePos.x) * Mathf.Rad2Deg;
+
+            Debug.Log(mousePos);
 
             GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
             go.transform.localEulerAngles = /*hand.localEulerAngles + */new Vector3(0, 0,angle + fireAngle);
