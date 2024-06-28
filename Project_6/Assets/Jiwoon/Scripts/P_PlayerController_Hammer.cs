@@ -11,8 +11,6 @@ public class PlayerController_Hammer : MonoBehaviour
     public LayerMask enemyLayer; // 적 레이어
     public Animator animator; // 공격 애니메이터
     public BoxCollider2D meleeCollider;
-    private P_SwordE P_SwordE;
-    private P_SwordQ P_SwordQ;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isJumping;
