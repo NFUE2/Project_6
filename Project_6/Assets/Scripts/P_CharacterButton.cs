@@ -25,6 +25,8 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
         int playerNum = PhotonNetwork.LocalPlayer.ActorNumber;
 
         PhotonNetwork.Instantiate(go.name,Vector2.zero + Vector2.right * playerNum,Quaternion.identity);
+
+        GameObject.Find("Window_ChooseCharacter").SetActive(false);
     }
 
     [PunRPC]
