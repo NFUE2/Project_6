@@ -27,8 +27,8 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        Debug.Log("적에게 데미지를 입혔습니다.");
     }
 }

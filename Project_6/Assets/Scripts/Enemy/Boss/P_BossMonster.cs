@@ -15,6 +15,7 @@ public interface IAttackPattern
     public void ExecuteAttack();
 }
 
+
 public abstract class P_BossMonster : MonoBehaviour
 {
     public string bossName;

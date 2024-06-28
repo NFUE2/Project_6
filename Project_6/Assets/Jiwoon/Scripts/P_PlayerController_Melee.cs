@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController_Melee : MonoBehaviour
 {
@@ -9,22 +10,28 @@ public class PlayerController_Melee : MonoBehaviour
     public LayerMask enemyLayer; // 적 레이어
     public Animator animator; // 공격 애니메이터
     public BoxCollider2D meleeCollider;
-
+    private P_SwordE P_SwordE;
+    private P_SwordQ P_SwordQ;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isJumping;
     private Camera mainCamera;
-    private SpriteRenderer spriteRenderer;
     private PlayerControls playerControls;
-    private bool isAttacking = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         playerControls = new PlayerControls(); // 추가: PlayerControls 인스턴스 생성
         meleeCollider.enabled = false; // 콜라이더 비활성화
+        P_SwordE = GetComponent<P_SwordE>();
+        P_SwordQ = GetComponent<P_SwordQ>();
+
+    }
+
+    private void Update()
+    {
+        Look(Mouse.current.position.ReadValue());
     }
 
     private void OnEnable()
@@ -35,9 +42,13 @@ public class PlayerController_Melee : MonoBehaviour
         playerControls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         playerControls.Player.Jump.performed += ctx => Jump();
+
         playerControls.Player.Attack.performed += ctx => Attack();
         playerControls.Player.Attack.canceled += ctx => StopAttack();
-        playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+
+        playerControls.Player.SkillQ.performed += ctx => SkillQ();
+        playerControls.Player.SkillE.performed += ctx => SkillE();
+        //playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
     }
 
     private void OnDisable()
@@ -74,12 +85,11 @@ public class PlayerController_Melee : MonoBehaviour
     {
         // 공격 애니메이션 재생
         animator.SetTrigger("Attack");
-        isAttacking = true;
     }
 
     private void StopAttack()
     {
-        isAttacking = false;
+
     }
 
     // 애니메이션 이벤트로 호출될 메서드
@@ -94,27 +104,31 @@ public class PlayerController_Melee : MonoBehaviour
         meleeCollider.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isAttacking && meleeCollider.enabled && (enemyLayer == (enemyLayer | (1 << collision.gameObject.layer))))
-        {
-            Debug.Log("적 공격됨: " + collision.name);
-            // 여기에 적에게 데미지를 주는 로직 추가
-        }
-    }
-
     private void Look(Vector2 lookInput)
     {
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(lookInput);
         Vector2 direction = mousePosition - (Vector2)transform.position;
 
+        // 부모 오브젝트 기준으로 회전 처리
         if (direction.x > 0)
         {
-            spriteRenderer.flipX = false; // 오른쪽
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // 오른쪽
         }
         else if (direction.x < 0)
         {
-            spriteRenderer.flipX = true; // 왼쪽
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // 왼쪽
         }
+    }
+
+    private void SkillQ()
+    {
+        Debug.Log("SkillQ 사용");
+        P_SwordQ.SkillAction();
+    }
+
+    private void SkillE()
+    {
+        Debug.Log("SkillE 사용");
+        P_SwordE.SkillAction();
     }
 }

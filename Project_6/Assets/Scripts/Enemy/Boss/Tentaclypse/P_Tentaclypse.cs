@@ -19,7 +19,7 @@ public class P_Tentaclypse : P_BossMonster
         bossName = tentaclypseData.BossName;
         bossPower = tentaclypseData.BossPower;
         bossHp = tentaclypseData.BossHp;
-        maxHp = bossHp;
+        maxHp = tentaclypseData.BossHp;
         currentState = P_BossState.Idle;
         // 패턴 추가 정보
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseRazorAttack>());

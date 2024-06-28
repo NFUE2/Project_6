@@ -19,13 +19,13 @@ public class P_SwordQ : MonoBehaviour, P_ISkill
         else
         {
             Debug.Log("Q스킬사용");
-            animator.SetBool("SkillQ", isGuard = true);
+            //animator.SetBool("SkillQ", isGuard = true);
         }
     }
 
     public void ExitGuard()
     {
-        //isGuard = false;
-        animator.SetBool("SkillQ", isGuard = false);
+        isGuard = false;
+        //animator.SetBool("SkillQ", isGuard = false);
     }
 }

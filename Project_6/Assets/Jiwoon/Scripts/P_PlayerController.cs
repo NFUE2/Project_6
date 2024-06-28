@@ -1,12 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
-public class PlayerController_Long : MonoBehaviour
+public class PlayerController_Gun : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public Transform attackPoint;
     public GameObject attackPrefab;
+    public BoxCollider2D meleeCollider;
+
+    private bool isAttackCooldown = false;
+    private int attackCount = 0;
+    private float cooldownDuration = 3f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -15,12 +22,17 @@ public class PlayerController_Long : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private PlayerControls playerControls;
 
+    private P_GunQ  P_gunQ;
+    private P_GunE  P_gunE;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerControls = new PlayerControls(); // 추가: PlayerControls 인스턴스 생성
+        P_gunQ = GetComponent<P_GunQ>();
+        P_gunE = GetComponent<P_GunE>();
     }
 
     private void Start()
@@ -38,11 +50,18 @@ public class PlayerController_Long : MonoBehaviour
         playerControls.Player.Jump.performed += ctx => Jump();
         playerControls.Player.Attack.performed += ctx => Attack();
         playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+        playerControls.Player.SkillQ.performed += ctx => SkillQ();
+        playerControls.Player.SkillE.performed += ctx => SkillE();
     }
 
     private void OnDisable()
     {
         playerControls.Player.Disable();
+    }
+
+    private void Update()
+    {
+        Look(Mouse.current.position.ReadValue());
     }
 
     private void FixedUpdate()
@@ -70,27 +89,57 @@ public class PlayerController_Long : MonoBehaviour
         }
     }
 
-    private void Attack() // 원거리 캐릭터가 공격한다.
+    private void Attack()
     {
+        if (isAttackCooldown) return;
+
+        attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // 마우스의 위치값
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized; // 마우스의 위치값에서 지정해준 공격 시작 위치값을 뺀다 => 공격 방향
         GameObject attackInstance = Instantiate(attackPrefab, attackPoint.position, Quaternion.identity); // 총알을 생성해 발사해 공격한다.
         attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f; // 공격 속도 설정 한다.
+
+        if (attackCount >= 6)
+        {
+            StartCoroutine(AttackCooldown());
+        }
     }
 
+    private IEnumerator AttackCooldown() //6발을 쓰고 장전을 한다.
+    {
+        isAttackCooldown = true;
+        attackCount = 0;
+        yield return new WaitForSeconds(cooldownDuration);
+        isAttackCooldown = false;
+    }
 
     private void Look(Vector2 lookInput)
     {
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(lookInput);
-        Vector2 direction = mousePosition - (Vector2)transform.position;
+        {
+            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(lookInput);
+            Vector2 direction = mousePosition - (Vector2)transform.position;
 
-        if (direction.x > 0)
-        {
-            spriteRenderer.flipX = false; // 오른쪽
+            if (direction.x > 0)
+            {
+                // 오른쪽을 바라볼 때
+                transform.localRotation = Quaternion.Euler(0, 0, 0); // 기본 방향으로 설정
+            }
+            else if (direction.x < 0)
+            {
+                // 왼쪽을 바라볼 때
+                transform.localRotation = Quaternion.Euler(0, 180, 0); // Y축으로 회전하여 반대 방향으로 설정
+            }
         }
-        else if (direction.x < 0)
-        {
-            spriteRenderer.flipX = true; // 왼쪽
-        }
+    }
+    private void SkillQ()
+    {
+        Debug.Log("SkillQ 사용");
+        P_gunQ.SkillAction();
+    }
+
+    private void SkillE()
+    {
+        Debug.Log("SkillE 사용");
+        P_gunE.SkillAction();
     }
 }

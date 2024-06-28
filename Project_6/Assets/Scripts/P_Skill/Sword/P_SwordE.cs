@@ -12,18 +12,18 @@ public class P_SwordE :MonoBehaviour, P_ISkill
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     public void SkillAction()
     {
         //투사체 복사 및 날리기
-        animator.SetTrigger("SkillE");
+        //animator.SetTrigger("SkillE");
 
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 
-        Transform go = Instantiate(projectile).transform;
+        Transform go = Instantiate(projectile, transform.position, Quaternion.identity).transform;
 
         go.localEulerAngles = new Vector3(0,0,angle);
     }
