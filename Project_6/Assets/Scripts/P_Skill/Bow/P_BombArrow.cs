@@ -13,7 +13,7 @@ public class P_BombArrow : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, bombRange);
 

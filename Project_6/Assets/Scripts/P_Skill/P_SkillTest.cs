@@ -25,7 +25,6 @@ public class P_SkillTest : MonoBehaviour
     private void Awake()
     {
         skills = GetComponents<P_ISkill>();
-        Debug.Log(skills.Length);
     }
 
     private void Update()
@@ -38,12 +37,10 @@ public class P_SkillTest : MonoBehaviour
             hand.localEulerAngles = new Vector3(0,0,angle);
         }
 
-
         if (Input.GetKeyDown(KeyCode.Q))
             skills[(int)Skill.SkillQ].SkillAction();
 
         if (Input.GetKeyDown(KeyCode.E))
             skills[(int)Skill.SkillE].SkillAction();
     }
-
 }
