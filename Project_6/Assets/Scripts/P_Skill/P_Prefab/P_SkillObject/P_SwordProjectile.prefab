@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 9149842315903282825}
   - component: {fileID: 4403244190826935134}
   m_Layer: 0
-  m_Name: SwordProjectile
+  m_Name: P_SwordProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
