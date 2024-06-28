@@ -19,6 +19,7 @@ public abstract class P_BossMonster : MonoBehaviour
 {
     public string bossName;
     public float bossPower;
+    public float maxHp;
     public float bossHp;
     public List<GameObject> dummies;
     protected P_BossState currentState;
