@@ -52,16 +52,13 @@ public class DragAndDrop_Item : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
 
 
-    void Update()
+    public void OnDrag(PointerEventData eventData)
     {
         // [조건문] Drag 기능을 하고있을때 조건문 실행.
         if (isDrag == true)
         {
-            // [변수] mousePosition = 메인 카메라 중점을 기준으로 마우스의 위치값을 입력.
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             // [변수] this 오브젝트의 위치 = 드래그를 시작한 지점부터의 거리를 입력.
-            this.gameObject.transform.position = new Vector2(mousePosition.x - StartPositionX, mousePosition.y - StartPositionY);
+            (transform as RectTransform).anchoredPosition = new Vector2(eventData.position.x - StartPositionX, eventData.position.y - StartPositionY);
         }
     }
 
@@ -77,14 +74,11 @@ public class DragAndDrop_Item : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (Input.GetMouseButtonDown(0))
         {
             // [변수] 해당 스프라이트의 알파값을 0.5로 낮추어 투명한 상태로 바꾸어줌.
-            image.color = new Color(1f, 1f, 1f, 0.5f);
-
-            // [변수] mousePosition = 메인 카메라 중점을 기준으로 마우스의 위치값을 입력.
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            image.color = new Color(1f, 1f, 1f, .5f);
 
             // [변수] 드래그 시작위치 = 마우스 현재 위치에서 오브젝트의 원래위치를 뺀 값으로 입력.
-            StartPositionX = mousePosition.x - this.transform.position.x;
-            StartPositionY = mousePosition.y - this.transform.position.y;
+            StartPositionX = eventData.position.x - (transform as RectTransform).anchoredPosition.x;
+            StartPositionY = eventData.position.y - (transform as RectTransform).anchoredPosition.y;
 
             // [변수] Drag 상태를 Drag 실행상태로 변경
             isDrag = true;
@@ -107,12 +101,12 @@ public class DragAndDrop_Item : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (InBorder == true)
         {
             // [변수] 현재 게임오브젝트의 위치를 경계면 안쪽의 쓰레기통 변수의 위치값 안쪽으로 입력.
-            this.gameObject.transform.localPosition = new Vector3(DeletePositionX, DeletePositionY, -1f);
+            gameObject.transform.localPosition = new Vector3(DeletePositionX, DeletePositionY, -1f);
         }
         // [조건문] 경계면 안쪽으로 들어오지 않았을 경우 조건문 실행.
         else
         {   // [변수] 현재 게임 오브젝트의 위치를 원래 오브젝트의 위치로 되돌려서 입력.
-            this.gameObject.transform.position = OriginPosition;
+            gameObject.transform.position = OriginPosition;
         }
 
     }
@@ -146,7 +140,7 @@ public class DragAndDrop_Item : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     private void OnTriggerExit2D(Collider2D other)
     {
         // [조건문] 만일 충돌체의 태그가 "DeleteSlot" 일 경우 조건문 실행.
-        if (other.CompareTag("Deleteslot"))
+        if (other.CompareTag("DeleteSlot"))
         {
             // [변수] 경계면 변수 InBorder = 경계면 바깥으로 나갔음을 의미하는 false 값 입력.
             InBorder = false;
