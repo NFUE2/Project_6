@@ -5,7 +5,7 @@ public class P_Tentaclypse : P_BossMonster
 {
     [SerializeField] private P_BossData tentaclypseData;
     public GameObject target;
-    private P_Dummy currentTarget;
+    private PlayerCondition currentTarget;
 
     [Header("Attack Pattern")]
     public GameObject attackPatternManager;
@@ -28,10 +28,10 @@ public class P_Tentaclypse : P_BossMonster
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseDispenserAttack>());
         // 플레이어 정보 수집
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        dummies = new List<GameObject>();
+        base.players = new List<GameObject>();
         foreach(GameObject player in players)
         {
-            dummies.Add(player);
+            base.players.Add(player);
         }
     }
 
@@ -40,19 +40,8 @@ public class P_Tentaclypse : P_BossMonster
         if(targetSettingTriggerTime >= targetSettingTime)
         {
             targetSettingTriggerTime = 0;
-            if(target != null)
-            {
-                bool isTargetDead = currentTarget.IsDead();
-                if (isTargetDead)
-                {
-                    dummies.Remove(target);
-                }
-            }
             target = SetTarget();
-            // 확인용 임시코드
-            currentTarget = target.GetComponent<P_Dummy>();
-            Debug.Log($"{currentTarget.dummyName} 주시 중");
-            // 확인용 임시코드
+            currentTarget = target.GetComponent<PlayerCondition>();
         }
     }
 
@@ -62,10 +51,7 @@ public class P_Tentaclypse : P_BossMonster
         {
             int index = Random.Range(0,patterns.Count);
             patterns[index].ExecuteAttack();
-            // 확인용 임시코드
-            //Debug.Log($"크와앙!! {currentTarget.dummyName}를 잡아 먹어버리겠당!");
             currentState = P_BossState.Idle;
-            // 확인용 임시코드
         }
         else
         {

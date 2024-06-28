@@ -49,9 +49,8 @@ public class P_Razor : MonoBehaviour
         {
             if (collision.CompareTag("Player"))
             {
-                P_Dummy dummy = collision.GetComponent<P_Dummy>();
-                Debug.Log($"{dummy.dummyName} ÇÇ°Ý!");
-                dummy.TakeDamage(tentaclypse.bossPower);
+                PlayerCondition player = collision.GetComponent<PlayerCondition>();
+                player.TakeDamage(tentaclypse.bossPower);
             }
         }
     }

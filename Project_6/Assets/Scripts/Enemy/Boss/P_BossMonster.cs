@@ -22,7 +22,7 @@ public abstract class P_BossMonster : MonoBehaviour
     public float bossPower;
     public float maxHp;
     public float bossHp;
-    public List<GameObject> dummies;
+    public List<GameObject> players;
     protected P_BossState currentState;
     protected List<IAttackPattern> patterns = new List<IAttackPattern>();
 
@@ -80,8 +80,8 @@ public abstract class P_BossMonster : MonoBehaviour
 
     public GameObject SetTarget()
     {
-        int index = Random.Range(0, dummies.Count);
-        return dummies[index];
+        int index = Random.Range(0, players.Count);
+        return players[index];
     }
 
     protected void Die()
