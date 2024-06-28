@@ -7,7 +7,9 @@ public class PlayerCondition : MonoBehaviour
 {
     public float maxHealth = 100f; // 최대 체력
     private float currentHealth;
-    //public Image currentHpBar;
+    public GameObject boss;
+    public P_BossMonster bossMonster;
+    public Image currentHpBar;
 
     private void Awake()
     {
@@ -16,23 +18,24 @@ public class PlayerCondition : MonoBehaviour
 
     private void Start()
     {
-        
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        bossMonster = boss.GetComponent<P_BossMonster>();
     }
 
     private void Update()
     {
-        //currentHpBar.fillAmount = currentHealth / maxHealth;
+        currentHpBar.fillAmount = currentHealth / maxHealth;
     }
 
     // 데미지를 받는 메서드
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        currentHealth -= 10f;
+        currentHealth -= damage;
         Debug.Log("플레이어 체력: " + currentHealth);
 
         if (currentHealth <= 0)
         {
-            //currentHpBar.fillAmount = 0;    
+            currentHpBar.fillAmount = 0;    
             Die();
         }
     }
@@ -41,6 +44,7 @@ public class PlayerCondition : MonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 사망");
+        bossMonster.players.Remove(gameObject);
         Destroy(gameObject); // 플레이어 오브젝트 파괴한다
     }
 
