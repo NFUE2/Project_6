@@ -8,6 +8,7 @@ public class P_SwordProjectile : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(transform.right);
         transform.position += transform.right * speed * Time.deltaTime;
     }
 }
