@@ -10,6 +10,7 @@ public class PlayerController_Melee : MonoBehaviour
     public LayerMask enemyLayer; // 적 레이어
     public Animator animator; // 공격 애니메이터
     public BoxCollider2D meleeCollider;
+    private P_SwordE P_SwordE;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -40,9 +41,13 @@ public class PlayerController_Melee : MonoBehaviour
         playerControls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         playerControls.Player.Jump.performed += ctx => Jump();
+
         playerControls.Player.Attack.performed += ctx => Attack();
         playerControls.Player.Attack.canceled += ctx => StopAttack();
-         // playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+
+        playerControls.Player.SkillQ.performed += ctx => SkillQ();
+        playerControls.Player.SkillE.performed += ctx => SkillE();
+        // playerControls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
     }
 
     private void OnDisable()
@@ -112,5 +117,15 @@ public class PlayerController_Melee : MonoBehaviour
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // 왼쪽
         }
+    }
+
+    private void SkillQ()
+    {
+
+    }
+
+    private void SkillE()
+    {
+
     }
 }
