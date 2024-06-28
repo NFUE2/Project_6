@@ -9,7 +9,7 @@ public class P_BowQ : MonoBehaviour, P_ISkill
 
     private void Awake()
     {
-        hand = GetComponent<P_SkillTest>().hand;
+        //hand = GetComponent<P_SkillTest>().hand;
     }
 
     public void SkillAction()

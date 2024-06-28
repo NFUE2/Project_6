@@ -37,7 +37,7 @@ public class PlayerController_Gun : MonoBehaviour
         P_gunQ = GetComponent<P_GunQ>();
         P_gunE = GetComponent<P_GunE>();
 
-        pv.GetComponent<PhotonView>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Start()

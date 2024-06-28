@@ -37,7 +37,7 @@ public class PlayerController_Bow : MonoBehaviour
         P_BowQ = GetComponent<P_BowQ>();
         P_BowE = GetComponent<P_BowE>();
 
-        pv.GetComponent<PhotonView>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Start()

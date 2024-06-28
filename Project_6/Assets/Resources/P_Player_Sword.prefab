@@ -16,7 +16,9 @@ GameObject:
   - component: {fileID: 8977575657748809050}
   - component: {fileID: 4641016725949181671}
   - component: {fileID: 4282614974121979400}
-  m_Layer: 0
+  - component: {fileID: -6331356649516015656}
+  - component: {fileID: -6996960895910818894}
+  m_Layer: 6
   m_Name: P_Player_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,6 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  boss: {fileID: 0}
+  bossMonster: {fileID: 0}
+  currentHpBar: {fileID: 0}
 --- !u!114 &4641016725949181671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +230,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fe52487536c8f4386e00369921ce9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6331356649516015656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940865410465219502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -6996960895910818894}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-6996960895910818894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940865410465219502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3197255201787416853
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +282,7 @@ GameObject:
   - component: {fileID: 8148003693196173771}
   - component: {fileID: 3380637792095673131}
   - component: {fileID: 7112026636531437827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6107615137582894876}
   - component: {fileID: 6479069290875718741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1116276751059608512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 577102699304104324}
   - component: {fileID: 9055266706945306932}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}

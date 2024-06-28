@@ -33,7 +33,7 @@ public class PlayerController_Hammer : MonoBehaviour
         P_HammerQ = GetComponent<P_HammerQ>();
         P_HammerE = GetComponent<P_HammerE>();
 
-        pv.GetComponent<PhotonView>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Update()

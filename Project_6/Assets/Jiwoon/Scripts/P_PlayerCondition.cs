@@ -19,7 +19,7 @@ public class PlayerCondition : MonoBehaviour
     private void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
-        bossMonster = boss.GetComponent<P_BossMonster>();
+        currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
     }
 
     private void Update()

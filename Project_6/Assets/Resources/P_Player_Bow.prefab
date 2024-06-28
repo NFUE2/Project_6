@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 1808445323783060405}
   - component: {fileID: 220284087400141067}
   - component: {fileID: 393337628837608181}
-  m_Layer: 0
+  - component: {fileID: -8018459564307159715}
+  - component: {fileID: -8581736037439202910}
+  m_Layer: 6
   m_Name: P_Player_Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,6 +211,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombArrow: {fileID: 8521390195919853251, guid: 46ff019546778784b93c80518bb9e1a2, type: 3}
   fireAngle: 0
+--- !u!114 &-8018459564307159715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527220601978211437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -8581736037439202910}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-8581736037439202910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527220601978211437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &1700430286747907544
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1767672634928217926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4108232323226777788}
   - component: {fileID: 3792699160137961704}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7891138447916238762}
   - component: {fileID: 2991229094672540505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}

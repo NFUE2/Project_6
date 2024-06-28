@@ -31,6 +31,12 @@ public abstract class P_BossMonster : MonoBehaviour
     public float attackCoolDown;
     public float attackTriggerTime;
 
+    private void Awake()
+    {
+        foreach(GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+            players.Add(p);
+    }
+
     private void Update()
     {
         HandleState();

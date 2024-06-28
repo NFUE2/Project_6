@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7545909660157487825}
   - component: {fileID: 1646512150971992331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3827233407639405496}
   - component: {fileID: 3735979094219265153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 5073505177653678796}
   - component: {fileID: 9149842315903282825}
   - component: {fileID: 3454552715223893867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: P_BombArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

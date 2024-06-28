@@ -30,7 +30,7 @@ public class PlayerController_Melee : MonoBehaviour
         P_SwordE = GetComponent<P_SwordE>();
         P_SwordQ = GetComponent<P_SwordQ>();
 
-        pv.GetComponent<PhotonView>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Update()

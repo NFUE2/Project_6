@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7285529713927411124}
   - component: {fileID: 9164021969975037497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HammerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6644561436750436895}
   - component: {fileID: 1347557780106686336}
   - component: {fileID: 8989685589908183107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053821959564914840}
   - component: {fileID: 2473000403563079204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5940929562056708313}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,9 @@ GameObject:
   - component: {fileID: 1310914263992408540}
   - component: {fileID: 1342693721821341072}
   - component: {fileID: 7136906609851079547}
-  m_Layer: 0
+  - component: {fileID: -9022622722718202654}
+  - component: {fileID: 3828053210425074534}
+  m_Layer: 6
   m_Name: P_Player_Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,6 +513,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  boss: {fileID: 0}
+  bossMonster: {fileID: 0}
+  currentHpBar: {fileID: 0}
 --- !u!114 &1342693721821341072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +542,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fe52487536c8f4386e00369921ce9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-9022622722718202654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833822381116069660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3828053210425074534}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3828053210425074534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833822381116069660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &4412223140309943800
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8645311613332125360}
   - component: {fileID: 7100035120858184959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
