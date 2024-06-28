@@ -263,7 +263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2940865410465219502, guid: 769689f650a807d438e8cf85820d2aae, type: 3}
       propertyPath: m_Name
-      value: Player_closedistance
+      value: Player_Sword
       objectReference: {fileID: 0}
     - target: {fileID: 6373281026703181688, guid: 769689f650a807d438e8cf85820d2aae, type: 3}
       propertyPath: m_LocalPosition.x
