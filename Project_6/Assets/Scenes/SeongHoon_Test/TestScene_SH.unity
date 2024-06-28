@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 500974417}
   - component: {fileID: 500974419}
   - component: {fileID: 500974420}
+  - component: {fileID: 500974421}
   m_Layer: 0
   m_Name: AttackPatternManager
   m_TagString: Untagged
@@ -456,6 +457,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ae97efdee068144cbfed9fb7726b491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &500974421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500974416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a154f8627aaa394ea878b807313437e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &545352352
@@ -633,6 +646,7 @@ MonoBehaviour:
   attackPatternManager: {fileID: 500974416}
   razorObject: {fileID: 9132095129911206727, guid: 4c8ee3156313e5f4e84cbb7564bb5d13, type: 3}
   allRoundAttackObject: {fileID: 4447542676708199653, guid: 5818ec5d660b0124e9989e97cad77bc5, type: 3}
+  dispenser: {fileID: 6009523534789110895, guid: d78dfaacdf40d7d44928e2f8b1b5b22c, type: 3}
 --- !u!50 &1249613885
 Rigidbody2D:
   serializedVersion: 4

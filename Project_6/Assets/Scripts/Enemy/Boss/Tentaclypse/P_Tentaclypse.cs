@@ -11,6 +11,7 @@ public class P_Tentaclypse : P_BossMonster
     public GameObject attackPatternManager;
     public GameObject razorObject;
     public GameObject allRoundAttackObject;
+    public GameObject dispenser;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class P_Tentaclypse : P_BossMonster
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseRazorAttack>());
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseAllRoundShotAttack>());
         SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseRazorRainAttack>());
+        SetAttackPattern(attackPatternManager.GetComponent<P_TentaclypseDispenserAttack>());
         // 플레이어 정보 수집
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         dummies = new List<GameObject>();
