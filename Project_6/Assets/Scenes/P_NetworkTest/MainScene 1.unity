@@ -3079,10 +3079,10 @@ MonoBehaviour:
       - m_Target: {fileID: 752863216}
         m_TargetAssemblyTypeName: P_CharacterButton, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3956837114867526773, guid: 454203a2b8223264b8ce0023befc07ec, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3773,10 +3773,10 @@ MonoBehaviour:
       - m_Target: {fileID: 899711489}
         m_TargetAssemblyTypeName: P_CharacterButton, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6773643574206278745, guid: ffe2891412bddb846bfa35584ce66e05, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6170,10 +6170,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1480158561}
         m_TargetAssemblyTypeName: P_CharacterButton, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1542275204694586125, guid: 89e45c87d91bc5c44a1aa60fe71cdcb2, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7274,10 +7274,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1879381985}
         m_TargetAssemblyTypeName: P_CharacterButton, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7430583368953147850, guid: 66e745d04f48b5f41b7a0756b218374d, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

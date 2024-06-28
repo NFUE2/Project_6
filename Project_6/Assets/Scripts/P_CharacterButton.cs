@@ -22,6 +22,9 @@ public class P_CharacterButton : MonoBehaviour, IPunObservable
     {
         //전체 동기화
         pv.RPC("OnClickRPC",RpcTarget.MasterClient);
+        int playerNum = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        PhotonNetwork.Instantiate(go.name,Vector2.zero + Vector2.right * playerNum,Quaternion.identity);
     }
 
     [PunRPC]
