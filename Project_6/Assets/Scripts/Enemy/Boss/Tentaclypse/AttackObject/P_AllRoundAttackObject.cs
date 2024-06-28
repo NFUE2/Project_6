@@ -26,8 +26,8 @@ public class P_AllRoundAttackObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            P_Dummy dummy = collision.GetComponent<P_Dummy>();
-            dummy.TakeDamage(tentaclypse.bossPower);
+            PlayerCondition player = collision.GetComponent<PlayerCondition>();
+            player.TakeDamage(tentaclypse.bossPower);
             Destroy(gameObject);
         }
     }
