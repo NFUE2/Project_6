@@ -2497,7 +2497,7 @@ MonoBehaviour:
         m_MethodName: OnClick
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3833822381116069660, guid: 9ef2244157958674a9edb578375385b4, type: 3}
+          m_ObjectArgument: {fileID: 3833822381116069660, guid: 89568532e519f304e9cfa8c606218868, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

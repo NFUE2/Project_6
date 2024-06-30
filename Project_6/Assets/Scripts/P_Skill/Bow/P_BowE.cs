@@ -18,14 +18,17 @@ public class P_BowE : MonoBehaviour, P_ISkill
 
     public void SkillAction()
     {
-        float startAngle = hand.localEulerAngles.z - fireAngle;
+        //float startAngle = hand.localEulerAngles.z - fireAngle;
 
-        Debug.Log(hand.localEulerAngles);
+        //Debug.Log(hand.localEulerAngles);
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - fireAngle;
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject go = Instantiate(bombArrow,hand.GetChild(0).position,Quaternion.identity);
-            go.transform.localEulerAngles = new Vector3(0,0,startAngle + i * fireAngle);
+            GameObject go = Instantiate(bombArrow,/*hand.GetChild(0)*/transform.position,Quaternion.identity);
+            go.transform.localEulerAngles = new Vector3(0,0,angle + i * fireAngle);
         }
     }
 }

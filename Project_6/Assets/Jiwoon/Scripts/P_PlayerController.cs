@@ -26,6 +26,9 @@ public class PlayerController_Gun : MonoBehaviour
     private P_GunQ  P_gunQ;
     private P_GunE  P_gunE;
 
+    public bool isRolling;
+    public bool fanningReady;
+
     PhotonView pv;
 
     private void Awake()
@@ -73,6 +76,7 @@ public class PlayerController_Gun : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isRolling) return;
         Move();
     }
 
@@ -99,6 +103,7 @@ public class PlayerController_Gun : MonoBehaviour
     private void Attack()
     {
         if (isAttackCooldown) return;
+        if (fanningReady || isRolling) return;
 
         attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // 마우스의 위치값
@@ -112,7 +117,7 @@ public class PlayerController_Gun : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackCooldown() //6발을 쓰고 장전을 한다.
+    public IEnumerator AttackCooldown() //6발을 쓰고 장전을 한다.
     {
         isAttackCooldown = true;
         attackCount = 0;

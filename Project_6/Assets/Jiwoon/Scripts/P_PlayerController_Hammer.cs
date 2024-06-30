@@ -90,6 +90,8 @@ public class PlayerController_Hammer : MonoBehaviour
 
     private void Attack()
     {
+        if (GetComponent<P_HammerE>().isCharging) return;
+
         // 공격 애니메이션 재생
         animator.SetTrigger("Attack");
     }

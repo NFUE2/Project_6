@@ -234,7 +234,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7748157857051649482
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -297,6 +297,8 @@ MonoBehaviour:
   attackPoint: {fileID: 8507357544887295975}
   attackPrefab: {fileID: 8574892165837719190, guid: ba710eb47daa70948b338fa40560aeb5, type: 3}
   meleeCollider: {fileID: 0}
+  isRolling: 0
+  fanningReady: 0
 --- !u!114 &7458120172320948905
 MonoBehaviour:
   m_ObjectHideFlags: 0

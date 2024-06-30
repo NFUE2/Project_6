@@ -14,8 +14,12 @@ public class P_BowQ : MonoBehaviour, P_ISkill
 
     public void SkillAction()
     {
-        GameObject go = Instantiate(wireArrow,hand.GetChild(0).position,Quaternion.identity);
-        go.transform.localEulerAngles = new Vector3(0, 0, hand.localEulerAngles.z);
+        GameObject go = Instantiate(wireArrow,/*hand.GetChild(0).*/transform.position,Quaternion.identity);
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
+        go.transform.localEulerAngles = new Vector3(0, 0, angle);
         go.GetComponent<P_WireArrow>().player = transform;
     }
 }

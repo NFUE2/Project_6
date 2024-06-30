@@ -22,7 +22,7 @@ public class P_GunQ : MonoBehaviour, P_ISkill
         //재장전 스크립트 필요
         if (fanningReady) return;
 
-        fanningReady = true;
+        fanningReady = GetComponent<PlayerController_Gun>().fanningReady =true;
         StartCoroutine(Fanning());
     }
 
@@ -44,6 +44,8 @@ public class P_GunQ : MonoBehaviour, P_ISkill
 
             yield return new WaitForSeconds(0.1f);
         }
-        fanningReady = false;
+        fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
+
+        StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
     }
 }
