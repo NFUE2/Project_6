@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class P_GunQ : MonoBehaviour, P_ISkill
 {
@@ -10,17 +11,19 @@ public class P_GunQ : MonoBehaviour, P_ISkill
     public GameObject bullet;
     private Transform hand;
     public bool fanningReady { get; private set; }
-
+    public float actionTime;
+    private float lastAction;
     private void Awake()
     {
         //hand = GetComponent<P_SkillTest>().hand;
+        lastAction = -actionTime;
     }
 
     public void SkillAction()
     {
-        Debug.Log(1);
         //재장전 스크립트 필요
         if (fanningReady) return;
+        if (Time.time - lastAction < actionTime) return;
 
         fanningReady = GetComponent<PlayerController_Gun>().fanningReady =true;
         StartCoroutine(Fanning());
@@ -47,5 +50,20 @@ public class P_GunQ : MonoBehaviour, P_ISkill
         fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
 
         StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
+        StartCoroutine(CoolTime());
+    }
+
+    IEnumerator CoolTime()
+    {
+        lastAction = Time.time;
+        Text coolTimeText = GetComponent<PlayerController_Gun>().cooltimeQText;
+
+        while (Time.time - lastAction < actionTime)
+        {
+            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            yield return null;
+        }
+
+        coolTimeText.text = "준비완료";
     }
 }

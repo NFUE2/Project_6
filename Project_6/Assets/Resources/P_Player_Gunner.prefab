@@ -297,8 +297,11 @@ MonoBehaviour:
   attackPoint: {fileID: 8507357544887295975}
   attackPrefab: {fileID: 8574892165837719190, guid: ba710eb47daa70948b338fa40560aeb5, type: 3}
   meleeCollider: {fileID: 0}
+  attackTime: 1
   isRolling: 0
   fanningReady: 0
+  cooltimeQText: {fileID: 0}
+  cooltimeEText: {fileID: 0}
 --- !u!114 &7458120172320948905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5918386792074528231, guid: 3a663da588185474abd1c9e053a5e6bf, type: 3}
+  actionTime: 8
 --- !u!114 &7620606900120597810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollingX: 5
+  actionTime: 3
 --- !u!114 &860336745386896568
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class P_HammerE : MonoBehaviour, P_ISkill
 {
@@ -14,14 +15,19 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
     Coroutine charging;
 
+    public float actionTime;
+    private float lastAction;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        lastAction = -actionTime;
     }
 
     public void SkillAction()
     {
         if (isCharging) return;
+        if (Time.time - lastAction < actionTime) return;
 
         animator.SetBool("Charging", isCharging = true);
         StartCoroutine(Charging());
@@ -38,6 +44,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
             yield return null;
         }
         animator.SetBool("Charging", isCharging = false);
+        StartCoroutine(CoolTime());
 
         //animator.SetBool("Charging", isCharging = false);
         //Smash();
@@ -55,4 +62,18 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
         charging = null;
     }
+    IEnumerator CoolTime()
+    {
+        lastAction = Time.time;
+        Text coolTimeText = GetComponent<PlayerController_Hammer>().cooltimeEText;
+
+        while (Time.time - lastAction < actionTime)
+        {
+            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            yield return null;
+        }
+
+        coolTimeText.text = "준비완료";
+    }
+
 }

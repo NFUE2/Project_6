@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayerController_Bow : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerController_Bow : MonoBehaviour
     public Transform attackPoint;
     public GameObject attackPrefab;
     public BoxCollider2D meleeCollider;
+
+    public float attackTime;
+    private float lastAttackTime;
 
     private bool isAttackCooldown = false;
     private int attackCount = 0;
@@ -27,6 +31,8 @@ public class PlayerController_Bow : MonoBehaviour
     private P_BowE P_BowE;
 
     PhotonView pv;
+    public Text cooltimeQText, cooltimeEText;
+    public bool isWiring;
 
     private void Awake()
     {
@@ -38,6 +44,8 @@ public class PlayerController_Bow : MonoBehaviour
         P_BowE = GetComponent<P_BowE>();
 
         pv = GetComponent<PhotonView>();
+        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Start()
@@ -68,11 +76,16 @@ public class PlayerController_Bow : MonoBehaviour
 
     private void Update()
     {
+        if (!pv.IsMine) return;
+
         Look(Mouse.current.position.ReadValue());
     }
 
     private void FixedUpdate()
     {
+        if (!pv.IsMine) return;
+
+        if (isWiring) return;
         Move();
     }
 
@@ -100,6 +113,9 @@ public class PlayerController_Bow : MonoBehaviour
     {
         if (isAttackCooldown) return;
 
+        if (Time.time - lastAttackTime < attackTime) return;
+        lastAttackTime = Time.time;
+
         attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // 마우스의 위치값
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized; // 마우스의 위치값에서 지정해준 공격 시작 위치값을 뺀다 => 공격 방향
@@ -108,6 +124,7 @@ public class PlayerController_Bow : MonoBehaviour
 
         if (attackCount >= 1)
         {
+            Debug.Log(1);
             StartCoroutine(AttackCooldown());
         }
     }

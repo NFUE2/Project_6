@@ -183,6 +183,10 @@ MonoBehaviour:
   attackPoint: {fileID: 1767672634928217926}
   attackPrefab: {fileID: 325852272198448987, guid: 743fb5092e8da194ea0b8931c48f60d0, type: 3}
   meleeCollider: {fileID: 0}
+  attackTime: 0.5
+  cooltimeQText: {fileID: 0}
+  cooltimeEText: {fileID: 0}
+  isWiring: 0
 --- !u!114 &220284087400141067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wireArrow: {fileID: 8521390195919853251, guid: 7938b819be6125442b884b139c2ce347, type: 3}
   hand: {fileID: 0}
+  actionTime: 8
 --- !u!114 &393337628837608181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombArrow: {fileID: 8521390195919853251, guid: 46ff019546778784b93c80518bb9e1a2, type: 3}
   fireAngle: 15
+  actionTime: 5
 --- !u!114 &-8018459564307159715
 MonoBehaviour:
   m_ObjectHideFlags: 0

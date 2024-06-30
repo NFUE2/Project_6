@@ -449,12 +449,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
+  attackTime: 1
   meleeAttackRange: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
   animator: {fileID: 6644561436750436895}
   meleeCollider: {fileID: 8989685589908183107}
+  cooltimeQText: {fileID: 0}
+  cooltimeEText: {fileID: 0}
 --- !u!61 &1849537572430368465
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -530,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxChargingTime: 1
   isCharging: 0
+  actionTime: 5
 --- !u!114 &4471793825532053257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: {fileID: 4237411922278087230, guid: 044fc4cd43e81d44ea6994349b102a7f, type: 3}
   shieldTime: 3
-  shieldPos: {x: 0, y: 0, z: 0}
+  actionTime: 10
 --- !u!114 &6903916744368478553
 MonoBehaviour:
   m_ObjectHideFlags: 0

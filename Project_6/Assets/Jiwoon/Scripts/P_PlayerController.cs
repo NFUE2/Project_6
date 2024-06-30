@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayerController_Gun : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerController_Gun : MonoBehaviour
     private bool isAttackCooldown = false;
     private int attackCount = 0;
     private float cooldownDuration = 3f;
+
+    public float attackTime;
+    private float lastAttackTime;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -30,6 +34,7 @@ public class PlayerController_Gun : MonoBehaviour
     public bool fanningReady;
 
     PhotonView pv;
+    public Text cooltimeQText, cooltimeEText;
 
     private void Awake()
     {
@@ -41,6 +46,8 @@ public class PlayerController_Gun : MonoBehaviour
         P_gunE = GetComponent<P_GunE>();
 
         pv = GetComponent<PhotonView>();
+        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Start()
@@ -71,11 +78,15 @@ public class PlayerController_Gun : MonoBehaviour
 
     private void Update()
     {
+        if (!pv.IsMine) return;
+
         Look(Mouse.current.position.ReadValue());
     }
 
     private void FixedUpdate()
     {
+        if (!pv.IsMine) return;
+
         if (isRolling) return;
         Move();
     }
@@ -104,6 +115,9 @@ public class PlayerController_Gun : MonoBehaviour
     {
         if (isAttackCooldown) return;
         if (fanningReady || isRolling) return;
+
+        if (Time.time - lastAttackTime < attackTime) return;
+        lastAttackTime = Time.time;
 
         attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // 마우스의 위치값

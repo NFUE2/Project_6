@@ -137,12 +137,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
+  attackTime: 1
   meleeAttackRange: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 8148003693196173771}
   meleeCollider: {fileID: 7112026636531437827}
+  cooltimeQText: {fileID: 0}
+  cooltimeEText: {fileID: 0}
 --- !u!61 &4404171072473838084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 8521390195919853251, guid: 2de9e0baf850eb44ebd1b577d68e7267, type: 3}
   animator: {fileID: 0}
+  actionTime: 3
 --- !u!114 &4282614974121979400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fe52487536c8f4386e00369921ce9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionTime: 3
 --- !u!114 &-6331356649516015656
 MonoBehaviour:
   m_ObjectHideFlags: 0
