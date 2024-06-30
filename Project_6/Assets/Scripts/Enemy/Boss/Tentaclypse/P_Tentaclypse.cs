@@ -5,7 +5,7 @@ public class P_Tentaclypse : P_BossMonster
 {
     [SerializeField] private P_BossData tentaclypseData;
     public GameObject target;
-    private PlayerCondition currentTarget;
+    private P_PlayerCondition currentTarget;
 
     [Header("Attack Pattern")]
     public GameObject attackPatternManager;
@@ -41,7 +41,7 @@ public class P_Tentaclypse : P_BossMonster
         {
             targetSettingTriggerTime = 0;
             target = SetTarget();
-            currentTarget = target.GetComponent<PlayerCondition>();
+            currentTarget = target.GetComponent<P_PlayerCondition>();
         }
     }
 

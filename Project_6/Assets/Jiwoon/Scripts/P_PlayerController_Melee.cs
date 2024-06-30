@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerController_Melee : MonoBehaviour
+public class PlayerController_Melee : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;

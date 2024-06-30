@@ -5,7 +5,7 @@ using System.Collections;
 using Photon.Pun;
 using UnityEngine.UI;
 
-public class PlayerController_Gun : MonoBehaviour
+public class PlayerController_Gun : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;

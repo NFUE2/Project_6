@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     private PlayerController_Melee playerController;
-    private float damage;
+    public float damage;
 
     private void Start()
     {
@@ -30,6 +30,9 @@ public class Weapon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("적에게 데미지를 입혔습니다.");
+
+        if (collision.TryGetComponent(out P_BossMonster boss))
+            boss.TakeDamage(damage);
 
         if (playerController.meleeCollider != null)
         {

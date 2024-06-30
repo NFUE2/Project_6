@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCondition : MonoBehaviour
+public class P_PlayerCondition : MonoBehaviour
 {
     public float maxHealth = 100f; // 최대 체력
     private float currentHealth;
