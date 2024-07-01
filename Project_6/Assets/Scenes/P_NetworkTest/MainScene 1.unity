@@ -9682,7 +9682,7 @@ GameObject:
   - component: {fileID: 2002424323}
   - component: {fileID: 2002424322}
   m_Layer: 5
-  m_Name: Current_HP
+  m_Name: BossCurrent_HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
