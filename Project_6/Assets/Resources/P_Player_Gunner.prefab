@@ -132,9 +132,10 @@ GameObject:
   - component: {fileID: 7620606900120597810}
   - component: {fileID: 860336745386896568}
   - component: {fileID: 6008753492994838232}
+  - component: {fileID: -1095103898515618612}
   m_Layer: 6
   m_Name: P_Player_Gunner
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,3 +370,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &-1095103898515618612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8629485680116683917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742c7967ff0563848ac1b9aadf26ca15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  boss: {fileID: 0}
+  bossMonster: {fileID: 0}
+  currentHpBar: {fileID: 0}

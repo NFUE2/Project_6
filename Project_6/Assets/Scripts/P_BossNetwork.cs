@@ -18,6 +18,10 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
     {
         instance = this;
         pv = GetComponent<PhotonView>();
+
+        if (PhotonNetwork.IsMasterClient)
+            gamestartButton.SetActive(true);
+        
     }
 
 
@@ -47,9 +51,9 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
 
     public void PlusCount()
     {
-        count++;
-        if (count >= 4)
-            gamestartButton.SetActive(true);
+        //count++;
+        //if (count >= 4)
+        //    gamestartButton.SetActive(true);
     }
 
 }
