@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Photon.Pun;
+using UnityEngine.UI;
 
-public class PlayerController_Gun : MonoBehaviour
+public class PlayerController_Gun : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
@@ -15,6 +17,9 @@ public class PlayerController_Gun : MonoBehaviour
     private int attackCount = 0;
     private float cooldownDuration = 3f;
 
+    public float attackTime;
+    private float lastAttackTime;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isJumping;
@@ -25,6 +30,12 @@ public class PlayerController_Gun : MonoBehaviour
     private P_GunQ  P_gunQ;
     private P_GunE  P_gunE;
 
+    public bool isRolling;
+    public bool fanningReady;
+
+    PhotonView pv;
+    public Text cooltimeQText, cooltimeEText;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +44,10 @@ public class PlayerController_Gun : MonoBehaviour
         playerControls = new PlayerControls(); // 추가: PlayerControls 인스턴스 생성
         P_gunQ = GetComponent<P_GunQ>();
         P_gunE = GetComponent<P_GunE>();
+
+        pv = GetComponent<PhotonView>();
+        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Start()
@@ -42,6 +57,8 @@ public class PlayerController_Gun : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -61,11 +78,16 @@ public class PlayerController_Gun : MonoBehaviour
 
     private void Update()
     {
+        if (!pv.IsMine) return;
+
         Look(Mouse.current.position.ReadValue());
     }
 
     private void FixedUpdate()
     {
+        if (!pv.IsMine) return;
+
+        if (isRolling) return;
         Move();
     }
 
@@ -92,6 +114,10 @@ public class PlayerController_Gun : MonoBehaviour
     private void Attack()
     {
         if (isAttackCooldown) return;
+        if (fanningReady || isRolling) return;
+
+        if (Time.time - lastAttackTime < attackTime) return;
+        lastAttackTime = Time.time;
 
         attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // 마우스의 위치값
@@ -105,7 +131,7 @@ public class PlayerController_Gun : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackCooldown() //6발을 쓰고 장전을 한다.
+    public IEnumerator AttackCooldown() //6발을 쓰고 장전을 한다.
     {
         isAttackCooldown = true;
         attackCount = 0;

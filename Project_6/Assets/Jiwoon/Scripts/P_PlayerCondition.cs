@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCondition : MonoBehaviour
+public class P_PlayerCondition : MonoBehaviour
 {
     public float maxHealth = 100f; // 최대 체력
     private float currentHealth;
@@ -19,7 +19,7 @@ public class PlayerCondition : MonoBehaviour
     private void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
-        bossMonster = boss.GetComponent<P_BossMonster>();
+        currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
     }
 
     private void Update()

@@ -1,10 +1,15 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class PlayerController_Melee : MonoBehaviour
+public class PlayerController_Melee : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
+
+    public float attackTime;
+    private float lastAttackTime;
 
     public float meleeAttackRange = 1f; // 근접 공격 범위
     public LayerMask enemyLayer; // 적 레이어
@@ -18,6 +23,10 @@ public class PlayerController_Melee : MonoBehaviour
     private Camera mainCamera;
     private PlayerControls playerControls;
 
+    PhotonView pv;
+
+    public Text cooltimeQText, cooltimeEText;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,15 +36,23 @@ public class PlayerController_Melee : MonoBehaviour
         P_SwordE = GetComponent<P_SwordE>();
         P_SwordQ = GetComponent<P_SwordQ>();
 
+        pv = GetComponent<PhotonView>();
+
+        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Update()
     {
+        if (!pv.IsMine) return;
+
         Look(Mouse.current.position.ReadValue());
     }
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -58,6 +75,8 @@ public class PlayerController_Melee : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!pv.IsMine) return;
+
         Move();
     }
 
@@ -83,6 +102,9 @@ public class PlayerController_Melee : MonoBehaviour
 
     private void Attack()
     {
+        if (GetComponent<P_SwordQ>().isGuard) return;
+        if (Time.time - lastAttackTime < attackTime) return;
+        lastAttackTime = Time.time;
         // 공격 애니메이션 재생
         animator.SetTrigger("Attack");
     }
@@ -131,4 +153,6 @@ public class PlayerController_Melee : MonoBehaviour
         Debug.Log("SkillE 사용");
         P_SwordE.SkillAction();
     }
+
+    
 }

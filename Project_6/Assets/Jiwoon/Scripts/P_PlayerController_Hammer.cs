@@ -1,10 +1,15 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class PlayerController_Hammer : MonoBehaviour
+public class PlayerController_Hammer : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
+
+    public float attackTime;
+    private float lastAttackTime;
 
     public float meleeAttackRange = 1f; // 근접 공격 범위
     public LayerMask enemyLayer; // 적 레이어
@@ -19,6 +24,9 @@ public class PlayerController_Hammer : MonoBehaviour
     private P_HammerQ P_HammerQ;
     private P_HammerE P_HammerE;
 
+    PhotonView pv;
+    public Text cooltimeQText, cooltimeEText;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,15 +36,22 @@ public class PlayerController_Hammer : MonoBehaviour
         P_HammerQ = GetComponent<P_HammerQ>();
         P_HammerE = GetComponent<P_HammerE>();
 
+        pv = GetComponent<PhotonView>();
+        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Update()
     {
+        if (!pv.IsMine) return;
+
         Look(Mouse.current.position.ReadValue());
     }
 
     private void OnEnable()
     {
+        if (!pv.IsMine) return;
+
         playerControls.Player.Enable();
 
         playerControls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -59,6 +74,8 @@ public class PlayerController_Hammer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!pv.IsMine) return;
+
         Move();
     }
 
@@ -84,6 +101,10 @@ public class PlayerController_Hammer : MonoBehaviour
 
     private void Attack()
     {
+        if (GetComponent<P_HammerE>().isCharging) return;
+        if (Time.time - lastAttackTime < attackTime) return;
+
+        lastAttackTime = Time.time;
         // 공격 애니메이션 재생
         animator.SetTrigger("Attack");
     }

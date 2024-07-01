@@ -19,8 +19,32 @@ public class P_Network : MonoBehaviourPunCallbacks
     private void Awake()
     {
         //서버접속
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
         DontDestroyOnLoad(gameObject);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("방생성 : " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("방입장 : " + PhotonNetwork.CurrentRoom.Name);
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("방입장 실패 : Random");
+    }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("방입장 실패 message : " + message);
     }
 
     private void Update()
@@ -31,12 +55,13 @@ public class P_Network : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.JoinRandomOrCreateRoom();
+        RoomOptions options = new RoomOptions { MaxPlayers = 4 };
+        PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, null, null, $"Test", options);
+        //PhotonNetwork.JoinRandomOrCreateRoom();
         StartCoroutine(SceneChaneCheck(ClientState.Joined,SceneType.Main));
     }
 
-    IEnumerator SceneChaneCheck(ClientState state,SceneType type)
+    IEnumerator SceneChaneCheck(ClientState state,SceneType target)
     {
         ClientState curState = PhotonNetwork.NetworkClientState;
 
@@ -46,6 +71,6 @@ public class P_Network : MonoBehaviourPunCallbacks
             yield return null;
         }
 
-        PhotonNetwork.LoadLevel((int)type);
+        PhotonNetwork.LoadLevel(/*(int)target*/1);
     }
 }
