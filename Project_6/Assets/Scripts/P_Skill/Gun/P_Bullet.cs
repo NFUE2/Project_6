@@ -7,9 +7,12 @@ public class P_Bullet : MonoBehaviour
 {
     public float speed;
     public float damage;
+    PhotonView pv;
+
 
     private void Start()
     {
+        pv = GetComponent<PhotonView>();
         Invoke("DestroyObject",5.0f);
     }
 
@@ -25,12 +28,15 @@ public class P_Bullet : MonoBehaviour
         {
             boss.TakeDamage(damage);
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
 
+    [PunRPC]
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -8,10 +8,13 @@ public class P_AllRoundAttackObject : MonoBehaviour
     private float keepingTime = 5;
     private float curTime = 0;
 
+    PhotonView pv;
+
     private void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
         tentaclypse = boss.GetComponent<P_Tentaclypse>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -20,7 +23,8 @@ public class P_AllRoundAttackObject : MonoBehaviour
         if(curTime >= keepingTime)
         {
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
 
@@ -31,17 +35,23 @@ public class P_AllRoundAttackObject : MonoBehaviour
             P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
             player.TakeDamage(tentaclypse.bossPower);
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
+
         }
         else if (collision.TryGetComponent(out P_Sheild shield))
         {
             shield.TakeDamage(tentaclypse.bossPower);
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
+
+    [PunRPC]
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
     }
 }
