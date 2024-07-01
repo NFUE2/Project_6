@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 5
+  jumpForce: 9
   attackPoint: {fileID: 8507357544887295975}
   attackPrefab: {fileID: 8574892165837719190, guid: ba710eb47daa70948b338fa40560aeb5, type: 3}
   meleeCollider: {fileID: 0}
