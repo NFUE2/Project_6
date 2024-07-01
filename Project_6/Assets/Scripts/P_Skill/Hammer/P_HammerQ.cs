@@ -8,7 +8,7 @@ public class P_HammerQ : MonoBehaviour, P_ISkill
 {
     public GameObject shield;
     private GameObject createShield;
-    public float shieldTime;
+    //public float shieldTime;
 
     public float actionTime;
     private float lastAction;
@@ -28,7 +28,7 @@ public class P_HammerQ : MonoBehaviour, P_ISkill
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         createShield.transform.localEulerAngles = new Vector3(0,0,angle);
         
-        Invoke("ShieldDestroy", shieldTime);
+        //Invoke("ShieldDestroy", shieldTime);
         StartCoroutine(CoolTime());
     }
 
@@ -37,10 +37,10 @@ public class P_HammerQ : MonoBehaviour, P_ISkill
         if (createShield != null && createShield.activeInHierarchy) createShield.transform.position = transform.position;
     }
 
-    private void ShieldDestroy()
-    {
-        if (createShield != null) Destroy(createShield);
-    }
+    //private void ShieldDestroy()
+    //{
+    //    if (createShield != null) Destroy(createShield);
+    //}
     IEnumerator CoolTime()
     {
         lastAction = Time.time;

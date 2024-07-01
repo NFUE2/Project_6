@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class ArrowScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        Invoke("DestroyObject", 5.0f);
     }
 
     void Update()
@@ -29,10 +31,18 @@ public class ArrowScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out P_Tentaclypse boss))
+        if (collision.TryGetComponent(out P_Tentaclypse boss))
+        {
             boss.TakeDamage(damage);
+            DestroyObject();
 
-        Destroy(gameObject);
+        }
+
+        //Destroy(gameObject);
         Debug.Log("적에게 데미지를 입혔습니다.");
+    }
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        Invoke("DestroyObject",5.0f);
     }
 
     void Update()
@@ -23,7 +25,8 @@ public class BulletScript : MonoBehaviour
         // 화면 좌표를 이용하여 화면 밖에 있는지 확인
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
         {
-            Destroy(gameObject); // 화면 밖으로 나갔을 때 총알 파괴
+            //Destroy(gameObject); // 화면 밖으로 나갔을 때 총알 파괴
+            DestroyObject();
         }
     }
 
@@ -32,8 +35,14 @@ public class BulletScript : MonoBehaviour
         if (collision.TryGetComponent(out P_Tentaclypse boss))
         {
             boss.TakeDamage(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            DestroyObject();
             Debug.Log("적에게 데미지를 입혔습니다.");
         }
+    }
+
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }
