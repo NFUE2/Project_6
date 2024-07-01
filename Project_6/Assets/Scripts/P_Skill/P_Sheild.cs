@@ -15,11 +15,12 @@ public class P_Sheild : MonoBehaviour,P_IDamagable
     public void TakeDamage(float damage)
     {
         amount -= damage;
+        Debug.Log(1);
         if(amount <= 0) DestroyObject();
     }
 
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(transform.parent.gameObject);
     }
 }

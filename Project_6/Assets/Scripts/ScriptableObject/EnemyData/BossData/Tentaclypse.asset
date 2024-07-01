@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tentaclypse
   m_EditorClassIdentifier: 
   bossName: "\uD150\uD130\uD074\uB9BD\uC2A4"
-  bossPower: 20
+  bossPower: 12.5
   bossHp: 100
