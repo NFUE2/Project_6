@@ -10,7 +10,6 @@ public class P_Sheild : MonoBehaviour,P_IDamagable
     public void TakeDamage(float damage)
     {
         amount -= damage;
-
         if(amount <= 0) PhotonNetwork.Destroy(gameObject);
     }
 }

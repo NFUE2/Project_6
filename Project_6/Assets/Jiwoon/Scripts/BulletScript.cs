@@ -30,9 +30,10 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out P_BossMonster boss))
+        {
             boss.TakeDamage(damage);
-
-        Destroy(gameObject);
-        Debug.Log("적에게 데미지를 입혔습니다.");
+            Destroy(gameObject);
+            Debug.Log("적에게 데미지를 입혔습니다.");
+        }
     }
 }

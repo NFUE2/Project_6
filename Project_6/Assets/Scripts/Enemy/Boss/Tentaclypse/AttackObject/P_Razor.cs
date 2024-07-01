@@ -52,6 +52,10 @@ public class P_Razor : MonoBehaviour
                 P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
                 player.TakeDamage(tentaclypse.bossPower);
             }
+            else if(collision.TryGetComponent(out P_Sheild shield))
+            {
+                shield.TakeDamage(tentaclypse.bossPower);
+            }
         }
     }
 }
