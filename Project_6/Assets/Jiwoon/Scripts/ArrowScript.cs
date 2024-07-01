@@ -35,7 +35,6 @@ public class ArrowScript : MonoBehaviour
         {
             boss.TakeDamage(damage);
             DestroyObject();
-
         }
 
         //Destroy(gameObject);

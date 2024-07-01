@@ -23,6 +23,7 @@ public class P_BombArrow : MonoBehaviour
     {
         if (collision.TryGetComponent(out P_BossMonster boss))
         {
+            Debug.Log("Ãæµ¹");
             boss.TakeDamage(damage);
             DestroyObject();
             //Destroy(gameObject);

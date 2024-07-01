@@ -10,7 +10,6 @@ public class P_Sheild : MonoBehaviour,P_IDamagable
     private void Start()
     {
         Invoke("DestroyObject", shieldTime);
-
     }
 
     public void TakeDamage(float damage)

@@ -45,7 +45,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
 
         if (currentHealth <= 0)
         {
-            currentHpBar.fillAmount = 0;    
+            currentHpBar.fillAmount = 0;
             Die();
         }
     }
@@ -58,5 +58,4 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
         bossMonster.players.Remove(gameObject);
         PhotonNetwork.Destroy(gameObject); // 플레이어 오브젝트 파괴한다
     }
-
 }

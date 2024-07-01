@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   bombRange: 1
-  damage: 3
+  damage: 5
 --- !u!114 &1616881573753160227
 MonoBehaviour:
   m_ObjectHideFlags: 0
