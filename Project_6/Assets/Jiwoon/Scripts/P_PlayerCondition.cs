@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 public class P_PlayerCondition : MonoBehaviour
 {
     public float maxHealth = 100f; // 최대 체력
@@ -44,6 +44,7 @@ public class P_PlayerCondition : MonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 사망");
+        //PhotonNetwork.Destroy(gameObject);
         bossMonster.players.Remove(gameObject);
         Destroy(gameObject); // 플레이어 오브젝트 파괴한다
     }

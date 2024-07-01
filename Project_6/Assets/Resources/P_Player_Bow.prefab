@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 393337628837608181}
   - component: {fileID: -8018459564307159715}
   - component: {fileID: -8581736037439202910}
+  - component: {fileID: -1844402871348309844}
   m_Layer: 6
   m_Name: P_Player_Bow
   m_TagString: Player
@@ -256,6 +257,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &-1844402871348309844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527220601978211437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742c7967ff0563848ac1b9aadf26ca15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  boss: {fileID: 0}
+  bossMonster: {fileID: 0}
+  currentHpBar: {fileID: 0}
 --- !u!1 &1700430286747907544
 GameObject:
   m_ObjectHideFlags: 0
