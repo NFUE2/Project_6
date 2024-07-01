@@ -11,6 +11,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
     public P_BossMonster bossMonster;
     public Image currentHpBar;
 
+    PhotonView pv;
     private void Awake()
     {
         currentHealth = maxHealth; // 초기 체력을 최대 체력으로 설정
@@ -20,6 +21,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
         currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -56,6 +58,13 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
         Debug.Log("플레이어 사망");
         //PhotonNetwork.Destroy(gameObject);
         bossMonster.players.Remove(gameObject);
-        PhotonNetwork.Destroy(gameObject); // 플레이어 오브젝트 파괴한다
+        //PhotonNetwork.Destroy(gameObject); // 플레이어 오브젝트 파괴한다
+        pv.RPC("DieRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void DieRPC()
+    {
+        Destroy(gameObject);
     }
 }

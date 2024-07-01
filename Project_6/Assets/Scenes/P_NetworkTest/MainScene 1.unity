@@ -9421,7 +9421,7 @@ MonoBehaviour:
   maxHp: 0
   bossHp: 0
   players: []
-  targetSettingTime: 5
+  targetSettingTime: 7
   targetSettingTriggerTime: 5
   attackCoolDown: 5
   attackTriggerTime: 0

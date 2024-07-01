@@ -22,6 +22,7 @@ public class P_Network : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
         DontDestroyOnLoad(gameObject);
+        Application.targetFrameRate = 60;
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
