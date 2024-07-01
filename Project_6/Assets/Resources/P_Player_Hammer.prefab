@@ -602,7 +602,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 4237411922278087230, guid: 044fc4cd43e81d44ea6994349b102a7f, type: 3}
-  shieldTime: 3
   actionTime: 10
 --- !u!114 &6903916744368478553
 MonoBehaviour:

@@ -48,6 +48,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
         animator.SetBool("Charging", isCharging = false);
         StartCoroutine(CoolTime());
         Smash(currentDamage);
+
     }
 
     public void Smash(float currentDamage)
@@ -71,6 +72,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
         {
             Debug.Log($"적 오브젝트가 아닙니다: {collider.name}");
         }
+        currentDamage = damage;
     }
 
     IEnumerator CoolTime()
