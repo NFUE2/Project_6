@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -35,7 +36,9 @@ public class P_BowE : MonoBehaviour, P_ISkill
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject go = Instantiate(bombArrow,/*hand.GetChild(0)*/transform.position,Quaternion.identity);
+            //GameObject go = Instantiate(bombArrow,/*hand.GetChild(0)*/transform.position,Quaternion.identity);
+            GameObject go = PhotonNetwork.Instantiate(bombArrow.name,/*hand.GetChild(0)*/transform.position, Quaternion.identity);
+
             go.transform.localEulerAngles = new Vector3(0,0,angle + i * fireAngle);
         }
         StartCoroutine(CoolTime());

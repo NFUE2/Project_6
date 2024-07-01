@@ -18,7 +18,7 @@ public interface IAttackPattern
 }
 
 
-public abstract class P_BossMonster : MonoBehaviourPun
+public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable
 {
     public string bossName;
     public float bossPower;
