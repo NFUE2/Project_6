@@ -30,5 +30,9 @@ public class P_AllRoundAttackObject : MonoBehaviour
             player.TakeDamage(tentaclypse.bossPower);
             Destroy(gameObject);
         }
+        else if (collision.TryGetComponent(out P_Sheild shield))
+        {
+            shield.TakeDamage(tentaclypse.bossPower);
+        }
     }
 }

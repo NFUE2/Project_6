@@ -20,6 +20,5 @@ public class P_Bullet : MonoBehaviour
             boss.TakeDamage(damage);
             Destroy(gameObject);
         }
-
     }
 }
