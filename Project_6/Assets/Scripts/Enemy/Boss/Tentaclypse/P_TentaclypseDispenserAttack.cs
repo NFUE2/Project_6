@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_TentaclypseDispenserAttack : MonoBehaviour, IAttackPattern
+public class P_TentaclypseDispenserAttack : MonoBehaviourPun, IAttackPattern
 {
     private GameObject boss;
     private P_Tentaclypse tentaclypse;
@@ -27,9 +28,12 @@ public class P_TentaclypseDispenserAttack : MonoBehaviour, IAttackPattern
 
     private IEnumerator DispenserAttack(Vector3 randPosLeft, Vector3 randPosRight)
     {
-        var dispenserLeft = Instantiate(dispenser);
+        /*var dispenserLeft = */Instantiate(dispenser);
+        var dispenserLeft = PhotonNetwork.Instantiate(dispenser.name,Vector2.zero,Quaternion.identity);
         dispenserLeft.transform.position = boss.transform.position;
-        var dispenserRight = Instantiate(dispenser);
+        //var dispenserRight = Instantiate(dispenser);
+        var dispenserRight = PhotonNetwork.Instantiate(dispenser.name, Vector2.zero, Quaternion.identity);
+
         dispenserRight.transform.position = boss.transform.position;
         float countTime = 0;
 
@@ -54,12 +58,15 @@ public class P_TentaclypseDispenserAttack : MonoBehaviour, IAttackPattern
             float angle = 360 / bulletCount;
             for (int j = 0; j < bulletCount; j++)
             {
-                GameObject go1 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
+                //GameObject go1 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
+                GameObject go1 = PhotonNetwork.Instantiate(bullet.name, dispenser.transform.position, Quaternion.identity);
+
                 go1.transform.position = randPosLeft;
                 go1.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * j / bulletCount), speed * Mathf.Sin(Mathf.PI * j * 2 / bulletCount)), ForceMode2D.Force);
                 go1.transform.Rotate(new Vector3(0, 0, 360 * j / bulletCount - 90));
 
-                GameObject go2 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
+                //GameObject go2 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
+                GameObject go2 = PhotonNetwork.Instantiate(bullet.name, dispenser.transform.position, Quaternion.identity);
                 go2.transform.position = randPosRight;
                 go2.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * j / bulletCount), speed * Mathf.Sin(Mathf.PI * j * 2 / bulletCount)), ForceMode2D.Force);
                 go2.transform.Rotate(new Vector3(0, 0, 360 * j / bulletCount - 90));

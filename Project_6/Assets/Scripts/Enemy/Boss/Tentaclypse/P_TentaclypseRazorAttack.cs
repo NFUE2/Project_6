@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class P_TentaclypseRazorAttack : MonoBehaviour, IAttackPattern
+public class P_TentaclypseRazorAttack : MonoBehaviourPun, IAttackPattern
 {
     private GameObject boss;
     private P_Tentaclypse tentaclypse;
@@ -27,7 +28,8 @@ public class P_TentaclypseRazorAttack : MonoBehaviour, IAttackPattern
         for(int i = 0; i < 5; i++)
         {
             Vector3 razorPosition = target.transform.position;
-            var razor = Instantiate(razorObject, transform);
+            //var razor = Instantiate(razorObject, transform);
+            var razor = PhotonNetwork.Instantiate(razorObject.name,Vector2.zero,Quaternion.identity);
             razor.transform.position = razorPosition;
             Vector3 currentRotation = razor.transform.eulerAngles;
             currentRotation.z = Random.Range(0, 180);

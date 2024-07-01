@@ -1,14 +1,18 @@
+using Photon.Pun;
 using System.Collections;
 using System.Threading;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class P_TentaclypseRazorRainAttack : MonoBehaviour, IAttackPattern
+public class P_TentaclypseRazorRainAttack : MonoBehaviourPun, IAttackPattern
 {
     private GameObject boss;
     private P_Tentaclypse tentaclypse;
     private GameObject razorObject;
     private Vector3[] verticalPositions;
     private Vector3[] horizontalPositions;
+
+    PhotonView pv;
 
     private void Start()
     {
@@ -45,50 +49,71 @@ public class P_TentaclypseRazorRainAttack : MonoBehaviour, IAttackPattern
 
     private IEnumerator RazorRainCoroutine()
     {
-        var vertRazor1 = Instantiate(razorObject, transform);
+        //var vertRazor1 = Instantiate(razorObject, transform);
+        var vertRazor1 = PhotonNetwork.Instantiate(razorObject.name,Vector3.zero,Quaternion.identity);
         Vector3 currentRotation = vertRazor1.transform.eulerAngles;
         currentRotation.z = 90f;
         vertRazor1.transform.eulerAngles = currentRotation;
         vertRazor1.transform.position = verticalPositions[0];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor2 = Instantiate(razorObject, transform);
+
+        //var vertRazor2 = Instantiate(razorObject, transform);
+        var vertRazor2 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor2.transform.eulerAngles = currentRotation;
         vertRazor2.transform.position = verticalPositions[1];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor3 = Instantiate(razorObject, transform);
+
+        //var vertRazor3 = Instantiate(razorObject, transform);
+        var vertRazor3 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor3.transform.eulerAngles = currentRotation;
         vertRazor3.transform.position = verticalPositions[2];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor4 = Instantiate(razorObject, transform);
+
+        //var vertRazor4 = Instantiate(razorObject, transform);
+        var vertRazor4 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor4.transform.eulerAngles = currentRotation;
         vertRazor4.transform.position = verticalPositions[3];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor5 = Instantiate(razorObject, transform);
+
+        //var vertRazor5 = Instantiate(razorObject, transform);
+        var vertRazor5 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor5.transform.eulerAngles = currentRotation;
         vertRazor5.transform.position = verticalPositions[4];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor6 = Instantiate(razorObject, transform);
+
+        //var vertRazor6 = Instantiate(razorObject, transform);
+        var vertRazor6 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor6.transform.eulerAngles = currentRotation;
         vertRazor6.transform.position = verticalPositions[5];
         yield return new WaitForSeconds(0.2f);
-        var vertRazor7 = Instantiate(razorObject, transform);
+
+        //var vertRazor7 = Instantiate(razorObject, transform);
+        var vertRazor7 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         vertRazor7.transform.eulerAngles = currentRotation;
         vertRazor7.transform.position = verticalPositions[6];
         yield return new WaitForSeconds(1f);
+
         currentRotation.z = 0;
-        var horiRazor1 = Instantiate(razorObject, transform);
+        //var horiRazor1 = Instantiate(razorObject, transform);
+        var horiRazor1 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         horiRazor1.transform.eulerAngles = currentRotation;
         horiRazor1.transform.position = horizontalPositions[0];
         yield return new WaitForSeconds(0.35f);
-        var horiRazor2 = Instantiate(razorObject, transform);
+
+        //var horiRazor2 = Instantiate(razorObject, transform);
+        var horiRazor2 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         horiRazor2.transform.eulerAngles = currentRotation;
         horiRazor2.transform.position = horizontalPositions[1];
         yield return new WaitForSeconds(0.35f);
-        var horiRazor3 = Instantiate(razorObject, transform);
+
+        //var horiRazor3 = Instantiate(razorObject, transform);
+        var horiRazor3 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         horiRazor3.transform.eulerAngles = currentRotation;
         horiRazor3.transform.position = horizontalPositions[2];
         yield return new WaitForSeconds(0.35f);
-        var horiRazor4 = Instantiate(razorObject, transform);
+
+        //var horiRazor4 = Instantiate(razorObject, transform);
+        var horiRazor4 = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
         horiRazor4.transform.eulerAngles = currentRotation;
         horiRazor4.transform.position = horizontalPositions[3];
         

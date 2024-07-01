@@ -48,7 +48,7 @@ public class P_PlayerCondition : MonoBehaviour
         Debug.Log("플레이어 사망");
         //PhotonNetwork.Destroy(gameObject);
         bossMonster.players.Remove(gameObject);
-        Destroy(gameObject); // 플레이어 오브젝트 파괴한다
+        PhotonNetwork.Destroy(gameObject); // 플레이어 오브젝트 파괴한다
     }
 
 }
