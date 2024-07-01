@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,9 +29,10 @@ public class P_SwordE :MonoBehaviour, P_ISkill
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 
-        Transform go = Instantiate(projectile, transform.position, Quaternion.identity).transform;
+        //Transform go = Instantiate(projectile, transform.position, Quaternion.identity).transform;
+        GameObject go = PhotonNetwork.Instantiate(projectile.name, transform.position, Quaternion.identity);
 
-        go.localEulerAngles = new Vector3(0,0,angle);
+        go.transform.localEulerAngles = new Vector3(0,0,angle);
 
         StartCoroutine(CoolTime());
     }

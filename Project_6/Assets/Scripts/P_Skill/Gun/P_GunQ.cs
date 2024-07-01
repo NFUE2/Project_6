@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,9 @@ public class P_GunQ : MonoBehaviour, P_ISkill
 
             Debug.Log(mousePos);
 
-            GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+            //GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject go = PhotonNetwork.Instantiate(bullet.name,/*hand.GetChild(0)*/transform.position, Quaternion.identity);
+
             go.transform.localEulerAngles = /*hand.localEulerAngles + */new Vector3(0, 0,angle + fireAngle);
 
             yield return new WaitForSeconds(0.1f);

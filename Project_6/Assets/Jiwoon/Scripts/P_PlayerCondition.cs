@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-public class P_PlayerCondition : MonoBehaviour
+public class P_PlayerCondition : MonoBehaviour, P_IDamagable
 {
     public float maxHealth = 100f; // 최대 체력
     public float currentHealth;

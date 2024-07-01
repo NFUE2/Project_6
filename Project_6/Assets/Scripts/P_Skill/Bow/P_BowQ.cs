@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class P_BowQ : MonoBehaviour, P_ISkill
     {
         if (Time.time - lastAction < actionTime) return;
 
-        GameObject go = Instantiate(wireArrow,/*hand.GetChild(0).*/transform.position,Quaternion.identity);
+        //GameObject go = Instantiate(wireArrow,/*hand.GetChild(0).*/transform.position,Quaternion.identity);
+        GameObject go = PhotonNetwork.Instantiate(wireArrow.name,/*hand.GetChild(0)*/transform.position, Quaternion.identity);
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class P_HammerQ : MonoBehaviour, P_ISkill
         if (createShield != null) return;
         if (Time.time - lastAction < actionTime) return;
         Debug.Log(1);
-        createShield = Instantiate(shield,transform.position,Quaternion.identity);
+        //createShield = Instantiate(shield, transform.position, Quaternion.identity);
+        createShield = PhotonNetwork.Instantiate(shield.name, transform.position, Quaternion.identity);
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         createShield.transform.localEulerAngles = new Vector3(0,0,angle);

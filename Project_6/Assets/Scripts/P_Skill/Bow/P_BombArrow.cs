@@ -6,7 +6,7 @@ public class P_BombArrow : MonoBehaviour
 {
     public float speed = 1f;
     public float bombRange = 1f;
-
+    public float damage;
     private void Update()
     {
         transform.position += transform.right * speed * Time.deltaTime;
@@ -15,13 +15,18 @@ public class P_BombArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, bombRange);
-
-        foreach (Collider2D c in col)
+        if (collision.TryGetComponent(out P_BossMonster boss))
         {
-            //데미지 주기
+            boss.TakeDamage(damage);
+            Destroy(gameObject);
         }
+        //Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, bombRange);
 
-        Destroy(gameObject);
+        //foreach (Collider2D c in col)
+        //{
+        //    //데미지 주기
+        //}
+
+        //Destroy(gameObject);
     }
 }

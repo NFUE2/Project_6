@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum P_BossState
 {
@@ -17,7 +18,7 @@ public interface IAttackPattern
 }
 
 
-public abstract class P_BossMonster : MonoBehaviourPun
+public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable
 {
     public string bossName;
     public float bossPower;
@@ -32,10 +33,14 @@ public abstract class P_BossMonster : MonoBehaviourPun
     public float attackCoolDown;
     public float attackTriggerTime;
 
+    Image hpui;
+
     private void Awake()
     {
         foreach(GameObject p in GameObject.FindGameObjectsWithTag("Player"))
             players.Add(p);
+
+        hpui = GameObject.Find("BossCurrent_HP").GetComponent<Image>();
     }
 
     private void Update()
@@ -79,6 +84,7 @@ public abstract class P_BossMonster : MonoBehaviourPun
     public void TakeDamage(float damage)
     {
         bossHp -= damage;
+        hpui.fillAmount = bossHp / maxHp;
         if (bossHp <= 0)
         {
             currentState = P_BossState.Dead;
