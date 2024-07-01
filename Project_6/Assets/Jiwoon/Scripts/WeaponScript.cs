@@ -29,10 +29,12 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("적에게 데미지를 입혔습니다.");
 
-        if (collision.TryGetComponent(out P_BossMonster boss))
+        if (collision.TryGetComponent(out P_Tentaclypse boss))
+        {
             boss.TakeDamage(damage);
+            Debug.Log("적에게 데미지를 입혔습니다.");
+        }
 
         if (playerController.meleeCollider != null)
         {
