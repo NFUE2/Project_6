@@ -58,7 +58,7 @@ public class P_Tentaclypse : P_BossMonster
             //patterns[index].ExecuteAttack();
             //currentState = P_BossState.Idle;
             if(PhotonNetwork.IsMasterClient)
-                pv.RPC("AttackRPC", RpcTarget.AllBuffered);
+                pv.RPC("AttackRPC", RpcTarget.MasterClient);
         }
         else
         {
