@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class P_HammerE : MonoBehaviour, P_ISkill
 {
-    private float damage;
-    private float damageRate;
-    public  float maxChargingTime = 1f;
-    private float attackDistance;
+    public float damage = 10f;
+    public float damageRate;
+    public float maxChargingTime = 5f;
+    public float attackDistance;
 
     private Animator animator;
     public bool isCharging;
@@ -20,6 +20,8 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
     private void Awake()
     {
+        BoxCollider2D boxCollider = GetComponentInChildren<BoxCollider2D>();
+     
         animator = GetComponentInChildren<Animator>();
         lastAction = -actionTime;
     }
@@ -35,33 +37,42 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
     IEnumerator Charging()
     {
-        //animator.SetBool("Charging", isCharging);
+        animator.SetBool("Charging", isCharging);
         float startCharging = Time.time;
-
+        float currentDamage = damage;
         while (!Input.GetKeyUp(KeyCode.E) && !(Time.time - startCharging > maxChargingTime))
         {
-            damage += Time.deltaTime * damageRate;
+            currentDamage += Time.deltaTime * damageRate;
             yield return null;
         }
         animator.SetBool("Charging", isCharging = false);
         StartCoroutine(CoolTime());
-
-        //animator.SetBool("Charging", isCharging = false);
-        //Smash();
-        //µ¥¹ÌÁö ÁÖ´Â ºÎºĞÀ» ½ºÅ©¸³Æ®·Î ÇÒÁö ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®·Î Ã³¸®ÇÒÁö °í¹Î
+        Smash(currentDamage);
     }
 
-    public void Smash()
+    public void Smash(float currentDamage)
     {
-
-        //µ¥¹ÌÁö ÀÔ·ÂºÎºĞ ÇÊ¿ä
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        Vector2 dir = (sr.flipX ? Vector2.right : Vector2.left); 
-
-        RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, dir,attackDistance);
-
-        charging = null;
+        // ì´ ë©”ì„œë“œì—ì„œ ì¶©ëŒì„ íŒì •í•˜ì§€ ì•Šê³ , OnTriggerEnter2Dë¥¼ í†µí•´ ì¶©ëŒì„ íŒì •í•©ë‹ˆë‹¤.
+        this.currentDamage = currentDamage; // ë°ë¯¸ì§€ë¥¼ ì €ì¥
     }
+
+    private float currentDamage;
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log($"ì¶©ëŒëœ ê°ì²´: {collider.name}");
+        P_Tentaclypse boss = collider.GetComponent<P_Tentaclypse>();
+        if (boss != null)
+        {
+            Debug.Log($"ìŠ¤í‚¬ ë°ë¯¸ì§€ {currentDamage} ë§Œí¼ ë„£ì—ˆìŠµë‹ˆë‹¤");
+            boss.TakeDamage(currentDamage);
+        }
+        else
+        {
+            Debug.Log($"ì  ì˜¤ë¸Œì íŠ¸ê°€ ì•„ë‹™ë‹ˆë‹¤: {collider.name}");
+        }
+    }
+
     IEnumerator CoolTime()
     {
         lastAction = Time.time;
@@ -73,7 +84,6 @@ public class P_HammerE : MonoBehaviour, P_ISkill
             yield return null;
         }
 
-        coolTimeText.text = "ÁØºñ¿Ï·á";
+        coolTimeText.text = "ì¤€ë¹„ì™„ë£Œ";
     }
-
 }
