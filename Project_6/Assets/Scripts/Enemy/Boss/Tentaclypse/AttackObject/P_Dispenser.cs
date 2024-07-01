@@ -7,7 +7,13 @@ public class P_Dispenser : MonoBehaviour
 {
     private float targetTime = 5f;
     private float curTime = 0;
+    PhotonView pv;
 
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+
+    }
 
     void Update()
     {
@@ -15,12 +21,14 @@ public class P_Dispenser : MonoBehaviour
         if (curTime >= targetTime)
         {
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
-
+    [PunRPC]
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
