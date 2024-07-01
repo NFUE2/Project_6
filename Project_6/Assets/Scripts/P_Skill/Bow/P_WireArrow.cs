@@ -1,5 +1,7 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class P_WireArrow : MonoBehaviour
@@ -10,6 +12,11 @@ public class P_WireArrow : MonoBehaviour
 
     public Transform player;
     public float wireEndDistance;
+
+    private void Start()
+    {
+        Invoke("DestroyObject",5.0f);
+    }
 
     private void Update()
     {
@@ -22,7 +29,8 @@ public class P_WireArrow : MonoBehaviour
 
             if (Vector3.Distance(transform.position, player.position) < wireEndDistance)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                DestroyObject();
                 player.GetComponent<PlayerController_Bow>().isWiring = false;
 
             }
@@ -32,5 +40,10 @@ public class P_WireArrow : MonoBehaviour
     {
         isCollision = true;
 
+    }
+
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

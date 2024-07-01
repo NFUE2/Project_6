@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,11 @@ public class P_BombArrow : MonoBehaviour
     public float speed = 1f;
     public float bombRange = 1f;
     public float damage;
+    private void Start()
+    {
+        Invoke("DestroyObject",5.0f);
+    }
+
     private void Update()
     {
         transform.position += transform.right * speed * Time.deltaTime;
@@ -18,7 +24,8 @@ public class P_BombArrow : MonoBehaviour
         if (collision.TryGetComponent(out P_BossMonster boss))
         {
             boss.TakeDamage(damage);
-            Destroy(gameObject);
+            DestroyObject();
+            //Destroy(gameObject);
         }
         //Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, bombRange);
 
@@ -29,4 +36,9 @@ public class P_BombArrow : MonoBehaviour
 
         //Destroy(gameObject);
     }
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
+    }
+
 }

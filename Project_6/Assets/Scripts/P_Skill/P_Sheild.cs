@@ -6,10 +6,21 @@ using UnityEngine;
 public class P_Sheild : MonoBehaviour,P_IDamagable
 {
     public float amount;
+    public float shieldTime = 5.0f;
+    private void Start()
+    {
+        Invoke("DestroyObject", shieldTime);
+
+    }
 
     public void TakeDamage(float damage)
     {
         amount -= damage;
-        if(amount <= 0) PhotonNetwork.Destroy(gameObject);
+        if(amount <= 0) DestroyObject();
+    }
+
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }
