@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class P_AllRoundAttackObject : MonoBehaviour
@@ -18,7 +19,8 @@ public class P_AllRoundAttackObject : MonoBehaviour
         curTime += Time.deltaTime;
         if(curTime >= keepingTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            DestroyObject();
         }
     }
 
@@ -28,11 +30,18 @@ public class P_AllRoundAttackObject : MonoBehaviour
         {
             P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
             player.TakeDamage(tentaclypse.bossPower);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            DestroyObject();
         }
         else if (collision.TryGetComponent(out P_Sheild shield))
         {
             shield.TakeDamage(tentaclypse.bossPower);
+            //Destroy(gameObject);
+            DestroyObject();
         }
+    }
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

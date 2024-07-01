@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,13 @@ public class P_Dispenser : MonoBehaviour
         curTime += Time.deltaTime;
         if (curTime >= targetTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            DestroyObject();
         }
+    }
+
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

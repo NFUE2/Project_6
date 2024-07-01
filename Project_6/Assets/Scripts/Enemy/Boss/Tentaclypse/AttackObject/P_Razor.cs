@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,8 @@ public class P_Razor : MonoBehaviour
             objectDestroyTriggerTime += Time.deltaTime;
             if(objectDestroyTriggerTime >= objectDestroyTime)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                DestroyObject();
             }
         }
     }
@@ -51,11 +53,18 @@ public class P_Razor : MonoBehaviour
             {
                 P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
                 player.TakeDamage(tentaclypse.bossPower);
+                DestroyObject();
             }
             else if(collision.TryGetComponent(out P_Sheild shield))
             {
                 shield.TakeDamage(tentaclypse.bossPower);
+                DestroyObject();
             }
         }
+    }
+
+    private void DestroyObject()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }
