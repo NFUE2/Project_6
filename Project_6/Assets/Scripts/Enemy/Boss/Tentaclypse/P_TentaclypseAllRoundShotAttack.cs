@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_TentaclypseAllRoundShotAttack : MonoBehaviour, IAttackPattern
+public class P_TentaclypseAllRoundShotAttack : MonoBehaviourPun, IAttackPattern
 {
     private GameObject boss;
     private P_Tentaclypse tentaclypse;
@@ -31,7 +32,8 @@ public class P_TentaclypseAllRoundShotAttack : MonoBehaviour, IAttackPattern
             float angle = 360 / bulletCount;
             for (int j = 0; j < bulletCount; j++)
             {
-                GameObject go = Instantiate(bullet, boss.transform.position, Quaternion.identity);
+                //GameObject go = Instantiate(bullet, boss.transform.position, Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate(bullet.name, boss.transform.position, Quaternion.identity);
                 go.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * j / bulletCount), speed * Mathf.Sin(Mathf.PI * j * 2 / bulletCount)), ForceMode2D.Force);
 
                 go.transform.Rotate(new Vector3(0, 0, 360 * j / bulletCount - 90));
