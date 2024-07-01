@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class P_Tentaclypse : P_BossMonster
 {
@@ -12,6 +13,8 @@ public class P_Tentaclypse : P_BossMonster
     public GameObject razorObject;
     public GameObject allRoundAttackObject;
     public GameObject dispenser;
+
+    private PhotonView pv;
 
     private void Start()
     {
@@ -33,6 +36,8 @@ public class P_Tentaclypse : P_BossMonster
         {
             base.players.Add(player);
         }
+
+        pv = GetComponent<PhotonView>();
     }
 
     protected override void IdleBehavior()
@@ -49,9 +54,10 @@ public class P_Tentaclypse : P_BossMonster
     {
         if (currentTarget != null)
         {
-            int index = Random.Range(0,patterns.Count);
-            patterns[index].ExecuteAttack();
-            currentState = P_BossState.Idle;
+            //int index = Random.Range(0,patterns.Count);
+            //patterns[index].ExecuteAttack();
+            //currentState = P_BossState.Idle;
+            pv.RPC("AttackRPC",RpcTarget.AllBuffered);
         }
         else
         {
@@ -63,5 +69,13 @@ public class P_Tentaclypse : P_BossMonster
     protected override void DeadBehavior()
     {
         Debug.Log("¥¿ø’ ¡Í±› §–");
+    }
+
+    [PunRPC]
+    private void AttackRPC()
+    {
+        int index = Random.Range(0, patterns.Count);
+        patterns[index].ExecuteAttack();
+        currentState = P_BossState.Idle;
     }
 }
