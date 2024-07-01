@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -6996960895910818894}
   m_Layer: 6
   m_Name: P_Player_Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b9ce0a4919152479e4a2408f549121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!61 &7112026636531437827
 BoxCollider2D:
   m_ObjectHideFlags: 0
