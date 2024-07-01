@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public interface IAttackPattern
 }
 
 
-public abstract class P_BossMonster : MonoBehaviour
+public abstract class P_BossMonster : MonoBehaviourPun
 {
     public string bossName;
     public float bossPower;
