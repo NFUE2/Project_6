@@ -31,9 +31,17 @@ public class P_PlayerCondition : MonoBehaviour
     // 데미지를 받는 메서드
     public void TakeDamage(float damage)
     {
+        P_GunE gunEComponent = GetComponent<P_GunE>(); //P_GunE스킬쓰기 위해 가져온다.
+
+        if (gunEComponent != null && gunEComponent.isInvincible) // P_GunE 스킬과 연동
+        {
+            return;
+        }
+
         currentHealth -= damage;
         currentHpBar.fillAmount = currentHealth / maxHealth;
         Debug.Log("플레이어 체력: " + currentHealth);
+        
 
         if (currentHealth <= 0)
         {

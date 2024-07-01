@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
   currentHpBar: {fileID: 0}

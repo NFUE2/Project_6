@@ -12,7 +12,8 @@ public class P_GunE : MonoBehaviour, P_ISkill
 
     public float actionTime;
     private float lastAction;
-    //public bool isRolling { get; private set; } 
+    //public bool isRolling { get; private set; }
+    public bool isInvincible { get; private set; }
 
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class P_GunE : MonoBehaviour, P_ISkill
         //isRolling = true;
         GetComponent<PlayerController_Gun>().isRolling = true;
 
+        isInvincible = true;  // 구르기 시작 시 무적 상태로 설정
+
         Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         int c = dir.x > 0 ? 1 : -1;  
 
@@ -43,6 +46,8 @@ public class P_GunE : MonoBehaviour, P_ISkill
     public void ExitRolling()
     {
         GetComponent<PlayerController_Gun>().isRolling = false;
+
+        isInvincible = false;  // 구르기 종료 시 무적 상태 해제
 
         //isRolling = false;
         rigidbody.velocity = Vector2.zero;
