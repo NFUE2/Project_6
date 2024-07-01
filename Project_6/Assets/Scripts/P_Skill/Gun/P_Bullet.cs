@@ -21,7 +21,7 @@ public class P_Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out P_BossMonster boss))
+        if (collision.TryGetComponent(out P_Tentaclypse boss))
         {
             boss.TakeDamage(damage);
             //Destroy(gameObject);

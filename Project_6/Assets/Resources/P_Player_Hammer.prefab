@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cc6464a57908f4786253f7238a2d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
 --- !u!61 &8989685589908183107
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -583,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3eb25772196254f927b77994585473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  damageRate: 3
-  maxChargingTime: 5
+  damage: 3
+  damageRate: 1.5
+  maxChargingTime: 3
   attackDistance: 3
   isCharging: 0
   actionTime: 5

@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15357c7032798bb439953900acc6e2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollingX: 5
+  rollingX: 2
   actionTime: 3
 --- !u!114 &860336745386896568
 MonoBehaviour:

@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 8521390195919853251, guid: 376371f497d0b8e4387696f053064dba, type: 3}
   animator: {fileID: 0}
-  actionTime: 3
+  actionTime: 2
 --- !u!114 &4282614974121979400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b9ce0a4919152479e4a2408f549121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 1
 --- !u!61 &7112026636531437827
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -461,9 +461,6 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: Attack
-  - Type: 4
-    SynchronizeType: 1
-    Name: Guard
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
