@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c56e221651ce5f4688e9f80d33a9111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 8521390195919853251, guid: 2de9e0baf850eb44ebd1b577d68e7267, type: 3}
+  projectile: {fileID: 8521390195919853251, guid: 376371f497d0b8e4387696f053064dba, type: 3}
   animator: {fileID: 0}
   actionTime: 3
 --- !u!114 &4282614974121979400
