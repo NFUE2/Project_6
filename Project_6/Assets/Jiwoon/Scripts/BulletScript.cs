@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Camera mainCamera;
-
+    public float damage;
     void Start()
     {
         mainCamera = Camera.main;
@@ -27,8 +27,12 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.TryGetComponent(out P_BossMonster boss))
+            boss.TakeDamage(damage);
+
+        Destroy(gameObject);
+        Debug.Log("적에게 데미지를 입혔습니다.");
     }
 }

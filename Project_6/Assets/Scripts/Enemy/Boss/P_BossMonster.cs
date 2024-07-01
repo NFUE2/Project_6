@@ -15,13 +15,14 @@ public interface IAttackPattern
     public void ExecuteAttack();
 }
 
+
 public abstract class P_BossMonster : MonoBehaviour
 {
     public string bossName;
     public float bossPower;
     public float maxHp;
     public float bossHp;
-    public List<GameObject> dummies;
+    public List<GameObject> players;
     protected P_BossState currentState;
     protected List<IAttackPattern> patterns = new List<IAttackPattern>();
 
@@ -29,6 +30,12 @@ public abstract class P_BossMonster : MonoBehaviour
     public float targetSettingTriggerTime;
     public float attackCoolDown;
     public float attackTriggerTime;
+
+    private void Awake()
+    {
+        foreach(GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+            players.Add(p);
+    }
 
     private void Update()
     {
@@ -79,8 +86,8 @@ public abstract class P_BossMonster : MonoBehaviour
 
     public GameObject SetTarget()
     {
-        int index = Random.Range(0, dummies.Count);
-        return dummies[index];
+        int index = Random.Range(0, players.Count);
+        return players[index];
     }
 
     protected void Die()

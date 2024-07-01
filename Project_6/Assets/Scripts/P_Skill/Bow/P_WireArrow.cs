@@ -16,11 +16,16 @@ public class P_WireArrow : MonoBehaviour
         if(!isCollision) transform.position += transform.right * arrowSpeed * Time.deltaTime;
         else
         {
-            Debug.Log(1);
+            player.GetComponent<PlayerController_Bow>().isWiring = true;
             player.position = Vector2.Lerp(player.position,transform.position + transform.right,Time.deltaTime * wireSpeed);
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
             if (Vector3.Distance(transform.position, player.position) < wireEndDistance)
+            {
                 Destroy(gameObject);
+                player.GetComponent<PlayerController_Bow>().isWiring = false;
+
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
