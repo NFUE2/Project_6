@@ -14,8 +14,11 @@ public class P_WireArrow : MonoBehaviour
     public float wireEndDistance;
     public Collider2D ignoreObject;
 
+    PhotonView pv;
+
     private void Start()
     {
+        pv = GetComponent<PhotonView>();
         Invoke("DestroyObject",5.0f);
 
         //if (ignoreObject != null)
@@ -43,7 +46,8 @@ public class P_WireArrow : MonoBehaviour
             if (Vector3.Distance(transform.position, player.position) < wireEndDistance)
             {
                 //Destroy(gameObject);
-                DestroyObject();
+                //DestroyObject();
+                pv.RPC("DestroyObject", RpcTarget.All);
                 player.GetComponent<PlayerController_Bow>().isWiring = false;
 
             }
@@ -54,8 +58,10 @@ public class P_WireArrow : MonoBehaviour
             isCollision = true;
     }
 
+    [PunRPC]
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
