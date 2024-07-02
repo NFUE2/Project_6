@@ -34,11 +34,10 @@ public class ArrowScript : MonoBehaviour
         if (collision.TryGetComponent(out P_Tentaclypse boss))
         {
             boss.TakeDamage(damage);
+            //Destroy(gameObject);
             DestroyObject();
+            Debug.Log("적에게 데미지를 입혔습니다.");
         }
-
-        //Destroy(gameObject);
-        Debug.Log("적에게 데미지를 입혔습니다.");
     }
     private void DestroyObject()
     {
