@@ -32,20 +32,20 @@ public class P_Network : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log("방생성 : " + PhotonNetwork.CurrentRoom.Name);
+        //Debug.Log("방생성 : " + PhotonNetwork.CurrentRoom.Name);
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("방입장 : " + PhotonNetwork.CurrentRoom.Name);
+        //Debug.Log("방입장 : " + PhotonNetwork.CurrentRoom.Name);
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("방입장 실패 : Random");
+        //Debug.Log("방입장 실패 : Random");
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("방입장 실패 message : " + message);
+        //Debug.Log("방입장 실패 message : " + message);
     }
 
     private void Update()

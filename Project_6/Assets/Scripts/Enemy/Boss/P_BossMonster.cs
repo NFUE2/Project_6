@@ -62,7 +62,7 @@ public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable,IPunObserva
 
     void HandleState()
     {
-        Debug.Log($"HandleState 실행 중 상태 : {currentState.ToString()}");
+        //Debug.Log($"HandleState 실행 중 상태 : {currentState.ToString()}");
         switch (currentState)
         {
             case P_BossState.Idle:

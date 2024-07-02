@@ -37,8 +37,8 @@ public class PlayerController_Hammer : MonoBehaviourPunCallbacks
         P_HammerE = GetComponent<P_HammerE>();
 
         pv = GetComponent<PhotonView>();
-        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
-        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
+        //cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        //cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Update()

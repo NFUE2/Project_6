@@ -29,7 +29,7 @@ public class Weapon_Hammer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("적에게 데미지를 입혔습니다.");
+        //Debug.Log("적에게 데미지를 입혔습니다.");
 
         if (collision.TryGetComponent(out P_BossMonster boss))
             boss.TakeDamage(damage);

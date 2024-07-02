@@ -46,8 +46,8 @@ public class PlayerController_Gun : MonoBehaviourPunCallbacks
         P_gunE = GetComponent<P_GunE>();
 
         pv = GetComponent<PhotonView>();
-        cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
-        cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
+        //cooltimeQText = GameObject.Find("Skill_Q").GetComponentInChildren<Text>();
+        //cooltimeEText = GameObject.Find("Skill_E").GetComponentInChildren<Text>();
     }
 
     private void Start()

@@ -20,7 +20,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
     private void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
-        currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
+        //currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
         pv = GetComponent<PhotonView>();
     }
 
@@ -43,11 +43,10 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
         currentHealth -= damage;
         currentHpBar.fillAmount = currentHealth / maxHealth;
         Debug.Log("플레이어 체력: " + currentHealth);
-        
 
         if (currentHealth <= 0)
         {
-            currentHpBar.fillAmount = 0;
+            //currentHpBar.fillAmount = 0;
             Die();
         }
     }

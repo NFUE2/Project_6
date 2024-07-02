@@ -44,12 +44,12 @@ public class P_CharacterButton : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting) //클라이언트만 작동함
         {
             stream.SendNext(button.interactable);
-            Debug.Log(1);
+            //Debug.Log(1);
         }
         else //클라이언트 아닌사람만 작동함
         {
             button.interactable = (bool)stream.ReceiveNext();
-            Debug.Log(button.interactable);
+            //Debug.Log(button.interactable);
         }
     }
 }
