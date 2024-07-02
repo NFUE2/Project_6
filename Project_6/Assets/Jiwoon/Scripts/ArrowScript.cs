@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.Procedural;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class ArrowScript : MonoBehaviour
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
         {
             //Destroy(gameObject); // 화면 밖으로 나갔을 때 총알 파괴
-            DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
 
@@ -41,6 +42,14 @@ public class ArrowScript : MonoBehaviour
             //DestroyObject();
             pv.RPC("DestroyObject", RpcTarget.All);
             Debug.Log("적에게 데미지를 입혔습니다.");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
 
