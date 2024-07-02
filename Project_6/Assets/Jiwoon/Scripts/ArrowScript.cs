@@ -7,9 +7,12 @@ public class ArrowScript : MonoBehaviour
 {
     private Camera mainCamera;
     public float damage;
+    PhotonView pv;
+
     void Start()
     {
         mainCamera = Camera.main;
+        pv = GetComponent<PhotonView>();
         Invoke("DestroyObject", 5.0f);
     }
 
@@ -35,12 +38,16 @@ public class ArrowScript : MonoBehaviour
         {
             boss.TakeDamage(damage);
             //Destroy(gameObject);
-            DestroyObject();
+            //DestroyObject();
+            pv.RPC("DestroyObject", RpcTarget.All);
             Debug.Log("적에게 데미지를 입혔습니다.");
         }
     }
+
+    [PunRPC]
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
