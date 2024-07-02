@@ -1092,7 +1092,8 @@ MonoBehaviour:
   currentHealth: 0
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
-  currentHpBar: {fileID: 0}
+  currentHpBar: {fileID: 3979701845103740709}
+  canvas: {fileID: 7162495009368520951}
 --- !u!114 &2275098260950604350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,6 +1182,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
   currentHpBar: {fileID: 3979701845103740709}
+  canvas: {fileID: 7162495009368520951}
 --- !u!1 &4286622504813018633
 GameObject:
   m_ObjectHideFlags: 0

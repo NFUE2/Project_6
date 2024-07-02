@@ -462,6 +462,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
   currentHpBar: {fileID: 3932503227604874706}
+  canvas: {fileID: 1661437861498058456}
 --- !u!114 &4641016725949181671
 MonoBehaviour:
   m_ObjectHideFlags: 0

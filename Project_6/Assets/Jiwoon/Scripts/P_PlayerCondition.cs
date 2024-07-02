@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Pun.Demo.Hub;
+using System.ComponentModel;
 public class P_PlayerCondition : MonoBehaviour, P_IDamagable
 {
     public float maxHealth = 100f; // 최대 체력
@@ -10,6 +12,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
     public GameObject boss;
     public P_BossMonster bossMonster;
     public Image currentHpBar;
+    public GameObject canvas;
 
     PhotonView pv;
     private void Awake()
@@ -22,6 +25,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
         boss = GameObject.FindGameObjectWithTag("Boss");
         //currentHpBar = GameObject.Find("Current_HP").GetComponent<Image>();
         pv = GetComponent<PhotonView>();
+        if (!pv.IsMine) canvas.SetActive(false);
     }
 
     private void Update()
@@ -58,6 +62,7 @@ public class P_PlayerCondition : MonoBehaviour, P_IDamagable
         //PhotonNetwork.Destroy(gameObject);
         bossMonster.players.Remove(gameObject);
         //PhotonNetwork.Destroy(gameObject); // 플레이어 오브젝트 파괴한다
+
         pv.RPC("DieRPC", RpcTarget.All);
     }
 

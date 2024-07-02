@@ -1242,3 +1242,4 @@ MonoBehaviour:
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
   currentHpBar: {fileID: 2149210661883223809}
+  canvas: {fileID: 1924169894715828090}

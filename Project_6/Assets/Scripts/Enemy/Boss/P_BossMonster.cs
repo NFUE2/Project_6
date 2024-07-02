@@ -37,9 +37,12 @@ public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable,IPunObserva
 
     private void Awake()
     {
-        foreach(GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        {
             players.Add(p);
-
+            p.GetComponent<P_PlayerCondition>().bossMonster = this;
+        }
+        //Search();
         hpui = GameObject.Find("BossCurrent_HP").GetComponent<Image>();
     }
 
@@ -111,4 +114,11 @@ public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable,IPunObserva
             hpui.fillAmount = (float)stream.ReceiveNext();
         }
     }
+
+    //public void Search()
+    //{
+    //    players.Clear();
+    //    foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+    //        players.Add(p);
+    //}
 }

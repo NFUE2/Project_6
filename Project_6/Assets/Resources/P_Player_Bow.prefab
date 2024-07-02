@@ -563,6 +563,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   bossMonster: {fileID: 0}
   currentHpBar: {fileID: 4062622086786632222}
+  canvas: {fileID: 7173226218702351938}
 --- !u!1 &1700430286747907544
 GameObject:
   m_ObjectHideFlags: 0
