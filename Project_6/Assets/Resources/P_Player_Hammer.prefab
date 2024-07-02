@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  damageRate: 1.5
+  damageRate: 2.5
   maxChargingTime: 3
   attackDistance: 3
   isCharging: 0

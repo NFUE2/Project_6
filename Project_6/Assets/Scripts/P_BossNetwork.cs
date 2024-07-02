@@ -24,7 +24,6 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
         
     }
 
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting)
@@ -39,13 +38,14 @@ public class P_BossNetwork : MonoBehaviour,IPunObservable
 
     public void BossActive()
     {
-        pv.RPC("BossActiveRPC", RpcTarget.All);
+        pv.RPC("BossActiveRPC", RpcTarget.MasterClient);
     }
 
     [PunRPC]
     public void BossActiveRPC()
     {
-        boss.SetActive(true);
+        PhotonNetwork.Instantiate(boss.name,new Vector3(0,1,0),Quaternion.identity);
+        //boss.SetActive(true);
         gamestartButton.SetActive(false);
     }
 
