@@ -220,7 +220,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -266,6 +266,7 @@ MonoBehaviour:
   wireSpeed: 3
   player: {fileID: 0}
   wireEndDistance: 1
+  ignoreObject: {fileID: 0}
 --- !u!114 &8278504898306736214
 MonoBehaviour:
   m_ObjectHideFlags: 0

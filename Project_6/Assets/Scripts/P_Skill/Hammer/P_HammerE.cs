@@ -12,6 +12,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
     private Animator animator;
     public bool isCharging;
+    private bool isSkillAttack; // 스킬 공격 여부를 나타내는 플래그
 
     Coroutine charging;
 
@@ -21,7 +22,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
     private void Awake()
     {
         BoxCollider2D boxCollider = GetComponentInChildren<BoxCollider2D>();
-     
+
         animator = GetComponentInChildren<Animator>();
         lastAction = -actionTime;
     }
@@ -46,15 +47,15 @@ public class P_HammerE : MonoBehaviour, P_ISkill
             yield return null;
         }
         animator.SetBool("Charging", isCharging = false);
+        isSkillAttack = true; // 스킬 공격 플래그 설정
         StartCoroutine(CoolTime());
         Smash(currentDamage);
-
     }
 
     public void Smash(float currentDamage)
     {
-        // 이 메서드에서 충돌을 판정하지 않고, OnTriggerEnter2D를 통해 충돌을 판정합니다.
-        this.currentDamage = currentDamage; // 데미지를 저장
+        // 스킬 공격 데미지를 저장
+        this.currentDamage = currentDamage;
     }
 
     private float currentDamage;
@@ -65,14 +66,23 @@ public class P_HammerE : MonoBehaviour, P_ISkill
         P_Tentaclypse boss = collider.GetComponent<P_Tentaclypse>();
         if (boss != null)
         {
-            Debug.Log($"스킬 데미지 {currentDamage} 만큼 넣었습니다");
-            boss.TakeDamage(currentDamage);
+            if (isSkillAttack)
+            {
+                Debug.Log($"스킬 데미지 {currentDamage} 만큼 넣었습니다");
+                boss.TakeDamage(currentDamage);
+                isSkillAttack = false; // 스킬 공격 플래그 초기화
+            }
+            else
+            {
+                Debug.Log($"일반 공격 데미지 {damage} 만큼 넣었습니다");
+                boss.TakeDamage(damage);
+            }
         }
         else
         {
             Debug.Log($"적 오브젝트가 아닙니다: {collider.name}");
         }
-        currentDamage = damage;
+        currentDamage = damage; // 데미지 초기화
     }
 
     IEnumerator CoolTime()

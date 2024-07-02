@@ -12,19 +12,32 @@ public class P_WireArrow : MonoBehaviour
 
     public Transform player;
     public float wireEndDistance;
+    public Collider2D ignoreObject;
 
     private void Start()
     {
         Invoke("DestroyObject",5.0f);
+
+        //if (ignoreObject != null)
+        //{
+        //    Collider2D[] ignoreColliders = ignoreObject.GetComponents<Collider2D>();
+        //    foreach (Collider2D ignoreCollider in ignoreColliders)
+        //    {
+        //        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ignoreCollider, true);
+        //    }
+        //}
     }
 
     private void Update()
     {
-        if(!isCollision) transform.position += transform.right * arrowSpeed * Time.deltaTime;
+        if (!isCollision)
+        {
+            transform.position += transform.right * arrowSpeed * Time.deltaTime;
+        }
         else
         {
             player.GetComponent<PlayerController_Bow>().isWiring = true;
-            player.position = Vector2.Lerp(player.position,transform.position + transform.right,Time.deltaTime * wireSpeed);
+            player.position = Vector2.Lerp(player.position, transform.position + transform.right, Time.deltaTime * wireSpeed);
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
             if (Vector3.Distance(transform.position, player.position) < wireEndDistance)
@@ -37,9 +50,8 @@ public class P_WireArrow : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isCollision = true;
-
+    {      
+            isCollision = true;
     }
 
     private void DestroyObject()
