@@ -7,7 +7,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 {
     public float damage = 10f;
     public float damageRate;
-    public float maxChargingTime = 5f;
+    public float maxChargingTime;
     public float attackDistance;
 
     private Animator animator;
@@ -61,7 +61,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log($"충돌된 객체: {collider.name}");
+        //Debug.Log($"충돌된 객체: {collider.name}");
         P_Tentaclypse boss = collider.GetComponent<P_Tentaclypse>();
         if (boss != null)
         {
@@ -70,7 +70,7 @@ public class P_HammerE : MonoBehaviour, P_ISkill
         }
         else
         {
-            Debug.Log($"적 오브젝트가 아닙니다: {collider.name}");
+            //Debug.Log($"적 오브젝트가 아닙니다: {collider.name}");
         }
         currentDamage = damage;
     }
