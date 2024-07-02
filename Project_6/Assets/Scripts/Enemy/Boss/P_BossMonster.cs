@@ -17,8 +17,8 @@ public interface IAttackPattern
     public void ExecuteAttack();
 }
 
-
-public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable
+[RequireComponent(typeof(PhotonView))]
+public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable,IPunObservable
 {
     public string bossName;
     public float bossPower;
@@ -85,12 +85,10 @@ public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable
     {
         bossHp -= damage;
         hpui.fillAmount = bossHp / maxHp;
-        if (bossHp <= 0)
-        {
-            currentState = P_BossState.Dead;
-        }
-    }
 
+        if (bossHp <= 0)
+            currentState = P_BossState.Dead;
+    }
     public GameObject SetTarget()
     {
         int index = Random.Range(0, players.Count);
@@ -100,5 +98,17 @@ public abstract class P_BossMonster : MonoBehaviourPun, P_IDamagable
     protected void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(hpui.fillAmount);
+        }
+        else
+        {
+            hpui.fillAmount = (float)stream.ReceiveNext();
+        }
     }
 }
