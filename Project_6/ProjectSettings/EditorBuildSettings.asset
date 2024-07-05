@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/P_NetworkTest/IntroScene 1.unity
+    path: Assets/Prototype/Scenes/P_NetworkTest/IntroScene 1.unity
     guid: 367a2c09dc1e887469a488f0363ea314
   - enabled: 1
-    path: Assets/Scenes/P_NetworkTest/MainScene 2.unity
+    path: Assets/Prototype/Scenes/P_NetworkTest/MainScene 2.unity
     guid: 368ca32db81566f449490a97eede7f90
   - enabled: 1
-    path: Assets/Scenes/P_NetworkTest/MainScene 1.unity
+    path: Assets/Prototype/Scenes/P_NetworkTest/MainScene 1.unity
     guid: 4de5638757888aa44a664499c03339d5
   m_configObjects: {}
