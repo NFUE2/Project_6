@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static DataEnum;
+using System;
 
+[Serializable]
 public class StateData
 {
 
     public StateType stateType;
 
-    float value;
+    public float value;
 }

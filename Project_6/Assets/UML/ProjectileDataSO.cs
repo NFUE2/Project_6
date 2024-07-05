@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+
+[CreateAssetMenu(fileName = "ProjectileDataSO", menuName = "Scriptable Object/ProjectileDataSO")]
 
 public class ProjectileDataSO : ObjectSO
 {

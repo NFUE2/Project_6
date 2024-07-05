@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+[CreateAssetMenu(fileName = "CraftItemDataSO", menuName = "Scriptable Object/CraftItemDataSO")]
 
 public class CraftItemDataSO : ObjectSO
 {

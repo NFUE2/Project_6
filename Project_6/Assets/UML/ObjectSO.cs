@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectSO : MonoBehaviour
+
+[CreateAssetMenu(fileName ="ObjectSO", menuName ="Scriptable Object/ObjectSO")]
+
+public class ObjectSO : ScriptableObject
 {
 
     public int id;

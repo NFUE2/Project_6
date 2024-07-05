@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Object/EnemyDataSO")]
 
 public class EnemyDataSO : CharacterDataSO
 {

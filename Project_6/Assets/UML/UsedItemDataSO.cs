@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static DataEnum;
 
+
+[CreateAssetMenu(fileName = "UsedItemDataSO", menuName = "Scriptable Object/UsedItemDataSO")]
 public class UsedItemDataSO : ItemDataSO
 {
 

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "CharacterDataSO", menuName = "Scriptable Object/CharacterDataSO")]
 public class CharacterDataSO : ObjectSO
 {
-    float maxHP;
-    float moveSpeed;
-    float attackTime;
-    float attackDamage;
+    public float maxHP;
+    public float moveSpeed;
+    public float attackTime;
+    public float attackDamage;
 }
