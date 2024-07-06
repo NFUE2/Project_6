@@ -7,6 +7,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public GameObject bossMonster;
     public GameObject spawnedBoss;
     public BossMonster boss;
+    public BossAttackController attackController;
     public List<GameObject> players;
     public GameObject targetPlayer;
     public BossMonsterStateMachine bossStateMachine;
@@ -22,7 +23,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         spawnedBoss = Instantiate(bossMonster);
         boss = spawnedBoss.GetComponent<BossMonster>();
-        
+        attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null)
         {
             Debug.Log("BossMonster 스크립트 로드 에러");
