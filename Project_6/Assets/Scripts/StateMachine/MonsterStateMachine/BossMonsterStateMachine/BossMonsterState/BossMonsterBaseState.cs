@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossMonsterBaseState : IState
+public class BossMonsterBaseState : MonoBehaviour, IState
 {
     protected BossMonsterStateMachine stateMachine;
     public BossMonsterBaseState(BossMonsterStateMachine stateMachine)
