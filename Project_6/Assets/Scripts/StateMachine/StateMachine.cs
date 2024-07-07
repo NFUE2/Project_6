@@ -9,7 +9,7 @@ public interface IState
     public void HandleInput(); // State별 Input의 동작을 변경하는 메서드, 필요한 경우에만 호출 가능(BaseState에 선언 시)
 }
 
-public abstract class StateMachine
+public abstract class StateMachine : MonoBehaviour
 {
     protected IState currentState; // 현재 State
 
