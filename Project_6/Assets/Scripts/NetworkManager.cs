@@ -53,7 +53,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //Debug.Log(PhotonNetwork.ConnectUsingSettings());
     }
 
-    public void OnClickJoinLobby()
+    public void OnJoinLobby()
     {
         StartCoroutine(ChangeState(
            connectServerMessage,
@@ -118,8 +118,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 message = "방이 가득 찼습니다.";
                 break;
 
-            case 32764: //정확히는 게임이 종료된 방에 입장시 뜨는 에러
-                message = "방을 찾을 수 없습니다.";
+            case 32764: //정확히는 게임이 종료된 방에 입장시 뜨는 에러, 방이 닫혔을때 뜨는듯
+                message = "방에 입장할 수 없습니다.";
                 break;
 
             case 32758:
@@ -145,13 +145,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //public override void OnConnected()
     //{
     //    base.OnConnected();
-    //    //Debug.Log("마스터 접속 시도");
+    //    Debug.Log("접속 시도");
     //}
-    //public override void OnConnectedToMaster()
-    //{
-    //    base.OnConnectedToMaster();
-    //    //Debug.Log("마스터 접속 성공");
-    //}
+
+    public override void OnConnectedToMaster()
+    {
+        base.OnConnectedToMaster();
+        //Debug.Log("마스터 접속 성공");
+        OnJoinLobby(); //마스터서버 접속되면 로비로 접속
+    }
     #endregion
 
     #region LobbyCallbacks

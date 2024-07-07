@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStateMachine : StateMachine
 {
     public Player Player { get; }
-    public PlayerIdleState IdleState { get; }
+    //public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
     public PlayerRunState RunState { get; }
     public PlayerJumpState JumpState { get; }
@@ -22,7 +22,7 @@ public class PlayerStateMachine : StateMachine
         this.Player = player;
 
         //상태를 전부 생성
-        IdleState = new PlayerIdleState(this);
+        //IdleState = new PlayerIdleState(this);
         WalkState = new PlayerWalkState(this);
         RunState = new PlayerRunState(this);
         JumpState = new PlayerJumpState(this);
