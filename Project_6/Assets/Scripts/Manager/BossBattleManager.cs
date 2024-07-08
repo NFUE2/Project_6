@@ -10,7 +10,12 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public BossAttackController attackController;
     public List<GameObject> players;
     public GameObject targetPlayer;
-    public BossMonsterStateMachine bossStateMachine;
+    public BossStateMachine bossStateMachine;
+
+    private float attackCoolDown = 3f;
+    private float curCoolDown = 3f;
+    private bool isFirst = true;
+    public bool isAttacking = false;
     // 플레이어 정보 받아오기(Array or List로 관리)
 
     private void Start()
@@ -19,24 +24,52 @@ public class BossBattleManager : Singleton<BossBattleManager>
         SpawnBossMonster();
     }
 
+    private void Update()
+    {
+        if(spawnedBoss != null && bossStateMachine != null)
+        {
+            
+            if(players != null)
+            {
+                curCoolDown += Time.deltaTime;
+                if(isFirst)
+                {
+                    Debug.Log("BSM NULL 아님");
+                    isFirst = false;
+                    Debug.Log($"{bossStateMachine.IdleState}");
+                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                }
+                else
+                {
+                    if(curCoolDown >= attackCoolDown)
+                    {
+                        bossStateMachine.ChangeState(bossStateMachine.AttackState);
+                        curCoolDown = 0;
+                    }
+                }
+            }
+        }
+    }
+
     private void SpawnBossMonster() // 보스 소환
     {
         spawnedBoss = Instantiate(bossMonster);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
-        if (boss != null)
+        if (boss != null && bossStateMachine == null)
         {
-            Debug.Log("BossMonster 스크립트 로드 에러");
+            CreateBossMonsterStateMachine(boss);
+            Debug.Log("BSM 생성");   
         }
         else
         {
-            CreateBossMonsterStateMachine(boss);
+            Debug.Log("BossMonster 스크립트 로드 에러");
         }
     }
 
     private void CreateBossMonsterStateMachine(BossMonster boss) // FSM 생성
     {
-        bossStateMachine = new BossMonsterStateMachine(boss);
+        bossStateMachine = spawnedBoss.GetComponent<BossStateMachine>();
     }
 
     private void GetPlayers() // 플레이어 정보 받아오기

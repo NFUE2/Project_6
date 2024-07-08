@@ -18,14 +18,24 @@ public class GolemAttackController : BossAttackController
                 Punch();
                 break;
         }
+        //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
     public void EyeRazor()
     {
         Debug.Log("·¹ÀÌÀú ºö!");
+        BossBattleManager.Instance.isAttacking = false;
+        ExitAttack();
     }
 
     public void Punch()
     {
         Debug.Log("ÈÖÀû... ÈÖÀû...");
+        BossBattleManager.Instance.isAttacking = false;
+        ExitAttack();
+    }
+
+    private void ExitAttack()
+    {
+        BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 }
