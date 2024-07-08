@@ -10,6 +10,7 @@ public class BossIdleState : BossBaseState
     public override void Enter()
     {
         base.Enter();
+        BossBattleManager.Instance.isAttacking = false;
         SetTargetPlayer();
     }
 

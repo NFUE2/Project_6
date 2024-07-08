@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GolemAttackController : BossAttackController
 {
+    public GameObject stompHitBox;
     public override void SelectAttack()
     {
         base.SelectAttack();
-        countOfAttack = 2;
+        countOfAttack = 1;
         int index = Random.Range(0, countOfAttack);
         switch (index)
         {
             case 0:
-                EyeRazor();
+                StompReady();
                 break;
             case 1:
                 Punch();
@@ -23,19 +24,38 @@ public class GolemAttackController : BossAttackController
     public void EyeRazor()
     {
         Debug.Log("·¹ÀÌÀú ºö!");
-        BossBattleManager.Instance.isAttacking = false;
         ExitAttack();
     }
 
     public void Punch()
     {
         Debug.Log("ÈÖÀû... ÈÖÀû...");
-        BossBattleManager.Instance.isAttacking = false;
         ExitAttack();
+    }
+
+    // ÁöÁø
+    public void StompReady()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isStompReady", true);
+    }
+
+    private void Stomp()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isStompReady", false);
+        BossBattleManager.Instance.bossAnimator.SetBool("isStomp", true);
+    }
+
+    private void EnableStompHitBox()
+    {
+        stompHitBox.SetActive(true);
+        BossBattleManager.Instance.bossAnimator.SetBool("isStomp", false);
+        ExitAttack() ;
     }
 
     private void ExitAttack()
     {
+        Debug.Log("exit attack");
+        BossBattleManager.Instance.isAttacking = false;
         BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 }

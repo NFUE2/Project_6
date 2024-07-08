@@ -10,10 +10,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public BossAttackController attackController;
     public List<GameObject> players;
     public GameObject targetPlayer;
+    public Animator bossAnimator;
     public BossStateMachine bossStateMachine;
 
-    private float attackCoolDown = 3f;
-    private float curCoolDown = 3f;
+    private float attackCoolDown = 5f;
+    private float curCoolDown = 0f;
     private bool isFirst = true;
     public bool isAttacking = false;
     // 플레이어 정보 받아오기(Array or List로 관리)
@@ -34,7 +35,6 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 curCoolDown += Time.deltaTime;
                 if(isFirst)
                 {
-                    Debug.Log("BSM NULL 아님");
                     isFirst = false;
                     Debug.Log($"{bossStateMachine.IdleState}");
                     bossStateMachine.ChangeState(bossStateMachine.IdleState);
@@ -58,8 +58,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)
         {
-            CreateBossMonsterStateMachine(boss);
-            Debug.Log("BSM 생성");   
+            CreateBossMonsterStateMachine(boss);  
         }
         else
         {
@@ -70,6 +69,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     private void CreateBossMonsterStateMachine(BossMonster boss) // FSM 생성
     {
         bossStateMachine = spawnedBoss.GetComponent<BossStateMachine>();
+        bossAnimator = spawnedBoss.GetComponent<Animator>();
     }
 
     private void GetPlayers() // 플레이어 정보 받아오기
