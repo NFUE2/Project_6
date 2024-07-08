@@ -11,17 +11,17 @@ public class PlayerRunState : PlayerGroundState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = groundData.RunSpeedModifier; //달리기 가속도 설정
+        //stateMachine.MovementSpeedModifier = groundData.RunSpeedModifier; //달리기 가속도 설정
         base.Enter();
         //달리기 상태로 변경
-        StartAnimation(stateMachine.Player.AnimationData.RunParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.RunParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //달리기 상태로 해제
-        StopAnimation(stateMachine.Player.AnimationData.RunParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.RunParameterHash);
     }
     protected override void OnRunCanceled(InputAction.CallbackContext context)
     {

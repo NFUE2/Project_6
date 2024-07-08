@@ -11,17 +11,17 @@ public class PlayerWalkState : PlayerGroundState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier; //가속도 설정
+        //stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier; //가속도 설정
         base.Enter();
         //이동 상태 설정
-        StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //이동 상태 해제
-        StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
 
     //달리기 시작

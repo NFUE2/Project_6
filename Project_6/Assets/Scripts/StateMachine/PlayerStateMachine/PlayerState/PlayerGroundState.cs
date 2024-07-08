@@ -16,14 +16,14 @@ public class PlayerGroundState : PlayerBaseState
         base.Enter();
 
         //상태머신으로 진입
-        StartAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //상태머신 해제
-        StopAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
     }
 
     public override void Update()
@@ -46,7 +46,7 @@ public class PlayerGroundState : PlayerBaseState
         if (!stateMachine.Player.Controller.isGrounded && stateMachine.Player.Controller.velocity.y < Physics.gravity.y * Time.fixedDeltaTime)
         {
             //떨어지는 상태 작동
-            stateMachine.ChangeState(stateMachine.FallState);
+            //stateMachine.ChangeState(stateMachine.FallState);
         }
     }
 
@@ -71,7 +71,7 @@ public class PlayerGroundState : PlayerBaseState
     //공격상태로 변경
     protected void OnAttack()
     {
-        stateMachine.ChangeState(stateMachine.ComboAttackState);
+        //stateMachine.ChangeState(stateMachine.ComboAttackState);
     }
 
 }

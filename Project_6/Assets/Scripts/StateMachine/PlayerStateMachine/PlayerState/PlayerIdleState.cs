@@ -15,14 +15,14 @@ public class PlayerIdleState : PlayerGroundState
         stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
         //애니메이션 idle상태 설정
-        StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //애니메이션 idle상태 해제
-        StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
     }
 
     public override void Update()

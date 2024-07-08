@@ -25,10 +25,10 @@ public class P_Network : MonoBehaviourPunCallbacks
         Application.targetFrameRate = 60;
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        base.OnPlayerEnteredRoom(newPlayer);
-    }
+    //public override void OnPlayerEnteredRoom(Player newPlayer)
+    //{
+    //    base.OnPlayerEnteredRoom(newPlayer);
+    //}
 
     public override void OnCreatedRoom()
     {

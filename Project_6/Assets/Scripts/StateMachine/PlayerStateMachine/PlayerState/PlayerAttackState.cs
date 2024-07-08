@@ -14,13 +14,13 @@ public class PlayerAttackState : PlayerBaseState
         stateMachine.MovementSpeedModifier = 0;
         base.Enter();
         //공격 상태로 변경
-        StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //공격 상태 해제
-        StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 }

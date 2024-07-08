@@ -12,14 +12,14 @@ public class PlayerAirState : PlayerBaseState
     {
         base.Enter();
         //머신 변경
-        StartAnimation(stateMachine.Player.AnimationData.AirParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.AirParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //머신 변경
-        StopAnimation(stateMachine.Player.AnimationData.AirParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.AirParameterHash);
     }
 
 }
