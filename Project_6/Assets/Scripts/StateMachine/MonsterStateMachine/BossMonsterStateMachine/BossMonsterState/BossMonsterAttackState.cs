@@ -7,6 +7,7 @@ public class BossMonsterAttackState : BossMonsterBaseState
     public override void Enter()
     {
         base.Enter();
+        BossBattleManager.Instance.attackController.SelectAttack();
     }
 
     public override void Exit()
