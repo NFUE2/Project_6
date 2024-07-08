@@ -31,30 +31,30 @@ public class PlayerBaseState : IState
         PlayerController input = stateMachine.Player.Input; //상태머신 플레이어에 입력등록
 
         //눌렀을때,누르는중,누르지않을때 작동하는부분
-        input.playerActions.Movement.canceled += OnMovementCanceled;
+        //input.playerActions.Movement.canceled += OnMovementCanceled;
 
-        input.playerActions.Run.started += OnRunStarted;
-        input.playerActions.Run.canceled += OnRunCanceled;
+        //input.playerActions.Run.started += OnRunStarted;
+        //input.playerActions.Run.canceled += OnRunCanceled;
 
-        input.playerActions.Jump.started += OnJumpStarted;
+        //input.playerActions.Jump.started += OnJumpStarted;
 
-        input.playerActions.Attack.performed += OnAttackPerfomed;
-        input.playerActions.Attack.canceled += OnAttackCanceled;
+        //input.playerActions.Attack.performed += OnAttackPerfomed;
+        //input.playerActions.Attack.canceled += OnAttackCanceled;
     }
 
     protected virtual void RemoveInputActionCallbacks()
     {
         //다른상태로 변경될 때 삭제됨
         PlayerController input = stateMachine.Player.Input;
-        input.playerActions.Movement.canceled -= OnMovementCanceled;
+        //input.playerActions.Movement.canceled -= OnMovementCanceled;
 
-        input.playerActions.Run.started -= OnRunStarted;
-        input.playerActions.Run.canceled -= OnRunCanceled;
+        //input.playerActions.Run.started -= OnRunStarted;
+        //input.playerActions.Run.canceled -= OnRunCanceled;
 
-        input.playerActions.Jump.started -= OnJumpStarted;
+        //input.playerActions.Jump.started -= OnJumpStarted;
 
-        input.playerActions.Attack.performed -= OnAttackPerfomed;
-        input.playerActions.Attack.canceled -= OnAttackCanceled;
+        //input.playerActions.Attack.performed -= OnAttackPerfomed;
+        //input.playerActions.Attack.canceled -= OnAttackCanceled;
     }
 
     public virtual void HandleInput()
@@ -122,7 +122,7 @@ public class PlayerBaseState : IState
     //플레이어 인풋시스템에서 입력받아오는부분
     private void ReadMovementInput()
     {
-        stateMachine.MovementInput = stateMachine.Player.Input.playerActions.Movement.ReadValue<Vector2>();
+        //stateMachine.MovementInput = stateMachine.Player.Input.playerActions.Movement.ReadValue<Vector2>();
     }
 
     //움직이는 부분
@@ -158,7 +158,7 @@ public class PlayerBaseState : IState
         float movementSpeed = GetMovementSpeed(); //스피드
         // stateMachine.Player.ForceReceiver.Movement 중력받는부분
         //이동함
-        stateMachine.Player.Controller.Move((direction * movementSpeed + stateMachine.Player.ForceReceiver.Movement ) * Time.deltaTime);
+        //stateMachine.Player.Controller.Move((direction * movementSpeed + stateMachine.Player.ForceReceiver.Movement ) * Time.deltaTime);
     }
 
     private float GetMovementSpeed()
@@ -184,7 +184,7 @@ public class PlayerBaseState : IState
     //?
     protected void ForceMove()
     {
-        stateMachine.Player.Controller.Move(stateMachine.Player.ForceReceiver.Movement * Time.deltaTime);
+        //stateMachine.Player.Controller.Move(stateMachine.Player.ForceReceiver.Movement * Time.deltaTime);
     }
 
     //

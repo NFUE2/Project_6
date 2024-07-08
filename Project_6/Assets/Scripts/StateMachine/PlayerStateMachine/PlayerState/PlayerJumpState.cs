@@ -11,20 +11,20 @@ public class PlayerJumpState : PlayerAirState
     public override void Enter()
     {
         //점프파워 설정
-        stateMachine.JumpForce = stateMachine.Player.Data.AirData.JumpForce;
+        //stateMachine.JumpForce = stateMachine.Player.Data.AirData.JumpForce;
 
         //점프
-        stateMachine.Player.ForceReceiver.Jump(stateMachine.JumpForce);
+        //stateMachine.Player.ForceReceiver.Jump(stateMachine.JumpForce);
         base.Enter();
         //점프 상태로변경
-        StartAnimation(stateMachine.Player.AnimationData.JumpParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.JumpParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
         //점프 상태 해제
-        StopAnimation(stateMachine.Player.AnimationData.JumpParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.JumpParameterHash);
     }
 
     public override void PhysicsUpdate()
@@ -35,7 +35,7 @@ public class PlayerJumpState : PlayerAirState
         if(stateMachine.Player.Controller.velocity.y <= 0)
         {
             //떨어지는 상태로 변경
-            stateMachine.ChangeState(stateMachine.FallState);
+            //stateMachine.ChangeState(stateMachine.FallState);
             return;
         }
     }
