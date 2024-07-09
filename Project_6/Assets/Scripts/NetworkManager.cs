@@ -168,57 +168,58 @@ public class NetworkManager : PunSingleton<NetworkManager>
     #endregion
 
     #region LobbyCallbacks
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-        //lobby.SetActive(true);
-    }
+    //로비관련은 로비매니저에서 담당
+    //public override void OnJoinedLobby()
+    //{
+    //    base.OnJoinedLobby();
+    //    //lobby.SetActive(true);
+    //}
 
-    public override void OnLeftLobby()
-    {
-        base.OnLeftLobby();
-    }
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        base.OnRoomListUpdate(roomList);
-        //TestLobbyManager.instance.SetRoomList(roomList); //로비 매니저로 이관
-    }
+    //public override void OnLeftLobby()
+    //{
+    //    base.OnLeftLobby();
+    //}
+    //public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    //{
+    //    base.OnRoomListUpdate(roomList);
+    //    //TestLobbyManager.instance.SetRoomList(roomList); //로비 매니저로 이관
+    //}
 
     #endregion
 
     #region RoomCallbacks
 
-    public override void OnCreatedRoom()
-    {
-        base.OnCreatedRoom();
-    }
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-    }
+    //public override void OnCreatedRoom()
+    //{
+    //    base.OnCreatedRoom();
+    //}
+    //public override void OnJoinedRoom()
+    //{
+    //    base.OnJoinedRoom();
+    //}
 
-    public override void OnLeftRoom()
-    {
-        base.OnLeftRoom();
-    }
+    //public override void OnLeftRoom()
+    //{
+    //    base.OnLeftRoom();
+    //}
 
-    //다른플레이어가 방에 입장했을때
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    {
-        base.OnPlayerEnteredRoom(newPlayer);
-    }
+    ////다른플레이어가 방에 입장했을때
+    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    //{
+    //    base.OnPlayerEnteredRoom(newPlayer);
+    //}
 
-    //다른플레이어가 방을 나갔을때
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    {
-        base.OnPlayerLeftRoom(otherPlayer);
-    }
+    ////다른플레이어가 방을 나갔을때
+    //public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    //{
+    //    base.OnPlayerLeftRoom(otherPlayer);
+    //}
 
-    //방장 변경되었을때
-    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
-    {
-        base.OnMasterClientSwitched(newMasterClient);
-    }
+    ////방장 변경되었을때
+    //public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    //{
+    //    base.OnMasterClientSwitched(newMasterClient);
+    //}
     #endregion 
 
     #region FailsCallbacks 실패시 작동하는 함수들

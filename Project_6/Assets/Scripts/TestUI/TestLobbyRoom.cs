@@ -40,6 +40,4 @@ public class TestLobbyRoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         lobbyManager.choiceRoomName = roomName.text;
     }
-    
-
 }

@@ -469,7 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 1730649412}
   playerList: {fileID: 1837439730}
-  playerPrefab: {fileID: 8967669999724310156, guid: 3d9f8f1b16dc40746ac6887b20b4f4e2, type: 3}
+  playerPrefab: {fileID: 8967669999724310156, guid: d5b27dc37ebac4a468d80a9de8d34196, type: 3}
   roomFrame: {fileID: 992700388}
 --- !u!114 &246684032
 MonoBehaviour:
@@ -4647,7 +4647,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348279971}
+      - m_Target: {fileID: 1870113138}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -4659,13 +4659,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 505460260}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 348279976}
+        m_TargetAssemblyTypeName: TestLobbyManager, Assembly-CSharp
+        m_MethodName: OnClickDisconnect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6226,7 +6226,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1730649415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 246684031}
+        m_TargetAssemblyTypeName: TestRoomManager, Assembly-CSharp
+        m_MethodName: OnClickGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1730649415
 MonoBehaviour:
   m_ObjectHideFlags: 0

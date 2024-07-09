@@ -24,35 +24,39 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
 
     public string choiceRoomName = string.Empty;
 
-    public override void OnJoinedLobby()
+    public override void OnJoinedLobby() //로비에 입장
     {
         base.OnJoinedLobby();
         lobbyFrame.SetActive(true);
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() //방 들어갔을때
     {
         base.OnJoinedRoom();
         lobbyFrame.SetActive(false);
     }
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList) 
     {
         base.OnRoomListUpdate(roomList);
         SetRoomList(roomList);
     }
-    public void OnClickJoinRoom()
+    public void OnClickJoinRoom() //방 입장버튼 클릭
     {
         StartCoroutine(NetworkManager.instance.ChangeState(
           connectRoomMessage,
           ClientState.Joined,
           JoinRoom));
     }
-    public bool JoinRoom()
+    public void OnClickDisconnect()
+    {
+        PhotonNetwork.Disconnect();
+    }
+
+    public bool JoinRoom() //방 입장
     {
         return PhotonNetwork.JoinRoom(choiceRoomName);
     }
 
-    
     public void SetRoomList(List<RoomInfo> roomList) //방 목록 생성
     {
         RoomListClear();
@@ -67,7 +71,7 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnClickRefreshLobby()
+    public void OnClickRefreshLobby() //방새로고침
     {
         StartCoroutine(NetworkManager.instance.ChangeState(
           refreshLobbyMessage,
@@ -81,7 +85,7 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
             Destroy(child.gameObject);
     }
 
-    public void OnCreateRoom(GameObject panel)
+    public void OnCreateRoom(GameObject panel) //방만들기
     {
         panel.SetActive(false);
 
