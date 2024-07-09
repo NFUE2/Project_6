@@ -10,17 +10,24 @@ public class PistolPlayer : PlayerBase
     private bool isAttackCooldown = false;
     private int attackCount = 0;
     private float cooldownDuration = 3f; //장전을 위한 쿨타임
+
+    // 수정 사항 - 캐릭터 공통부분은 PlayerBase로 올려주세요
     private float attackTime;
     private float lastAttackTime;
+    //=====================================================
+
     private Camera mainCamera;
     private bool isRolling;
     private bool fanningReady;
     public Transform attackPoint; //발사위치
     public GameObject attackPrefab; //발사할 오브젝트 에셋
 
+    // 수정 사항 - 캐릭터 공통부분은 PlayerBase로 올려주세요
     [Header("Skill Q")]
     public float actionTime;
     private float lastAction;
+    //====================================================
+
     public bool fanningReadyQ;
 
     public override void Attack()

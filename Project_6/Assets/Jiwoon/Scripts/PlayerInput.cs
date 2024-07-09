@@ -74,6 +74,8 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
             animator.SetBool("IsJump", true);
         }
     }
+
+    //수정사항 - OnCollisionEnter2D에서 처리
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // 캐릭터의 발 아래에 Raycast를 쏘아 땅에 닿아 있는지 확인
@@ -107,6 +109,7 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
 
         Vector3 direction = (mousePosition - transform.position).normalized; // 플레이어 위치와 마우스 위치 사이의 방향 벡터 계산
 
+        //수정사항 - 삼항연산자로 수정
         if (direction.x >= 0.01f) // 방향 벡터에 따라 플레이어 회전
         {
             transform.localScale = new Vector3(-1, 1, 1);  // 오른쪽을 바라보도록 설정
