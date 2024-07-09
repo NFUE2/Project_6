@@ -36,7 +36,6 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 if(isFirst)
                 {
                     isFirst = false;
-                    Debug.Log($"{bossStateMachine.IdleState}");
                     bossStateMachine.ChangeState(bossStateMachine.IdleState);
                 }
                 else

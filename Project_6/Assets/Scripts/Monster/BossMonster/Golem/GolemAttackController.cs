@@ -5,6 +5,9 @@ using UnityEngine;
 public class GolemAttackController : BossAttackController
 {
     public GameObject stompHitBox;
+    public GameObject swingHitBoxLeft;
+    public GameObject swingHitBoxRight;
+
     public override void SelectAttack()
     {
         base.SelectAttack();
@@ -16,21 +19,10 @@ public class GolemAttackController : BossAttackController
                 StompReady();
                 break;
             case 1:
-                Punch();
+                SwingReady();
                 break;
         }
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
-    }
-    public void EyeRazor()
-    {
-        Debug.Log("·¹ÀÌÀú ºö!");
-        ExitAttack();
-    }
-
-    public void Punch()
-    {
-        Debug.Log("ÈÖÀû... ÈÖÀû...");
-        ExitAttack();
     }
 
     // ÁöÁø
@@ -52,9 +44,35 @@ public class GolemAttackController : BossAttackController
         ExitAttack() ;
     }
 
+    // ½ºÀ®
+    // ½ºÀ® + ÁöÁø
+    public void SwingReady()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", true);
+    }
+
+    private void Swing()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", false);
+        BossBattleManager.Instance.bossAnimator.SetBool("isSwing", true);
+    }
+    
+    private void EnableSwingHitBox()
+    {
+        if(transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
+        {
+            swingHitBoxLeft.SetActive(true);
+        }
+        else
+        {
+            swingHitBoxRight.SetActive(true);
+        }
+        BossBattleManager.Instance.bossAnimator.SetBool("isSwing", false);
+        ExitAttack() ;
+    }
+
     private void ExitAttack()
     {
-        Debug.Log("exit attack");
         BossBattleManager.Instance.isAttacking = false;
         BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
