@@ -14,7 +14,7 @@ public class GolemAttackController : BossAttackController
     public override void SelectAttack()
     {
         base.SelectAttack();
-        countOfAttack = 1;
+        countOfAttack = 3;
         int index = Random.Range(0, countOfAttack);
         switch (index)
         {
