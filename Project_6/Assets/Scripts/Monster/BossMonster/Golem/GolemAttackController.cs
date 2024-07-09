@@ -7,21 +7,25 @@ public class GolemAttackController : BossAttackController
     public GameObject stompHitBox;
     public GameObject swingHitBoxLeft;
     public GameObject swingHitBoxRight;
+    public GameObject razorHitBox;
 
     private int additionalAttack;
 
     public override void SelectAttack()
     {
         base.SelectAttack();
-        countOfAttack = 2;
+        countOfAttack = 1;
         int index = Random.Range(0, countOfAttack);
         switch (index)
         {
             case 0:
-                SwingReady();
+                RazorReady();
                 break;
             case 1:
                 StompReady();
+                break;
+            case 2:
+                SwingReady();
                 break;
         }
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
@@ -89,6 +93,57 @@ public class GolemAttackController : BossAttackController
         {
             StompReady();
         }
+    }
+
+    // 레이저
+    public void RazorReady()
+    {
+        BossBattleManager.Instance.ToggleIsAttacking();
+        BossBattleManager.Instance.bossAnimator.SetBool("isRazorReady", true);
+    }
+
+    private void Razor()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isRazorReady", false);
+        BossBattleManager.Instance.bossAnimator.SetBool("isRazor", true);
+    }
+
+    private void EnableRazorHitBox()
+    {
+        if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
+        {
+            // y rotation 180 하지 않고 회전
+            razorHitBox.SetActive(true);
+            razorHitBox.transform.rotation = Quaternion.Euler(0, 0, 20);
+            StartCoroutine(RotateRazor());
+        }
+        else
+        {
+            razorHitBox.SetActive(true) ;
+            razorHitBox.transform.rotation = Quaternion.Euler(0, 180, 20);
+            StartCoroutine(RotateRazor());
+        }
+    }
+
+    // 회전
+    private IEnumerator RotateRazor()
+    {
+        float elapsedTime = 0f;
+        Quaternion startRotation = Quaternion.Euler(razorHitBox.transform.rotation.eulerAngles.x, razorHitBox.transform.rotation.eulerAngles.y, 20f);
+        Quaternion endRotation = Quaternion.Euler(razorHitBox.transform.rotation.eulerAngles.x, razorHitBox.transform.rotation.eulerAngles.y, -20f);
+
+        while(elapsedTime < 1f)
+        {
+            razorHitBox.transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsedTime / 1f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void ExitRazorAttack()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isRazor", false);
+        ExitAttack();
     }
 
     private void ExitAttack()

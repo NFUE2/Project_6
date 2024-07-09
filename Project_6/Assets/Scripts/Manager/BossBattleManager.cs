@@ -13,7 +13,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public Animator bossAnimator;
     public BossStateMachine bossStateMachine;
 
-    private float attackCoolDown = 5f;
+    private float attackCoolDown = 3f;
     private float curCoolDown = 0f;
     private bool isFirst = true;
     public bool isAttacking;
@@ -33,7 +33,10 @@ public class BossBattleManager : Singleton<BossBattleManager>
             
             if(players != null)
             {
-                curCoolDown += Time.deltaTime;
+                if (isAttacking == false)
+                {
+                    curCoolDown += Time.deltaTime;
+                }
                 if(isFirst)
                 {
                     isFirst = false;

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
-    private float duration = 0.2f;
-    private float curDuration = 0f;
+    public float duration = 0.2f;
+    public float curDuration = 0f;
 
     private void OnEnable()
     {
