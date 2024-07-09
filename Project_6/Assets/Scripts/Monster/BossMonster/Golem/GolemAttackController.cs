@@ -8,18 +8,20 @@ public class GolemAttackController : BossAttackController
     public GameObject swingHitBoxLeft;
     public GameObject swingHitBoxRight;
 
+    private int additionalAttack;
+
     public override void SelectAttack()
     {
         base.SelectAttack();
-        countOfAttack = 1;
+        countOfAttack = 2;
         int index = Random.Range(0, countOfAttack);
         switch (index)
         {
             case 0:
-                StompReady();
+                SwingReady();
                 break;
             case 1:
-                SwingReady();
+                StompReady();
                 break;
         }
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
@@ -28,6 +30,7 @@ public class GolemAttackController : BossAttackController
     // ÁöÁø
     public void StompReady()
     {
+        BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.bossAnimator.SetBool("isStompReady", true);
     }
 
@@ -41,13 +44,22 @@ public class GolemAttackController : BossAttackController
     {
         stompHitBox.SetActive(true);
         BossBattleManager.Instance.bossAnimator.SetBool("isStomp", false);
-        ExitAttack() ;
+        additionalAttack = Random.Range(0, 2);
+        if( additionalAttack == 0 ) 
+        {
+            ExitAttack() ;
+        }
+        else
+        {
+            SwingReady();
+        }
     }
 
     // ½ºÀ®
     // ½ºÀ® + ÁöÁø
     public void SwingReady()
     {
+        BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", true);
     }
 
@@ -68,12 +80,20 @@ public class GolemAttackController : BossAttackController
             swingHitBoxRight.SetActive(true);
         }
         BossBattleManager.Instance.bossAnimator.SetBool("isSwing", false);
-        ExitAttack() ;
+        additionalAttack = Random.Range(0, 2);
+        if(additionalAttack == 0)
+        {
+            ExitAttack() ;
+        }
+        else
+        {
+            StompReady();
+        }
     }
 
     private void ExitAttack()
     {
-        BossBattleManager.Instance.isAttacking = false;
+        BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 }

@@ -8,7 +8,7 @@ public class BossAttackState : BossBaseState
     public override void Enter()
     {
         base.Enter();
-        BossBattleManager.Instance.isAttacking = true;
+        //BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.attackController.SelectAttack();
     }
 
