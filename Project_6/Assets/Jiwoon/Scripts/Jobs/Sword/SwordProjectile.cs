@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
