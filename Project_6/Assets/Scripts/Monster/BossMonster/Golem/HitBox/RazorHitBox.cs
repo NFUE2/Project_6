@@ -20,7 +20,7 @@ public class RazorHitBox : HitBox
         else if (collision.gameObject.CompareTag("Ground"))
         {
             var field = Instantiate(burningField);
-            field.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.6f, collision.transform.position.z);
+            field.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.7f, collision.transform.position.z);
         }
     }
 }
