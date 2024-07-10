@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6893682881590893061}
   - component: {fileID: 9178035889672887536}
+  - component: {fileID: 3387617015864025817}
+  - component: {fileID: 6422326495414205650}
   - component: {fileID: 3374280999797708764}
   - component: {fileID: 388443719675527489}
-  - component: {fileID: 8560108611133784159}
   - component: {fileID: 583500363165249014}
   - component: {fileID: 742104884952019928}
   - component: {fileID: 5039338846900449197}
@@ -57,6 +58,34 @@ MonoBehaviour:
   jumpForce: 5
   SkillQCooldown: 0
   SkillECooldown: 0
+--- !u!114 &3387617015864025817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703750959777792835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &6422326495414205650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703750959777792835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  projectile: {fileID: 0}
+  attackTime: 0
 --- !u!114 &3374280999797708764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,21 +249,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8560108611133784159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2703750959777792835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  projectile: {fileID: 0}
-  attackTime: 0
 --- !u!50 &583500363165249014
 Rigidbody2D:
   serializedVersion: 4
@@ -320,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerdata: {fileID: 9178035889672887536}
-  player: {fileID: 8560108611133784159}
+  player: {fileID: 0}
   groundCheck: {fileID: 8401688725888005663}
   groundCheckRadius: 0.1
   groundLayer:

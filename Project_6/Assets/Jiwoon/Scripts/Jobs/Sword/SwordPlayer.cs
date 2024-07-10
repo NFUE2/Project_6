@@ -18,6 +18,10 @@ public class SwordPlayer : PlayerBase
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //임시 공격 수치
+    public float attackRange = 2.0f; // 공격 범위 추가
+    public int attackDamage = 10; // 공격 데미지 추가
+    public LayerMask enemyLayer; // 적 레이어 추가
     //=====================================================
 
     public override void Attack()
@@ -27,7 +31,24 @@ public class SwordPlayer : PlayerBase
         Debug.Log("일반공격!");
         lastAttackTime = Time.time;
         //animator.SetTrigger("Attack");
+
+        //임시 일반공격
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Hit " + enemy.name);
+            // 적에게 데미지를 주는 코드 (적 스크립트에 따라 달라질 수 있음)
+        }
+        //
     }
+    //임시공격보이는 판정
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    
 
     public override void UseSkillQ()
     {
