@@ -85,7 +85,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   projectile: {fileID: 0}
-  attackTime: 0
+  attackTime: 3
+  attackRange: 1.5
+  attackDamage: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &3374280999797708764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerdata: {fileID: 9178035889672887536}
-  player: {fileID: 0}
+  player: {fileID: 6422326495414205650}
   groundCheck: {fileID: 8401688725888005663}
   groundCheckRadius: 0.1
   groundLayer:
