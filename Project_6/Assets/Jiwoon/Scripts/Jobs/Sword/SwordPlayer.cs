@@ -38,7 +38,7 @@ public class SwordPlayer : PlayerBase
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Hit " + enemy.name);
-            //enemy.GetComponent<Enemy>().TakeDamage(attackDamage); 맞는 판정 구현
+            enemy.GetComponent<IDamagable>().TakeDamage(attackDamage);
         }
         //
     }
