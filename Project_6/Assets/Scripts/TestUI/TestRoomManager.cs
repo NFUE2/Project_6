@@ -10,7 +10,7 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject roomFrame;
 
-    private GameObject curPlayer;
+    //private GameObject curPlayer;
 
     private Dictionary<int, GameObject> playerListEntries;
 
@@ -40,9 +40,6 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
 
             playerListEntries.Add(p.ActorNumber, go);
         }
-
-        //curPlayer = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
-        //curPlayer.transform.parent = 
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
@@ -61,8 +58,7 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
         base.OnLeftRoom();
         roomFrame.SetActive(false);
 
-        foreach(GameObject go in playerListEntries.Values)
-            Destroy(go);
+        foreach(GameObject go in playerListEntries.Values) Destroy(go);
 
         playerListEntries.Clear();
         playerListEntries = null;
@@ -86,6 +82,4 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.LeaveRoom();
     }
-
-    
 }
