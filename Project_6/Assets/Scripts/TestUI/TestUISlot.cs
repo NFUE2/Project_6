@@ -8,7 +8,8 @@ using Photon.Pun;
 public class TestUISlot : MonoBehaviourPun //, IPunObservable
 {
     public GameObject prefab;
-    public ObjectSO data;
+    public Transform spawnPoint;
+    //public ObjectSO data;
 
     private TextMeshProUGUI characterName;
     private Image image;
@@ -21,7 +22,7 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
         image = GetComponent<Image>();
         selectButton = GetComponent<Button>();
 
-        characterName.text = data.name;
+        //characterName.text = data.name;
         image.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
     }
 
@@ -31,7 +32,8 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
         //TestMainScene.instance.CreateRPC(prefab);
         //TestMainScene.instance.CreateRPC(data.id);
         photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered);
-        PhotonNetwork.Instantiate(prefab.name, Vector3.zero, Quaternion.identity); //해당 오브젝트 Photon View필요
+        GameObject go = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity); //해당 오브젝트 Photon View필요
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = go.transform;
     }
 
     [PunRPC]
