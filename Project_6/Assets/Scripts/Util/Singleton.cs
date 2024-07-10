@@ -11,29 +11,37 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if(instance == null)
-            {
-                instance = FindObjectOfType<T>();
-
-                if(instance == null)
-                    instance = new GameObject(nameof(T),typeof(T)).GetComponent<T>();
-            }
-
+            if (instance == null) CreateInstance();
             return instance;
+        }
+    }
+
+    protected static void CreateInstance()
+    {
+        T[] objects = FindObjectsOfType<T>();
+
+        if (objects.Length > 0)
+        {
+            instance = objects[0];
+
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (Application.isPlaying) Destroy(objects[i]);
+                else DestroyImmediate(objects[i]);
+            }
+        }
+        else
+        {
+            instance = new GameObject(nameof(T), typeof(T)).GetComponent<T>();
         }
     }
 
 
     public virtual void Awake()
     {
-        if (instance == null)
-        {
-            instance = this as T;     
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        CreateInstance();
+
+        if (instance != this) Destroy(gameObject);
+        else DontDestroyOnLoad(gameObject);
     }
 }
