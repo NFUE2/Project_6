@@ -11,17 +11,14 @@ public class SwordPlayer : PlayerBase
 
     [Header("Skill Q")]
     private bool isGuard;
-    private float qSkillCooldown;
-    private float lastQActionTime;
 
     [Header("Skill E")]
     public GameObject projectile;  //Sword 플레이어가 쏘는 오브젝트다. 향후 에셋 추가
-    private float eSkillCooldown;
-    private float lastEActionTime;
 
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //=====================================================
 
     public override void Attack()
     {
