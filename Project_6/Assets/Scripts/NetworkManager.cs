@@ -30,7 +30,6 @@ public class NetworkManager : PunSingleton<NetworkManager>
     public override void Awake()
     {
         base.Awake();
-
 #if UNITY_EDITOR
         state.enabled = true;
 #endif
@@ -40,6 +39,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
     {
 #if UNITY_EDITOR
         state.text = PhotonNetwork.NetworkClientState.ToString();
+        Debug.Log(PhotonNetwork.LocalPlayer.UserId);
 #endif
     }
 

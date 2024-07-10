@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using Photon.Pun;
 
 [RequireComponent(typeof(PhotonView))]
-public class TestUISlot : MonoBehaviourPun//, IPunObservable
+public class TestUISlot : MonoBehaviourPun //, IPunObservable
 {
     public GameObject prefab;
     public ObjectSO data;
@@ -29,8 +29,9 @@ public class TestUISlot : MonoBehaviourPun//, IPunObservable
     {
         panel.SetActive(false);
         //TestMainScene.instance.CreateRPC(prefab);
-        TestMainScene.instance.CreateRPC(data.id);
+        //TestMainScene.instance.CreateRPC(data.id);
         photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered);
+        PhotonNetwork.Instantiate(prefab.name, Vector3.zero, Quaternion.identity); //해당 오브젝트 Photon View필요
     }
 
     [PunRPC]
