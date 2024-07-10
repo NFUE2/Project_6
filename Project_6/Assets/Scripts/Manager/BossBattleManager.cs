@@ -13,16 +13,17 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public Animator bossAnimator;
     public BossStateMachine bossStateMachine;
 
-    private float attackCoolDown = 5f;
+    private float attackCoolDown = 3f;
     private float curCoolDown = 0f;
     private bool isFirst = true;
-    public bool isAttacking = false;
+    public bool isAttacking;
     // 플레이어 정보 받아오기(Array or List로 관리)
 
     private void Start()
     {
         GetPlayers();
         SpawnBossMonster();
+        isAttacking = false;
     }
 
     private void Update()
@@ -32,16 +33,18 @@ public class BossBattleManager : Singleton<BossBattleManager>
             
             if(players != null)
             {
-                curCoolDown += Time.deltaTime;
+                if (isAttacking == false)
+                {
+                    curCoolDown += Time.deltaTime;
+                }
                 if(isFirst)
                 {
                     isFirst = false;
-                    Debug.Log($"{bossStateMachine.IdleState}");
                     bossStateMachine.ChangeState(bossStateMachine.IdleState);
                 }
                 else
                 {
-                    if(curCoolDown >= attackCoolDown)
+                    if(curCoolDown >= attackCoolDown && isAttacking == false)
                     {
                         bossStateMachine.ChangeState(bossStateMachine.AttackState);
                         curCoolDown = 0;
@@ -79,6 +82,20 @@ public class BossBattleManager : Singleton<BossBattleManager>
         foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
         {
             players.Add(p);
+        }
+    }
+
+    public void ToggleIsAttacking()
+    {
+        if (isAttacking)
+        {
+            isAttacking = false;
+            Debug.Log($"토글 {isAttacking}");
+        }
+        else if(!isAttacking)
+        {
+            isAttacking = true;
+            Debug.Log($"토글 {isAttacking}");
         }
     }
 }

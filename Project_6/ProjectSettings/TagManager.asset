@@ -9,6 +9,7 @@ TagManager:
   - Deleteslot
   - EnemyAttack
   - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX
