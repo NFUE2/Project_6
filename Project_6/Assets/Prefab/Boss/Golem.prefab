@@ -467,6 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.2
   curDuration: 0
+  burningField: {fileID: 4807170921041474770, guid: 59362509143bd1e4cbc6892e05b7d9c4, type: 3}
 --- !u!1 &6937834297774713849
 GameObject:
   m_ObjectHideFlags: 0

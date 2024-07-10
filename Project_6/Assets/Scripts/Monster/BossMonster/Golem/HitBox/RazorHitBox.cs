@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RazorHitBox : HitBox
 {
+    public GameObject burningField;
     private void OnEnable()
     {
         curDuration = 0f;
@@ -15,6 +16,11 @@ public class RazorHitBox : HitBox
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log($"{collision.gameObject.name}가 레이저에 피격되었습니다.");
+        }
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            var field = Instantiate(burningField);
+            field.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.6f, collision.transform.position.z);
         }
     }
 }
