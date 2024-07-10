@@ -3,29 +3,30 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
+using Photon.Pun.Demo.Asteroids;
 
 public class PistolPlayer : PlayerBase
 {
     [Header("Attack")]
     private bool isAttackCooldown = false;
     private int attackCount = 0;
-    private float cooldownDuration = 3f; //ÀåÀüÀ» À§ÇÑ ÄðÅ¸ÀÓ
-
-    // ¼öÁ¤ »çÇ× - Ä³¸¯ÅÍ °øÅëºÎºÐÀº PlayerBase·Î ¿Ã·ÁÁÖ¼¼¿ä
+    private float cooldownDuration = 3f; //ìž¥ì „ì†ë„
+    public GameObject bullet; //ì´ì•Œ
     private float attackTime;
     private float lastAttackTime;
-    //=====================================================
 
+    [Header("Skill Q")]
     private Camera mainCamera;
     private bool isRolling;
     private bool fanningReady;
-    public Transform attackPoint; //¹ß»çÀ§Ä¡
-    public GameObject attackPrefab; //¹ß»çÇÒ ¿ÀºêÁ§Æ® ¿¡¼Â
+    public Transform attackPoint; //ë°œì‚¬ ìœ„ì¹˜
 
-    // ¼öÁ¤ »çÇ× - Ä³¸¯ÅÍ °øÅëºÎºÐÀº PlayerBase·Î ¿Ã·ÁÁÖ¼¼¿ä
-    [Header("Skill Q")]
-    public float actionTime;
-    private float lastAction;
+    [Header("Skill E")]
+    //Animator animator;
+    Rigidbody2D rigidbody;
+    public float rollingX;
+    //public bool isRolling { get; private set; }
+    public bool isInvincible { get; private set; }
     //====================================================
 
     public bool fanningReadyQ;
@@ -39,19 +40,19 @@ public class PistolPlayer : PlayerBase
         lastAttackTime = Time.time;
 
         attackCount++;
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // ¸¶¿ì½ºÀÇ À§Ä¡°ª
-        Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized; // ¸¶¿ì½ºÀÇ À§Ä¡°ª¿¡¼­ ÁöÁ¤ÇØÁØ °ø°Ý ½ÃÀÛ À§Ä¡°ªÀ» »«´Ù => °ø°Ý ¹æÇâ
-        //GameObject attackInstance = Instantiate(attackPrefab, attackPoint.position, Quaternion.identity); // ÃÑ¾ËÀ» »ý¼ºÇØ ¹ß»çÇØ °ø°ÝÇÑ´Ù.
-        GameObject attackInstance = PhotonNetwork.Instantiate("Prototype/" + attackPrefab.name, attackPoint.position, Quaternion.identity); // ÃÑ¾ËÀ» »ý¼ºÇØ ¹ß»çÇØ °ø°ÝÇÑ´Ù.
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
+        GameObject attackInstance = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, Quaternion.identity);
 
-        attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f; // °ø°Ý ¼Óµµ ¼³Á¤ ÇÑ´Ù.
+        attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f;
 
         if (attackCount >= 6)
         {
             StartCoroutine(AttackCooldown());
         }
     }
-    public IEnumerator AttackCooldown() //6¹ßÀ» ¾²°í ÀåÀüÀ» ÇÑ´Ù.
+
+    public IEnumerator AttackCooldown()
     {
         isAttackCooldown = true;
         attackCount = 0;
@@ -61,16 +62,83 @@ public class PistolPlayer : PlayerBase
 
     public override void UseSkillQ()
     {
-        //ÀçÀåÀü ½ºÅ©¸³Æ® ÇÊ¿ä
         if (fanningReady) return;
-        if (Time.time - lastAction < actionTime) return;
+        if (Time.time - lastQActionTime < qSkillCooldown) return;
 
         fanningReady = GetComponent<PlayerController_Gun>().fanningReady = true;
-        //StartCoroutine(Fanning());
+        StartCoroutine(Fanning());
+    }
+
+    IEnumerator Fanning()
+    {
+        while (!Input.GetMouseButtonDown(0))
+            yield return null;
+
+        for (int i = 0; i < 6; i++)
+        {
+            float fireAngle = Random.Range(-3f, 3f);
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
+            Debug.Log(mousePos);
+
+            GameObject go = PhotonNetwork.Instantiate("Prototype/" + bullet.name, transform.position, Quaternion.identity);
+            go.transform.localEulerAngles = new Vector3(0, 0, angle + fireAngle);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
+        StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
+        StartCoroutine(CoolTimeQ());
+    }
+
+    IEnumerator CoolTimeQ()
+    {
+        lastQActionTime = Time.time;
+
+        while (Time.time - lastQActionTime < qSkillCooldown)
+        {
+            Debug.Log($"QìŠ¤í‚¬ ë‚¨ì€ ì‹œê°„ : {qSkillCooldown - (Time.time - lastQActionTime)}"); // ì¿¨íƒ€ìž„ í…ìŠ¤íŠ¸ ê°±ì‹ 
+            yield return null;
+        }
+        Debug.Log($"QìŠ¤í‚¬ ì¿¨íƒ€ìž„ ì™„ë£Œ"); // ì¿¨íƒ€ìž„ ì™„ë£Œ í…ìŠ¤íŠ¸ ê°±ì‹ 
     }
 
     public override void UseSkillE()
     {
-        // ±ÇÃÑÀÇ E ½ºÅ³ ·ÎÁ÷
+        if (Time.time - lastEActionTime < eSkillCooldown) return; // E ìŠ¤í‚¬ ì¿¨íƒ€ìž„ ì²´í¬
+
+        if (GetComponent<PlayerController_Gun>().isRolling) return;
+        GetComponent<PlayerController_Gun>().isRolling = true;
+
+        isInvincible = true;
+
+        Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        int c = dir.x > 0 ? 1 : -1;
+
+        GetComponent<Rigidbody>().velocity = new Vector2(rollingX * c, 0);
+
+        Invoke("ExitRolling", 1.0f);
+    }
+
+    public void ExitRolling()
+    {
+        GetComponent<PlayerController_Gun>().isRolling = false;
+        isInvincible = false;
+        rigidbody.velocity = Vector2.zero;
+        StartCoroutine(CoolTimeE());
+    }
+
+    IEnumerator CoolTimeE()
+    {
+        lastEActionTime = Time.time;
+
+        while (Time.time - lastEActionTime < eSkillCooldown)
+        {
+            Debug.Log($"EìŠ¤í‚¬ ë‚¨ì€ ì‹œê°„ : {lastEActionTime}"); // ì¿¨íƒ€ìž„ í…ìŠ¤íŠ¸ ê°±ì‹ 
+            yield return null;
+        }
+        Debug.Log($"EìŠ¤í‚¬ ì¿¨íƒ€ìž„ ì™„ë£Œ"); // ì¿¨íƒ€ìž„ ì™„ë£Œ í…ìŠ¤íŠ¸ ê°±ì‹ 
     }
 }

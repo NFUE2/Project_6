@@ -491,22 +491,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1507376331}
-    - target: {fileID: 5039338846900449197, guid: c27fad950637afe45addadeef54a9a82, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6422326495414205650, guid: c27fad950637afe45addadeef54a9a82, type: 3}
-      propertyPath: attackTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6422326495414205650, guid: c27fad950637afe45addadeef54a9a82, type: 3}
-      propertyPath: attackRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6422326495414205650, guid: c27fad950637afe45addadeef54a9a82, type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6893682881590893061, guid: c27fad950637afe45addadeef54a9a82, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.079087
