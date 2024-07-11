@@ -1,12 +1,14 @@
 using Photon.Pun;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
 
 public class RiflePlayer : PlayerBase
 {
+    public PlayerData PlayerData;
+
     [Header("Attack")]
     private bool isAttackCooldown = false;
     private int attackCount = 0;
@@ -96,7 +98,7 @@ public class RiflePlayer : PlayerBase
     public void TargetMarkerClicked(GameObject enemy)
     {
         // 적에게 데미지를 입히는 로직 추가
-        enemy.GetComponent<Enemy>().TakeDamage(10);
+        //enemy.GetComponent<Enemy>().TakeDamage(10);
         RemoveMarker();
     }
 
@@ -126,38 +128,21 @@ public class RiflePlayer : PlayerBase
         }
         targetMarkers.Clear();
     }
+    public override void UseSkillE()
+    {
+        StartCoroutine(CoolTimeE());
+    }
+
+    private IEnumerator CoolTimeE()
+    {
+        lastEActionTime = Time.time;
+
+        while (Time.time - lastEActionTime < PlayerData.SkillECooldown)
+        {
+            Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
+            yield return null;
+        }
+        Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
+    }
 }
 
-public class TargetMarker : MonoBehaviour
-{
-    private GameObject targetEnemy;
-    private RiflePlayer player;
-
-    public void Initialize(GameObject enemy, RiflePlayer player)
-    {
-        this.targetEnemy = enemy;
-        this.player = player;
-    }
-
-    private void Update()
-    {
-        if (targetEnemy != null)
-        {
-            transform.position = targetEnemy.transform.position;
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        player.TargetMarkerClicked(targetEnemy);
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (targetEnemy == null)
-        {
-            player.TargetMarkerMissed();
-        }
-    }
-}
