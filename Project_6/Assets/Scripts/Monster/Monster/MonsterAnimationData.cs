@@ -1,15 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class MonsterAnimationData 
 {
-    private string idleParameterName = "Idle";
-    private string MoveParameterName = "Move";
-    private string AttackParameterName = "Attack";
+    [SerializeField] private string idleParameterName = "Idle";
+    [SerializeField] private string moveParameterName = "Move";
+    [SerializeField] private string attackParameterName = "Attack";
+
+    public int idle { get; private set; }
+    public int move { get; private set; }
+    public int attack { get; private set; }
 
     public void Initialize()
     {
-
+        idle = Animator.StringToHash(idleParameterName);
+        move = Animator.StringToHash(moveParameterName);
+        attack = Animator.StringToHash(attackParameterName);
     }
 }

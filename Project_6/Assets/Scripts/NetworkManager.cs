@@ -39,7 +39,6 @@ public class NetworkManager : PunSingleton<NetworkManager>
     {
 #if UNITY_EDITOR
         state.text = PhotonNetwork.NetworkClientState.ToString();
-        Debug.Log(PhotonNetwork.LocalPlayer.UserId);
 #endif
     }
 
