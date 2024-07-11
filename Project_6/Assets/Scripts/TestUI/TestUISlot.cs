@@ -13,7 +13,7 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
 
     private TextMeshProUGUI characterName;
     private Image image;
-
+    TestCameraController camController;
     Button selectButton;
 
     private void Start()
@@ -31,15 +31,17 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
         panel.SetActive(false);
         //TestMainScene.instance.CreateRPC(prefab);
         //TestMainScene.instance.CreateRPC(data.id);
-        photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered);
-        GameObject go = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity); //해당 오브젝트 Photon View필요
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = go.transform;
+        TestGameManager.instance.player = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity); //해당 오브젝트 Photon View필요
+        photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered, TestGameManager.instance.player);
+        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = go.transform;
+        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
     }
 
     [PunRPC]
-    private void OnClickRPC()
+    private void OnClickRPC(GameObject player)
     {
         selectButton.interactable = false;
+        TestGameManager.instance.players.Add(player);
     }
 
     //AllBuffered는 쓸 필요 없음
