@@ -21,15 +21,21 @@ public class TargetMarker : MonoBehaviour
 
     private void OnMouseDown()
     {
-        player.TargetMarkerClicked(targetEnemy);
+        if (targetEnemy != null)
+        {
+            player.TargetMarkerClicked(targetEnemy);
+            Debug.Log($"Å¸°Ù ¸¶Ä¿ Å¬¸¯: {targetEnemy.name}");
+        }
+        else
+        {
+            player.TargetMarkerMissed();
+            Debug.Log("Å¸°Ù ¸¶Ä¿ ³õÄ§ (ÀûÀÌ null)");
+        }
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        if (targetEnemy == null)
-        {
-            player.TargetMarkerMissed();
-        }
+        Debug.Log($"Å¸°Ù ¸¶Ä¿ ÆÄ±«µÊ: {targetEnemy?.name ?? "null"}");
     }
 }

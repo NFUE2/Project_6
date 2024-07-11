@@ -1,27 +1,40 @@
 using Photon.Pun;
 using UnityEngine;
 using System.Collections;
-using System.Net.NetworkInformation;
 
-public class SwordPlayer : PlayerBase
+public class MacePlayer : PlayerBase
 {
-
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
 
     [Header("Skill Q")]
     private bool isGuard;
+    private float lastQActionTime;
+    public float qSkillCooldown;
+    public float healDuration = 5f; // 힐 지속 시간
+    public float healAmount = 10f; // 힐량
+    public float statBoostDuration = 10f; // 스탯 강화 지속 시간
+    public float defenseBoost = 10f; // 방어력 증가량
 
     [Header("Skill E")]
-    public GameObject projectile;  //Sword 플레이어가 쏘는 오브젝트다. 향후 에셋 추가
+    private bool isDashing;
+    private float lastEActionTime;
+    public float eSkillCooldown;
+    public float dashSpeed = 10f; // 돌진 속도
+    public float dashDuration = 0.5f; // 돌진 지속 시간
+    public float dashDamage = 20f; // 돌진 피해량
+    public float reducedDamage = 0.5f; // 돌진 중 받는 피해 감소 비율
+    public LayerMask bossLayer; // 보스 레이어
+    private bool bossHit; // 보스 히트 여부
 
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
-    //임시 공격 수치
-    public float attackRange = 2.0f; // 공격 범위 추가
-    public int attackDamage = 10; // 공격 데미지 추가
-    public LayerMask enemyLayer; // 적 레이어 추가
+    private bool enhancedAttack;
+
+    public float health = 100f; // 기본 체력 값
+    public float defense = 10f; // 기본 방어력 값
+
     //=====================================================
 
     public override void Attack()
@@ -30,91 +43,128 @@ public class SwordPlayer : PlayerBase
         if (Time.time - lastAttackTime < attackTime) return; // 공격 딜레이 체크
         Debug.Log("일반공격!");
         lastAttackTime = Time.time;
-        //animator.SetTrigger("Attack");
 
-        //임시 일반공격
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+        float damage = 10f; // 기본 공격 데미지
 
-        foreach (Collider2D enemy in hitEnemies)
+        if (enhancedAttack)
         {
-            Debug.Log("Hit " + enemy.name);
-            enemy.GetComponent<IDamagable>().TakeDamage(attackDamage);
+            damage += defense; // 방어력 추가 피해
+            enhancedAttack = false; // 평타 강화 해제
+            Debug.Log($"강화된 공격! 추가 피해: {defense}");
         }
-        //
+
+        // 공격 애니메이션 트리거
+        // animator.SetTrigger("Attack");
+
+        // 데미지 처리 로직 추가 필요
     }
-    //임시공격보이는 판정
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-    
 
     public override void UseSkillQ()
     {
-        if (isGuard)
-        {
-            ExitGuard();
-        }
-        else
-        {
-            if (Time.time - lastQActionTime < qSkillCooldown) return; // Q 스킬 쿨타임 체크
-
-            Debug.Log("Q 스킬 사용");
-            isGuard = true;
-            //animator.SetBool("Guard", true);
-            Invoke("ExitGuardEvent", 1.0f);
-        }
+        if (Time.time - lastQActionTime < qSkillCooldown) return; // 쿨타임 체크
+        StartCoroutine(HealAndBoost());
     }
 
-    private void ExitGuard()
-    {
-        Debug.Log("가드 종료");
-        isGuard = false;
-        //animator.SetBool("Guard", false);
-        StartCoroutine(CoolTimeQ());
-    }
-
-    private IEnumerator CoolTimeQ()
+    private IEnumerator HealAndBoost()
     {
         lastQActionTime = Time.time;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); // 힐 범위
 
-        while (Time.time - lastQActionTime < qSkillCooldown)
+        int healedPlayers = 0;
+
+        foreach (var hitCollider in hitColliders)
         {
-            Debug.Log($"Q스킬 남은 시간 : {lastQActionTime}"); // 쿨타임 텍스트 갱신
+            if (hitCollider.CompareTag("Player"))
+            {
+                MacePlayer player = hitCollider.GetComponent<MacePlayer>();
+                if (player != null && player != this)
+                {
+                    StartCoroutine(HealPlayer(player));
+                    healedPlayers++;
+                }
+            }
+        }
+
+        if (healedPlayers > 0)
+        {
+            StartCoroutine(BoostDefense(healedPlayers));
+        }
+
+        yield return new WaitForSeconds(qSkillCooldown);
+        Debug.Log($"Q스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
+    }
+
+    private IEnumerator HealPlayer(MacePlayer player)
+    {
+        float startTime = Time.time;
+        while (Time.time - startTime < healDuration)
+        {
+            player.health += healAmount * Time.deltaTime;
+            player.health = Mathf.Clamp(player.health, 0, 100); // 체력 범위 제한
+            Debug.Log($"힐량: {healAmount * Time.deltaTime}, 현재 체력: {player.health}");
             yield return null;
         }
-        Debug.Log($"Q스킬 쿨타임 완료");// 쿨타임 완료 텍스트 갱신
     }
-    private void ExitGuardEvent()
+
+    private IEnumerator BoostDefense(int healedPlayers)
     {
-        if (isGuard) ExitGuard();
+        float originalDefense = defense; // 현재 방어력 저장
+        defense += defenseBoost * healedPlayers;
+        yield return new WaitForSeconds(statBoostDuration);
+        defense = originalDefense; // 방어력 원상복구
     }
 
     public override void UseSkillE()
     {
-        if (Time.time - lastEActionTime < eSkillCooldown) return; // E 스킬 쿨타임 체크
-        Debug.Log("E 스킬 사용");
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        //향후 projectile 에셋 추가 할때 주석 풀기
-        //GameObject go = PhotonNetwork.Instantiate("Prototype/" + projectile.name, transform.position, Quaternion.identity);
-        //go.transform.localEulerAngles = new Vector3(0, 0, angle);
-
-        StartCoroutine(CoolTimeE());
+        if (Time.time - lastEActionTime < eSkillCooldown || isDashing) return; // 쿨타임 체크 및 중복 실행 방지
+        StartCoroutine(Dash());
     }
 
-    private IEnumerator CoolTimeE()
+    private IEnumerator Dash()
     {
         lastEActionTime = Time.time;
+        isDashing = true;
+        bossHit = false;
+        float startTime = Time.time;
 
-        while (Time.time - lastEActionTime < eSkillCooldown)
+        while (Time.time - startTime < dashDuration)
         {
-            Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
+            transform.Translate(Vector3.forward * dashSpeed * Time.deltaTime);
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f); // 충돌 범위
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.CompareTag("Enemy"))
+                {
+                    //hitCollider.GetComponent<Enemy>().TakeDamage(dashDamage);
+                    if (bossLayer == (bossLayer | (1 << hitCollider.gameObject.layer)))
+                    {
+                        bossHit = true;
+                    }
+                    else
+                    {
+                        // 적 밀어내기 및 스턴
+                        Rigidbody enemyRb = hitCollider.GetComponent<Rigidbody>();
+                        if (enemyRb != null)
+                        {
+                            Vector3 forceDirection = hitCollider.transform.position - transform.position;
+                            forceDirection.y = 0;
+                            enemyRb.AddForce(forceDirection.normalized * 5f, ForceMode.Impulse);
+                        }
+                    }
+                }
+            }
+
             yield return null;
         }
+
+        isDashing = false;
+        if (bossHit)
+        {
+            enhancedAttack = true; // 다음 공격 강화
+        }
+
+        yield return new WaitForSeconds(eSkillCooldown);
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
 }
-
