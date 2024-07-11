@@ -12,7 +12,7 @@ public class BossStateMachine : MonoBehaviour
 
     public BossIdleState IdleState { get; set; }
     public BossAttackState AttackState { get; set; }
-    //public BossDieState DieState { get; }
+    public BossDieState DieState { get; set; }
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class BossStateMachine : MonoBehaviour
 
         IdleState = new BossIdleState(this);
         AttackState = new BossAttackState(this);
+        DieState = new BossDieState(this);
     }
 
     public void ChangeState(IBossState state)
