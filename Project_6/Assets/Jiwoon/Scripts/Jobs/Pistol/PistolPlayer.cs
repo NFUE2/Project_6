@@ -51,7 +51,6 @@ public class PistolPlayer : PlayerBase
             StartCoroutine(AttackCooldown());
         }
     }
-
     public IEnumerator AttackCooldown()
     {
         isAttackCooldown = true;
