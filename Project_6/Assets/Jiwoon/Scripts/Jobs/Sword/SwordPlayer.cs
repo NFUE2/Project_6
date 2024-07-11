@@ -3,13 +3,14 @@ using UnityEngine;
 using System.Collections;
 using System.Net.NetworkInformation;
 using UnityEngine.UI;
+using TMPro;
 
 public class SwordPlayer_ : PlayerBase
 {
     public PlayerData PlayerData;
 
-    public Text qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public Text eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
 
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
