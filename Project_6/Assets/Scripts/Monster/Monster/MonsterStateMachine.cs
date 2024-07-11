@@ -6,7 +6,6 @@ public class MonsterStateMachine : StateMachine
 {
     public MonsterController controller;
 
-
     public MonsterIdleState idleState;
     public MonsterTrackState trackState;
     public MonsterAttackState attackState;

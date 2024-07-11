@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterBaseState : IState
 {
-    MonsterStateMachine stateMachine;
+    protected MonsterStateMachine stateMachine;
 
     public MonsterBaseState(MonsterStateMachine stateMachine)
     {
@@ -16,4 +16,16 @@ public class MonsterBaseState : IState
     public virtual void Exit() { }
 
     public virtual void HandleInput() { }
+
+    public virtual void Update() { }
+
+    protected void StartAnimation(int animaotrHash)
+    {
+        stateMachine.controller.animtor.SetBool(animaotrHash,true);
+    }
+
+    protected void StopAnimation(int animaotrHash)
+    {
+        stateMachine.controller.animtor.SetBool(animaotrHash, false);
+    }
 }
