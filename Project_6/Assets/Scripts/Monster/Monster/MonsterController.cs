@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum MonsterType
+public enum MonsterAttackType
 {
-    ShotRange,
-    LongRange,
+    Single, //근접 단일
+    Multi, //근접 다수
+    Long //원거리
 }
 
 [RequireComponent(typeof(PhotonView),typeof(Rigidbody2D),typeof(Animator))]
@@ -18,7 +19,7 @@ public class MonsterController : MonoBehaviour
     public EnemyDataSO data;
     public Animator animtor { get; private set; }
 
-    public MonsterType type;
+    public MonsterAttackType type;
     public Rigidbody2D rigidbody;
     public LayerMask targetLayer;
 
