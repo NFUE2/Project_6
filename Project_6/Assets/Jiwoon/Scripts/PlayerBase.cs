@@ -8,6 +8,9 @@ public abstract class PlayerBase : MonoBehaviour
     protected float lastQActionTime;
     protected float eSkillCooldown;
     protected float lastEActionTime;
+
+    protected float qSkillCooldownRemaining;
+    protected float eSkillCooldownRemaining;
     public abstract void Attack();
     public abstract void UseSkillQ();
     public abstract void UseSkillE();

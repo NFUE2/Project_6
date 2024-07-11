@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class P_HammerQ : MonoBehaviour, P_ISkill
 {
+    [Header("Skill Q")]
     public GameObject shield;
     private GameObject createShield;
     //public float shieldTime;

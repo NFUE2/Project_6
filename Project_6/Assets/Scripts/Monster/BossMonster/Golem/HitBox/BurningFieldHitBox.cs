@@ -27,6 +27,11 @@ public class BurningFieldHitBox : HitBox
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log($"{collision.gameObject.name}이 불장판에 의해 도트 데미지를 입고 있습니다.");
+                //if(collision.TryGetComponent<IDamagable>(out IDamagable P))
+                //{
+                //    float damage = BossBattleManager.Instance.boss.attackPower * 0.1f;
+                //    P.TakeDamage(damage);
+                //}
                 timeSinceLastTriggerStay = Time.time;
             }
         }

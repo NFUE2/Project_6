@@ -2,9 +2,15 @@ using Photon.Pun;
 using UnityEngine;
 using System.Collections;
 using System.Net.NetworkInformation;
+using UnityEngine.UI;
+using TMPro;
 
-public class SwordPlayer : PlayerBase
+public class SwordPlayer_ : PlayerBase
 {
+    public PlayerData PlayerData;
+
+    public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
 
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
@@ -38,7 +44,7 @@ public class SwordPlayer : PlayerBase
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Hit " + enemy.name);
-            //enemy.GetComponent<Enemy>().TakeDamage(attackDamage); 맞는 판정 구현
+            enemy.GetComponent<IDamagable>().TakeDamage(attackDamage);
         }
         //
     }
@@ -58,7 +64,7 @@ public class SwordPlayer : PlayerBase
         }
         else
         {
-            if (Time.time - lastQActionTime < qSkillCooldown) return; // Q 스킬 쿨타임 체크
+            if (Time.time - lastQActionTime < PlayerData.SkillQCooldown) return; // Q 스킬 쿨타임 체크
 
             Debug.Log("Q 스킬 사용");
             isGuard = true;
@@ -79,12 +85,13 @@ public class SwordPlayer : PlayerBase
     {
         lastQActionTime = Time.time;
 
-        while (Time.time - lastQActionTime < qSkillCooldown)
+        while (Time.time - lastQActionTime < PlayerData.SkillQCooldown)
         {
-            Debug.Log($"Q스킬 남은 시간 : {lastQActionTime}"); // 쿨타임 텍스트 갱신
+            float remainingTime = PlayerData.SkillQCooldown - (Time.time - lastQActionTime);
+            qCooldownText.text = $"Q스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
             yield return null;
         }
-        Debug.Log($"Q스킬 쿨타임 완료");// 쿨타임 완료 텍스트 갱신
+        qCooldownText.text = "Q스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
     }
     private void ExitGuardEvent()
     {
@@ -93,7 +100,7 @@ public class SwordPlayer : PlayerBase
 
     public override void UseSkillE()
     {
-        if (Time.time - lastEActionTime < eSkillCooldown) return; // E 스킬 쿨타임 체크
+        if (Time.time - lastEActionTime < PlayerData.SkillECooldown) return; // E 스킬 쿨타임 체크
         Debug.Log("E 스킬 사용");
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -109,12 +116,13 @@ public class SwordPlayer : PlayerBase
     {
         lastEActionTime = Time.time;
 
-        while (Time.time - lastEActionTime < eSkillCooldown)
+        while (Time.time - lastEActionTime < PlayerData.SkillECooldown)
         {
-            Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
+            float remainingTime = PlayerData.SkillECooldown - (Time.time - lastEActionTime);
+            eCooldownText.text = $"E스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
             yield return null;
         }
-        Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
+        eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
     }
 }
 

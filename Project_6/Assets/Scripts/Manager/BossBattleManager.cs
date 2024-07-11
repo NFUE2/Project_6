@@ -33,21 +33,31 @@ public class BossBattleManager : Singleton<BossBattleManager>
             
             if(players != null)
             {
-                if (isAttacking == false)
+                if(boss.currentHp <= 0)
                 {
-                    curCoolDown += Time.deltaTime;
-                }
-                if(isFirst)
-                {
-                    isFirst = false;
-                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    if(bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
+                    {
+                        bossStateMachine.ChangeState(bossStateMachine.DieState);
+                    }
                 }
                 else
                 {
-                    if(curCoolDown >= attackCoolDown && isAttacking == false)
+                    if (isAttacking == false)
                     {
-                        bossStateMachine.ChangeState(bossStateMachine.AttackState);
-                        curCoolDown = 0;
+                        curCoolDown += Time.deltaTime;
+                    }
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                        bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    }
+                    else
+                    {
+                        if (curCoolDown >= attackCoolDown && isAttacking == false)
+                        {
+                            bossStateMachine.ChangeState(bossStateMachine.AttackState);
+                            curCoolDown = 0;
+                        }
                     }
                 }
             }
@@ -97,6 +107,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
             isAttacking = true;
             Debug.Log($"토글 {isAttacking}");
         }
+    }
+
+    public void DestroyBoss()
+    {
+        Destroy(bossMonster);
     }
 }
     // 보스 소환 및 FSM 생성
