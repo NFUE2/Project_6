@@ -11,7 +11,7 @@ public class PistolPlayer : PlayerBase
     private bool isAttackCooldown = false;
     private int attackCount = 0;
     private float cooldownDuration = 3f; //장전속도
-    public GameObject bullet; //총알
+    public GameObject attackPrefab; //총알
     private float attackTime;
     private float lastAttackTime;
 
@@ -42,7 +42,7 @@ public class PistolPlayer : PlayerBase
         attackCount++;
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
-        GameObject attackInstance = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, Quaternion.identity);
+        GameObject attackInstance = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.identity);
 
         attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f;
 
@@ -51,7 +51,6 @@ public class PistolPlayer : PlayerBase
             StartCoroutine(AttackCooldown());
         }
     }
-
     public IEnumerator AttackCooldown()
     {
         isAttackCooldown = true;
@@ -65,7 +64,7 @@ public class PistolPlayer : PlayerBase
         if (fanningReady) return;
         if (Time.time - lastQActionTime < qSkillCooldown) return;
 
-        fanningReady = GetComponent<PlayerController_Gun>().fanningReady = true;
+        fanningReady = true;
         StartCoroutine(Fanning());
     }
 
@@ -82,14 +81,14 @@ public class PistolPlayer : PlayerBase
 
             Debug.Log(mousePos);
 
-            GameObject go = PhotonNetwork.Instantiate("Prototype/" + bullet.name, transform.position, Quaternion.identity);
+            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
             go.transform.localEulerAngles = new Vector3(0, 0, angle + fireAngle);
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
-        StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
+        fanningReady = false;
+        StartCoroutine(AttackCooldown());
         StartCoroutine(CoolTimeQ());
     }
 

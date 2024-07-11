@@ -26,7 +26,7 @@ public class HammerPlayer : PlayerBase
 
     public override void Attack()
     {
-        if (GetComponent<P_HammerE>().isCharging) return;
+        if (isCharging) return;
         if (Time.time - lastAttackTime < attackTime) return;
 
         lastAttackTime = Time.time;
