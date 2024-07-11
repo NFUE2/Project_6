@@ -8,4 +8,5 @@ public class CharacterDataSO : ObjectSO
     public float moveSpeed;
     public float attackTime;
     public float attackDamage;
+    public float deffenceDamage;
 }
