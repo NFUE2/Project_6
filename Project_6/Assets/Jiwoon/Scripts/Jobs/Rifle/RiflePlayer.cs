@@ -98,19 +98,23 @@ public class RiflePlayer : PlayerBase
     public void TargetMarkerClicked(GameObject enemy)
     {
         // 적에게 데미지를 입히는 로직 추가
-        //enemy.GetComponent<Enemy>().TakeDamage(10);
+        // enemy.GetComponent<Enemy>().TakeDamage(10);
+        Debug.Log($"데미지 적용: {enemy.name}");
         RemoveMarker();
     }
 
     public void TargetMarkerMissed()
     {
+        Debug.Log("타겟 마커 놓침");
         RemoveMarker();
     }
+
 
     private void RemoveMarker()
     {
         // 조준점 하나 제거 및 남은 기회 업데이트
         remainingChances--;
+        Debug.Log($"남은 기회: {remainingChances}");
         if (remainingChances <= 0)
         {
             ClearAllMarkers();
@@ -124,12 +128,25 @@ public class RiflePlayer : PlayerBase
             if (marker != null)
             {
                 Destroy(marker);
+                Debug.Log("마커 제거");
             }
         }
         targetMarkers.Clear();
+        Debug.Log("모든 마커 제거됨");
     }
     public override void UseSkillE()
     {
+        if (Time.time - lastEActionTime < PlayerData.SkillECooldown) return;
+
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
+
+        GameObject grenadeInstance = Instantiate(rifleGrenade, attackPoint.position, Quaternion.identity);
+        grenadeInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 10f; // 투사체 속도 설정
+
+        grenadeInstance.GetComponent<Grenade>().Initialize(10f, 5f, 3f); // 데미지, 범위, 도트 지속 시간 초기화
+
+        lastEActionTime = Time.time;
         StartCoroutine(CoolTimeE());
     }
 
@@ -145,4 +162,3 @@ public class RiflePlayer : PlayerBase
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
 }
-
