@@ -5,36 +5,42 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum MonsterType
+{
+    ShotRange,
+    LongRange,
+}
+
 [RequireComponent(typeof(PhotonView),typeof(Rigidbody2D),typeof(Animator))]
 public class MonsterController : MonoBehaviour
 {
+    [Header("EnemyData")]
     public EnemyDataSO data;
+    public Animator animtor { get; private set; }
 
-    Animator animtor;
-    Rigidbody2D rigidbody;
+    public MonsterType type;
+    public Rigidbody2D rigidbody;
+    public LayerMask targetLayer;
+
     MonsterStateMachine stateMachine;
 
-    List<Transform> players = new List<Transform>();
-    Transform target = null;
+    [field : Header("Animation")]
+    [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
 
+    //List<Transform> players = new List<Transform>(); //게임 매니저에서 가져오도록 설정
+    public Transform target = null;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animtor = GetComponent<Animator>();
-
         stateMachine = new MonsterStateMachine(this);
+
+        animationData.Initialize();
     }
 
     private void Update()
     {
-        //if(target == null)
-        //{
-        //    foreach(Transform p in players)
-        //    {
-        //        float distance = Vector3.Distance(transform.position,target.position);
-
-        //    }
-        //}
+        stateMachine.HandleInput(true);
     }
 }

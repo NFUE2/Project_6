@@ -9,11 +9,12 @@ public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
     //public void OnInteraction()
     //{
     //    //destination.position;
-
     //}
 
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        other.transform.position = destination.position;
+        collision.transform.position = destination.position;
+        
     }
 }

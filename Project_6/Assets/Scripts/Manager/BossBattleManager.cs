@@ -56,7 +56,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     private void SpawnBossMonster() // 보스 소환
     {
-        spawnedBoss = Instantiate(bossMonster);
+        spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)

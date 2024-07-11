@@ -46,6 +46,13 @@ MonoBehaviour:
   - DieRPC
   - CreateCharacter
   - OnPhotonSerializeView
+  - VotingRPC
+  - RunRPC
+  - EnterBossRoomRPC
+  - EnterRPC
+  - ExitRPC
+  - VoteAgreementRPC
+  - VoteOppositionRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
