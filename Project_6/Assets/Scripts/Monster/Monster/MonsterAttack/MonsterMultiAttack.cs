@@ -14,7 +14,7 @@ public class MonsterMultiAttack : MonsterAttack
         //int attackRange = stateMachine.controller.data.att //공격거리 필요
 
         RaycastHit2D[] ray = Physics2D.RaycastAll(myPos, Vector2.right * direction, 5.0f, target);
-        Physics2D.OverlapBox();
+
         foreach(RaycastHit2D hit in ray)
         {
             if (hit.transform.TryGetComponent(out IDamagable player))

@@ -1,13 +1,10 @@
-using Photon.Pun;
-using UnityEngine;
-
 public class MonsterAttackState : MonsterBaseState
 {
     MonsterAttack attack;
 
     public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine) 
     {
-        switch(stateMachine.controller.type)
+        switch (stateMachine.controller.type)
         {
             case MonsterAttackType.Single:
                 attack = new MonsterSingleAttack(stateMachine);

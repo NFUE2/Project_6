@@ -1,8 +1,4 @@
 using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MonsterAttackType
@@ -19,10 +15,13 @@ public class MonsterController : MonoBehaviour
     public EnemyDataSO data;
     public Animator animtor { get; private set; }
 
+    [Header("AttackType")]
     public MonsterAttackType type;
-    public Rigidbody2D rigidbody;
+
+    [Header("Target")]
     public LayerMask targetLayer;
 
+    //Rigidbody2D rigidbody;
     MonsterStateMachine stateMachine;
 
     [field : Header("Animation")]
@@ -33,7 +32,7 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        //rigidbody = GetComponent<Rigidbody2D>();
         animtor = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
 

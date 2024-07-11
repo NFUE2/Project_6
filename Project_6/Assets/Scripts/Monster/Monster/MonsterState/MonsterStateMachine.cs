@@ -15,6 +15,7 @@ public class MonsterStateMachine : StateMachine
         idleState = new MonsterIdleState(this);
         trackState = new MonsterTrackState(this);
         attackState = new MonsterAttackState(this);
+
         this.controller = controller;
     }
 }
