@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMonster : MonoBehaviour, IDamagable
 {
@@ -6,9 +7,9 @@ public class BossMonster : MonoBehaviour, IDamagable
     public float attackPower { get; set; }
     public float defensePower { get; set; }
     public float moveSpeed {  get; set; }
-    
-    
-    private float currentHp;
+
+    public Image hpBar;
+    public float currentHp;
 
     public float GetFillAmountHP()
     {
@@ -18,9 +19,16 @@ public class BossMonster : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         currentHp -= (damage * (defensePower / 100));
+        
         if (currentHp <= 0)
         {
+            currentHp = 0;
+            hpBar.fillAmount = 0;
             // »ç¸Á Ã³¸®
+        }
+        else
+        {
+            hpBar.fillAmount = GetFillAmountHP();
         }
     }
 }
