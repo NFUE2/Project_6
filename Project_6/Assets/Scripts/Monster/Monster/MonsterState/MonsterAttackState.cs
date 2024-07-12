@@ -1,6 +1,10 @@
+using System;
+using System.Diagnostics;
+using UnityEngine;
 public class MonsterAttackState : MonsterBaseState
 {
     MonsterAttack attack;
+    float lastAttackTime = float.MaxValue;
 
     public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine) 
     {
@@ -20,6 +24,7 @@ public class MonsterAttackState : MonsterBaseState
 
     public override void Enter()
     {
+        UnityEngine.Debug.Log("공격");
         base.Enter();
         StartAnimation(stateMachine.controller.animationData.attack);
     }
@@ -30,11 +35,19 @@ public class MonsterAttackState : MonsterBaseState
         StopAnimation(stateMachine.controller.animationData.attack);
     }
 
-    public void Attack()
+    public override void HandleInput()
     {
-        attack.Attack();
+        base.HandleInput();
+
+        if(Time.time - lastAttackTime < stateMachine.controller.data.attackTime)
+        {
+            lastAttackTime = Time.time;
+            attack.Attack();
+        }
+        //멀어지면 다시 추적
     }
 
+    //클래스 분리
     //public void Attack()
     //{
     //    MonsterType type = stateMachine.controller.type;

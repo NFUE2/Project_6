@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDataSO : CharacterDataSO
 {
-
     public float searchDistance;
-
+    public float attackDistance;
+    public GameObject projectile;
 }

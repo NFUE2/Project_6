@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MonsterAttackType
@@ -28,19 +29,26 @@ public class MonsterController : MonoBehaviour
     [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
 
     //List<Transform> players = new List<Transform>(); //게임 매니저에서 가져오도록 설정
+    [HideInInspector]
     public Transform target = null;
 
     private void Awake()
     {
+        animationData.Initialize();
         //rigidbody = GetComponent<Rigidbody2D>();
         animtor = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
-
-        animationData.Initialize();
     }
 
     private void Update()
     {
         stateMachine.HandleInput(true);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position,data.searchDistance);
     }
 }

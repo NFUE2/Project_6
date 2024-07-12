@@ -11,9 +11,9 @@ public class MonsterMultiAttack : MonsterAttack
         Vector2 myPos = stateMachine.controller.transform.position;
         int direction = stateMachine.controller.transform.localScale.x == 1 ? 1 : -1;
         LayerMask target = stateMachine.controller.targetLayer;
-        //int attackRange = stateMachine.controller.data.att //공격거리 필요
+        float attackDistance = stateMachine.controller.data.attackDistance; //공격거리 필요
 
-        RaycastHit2D[] ray = Physics2D.RaycastAll(myPos, Vector2.right * direction, 5.0f, target);
+        RaycastHit2D[] ray = Physics2D.RaycastAll(myPos, Vector2.right * direction * attackDistance, 5.0f, target);
 
         foreach(RaycastHit2D hit in ray)
         {
