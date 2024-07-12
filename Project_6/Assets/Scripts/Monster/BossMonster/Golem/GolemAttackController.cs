@@ -10,6 +10,13 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public GameObject swingHitBoxRight;
     public GameObject razorHitBox;
 
+    public BoxCollider2D bossCollider;
+    public BoxCollider2D chargeCollider;
+
+    private float beforeChargeHP;
+    private float afterChargeHP;
+    private float chargeCancleDamage = 50;
+
     private int additionalAttack;
 
     public override void SelectAttack()
@@ -145,6 +152,50 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         BossBattleManager.Instance.bossAnimator.SetBool("isRazor", false);
         ExitAttack();
+    }
+
+    // Â÷Áö
+    public void Charge()
+    {
+        BossBattleManager.Instance.ToggleIsAttacking();
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+        beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
+    }
+
+    private void EndCharge()
+    {
+        afterChargeHP = BossBattleManager.Instance.boss.currentHp;
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", false);
+        if(beforeChargeHP - afterChargeHP >= chargeCancleDamage)
+        {
+            BossBattleManager.Instance.bossAnimator.SetBool("isFaint", true);
+        }
+        else
+        {
+            BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", true);
+        }
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+    }
+
+    private void FaintEnd()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isFaint", false);
+        ExitAttack() ;
+    }
+
+    private void ChargePunch()
+    {
+        foreach(GameObject P in BossBattleManager.Instance.players)
+        {
+            PlayerCondition condition = P.GetComponent<PlayerCondition>();
+            condition.TakeDamage(BossBattleManager.Instance.boss.attackPower);
+        }
+    }
+
+    private void EndChargePunch()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", false);
+        ExitAttack() ;
     }
 
     private void ExitAttack()
