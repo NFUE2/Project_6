@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GolemAttackController : BossAttackController
+public class GolemAttackController : BossAttackController, IPunObservable
 {
     public GameObject stompHitBox;
     public GameObject swingHitBoxLeft;
@@ -150,5 +151,23 @@ public class GolemAttackController : BossAttackController
     {
         BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(stompHitBox.activeInHierarchy);
+            stream.SendNext(swingHitBoxLeft.activeInHierarchy);
+            stream.SendNext(swingHitBoxRight.activeInHierarchy);
+            stream.SendNext(razorHitBox.activeInHierarchy);
+        }
+        else
+        {
+            stompHitBox.SetActive((bool)stream.ReceiveNext());
+            swingHitBoxLeft.SetActive((bool)stream.ReceiveNext()); ;
+            swingHitBoxRight.SetActive((bool)stream.ReceiveNext()); ;
+            razorHitBox.SetActive((bool)stream.ReceiveNext()); ;
+        }
     }
 }
