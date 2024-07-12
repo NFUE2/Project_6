@@ -34,8 +34,8 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
-        animationData.Initialize();
         //rigidbody = GetComponent<Rigidbody2D>();
+        animationData.Initialize();
         animtor = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
     }
@@ -49,7 +49,7 @@ public class MonsterController : MonoBehaviour
     {
         //공격범위
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, data.attackDamage);
+        Gizmos.DrawWireSphere(transform.position, data.attackDistance);
 
         //탐색범위
         Gizmos.color = Color.blue;
