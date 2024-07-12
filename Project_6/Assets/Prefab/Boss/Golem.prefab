@@ -575,6 +575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebf5624895182a4898d75513ce23736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  currentHp: 0
+  golemData: {fileID: 11400000, guid: 9da37e2c0c62f254faace24ce0d2085d, type: 2}
 --- !u!61 &2459596844110712909
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb79fc3f296c4a4388cd1ce5735c387, type: 3}
   m_Name: GolemData
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
+  id: 1
+  name: Golem
   info: 
-  maxHP: 0
-  moveSpeed: 0
-  attackTime: 0
-  attackDamage: 0
-  deffenceDamage: 0
+  maxHP: 5000
+  moveSpeed: 1
+  attackTime: 5
+  attackDamage: 20
+  deffenceDamage: 20
