@@ -47,8 +47,12 @@ public class MonsterController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //공격범위
         Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, data.attackDamage);
 
+        //탐색범위
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position,data.searchDistance);
     }
 }
