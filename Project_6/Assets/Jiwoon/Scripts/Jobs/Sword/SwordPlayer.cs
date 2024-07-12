@@ -5,7 +5,7 @@ using System.Net.NetworkInformation;
 using UnityEngine.UI;
 using TMPro;
 
-public class SwordPlayer_ : PlayerBase
+public class SwordPlayer : PlayerBase
 {
     public PlayerData PlayerData;
 
