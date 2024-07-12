@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_SwordProjectile : MonoBehaviour
+public class P_Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
@@ -20,7 +20,7 @@ public class P_SwordProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out P_BossMonster boss))
+        if (collision.TryGetComponent(out P_BossMonster boss)) //향후 맞는 판정 수정
         {
             boss.TakeDamage(damage);
             //Destroy(gameObject);

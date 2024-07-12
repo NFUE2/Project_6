@@ -8,34 +8,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NetworkManager : MonoBehaviourPunCallbacks
+public class NetworkManager : PunSingleton<NetworkManager>
 {
-    public NetworkManager instance;
-
-    public GameObject networkPanel,panelExitButton; //상태변화 안내패널, 닫기버튼
-    //public TextMeshProUGUI infoText; //한글이 안되서 주석처리, 상태변화 메세지 표시
-    public Text infoText; //
+    public GameObject networkPanel, panelExitButton;//,lobby; //상태변화 안내패널, 닫기버튼
+    public TextMeshProUGUI infoText; //한글이 안되서 주석처리, 상태변화 메세지 표시
+    //public Text infoText; //
 
     //public TMP_InputField roomInputField; //한글이 안되서 주석처리
-    public TextMeshProUGUI state; //현재 포톤 접속상태 확인
+    public TextMeshProUGUI state; //현재 포톤 접속상태 확인, 에디터에서만 사용
 
     //현재 상태를 나타내는 메세지들
-    private readonly string connectServerMessage = "서버에 접속중입니다.";
-    private readonly string connectLobbyMessage = "로비에 접속중입니다.";
-    private readonly string connectRoomMessage = "방에 입장중입니다.";
-    private readonly string createRoomFailMessage = "방 생성에 실패하였습니다.";
-    private readonly string joinRoomFailMessage = "방 입장에 실패하였습니다.";
+    public readonly string connectServerMessage = "서버에 접속중입니다.";
+    public readonly string connectLobbyMessage = "로비에 접속중입니다.";
+    //public readonly string refreshLobbyMessage = "새로고침 중입니다."; //로비 매니저로 이관
+    //public readonly string connectRoomMessage = "방에 입장중입니다."; //로비 매니저로 이관
+    public readonly string createRoomFailMessage = "방 생성에 실패하였습니다.";
+    public readonly string joinRoomFailMessage = "방 입장에 실패하였습니다.";
 
     public string curChoiceRoom;
 
-    private void Awake()
+    public override void Awake()
     {
-        instance = this;
+        base.Awake();
+#if UNITY_EDITOR
+        state.enabled = true;
+#endif
     }
 
     private void Update()
     {
+#if UNITY_EDITOR
         state.text = PhotonNetwork.NetworkClientState.ToString();
+#endif
     }
 
     public void OnClickEnterServer()
@@ -60,32 +64,38 @@ public class NetworkManager : MonoBehaviourPunCallbacks
            ClientState.JoinedLobby,
            PhotonNetwork.JoinLobby));
 
+        PhotonNetwork.AutomaticallySyncScene = true;
         //Debug.Log(PhotonNetwork.JoinLobby());
     }
 
+    //public void OnClickRefreshLobby() //로비 매니저로 이관
+    //{
+    //    StartCoroutine(ChangeState(
+    //      refreshLobbyMessage,
+    //      ClientState.JoinedLobby,
+    //      PhotonNetwork.JoinLobby));
+    //}
 
-    public void OnClickJoinRoom()
+    //public void OnClickJoinRoom() //로비 매니저로 이관
+    //{
+    //    StartCoroutine(ChangeState(
+    //      connectRoomMessage,
+    //      ClientState.Joined,
+    //      JoinRoom));
+    //}
+
+    public void OnClickDisconnect()
     {
-        StartCoroutine(ChangeState(
-          connectRoomMessage,
-          ClientState.Joined,
-          JoinRoom));
+        PhotonNetwork.Disconnect();
     }
 
-    public bool JoinRoom()
-    {
-        return PhotonNetwork.JoinRoom(curChoiceRoom);
-    }
-
-    public void OnCreateRoom(string roomName)
-    {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4;
-        PhotonNetwork.CreateRoom(roomName,roomOptions);
-    }
+    //public bool JoinRoom() //로비 매니저로 이관
+    //{
+    //    return PhotonNetwork.JoinRoom(curChoiceRoom);
+    //}
 
     //포톤에서의 상태 변화
-    IEnumerator ChangeState(string message, ClientState targetState, Func<bool> func)
+    public IEnumerator ChangeState(string message, ClientState targetState, Func<bool> func)
     {
         if (!func()) yield break; //코루틴 종료
 
@@ -157,55 +167,58 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region LobbyCallbacks
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-    }
+    //로비관련은 로비매니저에서 담당
+    //public override void OnJoinedLobby()
+    //{
+    //    base.OnJoinedLobby();
+    //    //lobby.SetActive(true);
+    //}
 
-    public override void OnLeftLobby()
-    {
-        base.OnLeftLobby();
-    }
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        base.OnRoomListUpdate(roomList);
-    }
+    //public override void OnLeftLobby()
+    //{
+    //    base.OnLeftLobby();
+    //}
+    //public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    //{
+    //    base.OnRoomListUpdate(roomList);
+    //    //TestLobbyManager.instance.SetRoomList(roomList); //로비 매니저로 이관
+    //}
 
     #endregion
 
     #region RoomCallbacks
 
-    public override void OnCreatedRoom()
-    {
-        base.OnCreatedRoom();
-    }
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-    }
+    //public override void OnCreatedRoom()
+    //{
+    //    base.OnCreatedRoom();
+    //}
+    //public override void OnJoinedRoom()
+    //{
+    //    base.OnJoinedRoom();
+    //}
 
-    public override void OnLeftRoom()
-    {
-        base.OnLeftRoom();
-    }
+    //public override void OnLeftRoom()
+    //{
+    //    base.OnLeftRoom();
+    //}
 
-    //다른플레이어가 방에 입장했을때
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    {
-        base.OnPlayerEnteredRoom(newPlayer);
-    }
+    ////다른플레이어가 방에 입장했을때
+    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    //{
+    //    base.OnPlayerEnteredRoom(newPlayer);
+    //}
 
-    //다른플레이어가 방을 나갔을때
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    {
-        base.OnPlayerLeftRoom(otherPlayer);
-    }
+    ////다른플레이어가 방을 나갔을때
+    //public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    //{
+    //    base.OnPlayerLeftRoom(otherPlayer);
+    //}
 
-    //방장 변경되었을때
-    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
-    {
-        base.OnMasterClientSwitched(newMasterClient);
-    }
+    ////방장 변경되었을때
+    //public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    //{
+    //    base.OnMasterClientSwitched(newMasterClient);
+    //}
     #endregion 
 
     #region FailsCallbacks 실패시 작동하는 함수들
@@ -230,5 +243,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         StopAllCoroutines();
         FailTextInfo($"{joinRoomFailMessage}\n\n{ErrorMessage(returnCode)}");
     }
+
     #endregion 
 }
