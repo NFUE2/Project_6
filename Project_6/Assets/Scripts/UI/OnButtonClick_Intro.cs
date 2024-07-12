@@ -21,11 +21,13 @@ public class OnButtonClick_Intro : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //하이라이트
         Debug.Log("Enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        //원래
         Debug.Log("Exit");
     }
 }
