@@ -83,7 +83,8 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //      ClientState.Joined,
     //      JoinRoom));
     //}
-
+    
+    //네트워크매니저 처리
     public void OnClickDisconnect()
     {
         PhotonNetwork.Disconnect();
@@ -113,7 +114,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
         networkPanel.SetActive(false);
     }
 
-    //포톤 에러코드 정리
+    //포톤 에러코드 정리, 네트워크 매니저에서 처리
     private string ErrorMessage(short returnCode)
     {
         string message = "";
@@ -121,7 +122,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
         switch (returnCode)
         {
             case 32766:
-                message = "중복된 ID가 존재합니다.";
+                message = "중복된 방이 존재합니다.";
                 break;
 
             case 32765:
@@ -140,10 +141,10 @@ public class NetworkManager : PunSingleton<NetworkManager>
                 message = "잠시 후에 시도해주세요";
                 break;
         }
-
         return message;
     }
 
+    //UI에서 처리
     private void FailTextInfo(string message)
     {
         infoText.text = message;
@@ -158,6 +159,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //    Debug.Log("접속 시도");
     //}
 
+    //접속하면 곧바로 로비로 접속 시도
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -228,11 +230,13 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //    Debug.Log(returnCode);
     //}
 
-    //방 생성 실패
+    //방 생성 실패, 네트워크 매니저에서 처리
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
         StopAllCoroutines();
+        Debug.Log(returnCode);
+        Debug.Log(message);
         FailTextInfo($"{createRoomFailMessage}\n\n{ErrorMessage(returnCode)}");
     }
 
