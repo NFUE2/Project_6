@@ -39,6 +39,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
                     {
                         bossStateMachine.ChangeState(bossStateMachine.DieState);
                     }
+                    return;
                 }
                 else
                 {
