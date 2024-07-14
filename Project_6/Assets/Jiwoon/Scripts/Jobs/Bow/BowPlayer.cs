@@ -6,24 +6,31 @@ using System.Collections;
 public class BowPlayer : PlayerBase
 {
     [Header("Attack")]
-    private bool isAttackCooldown = false;
+    private bool isAttackCooldown = false; 
     private int attackCount = 0;
+
+    //공격부분 - 상위클래스로 이동
     private float attackTime;
     private float lastAttackTime;
+    //====================================
+
+    
     private Camera mainCamera;
+
     public GameObject attackPrefab; //총알
     public Transform attackPoint;
     private float cooldownDuration = 0.5f;
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     public GameObject wireArrow;
 
     [Header("Skill E")]
     public GameObject bombArrow;
     public float fireAngle;
+    //====================================
 
-
-
+    //원거리 캐릭터에서 구현
     public override void Attack()
     {
         if (isAttackCooldown) return;
@@ -39,11 +46,14 @@ public class BowPlayer : PlayerBase
 
         attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f; // 공격 속도 설정 한다.
 
+        //lastAttackTime의 의도동일,제거
         if (attackCount >= 1)
         {
             StartCoroutine(AttackCooldown());
         }
     }
+
+    //삭제
     private IEnumerator AttackCooldown() //발사속도
     {
         isAttackCooldown = true;
@@ -52,6 +62,8 @@ public class BowPlayer : PlayerBase
         isAttackCooldown = false;
     }
 
+
+    //스킬클래스에서 구현
     public override void UseSkillQ()
     {
         if (Time.time - lastQActionTime < qSkillCooldown) return;
@@ -110,4 +122,5 @@ public class BowPlayer : PlayerBase
         }
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
+    //========================================
 }

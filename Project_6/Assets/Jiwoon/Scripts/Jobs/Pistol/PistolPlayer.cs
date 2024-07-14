@@ -11,26 +11,35 @@ public class PistolPlayer : PlayerBase
     private bool isAttackCooldown = false;
     private int attackCount = 0;
     private float cooldownDuration = 3f; //장전속도
+
     public GameObject attackPrefab; //총알
+
+    //공격부분 - 상위클래스로 이동
     private float attackTime;
     private float lastAttackTime;
+    //====================================
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     private Camera mainCamera;
     private bool isRolling;
     private bool fanningReady;
+    public bool fanningReadyQ; //?
     public Transform attackPoint; //발사 위치
 
+    //스킬클래스로 이동
     [Header("Skill E")]
     //Animator animator;
-    Rigidbody2D rigidbody;
     public float rollingX;
-    //public bool isRolling { get; private set; }
-    public bool isInvincible { get; private set; }
     //====================================================
 
-    public bool fanningReadyQ;
+    //밑에 부분은 미정
+    //public bool isRolling { get; private set; }
+    Rigidbody2D rigidbody;
+    public bool isInvincible { get; private set; }
 
+
+    //원거리 캐릭터에서 구현
     public override void Attack()
     {
         if (isAttackCooldown) return;
@@ -46,11 +55,14 @@ public class PistolPlayer : PlayerBase
 
         attackInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 15f;
 
+        //재장전 코루틴 방식 -> Update 변경 구현
         if (attackCount >= 6)
         {
             StartCoroutine(AttackCooldown());
         }
     }
+
+    //변경구현
     public IEnumerator AttackCooldown()
     {
         isAttackCooldown = true;
@@ -59,6 +71,8 @@ public class PistolPlayer : PlayerBase
         isAttackCooldown = false;
     }
 
+
+    //스킬클래스에서 구현
     public override void UseSkillQ()
     {
         if (fanningReady) return;
@@ -108,6 +122,7 @@ public class PistolPlayer : PlayerBase
     {
         if (Time.time - lastEActionTime < eSkillCooldown) return; // E 스킬 쿨타임 체크
 
+
         if (GetComponent<PlayerController_Gun>().isRolling) return;
         GetComponent<PlayerController_Gun>().isRolling = true;
 
@@ -140,4 +155,6 @@ public class PistolPlayer : PlayerBase
         }
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
+
+    //=================================================
 }

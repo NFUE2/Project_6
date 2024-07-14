@@ -4,13 +4,16 @@ using System.Collections;
 
 public class HammerPlayer : PlayerBase
 {
+    //공격부분 - 상위클래스로 이동
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //====================================
 
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     public GameObject shield;
     private GameObject createShield;
@@ -22,8 +25,9 @@ public class HammerPlayer : PlayerBase
     private bool isSkillAttack; // 스킬 공격 여부를 나타내는 플래그
     public float damage;
     public float damageRate;
+    //====================================
 
-
+    //근접 캐릭터 클래스에서 구현
     public override void Attack()
     {
         if (isCharging) return;
@@ -34,6 +38,8 @@ public class HammerPlayer : PlayerBase
         animator.SetTrigger("Attack");
     }
 
+
+    //스킬 클래스에서 구현
     public override void UseSkillQ()
     {
         if (createShield != null) return;
@@ -136,4 +142,5 @@ public class HammerPlayer : PlayerBase
         }
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
+    //=========================================
 }

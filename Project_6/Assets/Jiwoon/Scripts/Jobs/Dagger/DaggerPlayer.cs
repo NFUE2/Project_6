@@ -15,6 +15,7 @@ public class DaggerPlayer : PlayerBase
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Dagger를 위한 애니메이션 컨트롤러
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     public float dashDistance = 5f; // 대쉬 거리
     public float dashSpeed = 10f; // 대쉬 속도
@@ -25,11 +26,15 @@ public class DaggerPlayer : PlayerBase
     public int maxStack = 10; // 최대 스택 수
     public int damagePerStack = 10; // 스택 당 데미지
     public TextMeshPro stackText; // 스택을 표시하는 UI 텍스트 요소
+    //====================================
 
+    //공격부분 - 상위클래스로 이동
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //====================================
 
+    //근접 캐릭터 클래스에서 구현 - 필요하면 새 스크립트 작성
     public override void Attack()
     {
         if (Time.time - lastAttackTime < attackTime) return; // 공격 딜레이 체크
@@ -40,6 +45,8 @@ public class DaggerPlayer : PlayerBase
         // 공격이 적중했다고 가정
         IncreaseStack();
     }
+
+    //스킬클래스에서 구현
     private void IncreaseStack() //E스킬을 쓰기위한 스텍
     {
         currentStack++;
@@ -130,5 +137,6 @@ public class DaggerPlayer : PlayerBase
         }
         eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
     }
+    //================================
 }
 

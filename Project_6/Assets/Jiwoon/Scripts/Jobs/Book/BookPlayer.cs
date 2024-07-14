@@ -5,14 +5,16 @@ using TMPro;
 
 public class BookPlayer_ : PlayerBase
 {
-    public PlayerData PlayerData;
-
+    //PlayerBase에서 구현
+    public PlayerData PlayerData; 
     public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
     public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
 
     [Header("Animation Data")]
-    public Animator animator;
+    public Animator animator; //안쓰는건 지워주우거나 주석처리 부탁드립니다
+    //====================================
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     public float shieldDuration = 5f; // 보호막 지속 시간
     public float shieldRange = 10f; // 보호막 적용 범위
@@ -24,25 +26,38 @@ public class BookPlayer_ : PlayerBase
     public float laserDamage = 10f; // 레이저 데미지
     public LineRenderer laserRenderer; // 레이저를 그릴 LineRenderer
     public LayerMask enemyLayer; // 적 레이어
+    //====================================
 
     [Header("Attack")]
+    //공격부분 - 상위클래스로 이동
     public float attackTime;
     private float lastAttackTime;
+    //====================================
+    
+    //원거리 캐릭터 클래스에서 구현
     public float attackRange = 10f; // 공격 범위
     public GameObject projectilePrefab; // 발사체 프리팹
-    public LayerMask targetLayer; // 타겟 레이어
     public float projectileSpeed; //발사속도
+    public LayerMask targetLayer; // 타겟 레이어
+    //====================================
 
+    //원거리 캐릭터에서 구현을 override해야할듯함
     public override void Attack()
     {
         if (Time.time - lastAttackTime < attackTime) return; // 공격 딜레이 체크
+
+        //마우스 클릭 위치가 아닌 캐릭터의 위치를 기준으로 사거리안의 적을 오토타겟팅되도록 바꿔주세요
+        //기획서에서 설명이 부족했던것 같네요
 
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.nearClipPlane;
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
+        
         // 클릭 위치에서 일정 범위 내 가장 가까운 타겟 찾기
         Transform closestTarget = FindClosestTarget(worldMousePosition, attackRange, targetLayer);
+        
+        //======================================
 
         if (closestTarget != null)
         {
@@ -77,6 +92,8 @@ public class BookPlayer_ : PlayerBase
         return closestTarget;
     }
 
+
+    //투사체 클래스에서 구현
     void LaunchProjectile(Transform target)
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -85,7 +102,10 @@ public class BookPlayer_ : PlayerBase
         // 발사체를 일정 시간 후 자동으로 삭제
         Destroy(projectile, 5f);
     }
+    //==================================
 
+
+    //스킬 클래스에서 구현
     public override void UseSkillQ()
     {
         Transform closestPlayer = FindClosestTarget(transform.position, shieldRange, playerLayer);
@@ -175,4 +195,5 @@ public class BookPlayer_ : PlayerBase
         }
         eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
     }
+    //=============================================
 }

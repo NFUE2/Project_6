@@ -15,21 +15,28 @@ public class SwordPlayer : PlayerBase
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
 
+
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     private bool isGuard;
 
     [Header("Skill E")]
     public GameObject projectile;  //Sword 플레이어가 쏘는 오브젝트다. 향후 에셋 추가
+    //===================================
 
+    //공격부분 - 상위클래스로 이동
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //====================================
+
     //임시 공격 수치
     public float attackRange = 2.0f; // 공격 범위 추가
     public int attackDamage = 10; // 공격 데미지 추가
     public LayerMask enemyLayer; // 적 레이어 추가
-    //=====================================================
 
+
+    //
     public override void Attack()
     {
         if (isGuard) return; // 가드 상태에서는 공격 불가
@@ -56,6 +63,7 @@ public class SwordPlayer : PlayerBase
     }
     
 
+    //스킬클래스에서 구현
     public override void UseSkillQ()
     {
         if (isGuard)
@@ -124,5 +132,6 @@ public class SwordPlayer : PlayerBase
         }
         eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
     }
+    //==========================
 }
 
