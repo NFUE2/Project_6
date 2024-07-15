@@ -104,7 +104,10 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
     }
     private void RotateTowardsMouse()
     {
+        //이러면 OnLook 함수가 무의미합니다
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 월드 좌표에서 마우스 위치 가져오기
+        
+
         mousePosition.z = 0; // 2D 게임이므로 z축 값은 무시
 
         Vector3 direction = (mousePosition - transform.position).normalized; // 플레이어 위치와 마우스 위치 사이의 방향 벡터 계산
@@ -137,7 +140,7 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
     }
     public void OnLook(InputAction.CallbackContext context)
     {
-
+        //여기서 마우스 포지션 받아와주세요
     }   
     public void OnAttack(InputAction.CallbackContext context)
     {

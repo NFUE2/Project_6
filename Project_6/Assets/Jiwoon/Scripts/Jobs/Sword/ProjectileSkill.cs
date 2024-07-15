@@ -4,15 +4,22 @@ public class ProjectileSkill : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public Transform attackPoint;
-    public PlayerData PlayerData;
+
+    public PlayerData PlayerData; //SO변경
+
+    //상위에서처리
     private float lastActionTime;
     private TextMeshProUGUI cooldownText;
+    //============================
 
+    //상위클래스에서 쿨타임처리
     public void SetCooldownText(TextMeshProUGUI text)
     {
         cooldownText = text;
     }
+    //===============================
 
+    //오버라이드
     public void UseSkill()
     {
         if (Time.time - lastActionTime < PlayerData.SkillECooldown) return; // E 스킬 쿨타임 체크
@@ -27,6 +34,7 @@ public class ProjectileSkill : MonoBehaviour
         lastActionTime = Time.time;
     }
 
+    //상위클래스에서 쿨타임 처리
     private void Update()
     {
         if (cooldownText != null)

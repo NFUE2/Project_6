@@ -8,7 +8,7 @@ public abstract class PlayerBase : MonoBehaviour
 
     protected float lastQActionTime;  // Q 스킬 마지막 사용 시간
     protected float lastEActionTime;  // E 스킬 마지막 사용 시간
-    protected float attackTime;  // 공격 시간 간격
+    protected float attackTime;  // 공격 시간 간격 -> PlayerDataSO에서 받아서 사용
     protected float lastAttackTime;  // 마지막 공격 시간
 
     // lastEActionTime에 접근하기 위한 메서드 추가

@@ -5,18 +5,27 @@ using Photon.Pun;
 
 public class FanningSkill : MonoBehaviour
 {
-    public GameObject attackPrefab;
+    //이 부분은 PistolPlayer에서 처리 가능할 것 같습니다
     public Transform attackPoint;
-    public PlayerData PlayerData;
+    public GameObject attackPrefab;
+    public bool IsFanningReady { get; private set; }
+    //===================================
+
+    // 상위클래서에서 처리
+    public PlayerData PlayerData; 
     private float lastActionTime;
     private TextMeshProUGUI cooldownText;
-    public bool IsFanningReady { get; private set; }
+    //====================================
 
+
+    //쿨타임표기는 상위클래스에서 처리
     public void SetCooldownText(TextMeshProUGUI text)
     {
         cooldownText = text;
     }
+    //========================
 
+    //오버라이드
     public void UseSkill()
     {
         if (IsFanningReady) return;
@@ -25,7 +34,8 @@ public class FanningSkill : MonoBehaviour
         IsFanningReady = true;
         StartCoroutine(Fanning());
     }
-
+    
+    //Interface 클래스를 하나 만들어서 상속받아서 따로 작동하도록 해주세요
     private IEnumerator Fanning()
     {
         while (!Input.GetMouseButtonDown(0))
@@ -47,6 +57,7 @@ public class FanningSkill : MonoBehaviour
         lastActionTime = Time.time;
     }
 
+    //상위클래스에서 처리
     private void Update()
     {
         if (cooldownText != null)

@@ -6,15 +6,20 @@ public class GuardSkill : MonoBehaviour
 {
     public bool IsGuard { get; private set; }
     public float GuardDuration = 1.0f; // 가드 지속 시간
+
+    //상위클래스에서 처리
     public PlayerData PlayerData;
     private float lastActionTime;
     private TextMeshProUGUI cooldownText;
+    //====================================
 
+    //쿨타임은 상위클래스에서 처리
     public void SetCooldownText(TextMeshProUGUI text)
     {
         cooldownText = text;
     }
 
+    //오버라이드, 플레이어가 가드중일때 뎀감이 있어야하는데 처리필요
     public void UseSkill()
     {
         if (IsGuard)
@@ -32,6 +37,7 @@ public class GuardSkill : MonoBehaviour
         }
     }
 
+
     private void ExitGuard()
     {
         Debug.Log("가드 종료");
@@ -40,11 +46,14 @@ public class GuardSkill : MonoBehaviour
         lastActionTime = Time.time;
     }
 
+    //인터페이스 클래스로 처리
     private void ExitGuardEvent()
     {
         if (IsGuard) ExitGuard();
     }
 
+
+    //쿨타임 상위클래스에서 처리
     private void Update()
     {
         if (cooldownText != null)
