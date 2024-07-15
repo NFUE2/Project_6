@@ -8,9 +8,8 @@ using TMPro;
 public class SwordPlayer : PlayerBase
 {
     public PlayerData PlayerData;
-
-    public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
 
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
@@ -77,7 +76,7 @@ public class SwordPlayer : PlayerBase
             Debug.Log("Q 스킬 사용");
             isGuard = true;
             //animator.SetBool("Guard", true);
-            Invoke("ExitGuardEvent", 1.0f);
+            Invoke("ExitGuardEvent", 1.0f); //토글스킬임, 가드시간 데이터로 빼야함
         }
     }
 
@@ -96,7 +95,7 @@ public class SwordPlayer : PlayerBase
         while (Time.time - lastQActionTime < PlayerData.SkillQCooldown)
         {
             float remainingTime = PlayerData.SkillQCooldown - (Time.time - lastQActionTime);
-            qCooldownText.text = $"Q스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
+            qCooldownText.text = $"{remainingTime:F1}"; // 쿨타임 텍스트 갱신
             yield return null;
         }
         qCooldownText.text = "Q스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
@@ -127,7 +126,7 @@ public class SwordPlayer : PlayerBase
         while (Time.time - lastEActionTime < PlayerData.SkillECooldown)
         {
             float remainingTime = PlayerData.SkillECooldown - (Time.time - lastEActionTime);
-            eCooldownText.text = $"E스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
+            eCooldownText.text = $"{remainingTime:F1}"; // 쿨타임 텍스트 갱신
             yield return null;
         }
         eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신

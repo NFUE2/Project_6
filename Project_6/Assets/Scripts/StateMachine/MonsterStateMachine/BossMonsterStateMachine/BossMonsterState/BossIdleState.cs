@@ -21,7 +21,8 @@ public class BossIdleState : BossBaseState
 
     private void SetTargetPlayer()
     {
-        var players = BossBattleManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트
+        //var players = BossBattleManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트
+        var players = TestGameManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트
         int randInt = Random.Range(0, players.Count);
         BossBattleManager.Instance.targetPlayer = players[randInt];
     }

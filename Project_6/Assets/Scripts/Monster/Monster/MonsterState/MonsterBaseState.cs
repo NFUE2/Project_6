@@ -17,15 +17,13 @@ public class MonsterBaseState : IState
 
     public virtual void HandleInput() { }
 
-    public virtual void Update() { }
-
     protected void StartAnimation(int animaotrHash)
     {
-        stateMachine.controller.animtor.SetBool(animaotrHash,true);
+        //stateMachine.controller.animtor.SetBool(animaotrHash,true);
     }
 
     protected void StopAnimation(int animaotrHash)
     {
-        stateMachine.controller.animtor.SetBool(animaotrHash, false);
+        //stateMachine.controller.animtor.SetBool(animaotrHash, false);
     }
 }

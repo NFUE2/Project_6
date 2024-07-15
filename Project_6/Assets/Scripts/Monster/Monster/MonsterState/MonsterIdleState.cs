@@ -12,6 +12,7 @@ public class MonsterIdleState : MonsterBaseState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Idle");
         StartAnimation(stateMachine.controller.animationData.idle);
         players = TestGameManager.instance.players;//게임 매니저에서 가져오기
     }

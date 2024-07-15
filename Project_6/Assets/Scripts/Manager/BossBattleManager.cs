@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,12 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public bool isAttacking;
     // 플레이어 정보 받아오기(Array or List로 관리)
 
+    public override void Awake()
+    {
+        if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        base.Awake();
+    }
+
     private void Start()
     {
         GetPlayers();
@@ -33,21 +40,32 @@ public class BossBattleManager : Singleton<BossBattleManager>
             
             if(players != null)
             {
-                if (isAttacking == false)
+                if(boss.currentHp <= 0)
                 {
-                    curCoolDown += Time.deltaTime;
-                }
-                if(isFirst)
-                {
-                    isFirst = false;
-                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    if(bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
+                    {
+                        bossStateMachine.ChangeState(bossStateMachine.DieState);
+                    }
+                    return;
                 }
                 else
                 {
-                    if(curCoolDown >= attackCoolDown && isAttacking == false)
+                    if (isAttacking == false)
                     {
-                        bossStateMachine.ChangeState(bossStateMachine.AttackState);
-                        curCoolDown = 0;
+                        curCoolDown += Time.deltaTime;
+                    }
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                        bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    }
+                    else
+                    {
+                        if (curCoolDown >= attackCoolDown && isAttacking == false)
+                        {
+                            bossStateMachine.ChangeState(bossStateMachine.AttackState);
+                            curCoolDown = 0;
+                        }
                     }
                 }
             }
@@ -56,7 +74,8 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     private void SpawnBossMonster() // 보스 소환
     {
-        spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
+        //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
+        spawnedBoss = PhotonNetwork.Instantiate(bossMonster.name, transform.position, Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)
@@ -79,10 +98,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         // List로 관리합니다. Player 사망 시 List에서 요소 제거해야 하므로
         // Player 스크립트에서 싱글톤 접근하여 Remove 해야합니다.
-        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            players.Add(p);
-        }
+        //foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        //{
+        //    players.Add(p);
+        //}
+        players = TestGameManager.instance.players;
     }
 
     public void ToggleIsAttacking()
@@ -97,6 +117,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
             isAttacking = true;
             Debug.Log($"토글 {isAttacking}");
         }
+    }
+
+    public void DestroyBoss()
+    {
+        Destroy(bossMonster);
     }
 }
     // 보스 소환 및 FSM 생성

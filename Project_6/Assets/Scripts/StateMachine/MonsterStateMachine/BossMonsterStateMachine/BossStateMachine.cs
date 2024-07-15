@@ -32,4 +32,9 @@ public class BossStateMachine : MonoBehaviour
         currentState = state;
         currentState?.Enter();
     }
+
+    public IBossState GetCurrentState()
+    {
+        return currentState;
+    }
 }

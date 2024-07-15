@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class BossDieState : BossBaseState
 {
     public BossDieState(BossStateMachine stateMachine) : base(stateMachine)
@@ -9,6 +11,7 @@ public class BossDieState : BossBaseState
     {
         base.Enter();
         DropReward();
+        BossBattleManager.Instance.DestroyBoss();
     }
 
     public override void Exit() 
@@ -21,6 +24,5 @@ public class BossDieState : BossBaseState
         // 아이템을 드랍할 것인지,
         // 인벤토리로 바로 아이템을 부여할 것인지,
         // 돈은 얼마나 줄 것인지,
-        
     }
 }
