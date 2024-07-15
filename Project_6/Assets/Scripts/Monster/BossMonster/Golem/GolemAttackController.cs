@@ -35,6 +35,9 @@ public class GolemAttackController : BossAttackController, IPunObservable
             case 2:
                 SwingReady();
                 break;
+            case 3:
+                Charge();
+                break;
         }
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
@@ -159,12 +162,16 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         BossBattleManager.Instance.ToggleIsAttacking();
         BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+        bossCollider.enabled = false;
+        chargeCollider.enabled = true;
         beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
     }
 
     private void EndCharge()
     {
         afterChargeHP = BossBattleManager.Instance.boss.currentHp;
+        chargeCollider.enabled = false;
+        bossCollider.enabled = true;
         BossBattleManager.Instance.bossAnimator.SetBool("isCharging", false);
         if(beforeChargeHP - afterChargeHP >= chargeCancleDamage)
         {
