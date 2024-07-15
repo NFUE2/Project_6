@@ -3,10 +3,6 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using TMPro;
 
-using Photon.Pun;
-using UnityEngine;
-using TMPro;
-
 public class PistolPlayer : RangedPlayerBase
 {
     public PlayerData PlayerData;
@@ -28,19 +24,6 @@ public class PistolPlayer : RangedPlayerBase
 
     public override void Attack()
     {
-        if (isAttackCooldown) return;
-        if (fanningSkill.IsFanningReady || rollingSkill.IsRolling) return;
-
-        if (Time.time - lastAttackTime < attackTime) return;
-        lastAttackTime = Time.time;
-
-        attackCount++;
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
-        GameObject attackInstance = PhotonNetwork.Instantiate("Prototype/" + attackPrefab.name, attackPoint.position, Quaternion.identity);
-
-        attackInstance.GetComponent<Projectile>().SetDirection(attackDirection);
-
         // 6번 공격 후 장전
         if (attackCount >= 6)
         {
