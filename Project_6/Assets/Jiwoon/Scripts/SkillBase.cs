@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -29,7 +28,7 @@ public abstract class SkillBase : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         UpdateCooldownText();
     }
