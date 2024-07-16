@@ -38,14 +38,14 @@ public class P_SwordE :MonoBehaviour, P_ISkill
     }
     IEnumerator CoolTime()
     {
-        Text coolTimeText = GetComponent<PlayerController_Melee>().cooltimeEText;
+        //Text coolTimeText = GetComponent<PlayerController_Melee>().cooltimeEText;
         lastAction = Time.time;
 
         while (Time.time - lastAction < actionTime)
         {
-            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            //coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
             yield return null;
         }
-        coolTimeText.text = "준비완료";
+        //coolTimeText.text = "준비완료";
     }
 }
