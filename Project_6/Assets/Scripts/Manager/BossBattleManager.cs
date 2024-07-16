@@ -24,7 +24,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
-        if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
     }
 
