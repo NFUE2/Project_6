@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bede1a87c9c2e44ada1cbf734d1931, type: 3}
+  m_Name: Sniper_Skill_E
+  m_EditorClassIdentifier: 
+  id: 0
+  name: 
+  info: "\uC77C\uC815 \uC2DC\uAC04\uB3D9\uC548 \uC9C0\uC18D\uC801\uC778 \uB370\uBBF8\uC9C0\uB97C
+    \uC785\uD788\uB294 \uD2B9\uC218\uD55C \uCD1D\uD0C4\uC744 \uBC1C\uC0AC\uD558\uB294
+    \uAE30\uC220."
+  coolTime: 0
+  lastActionTime: 0
+  isQuickAction: 0
+  projectile: {fileID: 0}

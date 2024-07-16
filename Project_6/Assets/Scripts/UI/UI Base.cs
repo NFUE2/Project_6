@@ -25,3 +25,4 @@ public class UIBase : MonoBehaviour
 
     public virtual void Opened(params object[] param) { }
 }
+// 货肺款 牡滚胶 积己

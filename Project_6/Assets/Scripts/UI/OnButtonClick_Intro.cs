@@ -21,13 +21,18 @@ public class OnButtonClick_Intro : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //하이라이트
-        Debug.Log("Enter");
+
+
+        ColorBlock colorBlock = button.colors;
+
+        colorBlock.highlightedColor = new Color(0f, 1f, 0f, 1f);
+        colorBlock.pressedColor = new Color(0f, 0.5f, 0f, 1f);
+
+        button.colors = colorBlock;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //원래
-        Debug.Log("Exit");
+
     }
 }

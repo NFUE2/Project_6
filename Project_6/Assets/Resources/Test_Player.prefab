@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  healthBarImage: {fileID: 0}
 --- !u!114 &6422326495414205650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerData: {fileID: 0}
+  qCooldownText: {fileID: 0}
+  eCooldownText: {fileID: 0}
   animator: {fileID: 0}
   projectile: {fileID: 0}
   attackTime: 3

@@ -33,7 +33,7 @@ public class TestLobbyRoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         roomName.text = roomInfo.Name;
         //StringBuilder player = new StringBuilder($"{roomInfo.PlayerCount} / {roomInfo.MaxPlayers}");
-        currentPlayer.text = $"{roomInfo.PlayerCount} / {roomInfo.MaxPlayers}";
+        currentPlayer.text = $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}";
     }
 
     public void OnClick()
