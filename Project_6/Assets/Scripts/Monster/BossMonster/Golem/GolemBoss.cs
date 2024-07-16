@@ -12,6 +12,6 @@ public class GolemBoss : BossMonster
         defensePower = golemData.deffenceDamage;
         moveSpeed = golemData.moveSpeed;
         // 임시 데이터
-        hpBar.fillAmount = GetFillAmountHP();
+        //hpBar.fillAmount = GetFillAmountHP();
     }
 }

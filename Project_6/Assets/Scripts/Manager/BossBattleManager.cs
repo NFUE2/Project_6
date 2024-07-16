@@ -39,18 +39,20 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         if(spawnedBoss != null && bossStateMachine != null)
         {
-            if(targetPlayer != null)
-            {
-                distanceToTarget = CalcDistance();
-            }
-            else if(targetPlayer == null)
-            {
-                distanceToTarget = -1;
-            }
+            
             
             if(players != null)
             {
-                if(boss.currentHp <= 0)
+                if (targetPlayer != null)
+                {
+                    distanceToTarget = CalcDistance();
+                }
+                else if (targetPlayer == null)
+                {
+                    distanceToTarget = -1;
+                }
+
+                if (boss.currentHp <= 0)
                 {
                     if(bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
                     {
@@ -89,8 +91,8 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     private void SpawnBossMonster() // 보스 소환
     {
-        //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
-        spawnedBoss = PhotonNetwork.Instantiate(bossMonster.name, transform.position, Quaternion.identity);
+        spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
+        //spawnedBoss = PhotonNetwork.Instantiate(bossMonster.name, transform.position, Quaternion.identity);(복원)
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)
@@ -113,11 +115,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         // List로 관리합니다. Player 사망 시 List에서 요소 제거해야 하므로
         // Player 스크립트에서 싱글톤 접근하여 Remove 해야합니다.
-        //foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
-        //{
-        //    players.Add(p);
-        //}
-        players = TestGameManager.instance.players;
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            players.Add(p);
+        }
+
+
+        //players = TestGameManager.instance.players;(복원)
     }
 
     public void ToggleIsAttacking()

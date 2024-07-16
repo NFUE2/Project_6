@@ -65,7 +65,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Stomp()
     {
-        SoundManager.Instance.Shot(stompAudioClip);
+        //SoundManager.Instance.Shot(stompAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isStompReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isStomp", true);
     }
@@ -95,7 +95,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Swing()
     {
-        SoundManager.Instance.Shot(swingAudioClip);
+        //SoundManager.Instance.Shot(swingAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwing", true);
     }
@@ -132,7 +132,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Razor()
     {
-        SoundManager.Instance.Shot(razorAudioClip);
+        //SoundManager.Instance.Shot(razorAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isRazorReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isRazor", true);
     }
@@ -210,7 +210,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void ChargePunch()
     {
-        SoundManager.Instance.Shot(swingAudioClip);
+        //SoundManager.Instance.Shot(swingAudioClip);
         foreach (GameObject P in BossBattleManager.Instance.players)
         {
             PlayerCondition condition = P.GetComponent<PlayerCondition>();
