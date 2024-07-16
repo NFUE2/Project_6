@@ -711,6 +711,7 @@ MonoBehaviour:
   attackController: {fileID: 0}
   players: []
   targetPlayer: {fileID: 0}
+  distanceToTarget: 0
   bossAnimator: {fileID: 0}
   bossStateMachine: {fileID: 0}
   isAttacking: 0

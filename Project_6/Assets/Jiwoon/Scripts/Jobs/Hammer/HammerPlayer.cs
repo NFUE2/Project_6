@@ -4,13 +4,16 @@ using System.Collections;
 
 public class HammerPlayer : PlayerBase
 {
+    //공격부분 - 상위클래스로 이동
     [Header("Attack")]
     public float attackTime;
     private float lastAttackTime;
+    //====================================
 
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     public GameObject shield;
     private GameObject createShield;
@@ -22,8 +25,9 @@ public class HammerPlayer : PlayerBase
     private bool isSkillAttack; // 스킬 공격 여부를 나타내는 플래그
     public float damage;
     public float damageRate;
+    //====================================
 
-
+    //근접 캐릭터 클래스에서 구현
     public override void Attack()
     {
         if (isCharging) return;
@@ -34,10 +38,12 @@ public class HammerPlayer : PlayerBase
         animator.SetTrigger("Attack");
     }
 
+
+    //스킬 클래스에서 구현
     public override void UseSkillQ()
     {
         if (createShield != null) return;
-        if (Time.time - lastQActionTime < qSkillCooldown) return;
+        //if (Time.time - lastQActionTime < qSkillCooldown) return;
         //createShield = Instantiate(shield, transform.position, Quaternion.identity);
         createShield = PhotonNetwork.Instantiate("Prototype/" + shield.name, transform.position, Quaternion.identity);
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
@@ -60,7 +66,7 @@ public class HammerPlayer : PlayerBase
     {
         lastQActionTime = Time.time;
 
-        while (Time.time - lastQActionTime < qSkillCooldown)
+        //while (Time.time - lastQActionTime < qSkillCooldown)
         {
             Debug.Log($"Q스킬 남은 시간 : {lastQActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;
@@ -71,7 +77,7 @@ public class HammerPlayer : PlayerBase
     public override void UseSkillE()
     {
         if (isCharging) return;
-        if (Time.time - lastEActionTime < eSkillCooldown) return;
+        //if (Time.time - lastEActionTime < eSkillCooldown) return;
 
         animator.SetBool("Charging", isCharging = true);
         StartCoroutine(Charging());
@@ -129,11 +135,12 @@ public class HammerPlayer : PlayerBase
     {
         lastEActionTime = Time.time;
 
-        while (Time.time - lastEActionTime < eSkillCooldown)
+        //while (Time.time - lastEActionTime < eSkillCooldown)
         {
             Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;
         }
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
+    //=========================================
 }

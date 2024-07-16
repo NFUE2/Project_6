@@ -10,25 +10,49 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public GameObject swingHitBoxRight;
     public GameObject razorHitBox;
 
+    public AudioClip swingAudioClip;
+    public AudioClip stompAudioClip;
+    public AudioClip razorAudioClip;
+
+    public BoxCollider2D bossCollider;
+    public BoxCollider2D chargeCollider;
+
+    private float beforeChargeHP;
+    private float afterChargeHP;
+    private float chargeCancleDamage = 50;
+
     private int additionalAttack;
 
     public override void SelectAttack()
     {
         base.SelectAttack();
         countOfAttack = 3;
-        int index = Random.Range(0, countOfAttack);
-        switch (index)
+        float distanceToTarget = BossBattleManager.Instance.distanceToTarget;
+        Debug.Log(distanceToTarget);
+        if(distanceToTarget > 7)
         {
-            case 0:
-                RazorReady();
-                break;
-            case 1:
-                StompReady();
-                break;
-            case 2:
-                SwingReady();
-                break;
+            RazorReady();
         }
+        else if(distanceToTarget <= 7)
+        {
+            int index = Random.Range(0, countOfAttack - 1);
+            switch (index)
+            {
+                case 0:
+                    StompReady();
+                    break;
+                case 1:
+                    SwingReady();
+                    break;
+                case 2:
+                    SwingReady();
+                    break;
+                case 3:
+                    Charge();
+                    break;
+            }
+        }
+        
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 
@@ -41,6 +65,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Stomp()
     {
+        //SoundManager.Instance.Shot(stompAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isStompReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isStomp", true);
     }
@@ -70,6 +95,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Swing()
     {
+        //SoundManager.Instance.Shot(swingAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwing", true);
     }
@@ -106,6 +132,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Razor()
     {
+        //SoundManager.Instance.Shot(razorAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isRazorReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isRazor", true);
     }
@@ -146,6 +173,55 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         BossBattleManager.Instance.bossAnimator.SetBool("isRazor", false);
         ExitAttack();
+    }
+
+    // Â÷Áö
+    public void Charge()
+    {
+        BossBattleManager.Instance.ToggleIsAttacking();
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+        bossCollider.enabled = false;
+        chargeCollider.enabled = true;
+        beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
+    }
+
+    private void EndCharge()
+    {
+        afterChargeHP = BossBattleManager.Instance.boss.currentHp;
+        chargeCollider.enabled = false;
+        bossCollider.enabled = true;
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", false);
+        if(beforeChargeHP - afterChargeHP >= chargeCancleDamage)
+        {
+            BossBattleManager.Instance.bossAnimator.SetBool("isFaint", true);
+        }
+        else
+        {
+            BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", true);
+        }
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+    }
+
+    private void FaintEnd()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isFaint", false);
+        ExitAttack() ;
+    }
+
+    private void ChargePunch()
+    {
+        //SoundManager.Instance.Shot(swingAudioClip);
+        foreach (GameObject P in BossBattleManager.Instance.players)
+        {
+            PlayerCondition condition = P.GetComponent<PlayerCondition>();
+            condition.TakeDamage(BossBattleManager.Instance.boss.attackPower);
+        }
+    }
+
+    private void EndChargePunch()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", false);
+        ExitAttack() ;
     }
 
     private void ExitAttack()
