@@ -37,22 +37,22 @@ public class P_SwordQ : MonoBehaviour, P_ISkill
         Debug.Log("스킬종료");
         animator.SetBool("Guard", isGuard = false);
         //isGuard = false;
-        StartCoroutine(CoolTime());
+        //StartCoroutine(CoolTime());
     }
 
-    IEnumerator CoolTime()
-    {
-        lastAction = Time.time;
-        Text coolTimeText = GetComponent<PlayerController_Melee>().cooltimeQText;
+    //IEnumerator CoolTime()
+    //{
+    //    lastAction = Time.time;
+    //    Text coolTimeText = GetComponent<PlayerController_Melee>().cooltimeQText;
 
-        while(Time.time  - lastAction < actionTime)
-        {
-            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
-            yield return null;
-        }
+    //    while(Time.time  - lastAction < actionTime)
+    //    {
+    //        coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+    //        yield return null;
+    //    }
 
-        coolTimeText.text = "준비완료";
-    }
+    //    coolTimeText.text = "준비완료";
+    //}
 
     private void ExitGuardEvent()
     {

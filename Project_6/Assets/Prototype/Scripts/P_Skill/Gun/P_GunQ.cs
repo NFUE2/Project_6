@@ -26,7 +26,7 @@ public class P_GunQ : MonoBehaviour, P_ISkill
         if (fanningReady) return;
         if (Time.time - lastAction < actionTime) return;
 
-        fanningReady = GetComponent<PlayerController_Gun>().fanningReady =true;
+        //fanningReady = GetComponent<PlayerController_Gun>().fanningReady =true;
         StartCoroutine(Fanning());
     }
 
@@ -50,23 +50,23 @@ public class P_GunQ : MonoBehaviour, P_ISkill
 
             yield return new WaitForSeconds(0.1f);
         }
-        fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
+        //fanningReady = GetComponent<PlayerController_Gun>().fanningReady = false;
 
-        StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
+        //StartCoroutine(GetComponent<PlayerController_Gun>().AttackCooldown());
         StartCoroutine(CoolTime());
     }
 
     IEnumerator CoolTime()
     {
         lastAction = Time.time;
-        Text coolTimeText = GetComponent<PlayerController_Gun>().cooltimeQText;
+        //Text coolTimeText = GetComponent<PlayerController_Gun>().cooltimeQText;
 
         while (Time.time - lastAction < actionTime)
         {
-            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            //coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
             yield return null;
         }
 
-        coolTimeText.text = "준비완료";
+        //coolTimeText.text = "준비완료";
     }
 }

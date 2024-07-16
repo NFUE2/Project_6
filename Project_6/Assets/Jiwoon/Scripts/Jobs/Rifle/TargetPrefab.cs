@@ -23,12 +23,12 @@ public class TargetMarker : MonoBehaviour
     {
         if (targetEnemy != null)
         {
-            player.TargetMarkerClicked(targetEnemy);
+            //player.TargetMarkerClicked(targetEnemy);
             Debug.Log($"타겟 마커 클릭: {targetEnemy.name}");
         }
         else
         {
-            player.TargetMarkerMissed();
+            //player.TargetMarkerMissed();
             Debug.Log("타겟 마커 놓침 (적이 null)");
         }
         Destroy(gameObject);

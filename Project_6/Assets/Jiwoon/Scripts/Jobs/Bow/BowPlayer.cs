@@ -66,7 +66,7 @@ public class BowPlayer : PlayerBase
     //스킬클래스에서 구현
     public override void UseSkillQ()
     {
-        if (Time.time - lastQActionTime < qSkillCooldown) return;
+        //if (Time.time - lastQActionTime < qSkillCooldown) return;
 
         //GameObject go = Instantiate(wireArrow,/*hand.GetChild(0).*/transform.position,Quaternion.identity);
         GameObject go = PhotonNetwork.Instantiate("Prototype/" + name,/*hand.GetChild(0)*/transform.position, Quaternion.identity);
@@ -83,7 +83,7 @@ public class BowPlayer : PlayerBase
     {
         lastEActionTime = Time.time;
 
-        while (Time.time - lastQActionTime < qSkillCooldown)
+        //while (Time.time - lastQActionTime < qSkillCooldown)
         {
             Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;
@@ -93,7 +93,7 @@ public class BowPlayer : PlayerBase
 
     public override void UseSkillE()
     {
-        if (Time.time - lastEActionTime < eSkillCooldown) return;
+        //if (Time.time - lastEActionTime < eSkillCooldown) return;
 
         //float startAngle = hand.localEulerAngles.z - fireAngle;
 
@@ -115,7 +115,7 @@ public class BowPlayer : PlayerBase
     {
         lastEActionTime = Time.time;
 
-        while (Time.time - lastEActionTime < eSkillCooldown)
+        //while (Time.time - lastEActionTime < eSkillCooldown)
         {
             Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;
