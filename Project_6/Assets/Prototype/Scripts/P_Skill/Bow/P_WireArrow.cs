@@ -39,7 +39,7 @@ public class P_WireArrow : MonoBehaviour
         }
         else
         {
-            //player.GetComponent<PlayerController_Bow>().isWiring = true;
+            player.GetComponent<PlayerController_Bow>().isWiring = true;
             player.position = Vector2.Lerp(player.position, transform.position + transform.right, Time.deltaTime * wireSpeed);
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
@@ -48,7 +48,7 @@ public class P_WireArrow : MonoBehaviour
                 //Destroy(gameObject);
                 //DestroyObject();
                 pv.RPC("DestroyObject", RpcTarget.All);
-                //player.GetComponent<PlayerController_Bow>().isWiring = false;
+                player.GetComponent<PlayerController_Bow>().isWiring = false;
 
             }
         }

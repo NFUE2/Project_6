@@ -88,14 +88,14 @@ public class P_HammerE : MonoBehaviour, P_ISkill
     IEnumerator CoolTime()
     {
         lastAction = Time.time;
-        //Text coolTimeText = GetComponent<PlayerController_Hammer>().cooltimeEText;
+        Text coolTimeText = GetComponent<PlayerController_Hammer>().cooltimeEText;
 
         while (Time.time - lastAction < actionTime)
         {
-            //coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
             yield return null;
         }
 
-        //coolTimeText.text = "준비완료";
+        coolTimeText.text = "준비완료";
     }
 }

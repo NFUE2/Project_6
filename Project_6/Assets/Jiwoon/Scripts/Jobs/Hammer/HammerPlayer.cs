@@ -43,7 +43,7 @@ public class HammerPlayer : PlayerBase
     public override void UseSkillQ()
     {
         if (createShield != null) return;
-        //if (Time.time - lastQActionTime < qSkillCooldown) return;
+        if (Time.time - lastQActionTime < qSkillCooldown) return;
         //createShield = Instantiate(shield, transform.position, Quaternion.identity);
         createShield = PhotonNetwork.Instantiate("Prototype/" + shield.name, transform.position, Quaternion.identity);
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
@@ -66,7 +66,7 @@ public class HammerPlayer : PlayerBase
     {
         lastQActionTime = Time.time;
 
-        //while (Time.time - lastQActionTime < qSkillCooldown)
+        while (Time.time - lastQActionTime < qSkillCooldown)
         {
             Debug.Log($"Q스킬 남은 시간 : {lastQActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;
@@ -77,7 +77,7 @@ public class HammerPlayer : PlayerBase
     public override void UseSkillE()
     {
         if (isCharging) return;
-        //if (Time.time - lastEActionTime < eSkillCooldown) return;
+        if (Time.time - lastEActionTime < eSkillCooldown) return;
 
         animator.SetBool("Charging", isCharging = true);
         StartCoroutine(Charging());
@@ -135,7 +135,7 @@ public class HammerPlayer : PlayerBase
     {
         lastEActionTime = Time.time;
 
-        //while (Time.time - lastEActionTime < eSkillCooldown)
+        while (Time.time - lastEActionTime < eSkillCooldown)
         {
             Debug.Log($"E스킬 남은 시간 : {lastEActionTime}"); // 쿨타임 텍스트 갱신
             yield return null;

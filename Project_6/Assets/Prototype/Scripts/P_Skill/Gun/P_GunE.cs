@@ -28,9 +28,9 @@ public class P_GunE : MonoBehaviour, P_ISkill
 
         //animator.SetTrigger("SkillE");
         //if (isRolling) return;
-        //if (GetComponent<PlayerController_Gun>().isRolling) return;
+        if (GetComponent<PlayerController_Gun>().isRolling) return;
         //isRolling = true;
-        //GetComponent<PlayerController_Gun>().isRolling = true;
+        GetComponent<PlayerController_Gun>().isRolling = true;
 
         isInvincible = true;  // 구르기 시작 시 무적 상태로 설정
 
@@ -45,7 +45,7 @@ public class P_GunE : MonoBehaviour, P_ISkill
 
     public void ExitRolling()
     {
-        //GetComponent<PlayerController_Gun>().isRolling = false;
+        GetComponent<PlayerController_Gun>().isRolling = false;
 
         isInvincible = false;  // 구르기 종료 시 무적 상태 해제
 
@@ -57,14 +57,14 @@ public class P_GunE : MonoBehaviour, P_ISkill
     IEnumerator CoolTime()
     {
         lastAction = Time.time;
-        //Text coolTimeText = //GetComponent<PlayerController_Gun>().cooltimeEText;
+        Text coolTimeText = GetComponent<PlayerController_Gun>().cooltimeEText;
 
         while (Time.time - lastAction < actionTime)
         {
-            //coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
+            coolTimeText.text = (actionTime - (Time.time - lastAction)).ToString("F1");
             yield return null;
         }
 
-        //coolTimeText.text = "준비완료";
+        coolTimeText.text = "준비완료";
     }
 }
