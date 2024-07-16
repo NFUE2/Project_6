@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using Photon.Pun;
 
 public class FanningSkill : SkillBase
@@ -8,6 +7,9 @@ public class FanningSkill : SkillBase
     public GameObject attackPrefab;
     public bool IsFanningReady { get; private set; }
     public PlayerData PlayerData;
+
+    private int shotsFired;
+    private bool isFanningActive;
 
     void Start()
     {
@@ -19,27 +21,31 @@ public class FanningSkill : SkillBase
         if (IsFanningReady || Time.time - lastActionTime < cooldownDuration) return;
 
         IsFanningReady = true;
-        StartCoroutine(Fanning());
+        isFanningActive = true;
+        shotsFired = 0;
     }
 
-    private IEnumerator Fanning()
+    void Update()
     {
-        while (!Input.GetMouseButtonDown(0))
-            yield return null;
+        base.Update(); // SkillBase 클래스의 Update 호출
 
-        for (int i = 0; i < 6; i++)
+        if (isFanningActive && Input.GetMouseButtonDown(0))
         {
-            float fireAngle = Random.Range(-3f, 3f);
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+            for (int i = 0; i < 6; i++)
+            {
+                float fireAngle = Random.Range(-3f, 3f);
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
-            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
-            go.transform.localEulerAngles = new Vector3(0, 0, angle + fireAngle);
+                GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
+                go.transform.localEulerAngles = new Vector3(0, 0, angle + fireAngle);
 
-            yield return new WaitForSeconds(0.1f);
+                shotsFired++;
+            }
+
+            isFanningActive = false;
+            IsFanningReady = false;
+            lastActionTime = Time.time;
         }
-
-        IsFanningReady = false;
-        lastActionTime = Time.time;
     }
 }
