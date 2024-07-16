@@ -23,22 +23,32 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         base.SelectAttack();
         countOfAttack = 3;
-        int index = Random.Range(0, countOfAttack);
-        switch (index)
+        float distanceToTarget = BossBattleManager.Instance.distanceToTarget;
+        Debug.Log(distanceToTarget);
+        if(distanceToTarget > 7)
         {
-            case 0:
-                RazorReady();
-                break;
-            case 1:
-                StompReady();
-                break;
-            case 2:
-                SwingReady();
-                break;
-            case 3:
-                Charge();
-                break;
+            RazorReady();
         }
+        else if(distanceToTarget <= 7)
+        {
+            int index = Random.Range(0, countOfAttack - 1);
+            switch (index)
+            {
+                case 0:
+                    StompReady();
+                    break;
+                case 1:
+                    SwingReady();
+                    break;
+                case 2:
+                    SwingReady();
+                    break;
+                case 3:
+                    Charge();
+                    break;
+            }
+        }
+        
         //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 

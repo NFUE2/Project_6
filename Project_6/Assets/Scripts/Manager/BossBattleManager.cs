@@ -11,6 +11,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public BossAttackController attackController;
     public List<GameObject> players;
     public GameObject targetPlayer;
+    public float distanceToTarget;
     public Animator bossAnimator;
     public BossStateMachine bossStateMachine;
 
@@ -37,6 +38,14 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         if(spawnedBoss != null && bossStateMachine != null)
         {
+            if(targetPlayer != null)
+            {
+                distanceToTarget = CalcDistance();
+            }
+            else if(targetPlayer == null)
+            {
+                distanceToTarget = -1;
+            }
             
             if(players != null)
             {
@@ -70,6 +79,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 }
             }
         }
+    }
+
+    public float CalcDistance()
+    {
+        return Vector3.Distance(targetPlayer.transform.position, spawnedBoss.transform.position);
     }
 
     private void SpawnBossMonster() // 보스 소환

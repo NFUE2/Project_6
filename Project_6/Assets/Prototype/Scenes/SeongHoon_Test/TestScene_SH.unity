@@ -711,6 +711,7 @@ MonoBehaviour:
   attackController: {fileID: 0}
   players: []
   targetPlayer: {fileID: 0}
+  distanceToTarget: 0
   bossAnimator: {fileID: 0}
   bossStateMachine: {fileID: 0}
   isAttacking: 0
@@ -1848,63 +1849,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &3572460435963317064
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3258122565700127898, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6937834297774713849, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
-      propertyPath: m_Name
-      value: Golem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1916,4 +1860,3 @@ SceneRoots:
   - {fileID: 949477997}
   - {fileID: 1998553201}
   - {fileID: 1764518719}
-  - {fileID: 3572460435963317064}
