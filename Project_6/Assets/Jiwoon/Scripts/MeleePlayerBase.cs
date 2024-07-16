@@ -6,27 +6,42 @@ public abstract class MeleePlayerBase : PlayerBase
 {
     public int attackDamage = 10;
     public LayerMask enemyLayer;
+    public float attackCooldown = 1.0f;  // 공격 쿨타임 설정
     protected bool isAttacking = false;
+
+    private Animator animator;
+    private BoxCollider2D attackCollider;
+
+    protected override void Awake() // 최상위 클래스에서 호출되도록 설정
+    {
+        base.Awake();
+        animator = GetComponent<Animator>();
+        attackCollider = GetComponentInChildren<BoxCollider2D>(); // 하위 오브젝트에서 공격판정을 할 콜라이더를 가져온다.
+    }
 
     public override void Attack()
     {
-        if (isAttacking) return;  //공격중 판정이 아닌 마지막 공격기준으로 공격쿨타임이 돌았을때 공격할수있게 해주세요
+        if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
-        GetComponent<Animator>().SetTrigger("Attack"); //animator 컴포넌트를 최상위 클래스에서 설정
+        animator.SetTrigger("Attack");
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
-    // 아래방식이면 공격범위가 아니라 플레이어에 닿은 적들이 데미지를 입을것같습니다
-    // GetComponent방식을 수정해주세요, 최적화에 문제생깁니다
     public void EnableAttackCollider()
     {
-        GetComponent<BoxCollider2D>().enabled = true;
+        attackCollider.enabled = true;
     }
 
     public void DisableAttackCollider()
     {
-        GetComponent<BoxCollider2D>().enabled = false;
-        isAttacking = false;
+        attackCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
