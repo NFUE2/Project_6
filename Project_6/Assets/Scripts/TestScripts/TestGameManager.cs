@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestGameManager : Singleton<TestGameManager>
 {
+
     public TestCameraController cam { get; private set; }
     public GameObject player;
     public List<GameObject> players = new List<GameObject>();
