@@ -17,6 +17,7 @@ public class TargetSkill : MonoBehaviour
         remainingChances = qSkillMaxTargets;
     }
 
+    //오버라이드
     public void UseSkill()
     {
         if (remainingChances <= 0) return;
@@ -76,7 +77,7 @@ public class TargetSkill : MonoBehaviour
         {
             if (marker != null)
             {
-                Destroy(marker);
+                Destroy(marker); //비활성화 상태로 변경
                 Debug.Log("마커 제거");
             }
         }

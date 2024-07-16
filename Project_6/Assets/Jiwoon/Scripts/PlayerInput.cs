@@ -23,6 +23,9 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
     public float groundCheckRadius = 0.1f;
     public LayerMask groundLayer;
 
+    [Header("Mouse_Data")]
+    protected Vector2 lookInput; // 마우스 위치 저장 변수
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -104,21 +107,15 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
     }
     private void RotateTowardsMouse()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 월드 좌표에서 마우스 위치 가져오기
-        mousePosition.z = 0; // 2D 게임이므로 z축 값은 무시
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(lookInput);
+        mousePosition.z = 0;
 
-        Vector3 direction = (mousePosition - transform.position).normalized; // 플레이어 위치와 마우스 위치 사이의 방향 벡터 계산
+        Vector3 direction = (mousePosition - transform.position).normalized;
 
-        //수정사항 - 삼항연산자로 수정
-        if (direction.x >= 0.01f) // 방향 벡터에 따라 플레이어 회전
-        {
-            transform.localScale = new Vector3(-1, 1, 1);  // 오른쪽을 바라보도록 설정
-        }
-        else if (direction.x <= -0.01f)
-        {
-            transform.localScale = new Vector3(1, 1, 1); // 왼쪽을 바라보도록 설정
-        }
+        transform.localScale = direction.x >= 0.01f ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
     }
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -137,8 +134,13 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
     }
     public void OnLook(InputAction.CallbackContext context)
     {
+        lookInput = context.ReadValue<Vector2>(); // 마우스 위치 입력 받기
+    }
+    public Vector2 GetMousePosition()
+    {
+        return lookInput;
+    }
 
-    }   
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)

@@ -6,25 +6,42 @@ public abstract class MeleePlayerBase : PlayerBase
 {
     public int attackDamage = 10;
     public LayerMask enemyLayer;
+    public float attackCooldown = 1.0f;  // 공격 쿨타임 설정
     protected bool isAttacking = false;
+
+    private Animator animator;
+    private BoxCollider2D attackCollider;
+
+    protected override void Awake() // 최상위 클래스에서 호출되도록 설정
+    {
+        base.Awake();
+        animator = GetComponent<Animator>();
+        attackCollider = GetComponentInChildren<BoxCollider2D>(); // 하위 오브젝트에서 공격판정을 할 콜라이더를 가져온다.
+    }
 
     public override void Attack()
     {
-        if (isAttacking) return;
+        if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
-        GetComponent<Animator>().SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
     public void EnableAttackCollider()
     {
-        GetComponent<BoxCollider2D>().enabled = true;
+        attackCollider.enabled = true;
     }
 
     public void DisableAttackCollider()
     {
-        GetComponent<BoxCollider2D>().enabled = false;
-        isAttacking = false;
+        attackCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
