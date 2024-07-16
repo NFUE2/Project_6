@@ -12,9 +12,8 @@ public abstract class MeleePlayerBase : PlayerBase
     private Animator animator;
     private BoxCollider2D attackCollider;
 
-    protected override void Awake() // 최상위 클래스에서 호출되도록 설정
+    protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
-        base.Awake();
         animator = GetComponent<Animator>();
         attackCollider = GetComponentInChildren<BoxCollider2D>(); // 하위 오브젝트에서 공격판정을 할 콜라이더를 가져온다.
     }
