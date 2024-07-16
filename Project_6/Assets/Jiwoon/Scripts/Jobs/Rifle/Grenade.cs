@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
+    //데이터는 SO가처리
     public float damage;
     public float radius;
     public float dotDuration;
+    //=====================================
 
     private void Start()
     {
@@ -22,7 +24,7 @@ public class Grenade : MonoBehaviour
 
     private void Explode()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, radius, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, radius, LayerMask.GetMask("Enemy")); //layermask는 public으로 받아와주세요
 
         foreach (var enemy in hitEnemies)
         {

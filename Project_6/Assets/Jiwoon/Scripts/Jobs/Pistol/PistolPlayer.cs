@@ -1,41 +1,50 @@
 using Photon.Pun;
-using UnityEngine.InputSystem;
 using UnityEngine;
 using TMPro;
 
 public class PistolPlayer : RangedPlayerBase
 {
-    public PlayerData PlayerData;
-    public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    protected bool isAttackCooldown = false;
+    protected int attackCount = 0;
+    protected float cooldownDuration = 0.5f;
 
     [Header("Skill Q")]
-    [SerializeField] private FanningSkill fanningSkill; // FanningSkill 인스턴스
+    [SerializeField] private FanningSkill fanningSkill;
 
     [Header("Skill E")]
-    [SerializeField] private RollingSkill rollingSkill; // RollingSkill 인스턴스
+    [SerializeField] private RollingSkill rollingSkill;
 
     private void Start()
     {
-        mainCamera = Camera.main;
         fanningSkill.SetCooldownText(qCooldownText);
         rollingSkill.SetCooldownText(eCooldownText);
     }
 
     public override void Attack()
     {
-        // 6번 공격 후 장전
-        if (attackCount >= 6)
+        if (!isAttackCooldown)
         {
-            isAttackCooldown = true;
-            attackCount = 0;
-            lastAttackTime = Time.time;
+            attackCount++;
+            if (attackCount >= 6)
+            {
+                isAttackCooldown = true;
+                attackCount = 0;
+                lastAttackTime = Time.time;
+            }
         }
     }
 
     private void Update()
     {
         UpdateCooldown();
+    }
+
+    private void UpdateCooldown()
+    {
+        if (isAttackCooldown && Time.time - lastAttackTime >= cooldownDuration)
+        {
+            isAttackCooldown = false;
+        }
     }
 
     public override void UseSkillQ()
@@ -48,3 +57,4 @@ public class PistolPlayer : RangedPlayerBase
         rollingSkill.UseSkill();
     }
 }
+

@@ -3,12 +3,20 @@ using TMPro;
 
 public class RollingSkill : MonoBehaviour
 {
-    public float rollingX;
-    public PlayerData PlayerData;
+    //상위에서처리
+    public PlayerData PlayerData; //SkillDataSO 있습니다
     private float lastActionTime;
     private TextMeshProUGUI cooldownText;
+    //======================================
+
+    public float rollingX;
+
+    //무적처리 필요, TakeDamage에서의 처리 필요
     public bool IsRolling { get; private set; }
     public bool isInvincible { get; private set; }
+    //=================================================
+
+
     private Rigidbody2D rigidbody;
 
     private void Start()
@@ -16,11 +24,13 @@ public class RollingSkill : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    //쿨타임표기는 상위클래스에서 처리
     public void SetCooldownText(TextMeshProUGUI text)
     {
         cooldownText = text;
     }
 
+    //오버라이드
     public void UseSkill()
     {
         if (IsRolling) return;
@@ -45,6 +55,7 @@ public class RollingSkill : MonoBehaviour
         lastActionTime = Time.time;
     }
 
+    //상위클래스에서 처리
     private void Update()
     {
         if (cooldownText != null)

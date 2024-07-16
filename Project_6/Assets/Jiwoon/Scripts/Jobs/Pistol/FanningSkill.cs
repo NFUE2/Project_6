@@ -1,26 +1,22 @@
 using UnityEngine;
 using System.Collections;
-using TMPro;
 using Photon.Pun;
 
-public class FanningSkill : MonoBehaviour
+public class FanningSkill : SkillBase
 {
-    public GameObject attackPrefab;
     public Transform attackPoint;
-    public PlayerData PlayerData;
-    private float lastActionTime;
-    private TextMeshProUGUI cooldownText;
+    public GameObject attackPrefab;
     public bool IsFanningReady { get; private set; }
+    public PlayerData PlayerData;
 
-    public void SetCooldownText(TextMeshProUGUI text)
+    void Start()
     {
-        cooldownText = text;
+        cooldownDuration = PlayerData.SkillQCooldown;
     }
 
-    public void UseSkill()
+    public override void UseSkill()
     {
-        if (IsFanningReady) return;
-        if (Time.time - lastActionTime < PlayerData.SkillQCooldown) return;
+        if (IsFanningReady || Time.time - lastActionTime < cooldownDuration) return;
 
         IsFanningReady = true;
         StartCoroutine(Fanning());
@@ -45,21 +41,5 @@ public class FanningSkill : MonoBehaviour
 
         IsFanningReady = false;
         lastActionTime = Time.time;
-    }
-
-    private void Update()
-    {
-        if (cooldownText != null)
-        {
-            if (Time.time - lastActionTime >= PlayerData.SkillQCooldown)
-            {
-                cooldownText.text = "Q스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
-            }
-            else
-            {
-                float remainingTime = PlayerData.SkillQCooldown - (Time.time - lastActionTime);
-                cooldownText.text = $"{remainingTime:F1}"; // 쿨타임 텍스트 갱신
-            }
-        }
     }
 }
