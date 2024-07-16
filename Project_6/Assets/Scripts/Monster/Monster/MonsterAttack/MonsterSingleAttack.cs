@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class MonsterSingleAttack : MonsterAttack
 {
-    public MonsterSingleAttack(MonsterStateMachine stateMachine) : base(stateMachine) { }
+    //public MonsterSingleAttack(MonsterStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Attack()
     {
-        Vector2 myPos = stateMachine.controller.transform.position;
-        int direction = stateMachine.controller.transform.localScale.x == 1 ? 1 : -1;
-        LayerMask target = stateMachine.controller.targetLayer;
-        float attackDistance = stateMachine.controller.data.attackDistance;
-        RaycastHit2D ray = Physics2D.Raycast(myPos, Vector2.right * direction * attackDistance, 5.0f, target);
+        //Debug.Log("АјАн");
 
-        if (ray.transform.TryGetComponent(out IDamagable player))
-            player.TakeDamage(stateMachine.controller.data.attackDamage);
+        Vector2 myPos = transform.position;
+        int direction = transform.localScale.x == 1 ? 1 : -1;
+        //LayerMask target = controller.targetLayer;
+        float attackDistance = data.attackDistance;
+        RaycastHit2D ray = Physics2D.Raycast(myPos, Vector2.right * direction, attackDistance, target);
+        Collider2D col = ray.collider;
+
+        //Debug.Log(Vector2.right * direction * attackDistance);
+
+        if (col != null && col.TryGetComponent(out IDamagable player))
+        {
+            player.TakeDamage(data.attackDamage);
+        }
     }
 }

@@ -19,12 +19,16 @@ public class MonsterBaseState : IState
 
     protected void StartAnimation(int animaotrHash)
     {
-        //stateMachine.controller.animtor.SetBool(animaotrHash,true);
+        stateMachine.controller.animator.SetBool(animaotrHash, true);
+    }
+    protected void StartTriggerAnimation(int animaotrHash)
+    {
+        stateMachine.controller.animator.SetTrigger(animaotrHash);
     }
 
     protected void StopAnimation(int animaotrHash)
     {
-        //stateMachine.controller.animtor.SetBool(animaotrHash, false);
+        stateMachine.controller.animator.SetBool(animaotrHash, false);
     }
 
     public float TargetDistance()

@@ -3,23 +3,26 @@ using System.Diagnostics;
 using UnityEngine;
 public class MonsterAttackState : MonsterBaseState
 {
-    MonsterAttack attack;
-    float lastAttackTime = float.MaxValue;
+    //MonsterAttack attack;
+    float lastAttackTime = -float.MaxValue;
+    public bool isAttacking = false;
 
     public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
-        switch (stateMachine.controller.type)
-        {
-            case MonsterAttackType.Single:
-                attack = new MonsterSingleAttack(stateMachine);
-                break;
-            case MonsterAttackType.Multi:
-                attack = new MonsterMultiAttack(stateMachine);
-                break;
-            case MonsterAttackType.Long:
-                attack = new MonsterLongAttack(stateMachine);
-                break;
-        }
+        //stateMachine.controller.GetComponent<MonsterAttack>().Initailize(this);
+        //switch (stateMachine.controller.type)
+        //{
+        //    case MonsterAttackType.Single:
+        //        attack = new MonsterSingleAttack(stateMachine);
+        //        break;
+        //    case MonsterAttackType.Multi:
+        //        attack = new MonsterMultiAttack(stateMachine);
+        //        break;
+        //    case MonsterAttackType.Long:
+        //        attack = new MonsterLongAttack(stateMachine);
+        //        break;
+        //}
+        //attack = stateMachine.controller.GetComponent<MonsterAttack>();
     }
 
     public override void Enter()
@@ -30,36 +33,50 @@ public class MonsterAttackState : MonsterBaseState
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.controller.animationData.attack);
+        //StopAnimation(stateMachine.controller.animationData.attack);
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
 
-        if (TargetDistance() > stateMachine.controller.data.attackDistance)
+        if (!isAttacking && TargetDistance() > stateMachine.controller.data.attackDistance)
         {
             stateMachine.ChangeState(stateMachine.trackState);
         }
 
-        if (lastAttackTime >= stateMachine.controller.data.attackTime)
+        if (Time.time - lastAttackTime >= stateMachine.controller.data.attackTime)
         {
-            lastAttackTime = 0f;
-            StartAnimation(stateMachine.controller.animationData.attack);
+            lastAttackTime = Time.time;
+            StartTriggerAnimation(stateMachine.controller.animationData.attack);
+            isAttacking = true;
+            //StopAnimation(stateMachine.controller.animationData.attack);
             //attack.Attack();
         }
-        else
-            lastAttackTime += Time.deltaTime;
+
+        if(isAttacking) GetNomalizeTime();
+        //else
+        //    lastAttackTime += Time.deltaTime;
         //멀어지면 다시 추적
+        /*isAttacking = */
     }
 
-    public void Attack() //애니메이션 이벤트용
+    private void GetNomalizeTime()
     {
-        attack.Attack();
+        Animator animator = stateMachine.controller.animator;
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
 
-        //Has Exit Time을 사용하면 애니메이션이 끝나고나서 넘어갈수있으니 괜찮을듯
-        StopAnimation(stateMachine.controller.animationData.attack);
+        if (info.normalizedTime >= 1.0f) isAttacking = false;
     }
+
+
+    //public void Attack() //애니메이션 이벤트용
+    //{
+    //    //attack.Attack();
+
+    //    //Has Exit Time을 사용하면 애니메이션이 끝나고나서 넘어갈수있으니 괜찮을듯
+    //    StopAnimation(stateMachine.controller.animationData.attack);
+    //}
 
     //클래스 분리
     //public void Attack()

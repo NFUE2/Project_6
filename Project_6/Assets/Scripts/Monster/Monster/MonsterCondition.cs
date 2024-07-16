@@ -1,34 +1,43 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class MonsterCondition : MonoBehaviour,IDamagable
 {
     MonsterController controller;
 
-    public event Action OnAlive;
+    //public event Action OnAlive;
+    public event Action OnDie;
+    public event Action OnSpawn;
 
-    float maxHP,curHP;
+    float curHP;
 
     private void Awake()
     {
         controller = GetComponent<MonsterController>();
-        curHP = maxHP = controller.data.maxHP;
+        OnSpawn += SetHP;
+    }
 
-        //OnDie += Die;
+    private void OnEnable()
+    {
+        OnSpawn?.Invoke();
     }
 
     public void TakeDamage(float damage)
     {
-        curHP = Mathf.Clamp(curHP - damage, 0, maxHP);
+        curHP = Mathf.Clamp(curHP - damage, 0, controller.data.maxHP);
 
-        //if(curHP == 0)
-            //OnDie?.Invoke();
+        if (curHP == 0)
+        {
+            Debug.Log("»ç¸Á");
+            OnDie?.Invoke();
+        }
     }
 
-    //void Die()
-    //{
-    //    enabled = false;
-    //}
+    private void SetHP()
+    {
+        curHP = controller.data.maxHP;
+    }
 }

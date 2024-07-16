@@ -22,10 +22,6 @@ public abstract class StateMachine
 
     public void HandleInput(bool input)
     {
-
-
-
-
         currentState?.HandleInput();
     }
 }
