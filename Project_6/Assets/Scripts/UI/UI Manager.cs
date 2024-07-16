@@ -30,6 +30,4 @@ public class UIManager : Singleton<UIManager>
 
         return (T)ui;
     }
-
-
 }
