@@ -6,7 +6,7 @@ public class MonsterAttackState : MonsterBaseState
     MonsterAttack attack;
     float lastAttackTime = float.MaxValue;
 
-    public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine) 
+    public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
         switch (stateMachine.controller.type)
         {
@@ -24,9 +24,7 @@ public class MonsterAttackState : MonsterBaseState
 
     public override void Enter()
     {
-        UnityEngine.Debug.Log("공격");
         base.Enter();
-        StartAnimation(stateMachine.controller.animationData.attack);
     }
 
     public override void Exit()
@@ -39,12 +37,28 @@ public class MonsterAttackState : MonsterBaseState
     {
         base.HandleInput();
 
-        if(Time.time - lastAttackTime < stateMachine.controller.data.attackTime)
+        if (TargetDistance() > stateMachine.controller.data.attackDistance)
         {
-            lastAttackTime = Time.time;
-            attack.Attack();
+            stateMachine.ChangeState(stateMachine.trackState);
         }
+
+        if (lastAttackTime >= stateMachine.controller.data.attackTime)
+        {
+            lastAttackTime = 0f;
+            StartAnimation(stateMachine.controller.animationData.attack);
+            //attack.Attack();
+        }
+        else
+            lastAttackTime += Time.deltaTime;
         //멀어지면 다시 추적
+    }
+
+    public void Attack() //애니메이션 이벤트용
+    {
+        attack.Attack();
+
+        //Has Exit Time을 사용하면 애니메이션이 끝나고나서 넘어갈수있으니 괜찮을듯
+        StopAnimation(stateMachine.controller.animationData.attack);
     }
 
     //클래스 분리

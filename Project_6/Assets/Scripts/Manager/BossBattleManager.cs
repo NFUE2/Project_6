@@ -14,6 +14,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public float distanceToTarget;
     public Animator bossAnimator;
     public BossStateMachine bossStateMachine;
+    public GameObject[] bossEndObject;
 
     private float attackCoolDown = 3f;
     private float curCoolDown = 0f;
@@ -135,7 +136,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public void DestroyBoss()
     {
-        Destroy(bossMonster);
+        Debug.Log(1);
+        //Destroy(bossMonster);
+        spawnedBoss.SetActive(false);
+        foreach(GameObject g in bossEndObject)
+            g.SetActive(!g.activeInHierarchy);
+
+        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
     }
 }
     // 보스 소환 및 FSM 생성

@@ -18,13 +18,9 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
     private void Start()
     {
         curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
-        Debug.Log(curPlayersCount);
     }
 
-    private void Update()
-    {
-        Debug.Log(playerCount);
-    }
+  
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

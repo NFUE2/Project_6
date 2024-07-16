@@ -96,6 +96,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     
     private void EnableSwingHitBox()
     {
+        Debug.Log(BossBattleManager.Instance.targetPlayer);
         if(transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
         {
             swingHitBoxLeft.SetActive(true);

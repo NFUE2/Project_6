@@ -12,7 +12,6 @@ public class MonsterIdleState : MonsterBaseState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Idle");
         StartAnimation(stateMachine.controller.animationData.idle);
         players = TestGameManager.instance.players;//게임 매니저에서 가져오기
     }
@@ -32,9 +31,7 @@ public class MonsterIdleState : MonsterBaseState
     {
         foreach(GameObject p in players)
         {
-            Vector3 myPos = stateMachine.controller.transform.position;
-
-            float distance = Vector2.Distance(p.transform.position,myPos);
+            float distance = Vector2.Distance(p.transform.position, stateMachine.controller.transform.position);
 
             if (distance < stateMachine.controller.data.searchDistance)
             {
@@ -43,4 +40,6 @@ public class MonsterIdleState : MonsterBaseState
             }
         }
     }
+
+
 }

@@ -26,4 +26,20 @@ public class MonsterBaseState : IState
     {
         //stateMachine.controller.animtor.SetBool(animaotrHash, false);
     }
+
+    public float TargetDistance()
+    {
+        Vector2 targetPos = stateMachine.controller.target.position;
+        Vector2 myPos = stateMachine.controller.transform.position;
+
+        return Vector2.Distance(targetPos, myPos);
+    }
+
+    public Vector2 TargetDirection()
+    {
+        Vector2 targetPos = stateMachine.controller.target.position;
+        Vector2 myPos = stateMachine.controller.transform.position;
+
+        return (targetPos - myPos).normalized;
+    }
 }

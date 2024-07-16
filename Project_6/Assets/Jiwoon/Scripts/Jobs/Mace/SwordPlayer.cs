@@ -2,11 +2,13 @@ using Photon.Pun;
 using UnityEngine;
 using System.Collections;
 
+//클래스 이름이랑 파일이름이 다름, 변경필요
 public class MacePlayer : PlayerBase
 {
     [Header("Animation Data")]
     public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
 
+    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
     private bool isGuard;
     private float lastQActionTime;
@@ -26,17 +28,23 @@ public class MacePlayer : PlayerBase
     public float reducedDamage = 0.5f; // 돌진 중 받는 피해 감소 비율
     public LayerMask bossLayer; // 보스 레이어
     private bool bossHit; // 보스 히트 여부
+    //====================================
 
     [Header("Attack")]
+    //공격부분 - 상위클래스로 이동
     public float attackTime;
     private float lastAttackTime;
+    //====================================
+
     private bool enhancedAttack;
 
+    //PlayerDataSO에서 가져오기
     public float health = 100f; // 기본 체력 값
     public float defense = 10f; // 기본 방어력 값
+    //=========================================
 
-    //=====================================================
 
+    //근접 캐릭터 클래스에서 구현
     public override void Attack()
     {
         if (isGuard) return; // 가드 상태에서는 공격 불가
@@ -59,6 +67,7 @@ public class MacePlayer : PlayerBase
         // 데미지 처리 로직 추가 필요
     }
 
+    //스킬클래스에서 구현
     public override void UseSkillQ()
     {
         if (Time.time - lastQActionTime < qSkillCooldown) return; // 쿨타임 체크
@@ -167,4 +176,6 @@ public class MacePlayer : PlayerBase
         yield return new WaitForSeconds(eSkillCooldown);
         Debug.Log($"E스킬 쿨타임 완료"); // 쿨타임 완료 텍스트 갱신
     }
+
+    //==================================================
 }
