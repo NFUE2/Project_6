@@ -3,7 +3,7 @@ using TMPro;
 
 public class RollingSkill : SkillBase
 {
-    public PlayerData PlayerData;
+    public PlayerDataSO PlayerData;
     public float rollingX;
 
     public bool IsRolling { get; private set; }
