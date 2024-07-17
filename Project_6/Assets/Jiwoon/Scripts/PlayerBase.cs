@@ -12,7 +12,7 @@ public abstract class PlayerBase : MonoBehaviour
     public abstract void UseSkillE();
 
     [Header("Animation Data")]
-    public Animator animator; // 향후 애니메이션 에셋 추가 => Sword를 위한 애니메이션 컨트롤러
+    public Animator animator; // 향후 애니메이션 에셋 추가 =>
 
     [Header("Skills")]
     protected float lastQActionTime;  // Q 스킬 마지막 사용 시간
