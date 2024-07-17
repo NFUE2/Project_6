@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LightBandit
+  m_Controller: {fileID: 9100000, guid: 8f7147993bc87574d88a146a51f64dc0, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: f7180347ef4b3934ea644ec66923ca3b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f50ea1e86c917ee4a886801ca2d6f4c2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8f7cb9df632569f4b9f3c62fcd9e3cbb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e38cb418ab88f9346b0ebccb770105ee, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 185d0f6b401cf2744ae40107f4e201b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5ebd92ec0147c7d4dac5630b51456c5f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ca85708f934a8ec4c99d8bc6df78d65b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c2755e67fa2a27c4784f3f25fb5572ef, type: 2}

@@ -16,15 +16,18 @@ public class MonsterController : MonoBehaviour
     [Header("EnemyData")]
     public EnemyDataSO data;
     public Animator animator { get; private set; }
+    [field : SerializeField] public Rigidbody2D rigidbody { get; private set; }
+    public Vector2 offsetPos { get; private set; }
 
     public MonsterCondition condition;
+    public bool isRight;
+
     //[Header("AttackType")]
     //public MonsterAttackType type;
 
     //[Header("Target")]
     //public LayerMask targetLayer;
 
-    //Rigidbody2D rigidbody;
     MonsterStateMachine stateMachine;
 
     [field : Header("Animation")]
@@ -41,6 +44,7 @@ public class MonsterController : MonoBehaviour
         animationData.Initialize();
         animator = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
+        offsetPos = GetComponent<Collider2D>().offset;
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
     }
@@ -54,11 +58,11 @@ public class MonsterController : MonoBehaviour
     {
         //공격범위
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, data.attackDistance);
+        Gizmos.DrawWireSphere((Vector3)offsetPos + transform.position, data.attackDistance);
 
         //탐색범위
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position,data.searchDistance);
+        Gizmos.DrawWireSphere((Vector3)offsetPos + transform.position, data.searchDistance);
     }
 
     public void Disable()

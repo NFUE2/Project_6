@@ -31,7 +31,7 @@ public class MonsterIdleState : MonsterBaseState
     {
         foreach(GameObject p in players)
         {
-            float distance = Vector2.Distance(p.transform.position, stateMachine.controller.transform.position);
+            float distance = Vector2.Distance(p.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
 
             if (distance < stateMachine.controller.data.searchDistance)
             {

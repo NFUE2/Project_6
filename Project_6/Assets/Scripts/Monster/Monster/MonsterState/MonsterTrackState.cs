@@ -6,17 +6,22 @@ using UnityEngine;
 public class MonsterTrackState : MonsterBaseState
 {
     public MonsterTrackState(MonsterStateMachine stateMachine) : base(stateMachine) { }
+    Rigidbody2D rigidbody;
 
-    //Rigidbody2D rigidbody;
     public override void Enter()
     {
+        base.Enter();
         //rigidbody = stateMachine.controller.rigidbody;
         StartAnimation(stateMachine.controller.animationData.move);
+        rigidbody = stateMachine.controller.rigidbody;
     }
 
     public override void Exit()
     {
+        base.Exit();
         StopAnimation(stateMachine.controller.animationData.move);
+        //stateMachine.controller.
+        rigidbody.velocity = Vector2.zero;
     }
 
     public override void HandleInput()
@@ -41,13 +46,15 @@ public class MonsterTrackState : MonsterBaseState
             stateMachine.ChangeState(stateMachine.attackState);
         }
 
-        stateMachine.controller.transform.localScale = TargetDirection().x < 0 ? new Vector3(-1,1,1) : Vector3.one;
+        stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
+        stateMachine.controller.transform.localScale = stateMachine.controller.isRight ? Vector3.one : new Vector3(-1,1,1);
     }
 
     void Move()
     {
         //rigidbody2D 사용으로 수정
         float speed = stateMachine.controller.data.moveSpeed;
-        stateMachine.controller.transform.Translate(TargetDirection() * speed * Time.deltaTime);
+        //stateMachine.controller.transform.Translate(TargetDirection() * speed * Time.deltaTime); //수정 필요
+        rigidbody.velocity = new Vector2(TargetDirection().x * speed,rigidbody.velocity.y);
     }
 }

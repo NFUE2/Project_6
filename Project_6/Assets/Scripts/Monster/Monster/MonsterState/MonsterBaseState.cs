@@ -36,7 +36,7 @@ public class MonsterBaseState : IState
         Vector2 targetPos = stateMachine.controller.target.position;
         Vector2 myPos = stateMachine.controller.transform.position;
 
-        return Vector2.Distance(targetPos, myPos);
+        return Vector2.Distance(targetPos, myPos + stateMachine.controller.offsetPos);
     }
 
     public Vector2 TargetDirection()
@@ -44,6 +44,6 @@ public class MonsterBaseState : IState
         Vector2 targetPos = stateMachine.controller.target.position;
         Vector2 myPos = stateMachine.controller.transform.position;
 
-        return (targetPos - myPos).normalized;
+        return (targetPos - (myPos + stateMachine.controller.offsetPos)).normalized;
     }
 }

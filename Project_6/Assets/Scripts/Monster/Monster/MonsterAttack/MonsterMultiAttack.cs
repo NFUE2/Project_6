@@ -9,7 +9,7 @@ public class MonsterMultiAttack : MonsterAttack
     public override void Attack()
     {
         Vector2 myPos = transform.position;
-        int direction = transform.localScale.x == 1 ? 1 : -1;
+        int direction = controller.isRight ? 1 : -1;
         //LayerMask target = controller.targetLayer;
         float attackDistance = data.attackDistance; //공격거리 필요
 

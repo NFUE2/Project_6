@@ -26,6 +26,7 @@ public class MonsterStateMachine : StateMachine
 
     private void Spawn()
     {
+        Debug.Log(1);
         ChangeState(idleState);
     }
 
