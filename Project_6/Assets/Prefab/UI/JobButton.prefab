@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 2700530224519053287}
   - component: {fileID: 7537846822140468308}
   - component: {fileID: 6875707535821911566}
+  - component: {fileID: 6812202766294616682}
   m_Layer: 5
   m_Name: JobButton
   m_TagString: Untagged
@@ -361,6 +362,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2703750959777792835, guid: f4d8702243185e341ba69177c357eeb0, type: 3}
   spawnPoint: {fileID: 0}
+  character: {fileID: 0}
+  Skill_Q: {fileID: 0}
+  Skill_E: {fileID: 0}
+  Board_02: {fileID: 0}
 --- !u!114 &7537846822140468308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +403,19 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!114 &6812202766294616682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673765445563923153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b4c65ab4779524d8cd8265015b0429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonIsOn: 0
 --- !u!1 &8914681118936699192
 GameObject:
   m_ObjectHideFlags: 0
