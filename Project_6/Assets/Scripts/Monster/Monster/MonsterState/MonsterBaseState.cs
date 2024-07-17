@@ -46,4 +46,11 @@ public class MonsterBaseState : IState
 
         return (targetPos - (myPos + stateMachine.controller.offsetPos)).normalized;
     }
+
+    public void Aim()
+    {
+        stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
+        Debug.Log(stateMachine.controller.data.isRight ^ TargetDirection().x > 0);
+        stateMachine.controller.transform.localScale = stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
+    }
 }

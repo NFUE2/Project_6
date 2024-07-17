@@ -21,6 +21,6 @@ MonoBehaviour:
   attackDamage: 0
   deffenceDamage: 5
   isRight: 1
-  searchDistance: 15
-  attackDistance: 15
-  projectile: {fileID: 0}
+  searchDistance: 10
+  attackDistance: 10
+  projectile: {fileID: 987083297778883385, guid: ad84f80338e2a554aa6a2ffef93778cc, type: 3}

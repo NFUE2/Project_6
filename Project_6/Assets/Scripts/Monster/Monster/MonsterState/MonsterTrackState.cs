@@ -19,15 +19,15 @@ public class MonsterTrackState : MonsterBaseState
     public override void Exit()
     {
         base.Exit();
+        rigidbody.velocity = Vector2.zero;
         StopAnimation(stateMachine.controller.animationData.move);
         //stateMachine.controller.
-        rigidbody.velocity = Vector2.zero;
     }
 
     public override void HandleInput()
     {
         PlayerTracking();
-        Move();
+        //Move();
     }
 
     void PlayerTracking()
@@ -45,9 +45,11 @@ public class MonsterTrackState : MonsterBaseState
         {
             stateMachine.ChangeState(stateMachine.attackState);
         }
-
-        stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
-        stateMachine.controller.transform.localScale = stateMachine.controller.isRight ? Vector3.one : new Vector3(-1,1,1);
+        else
+        {
+            Move();
+            Aim();
+        }
     }
 
     void Move()
@@ -55,6 +57,8 @@ public class MonsterTrackState : MonsterBaseState
         //rigidbody2D 사용으로 수정
         float speed = stateMachine.controller.data.moveSpeed;
         //stateMachine.controller.transform.Translate(TargetDirection() * speed * Time.deltaTime); //수정 필요
-        rigidbody.velocity = new Vector2(TargetDirection().x * speed,rigidbody.velocity.y);
+        int direction = TargetDirection().x < 0 ? -1 : 1;
+
+        rigidbody.velocity = new Vector2(direction * speed,rigidbody.velocity.y);
     }
 }

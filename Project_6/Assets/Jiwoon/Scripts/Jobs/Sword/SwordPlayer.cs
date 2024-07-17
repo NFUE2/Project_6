@@ -18,8 +18,8 @@ public class SwordPlayer : MeleePlayerBase
     //상위클래스에서 처리
     private void Start()
     {
-        guardSkill.SetCooldownText(qCooldownText);
-        projectileSkill.SetCooldownText(eCooldownText);
+        //guardSkill.SetCooldownText(qCooldownText);
+        //projectileSkill.SetCooldownText(eCooldownText);
     }
     //=============================
 
