@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 1953760483231768193}
   - component: {fileID: 3560452050691304073}
   - component: {fileID: 6565476647792214605}
-  - component: {fileID: 3996703772090781922}
   - component: {fileID: 1068129008181538641}
   - component: {fileID: 8371396709665741523}
   - component: {fileID: 2974454856601766256}
@@ -84,15 +83,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ce0c165253e9e4aa624d9251dbeb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 3996703772090781922}
+  playerData: {fileID: 0}
+  qCooldownText: {fileID: 0}
+  eCooldownText: {fileID: 0}
+  animator: {fileID: 0}
   attackPrefab: {fileID: 0}
   attackPoint: {fileID: 1953760483231768193}
-  targetPrefab: {fileID: 0}
-  qSkillMaxTargets: 3
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  rifleGrenade: {fileID: 0}
+  attackCooldown: 0
+  PlayerData: {fileID: 0}
+  targetSkill: {fileID: 0}
+  grenadeSkill: {fileID: 0}
 --- !u!114 &6565476647792214605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,30 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 3996703772090781922}
+  playerdata: {fileID: 0}
   player: {fileID: 0}
   groundCheck: {fileID: 1803577801457033440}
   groundCheckRadius: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
---- !u!114 &3996703772090781922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7719208638712657327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a39427920d2f9b44b6734ef1be37bd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 5
-  jumpForce: 5
-  SkillQCooldown: 3
-  SkillECooldown: 3
 --- !u!114 &1068129008181538641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +301,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

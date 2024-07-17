@@ -28,7 +28,7 @@ public abstract class SkillBase : MonoBehaviour
         }
     }
 
-    protected void Update()
+    private void Update()
     {
         UpdateCooldownText();
     }

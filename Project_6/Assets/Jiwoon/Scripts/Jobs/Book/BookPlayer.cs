@@ -6,7 +6,7 @@ using TMPro;
 public class BookPlayer_ : PlayerBase
 {
     //PlayerBase에서 구현
-    public PlayerData PlayerData; 
+    public PlayerDataSO PlayerData; 
     public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
     public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
 

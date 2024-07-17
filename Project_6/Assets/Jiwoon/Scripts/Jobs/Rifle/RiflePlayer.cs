@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RiflePlayer : RangedPlayerBase
 {
-    public PlayerData PlayerData; //최상위 에서 처리
+    public PlayerDataSO PlayerData; //최상위 에서 처리
 
 
     //해당 클래스의 상위 클래스를 받아와주세요

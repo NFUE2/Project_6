@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour  //각 플레이어의 겹치는 역할들을 통합하
 
     [Header("Player_Data & Source")]
     protected Rigidbody2D rb;
-    public PlayerData playerdata;
+    public PlayerDataSO playerdata;
     public PlayerBase player;
 
     [Header("ground_Data")]
