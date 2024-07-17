@@ -714,6 +714,7 @@ MonoBehaviour:
   distanceToTarget: 0
   bossAnimator: {fileID: 0}
   bossStateMachine: {fileID: 0}
+  bossEndObject: []
   isAttacking: 0
 --- !u!1 &1600552978
 GameObject:
