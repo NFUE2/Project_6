@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterAttack : MonoBehaviour
@@ -32,7 +33,16 @@ public abstract class MonsterAttack : MonoBehaviour
     //}
 
     public abstract void Attack();
+    public int Direction()
+    {
+        Vector2 dir = controller.target.position - transform.position;
+        return dir.x > 0 ? 1 : -1;
+    }
 
+    public Vector2 Direction(Vector2 target)
+    {
+        return (target - (Vector2)transform.position).normalized;
+    }
     //public void ExitAttack()
     //{
     //    //Debug.Log("공격 종료");

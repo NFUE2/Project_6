@@ -11,18 +11,16 @@ public class MonsterSingleAttack : MonsterAttack
         //Debug.Log("АјАн");
 
         Vector2 myPos = transform.position;
-        int direction = controller.isRight ? 1 : -1;
+        //int direction = TargetisRight() ? 1 : -1;
         //LayerMask target = controller.targetLayer;
 
         float attackDistance = data.attackDistance;
-        RaycastHit2D ray = Physics2D.Raycast(myPos, Vector2.right * direction, attackDistance, target);
+        RaycastHit2D ray = Physics2D.Raycast(myPos, Vector2.right * Direction(), attackDistance, target);
         Collider2D col = ray.collider;
 
         //Debug.Log(Vector2.right * direction * attackDistance);
 
         if (col != null && col.TryGetComponent(out IDamagable player))
-        {
             player.TakeDamage(data.attackDamage);
-        }
     }
 }

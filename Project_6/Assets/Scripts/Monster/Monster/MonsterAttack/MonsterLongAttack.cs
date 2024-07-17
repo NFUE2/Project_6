@@ -9,9 +9,7 @@ public class MonsterLongAttack : MonsterAttack
 
     public override void Attack()
     {
-        Vector2 myPos = transform.position;
-        Vector2 targetPos = controller.target.position;
-        Vector2 direction = (targetPos - myPos).normalized;
+        Vector2 direction = Direction(controller.target.position);
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //string projectileName = data.projectile.name; //투사체 이름

@@ -22385,6 +22385,14 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5039338846900449197, guid: f4d8702243185e341ba69177c357eeb0, type: 3}
+      propertyPath: playerdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
+    - target: {fileID: 6422326495414205650, guid: f4d8702243185e341ba69177c357eeb0, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
     - target: {fileID: 6893682881590893061, guid: f4d8702243185e341ba69177c357eeb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.13
@@ -27349,7 +27357,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3684046074620292259, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.19
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3684046074620292259, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
       propertyPath: m_LocalPosition.y
