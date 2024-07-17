@@ -5,7 +5,7 @@ public class ProjectileSkill : SkillBase
 {
     public GameObject projectilePrefab;
     public Transform attackPoint;
-    public PlayerData PlayerData;
+    public PlayerDataSO PlayerData;
 
     void Start()
     {

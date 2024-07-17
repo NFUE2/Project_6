@@ -9,7 +9,6 @@ public abstract class MeleePlayerBase : PlayerBase
     public float attackCooldown = 1.0f;  // 공격 쿨타임 설정
     protected bool isAttacking = false;
 
-    private Animator animator;
     private BoxCollider2D attackCollider;
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
