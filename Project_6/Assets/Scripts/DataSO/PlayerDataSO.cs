@@ -10,4 +10,6 @@ public class PlayerDataSO : CharacterDataSO
     public float SkillECooldown;
     public float walkSpeed;
     public float runSpeed;
+    public float playerdefense;
+
 }
