@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5239344786957623370}
   - component: {fileID: 4542121630658864728}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: -5816396751919689800}
   - component: {fileID: -2347612498054488899}
   - component: {fileID: 7388303663960336584}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HeavyBandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

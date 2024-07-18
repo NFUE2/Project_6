@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 2856650200978534355}
   - component: {fileID: -4594335967710953956}
   - component: {fileID: -8971079119003916917}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LightBandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339136405699963841}
   - component: {fileID: 3005803615882833933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

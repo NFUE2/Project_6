@@ -15,6 +15,7 @@ public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.transform.position = destination.position;
-        
+        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
+        Debug.Log(1);
     }
 }

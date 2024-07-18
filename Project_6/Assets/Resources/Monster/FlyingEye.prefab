@@ -166,7 +166,7 @@ MonoBehaviour:
   target:
     serializedVersion: 2
     m_Bits: 64
-  clip: {fileID: 0}
+  attackClip: {fileID: 0}
   fire: {fileID: 3326795029358712948}
 --- !u!61 &2708453040609797417
 BoxCollider2D:

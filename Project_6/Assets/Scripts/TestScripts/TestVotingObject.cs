@@ -17,7 +17,7 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
     private void Start()
     {
-        curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        //curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
   
