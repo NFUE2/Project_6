@@ -9,12 +9,16 @@ public class MonsterLongAttack : MonsterAttack
 
     public override void Attack()
     {
-        Vector2 direction = Direction(controller.target.position);
+        base.Attack();
+
+        Vector2 direction = Direction(fire.position,controller.target.position);
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Debug.Log(angle);
         //string projectileName = data.projectile.name; //투사체 이름
         //GameObject proejectile = PhotonNetwork.Instantiate($"Projectile/{projectileName}", fire.position, Quaternion.identity); //복사할 투사체
         GameObject proejectile = Instantiate(data.projectile, fire.position, Quaternion.identity); //복사할 투사체
-        proejectile.transform.localEulerAngles = new Vector3(0, 0, -angle); //투사체 각도
+        //GameObject proejectile = PhotonNetwork.Instantiate("Projectile/ + "data.projectile.name, fire.position, Quaternion.identity); //복사할 투사체
+        proejectile.transform.localEulerAngles = new Vector3(0, 0, angle); //투사체 각도
     }
 }

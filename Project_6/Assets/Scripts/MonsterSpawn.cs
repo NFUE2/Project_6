@@ -10,7 +10,7 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Start()
     {
-        //monster = PhotonNetwork.Instantiate(monsterPrefab.name,transform.position,Quaternion.identity);
+        //monster = PhotonNetwork.Instantiate("Monster/" + monsterPrefab.name, transform.position, Quaternion.identity);
         monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
         monsterCondition = monster.GetComponent<MonsterCondition>();
         monsterCondition.OnDie += ReSpawnCoolTime;

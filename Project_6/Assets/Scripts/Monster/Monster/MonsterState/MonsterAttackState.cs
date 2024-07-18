@@ -25,16 +25,16 @@ public class MonsterAttackState : MonsterBaseState
         //attack = stateMachine.controller.GetComponent<MonsterAttack>();
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
+    //public override void Enter()
+    //{
+    //    base.Enter();
+    //}
 
-    public override void Exit()
-    {
-        base.Exit();
-        //StopAnimation(stateMachine.controller.animationData.attack);
-    }
+    //public override void Exit()
+    //{
+    //    base.Exit();
+    //    //StopAnimation(stateMachine.controller.animationData.attack);
+    //}
 
     public override void HandleInput()
     {

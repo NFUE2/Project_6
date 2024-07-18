@@ -17,8 +17,9 @@ public class MonsterController : MonoBehaviour
     public EnemyDataSO data;
     public Animator animator { get; private set; }
     [field : SerializeField] public Rigidbody2D rigidbody { get; private set; }
-    public Vector2 offsetPos { get; private set; }
+    public Collider2D col;
 
+    public Vector2 offsetPos;
     public MonsterCondition condition;
     public bool isRight;
 
@@ -44,7 +45,12 @@ public class MonsterController : MonoBehaviour
         animationData.Initialize();
         animator = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
-        offsetPos = GetComponent<Collider2D>().offset;
+        col = GetComponent<Collider2D>();
+        offsetPos = col.offset;
+
+        condition.OnDie += ColliderToggle;
+        condition.OnSpawn += ColliderToggle;
+
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
     }
@@ -56,17 +62,26 @@ public class MonsterController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        float dir = transform.localScale.x == 1 ? offsetPos.x : -offsetPos.x;
+
+        Vector2 newOffset = new Vector2(dir,offsetPos.y);
+
         //공격범위
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere((Vector3)offsetPos + transform.position, data.attackDistance);
+        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), data.attackDistance);
 
         //탐색범위
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere((Vector3)offsetPos + transform.position, data.searchDistance);
+        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), data.searchDistance);
     }
 
     public void Disable()
     {
         gameObject.SetActive(false);
+    }
+
+    private void ColliderToggle()
+    {
+        col.enabled = !col.enabled;
     }
 }

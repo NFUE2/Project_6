@@ -9,9 +9,8 @@ public abstract class MonsterAttack : MonoBehaviour
     //MonsterAttackState state;
     //protected float attackTime;
     //protected float damage;
-
     public LayerMask target;
-
+    public AudioClip clip;
 
     //protected MonsterAttack(MonsterStateMachine stateMachine)
     //{
@@ -23,6 +22,7 @@ public abstract class MonsterAttack : MonoBehaviour
     {
         controller = GetComponent<MonsterController>();
         data = controller.data;
+
         //attackTime = controller.data.attackTime;
         //damage = controller.data.attackDamage;
     }
@@ -32,16 +32,20 @@ public abstract class MonsterAttack : MonoBehaviour
     //    this.state = state;
     //}
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        //SoundManager.instance.Shot(clip);
+    }
+        
     public int Direction()
     {
         Vector2 dir = controller.target.position - transform.position;
         return dir.x > 0 ? 1 : -1;
     }
 
-    public Vector2 Direction(Vector2 target)
+    public Vector2 Direction(Vector2 fire, Vector2 target)
     {
-        return (target - (Vector2)transform.position).normalized;
+        return (target - fire).normalized;
     }
     //public void ExitAttack()
     //{

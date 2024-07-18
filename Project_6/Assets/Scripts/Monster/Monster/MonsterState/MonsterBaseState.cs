@@ -33,10 +33,18 @@ public class MonsterBaseState : IState
 
     public float TargetDistance()
     {
-        Vector2 targetPos = stateMachine.controller.target.position;
-        Vector2 myPos = stateMachine.controller.transform.position;
+        MonsterController controller = stateMachine.controller;
+        Transform myTransform = controller.transform;
 
-        return Vector2.Distance(targetPos, myPos + stateMachine.controller.offsetPos);
+        Vector2 targetPos = controller.target.position;
+        Vector2 offsetPos = controller.offsetPos;
+
+        if (myTransform.localScale.x == -1)
+            offsetPos = new Vector2(-offsetPos.x, offsetPos.y);
+
+        Vector2 myPos = ((Vector2)myTransform.position + offsetPos);
+
+        return Vector2.Distance(targetPos, myPos);
     }
 
     public Vector2 TargetDirection()

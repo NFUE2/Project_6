@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BowBandit
   m_EditorClassIdentifier: 
   id: 13
-  name: 
+  name: "\uB3C4\uC801"
   info: 
   maxHP: 30
   moveSpeed: 5

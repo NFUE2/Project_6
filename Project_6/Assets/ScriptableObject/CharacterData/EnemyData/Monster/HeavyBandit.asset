@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeavyBandit
   m_EditorClassIdentifier: 
   id: 12
-  name: "\uC911\uBB34\uC7A5 \uB3C4\uC801"
+  name: "\uB3C4\uC801"
   info: 
   maxHP: 50
   moveSpeed: 5
