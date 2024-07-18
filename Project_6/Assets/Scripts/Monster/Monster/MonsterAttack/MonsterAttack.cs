@@ -10,7 +10,7 @@ public abstract class MonsterAttack : MonoBehaviour
     //protected float attackTime;
     //protected float damage;
     public LayerMask target;
-    public AudioClip clip;
+    public AudioClip attackClip;
 
     //protected MonsterAttack(MonsterStateMachine stateMachine)
     //{
@@ -34,7 +34,7 @@ public abstract class MonsterAttack : MonoBehaviour
 
     public virtual void Attack()
     {
-        //SoundManager.instance.Shot(clip);
+        SoundManager.instance.Shot(attackClip);
     }
         
     public int Direction()

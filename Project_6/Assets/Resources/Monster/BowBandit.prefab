@@ -197,7 +197,7 @@ MonoBehaviour:
   target:
     serializedVersion: 2
     m_Bits: 64
-  clip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
   fire: {fileID: 3249414232058124800}
 --- !u!50 &5365907723508209861
 Rigidbody2D:

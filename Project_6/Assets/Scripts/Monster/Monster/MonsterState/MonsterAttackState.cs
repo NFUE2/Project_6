@@ -46,7 +46,7 @@ public class MonsterAttackState : MonsterBaseState
             stateMachine.ChangeState(stateMachine.trackState);
         }
 
-        if (Time.time - lastAttackTime >= stateMachine.controller.data.attackTime)
+        if (!isAttacking && Time.time - lastAttackTime >= stateMachine.controller.data.attackTime)
         {
             Aim();
 

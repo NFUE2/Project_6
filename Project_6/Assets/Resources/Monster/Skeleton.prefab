@@ -322,7 +322,7 @@ MonoBehaviour:
   target:
     serializedVersion: 2
     m_Bits: 64
-  clip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
   hitBox: {fileID: 2999132604075402797}
 --- !u!114 &6629749056797257980
 MonoBehaviour:
