@@ -4,20 +4,28 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     private Vector2 direction;
+    public int damage = 10; // 투사체가 입히는 데미지
 
-    public void SetDirection(Vector2 newDirection) //해당 함수 삭제
+    public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
     }
 
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime; //direction이 아니라 고정적인 벡터값으로 변경해주세요
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 충돌 처리 코드
-        // 예: 적에게 피해를 입히거나 투사체를 파괴
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            //collision.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
