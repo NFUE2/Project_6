@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class RiflePlayer : RangedPlayerBase
 {
-    public PlayerDataSO PlayerData; //최상위 에서 처리
-
-
     //해당 클래스의 상위 클래스를 받아와주세요
     [Header("Skill Q")]
     [SerializeField] private TargetSkill targetSkill; // TargetSkill 인스턴스
@@ -27,7 +24,6 @@ public class RiflePlayer : RangedPlayerBase
     // 볼트 액션 소총이어서 attackCount를 사용하는것 같은데 그러지마시고 일반 원거리 공격과 동일하게 처리하면됩니다.
     public override void Attack()
     {
-        //if (isAttackCooldown) return; //삭제
 
         //if (Time.time - lastAttackTime < attackTime) return;
         lastAttackTime = Time.time; 

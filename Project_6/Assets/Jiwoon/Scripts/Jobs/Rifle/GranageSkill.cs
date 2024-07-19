@@ -13,7 +13,7 @@ public class GrenadeSkill : MonoBehaviour
 
     public void UseSkill()
     {
-        if (Time.time - player.GetLastEActionTime() < player.PlayerData.SkillECooldown) return;
+        //if (Time.time - player.GetLastEActionTime() < player.PlayerData.SkillECooldown) return;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); //PlayerInput에서의 데이터 받아서 처리
 

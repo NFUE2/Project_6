@@ -9,7 +9,7 @@ public class RollingSkill : SkillBase
     public bool IsRolling { get; private set; }
     public bool isInvincible { get; private set; }
 
-    private Rigidbody2D rigidbody;
+    private new Rigidbody2D rigidbody;
 
     void Start()
     {

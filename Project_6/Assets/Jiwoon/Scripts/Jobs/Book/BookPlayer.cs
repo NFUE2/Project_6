@@ -1,77 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class BookPlayer_ : PlayerBase
+public class BookPlayer : RangedPlayerBase
 {
-    //PlayerBase에서 구현
-    public PlayerDataSO PlayerData; 
-    public TextMeshPro qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshPro eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public PlayerDataSO PlayerData;
 
-    [Header("Animation Data")]
-    public Animator animator; //안쓰는건 지워주우거나 주석처리 부탁드립니다
-    //====================================
-
-    //스킬클래스로 이동 - 만약 스킬클래스에서 처리 못하면 말해주세요
     [Header("Skill Q")]
-    public float shieldDuration = 5f; // 보호막 지속 시간
-    public float shieldRange = 10f; // 보호막 적용 범위
-    public GameObject shieldPrefab; // 보호막 프리팹
-    public LayerMask playerLayer; // 플레이어 레이어
+    [SerializeField] private BookShieldSkill bookshieldSkill;
 
     [Header("Skill E")]
-    public float laserDuration = 2f; // 레이저 지속 시간
-    public float laserDamage = 10f; // 레이저 데미지
-    public LineRenderer laserRenderer; // 레이저를 그릴 LineRenderer
-    public LayerMask enemyLayer; // 적 레이어
-    //====================================
+    [SerializeField] private LaserSkill laserSkill;
 
     [Header("Attack")]
-    //공격부분 - 상위클래스로 이동
     public float attackTime;
     private float lastAttackTime;
-    //====================================
-    
-    //원거리 캐릭터 클래스에서 구현
-    public float attackRange = 10f; // 공격 범위
-    public GameObject projectilePrefab; // 발사체 프리팹
-    public float projectileSpeed; //발사속도
-    public LayerMask targetLayer; // 타겟 레이어
-    //====================================
+    private float attackRange;
+    private LayerMask targetLayer;
+    private Vector3 projectileSpeed;
+    private GameObject projectilePrefab;
 
-    //원거리 캐릭터에서 구현을 override해야할듯함
+    private void Start()
+    {
+        bookshieldSkill.SetCooldownText(qCooldownText);
+        laserSkill.SetCooldownText(eCooldownText);
+    }
+
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < attackTime) return; // 공격 딜레이 체크
-
-        //마우스 클릭 위치가 아닌 캐릭터의 위치를 기준으로 사거리안의 적을 오토타겟팅되도록 바꿔주세요
-        //기획서에서 설명이 부족했던것 같네요
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = Camera.main.nearClipPlane;
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        
-        // 클릭 위치에서 일정 범위 내 가장 가까운 타겟 찾기
-        Transform closestTarget = FindClosestTarget(worldMousePosition, attackRange, targetLayer);
-        
-        //======================================
-
-        if (closestTarget != null)
+        if (Time.time - lastAttackTime >= attackTime)
         {
-            Debug.Log("타겟 공격!");
-            LaunchProjectile(closestTarget);
-            lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log("범위 내 타겟 없음.");
+            Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
+
+            if (closestTarget != null)
+            {
+                Debug.Log("타겟 공격!");
+                LaunchProjectile(closestTarget);
+                lastAttackTime = Time.time;
+            }
+            else
+            {
+                Debug.Log("범위 내 타겟 없음.");
+            }
         }
     }
 
-    Transform FindClosestTarget(Vector3 position, float range, LayerMask layer)
+    public override void UseSkillQ()
+    {
+        bookshieldSkill.UseSkill();
+    }
+
+    public override void UseSkillE()
+    {
+        laserSkill.UseSkill();
+    }
+
+    private Transform FindClosestTarget(Vector3 position, float range, LayerMask layer)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, range, layer);
         Transform closestTarget = null;
@@ -79,7 +63,7 @@ public class BookPlayer_ : PlayerBase
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.transform == transform) continue; // 본인 제외
+            if (hitCollider.transform == transform) continue;
 
             float distance = Vector3.Distance(position, hitCollider.transform.position);
             if (distance < closestDistance)
@@ -92,108 +76,11 @@ public class BookPlayer_ : PlayerBase
         return closestTarget;
     }
 
-
-    //투사체 클래스에서 구현
-    void LaunchProjectile(Transform target)
+    private void LaunchProjectile(Transform target)
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector2 direction = (target.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody>().velocity = direction * projectileSpeed;
-        // 발사체를 일정 시간 후 자동으로 삭제
         Destroy(projectile, 5f);
     }
-    //==================================
-
-
-    //스킬 클래스에서 구현
-    public override void UseSkillQ()
-    {
-        Transform closestPlayer = FindClosestTarget(transform.position, shieldRange, playerLayer);
-
-        if (closestPlayer != null)
-        {
-            StartCoroutine(ApplyShield(closestPlayer));
-            StartCoroutine(CoolTimeQ());
-        }
-        else
-        {
-            Debug.Log("범위 내 플레이어 없음.");
-        }
-    }
-
-    private IEnumerator ApplyShield(Transform target)
-    {
-        // 보호막 오브젝트 생성 및 타겟에 적용
-        GameObject shield = Instantiate(shieldPrefab, target.position, Quaternion.identity);
-        shield.transform.SetParent(target); // 타겟의 자식으로 설정하여 따라다니도록 함
-
-        Debug.Log($"{target.name}에게 보호막 적용!");
-
-        // 보호막 지속 시간 동안 대기
-        yield return new WaitForSeconds(shieldDuration);
-
-        // 보호막 제거
-        Destroy(shield);
-        Debug.Log($"{target.name}의 보호막 종료!");
-    }
-
-    private IEnumerator CoolTimeQ()
-    {
-        lastQActionTime = Time.time;
-
-        while (Time.time - lastQActionTime < PlayerData.SkillQCooldown)
-        {
-            float remainingTime = PlayerData.SkillQCooldown - (Time.time - lastQActionTime);
-            qCooldownText.text = $"Q스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
-            yield return null;
-        }
-        qCooldownText.text = "Q스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
-    }
-
-    public override void UseSkillE()
-    {
-        StartCoroutine(FireLaser());
-        StartCoroutine(CoolTimeE());
-    }
-
-    private IEnumerator FireLaser()
-    {
-        float startTime = Time.time;
-        laserRenderer.enabled = true;
-
-        while (Time.time - startTime < laserDuration)
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = Camera.main.nearClipPlane;
-            Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            Vector3 direction = (worldMousePosition - transform.position).normalized;
-
-            Ray ray = new Ray(transform.position, direction);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, enemyLayer);
-
-            laserRenderer.SetPosition(0, transform.position);
-            laserRenderer.SetPosition(1, transform.position + direction * 100); // 레이저의 끝점을 먼 거리로 설정
-
-            foreach (RaycastHit hit in hits)
-            {
-                //hit.collider.GetComponent<Enemy>().TakeDamage(laserDamage); // 적에게 데미지 적용
-            }
-            yield return null;
-        }
-        laserRenderer.enabled = false;
-    }
-
-    private IEnumerator CoolTimeE()
-    {
-        lastEActionTime = Time.time;
-
-        while (Time.time - lastEActionTime < PlayerData.SkillECooldown)
-        {
-            float remainingTime = PlayerData.SkillECooldown - (Time.time - lastEActionTime);
-            eCooldownText.text = $"E스킬 남은 시간: {remainingTime:F1}초"; // 쿨타임 텍스트 갱신
-            yield return null;
-        }
-        eCooldownText.text = "E스킬 쿨타임 완료"; // 쿨타임 완료 텍스트 갱신
-    }
-    //=============================================
 }

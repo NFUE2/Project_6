@@ -26,5 +26,4 @@ public abstract class RangedPlayerBase : PlayerBase
 
         attackInstance.GetComponent<Projectile>().SetDirection(attackDirection);
     }
-
 }
