@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MeleePlayerBase : PlayerBase
 {
     public int attackDamage = 10;
     public LayerMask enemyLayer;
-    public float attackCooldown = 1.0f;  // 공격 쿨타임 설정
+    public float attackCooldown = 1f;  // 공격 쿨타임 설정
     protected bool isAttacking = false;
 
     private BoxCollider2D attackCollider;
@@ -15,6 +14,7 @@ public abstract class MeleePlayerBase : PlayerBase
     {
         animator = GetComponent<Animator>();
         attackCollider = transform.Find("AttackCollider").GetComponent<BoxCollider2D>();
+        attackCollider.enabled = false; // 공격 콜라이더를 기본적으로 비활성화
     }
 
     public override void Attack()
@@ -44,9 +44,9 @@ public abstract class MeleePlayerBase : PlayerBase
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        if (attackCollider.enabled && ((1 << other.gameObject.layer) & enemyLayer) != 0)
         {
-            other.GetComponent<IDamagable>().TakeDamage(attackDamage);
+            other.GetComponent<IDamagable>()?.TakeDamage(attackDamage);
         }
     }
 }
