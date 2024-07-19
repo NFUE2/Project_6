@@ -1,9 +1,16 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using TMPro;
+using System;
+using JetBrains.Annotations;
+
+[Serializable]
+public class BossBattleData
+{
+    public Transform bossStart;
+    public Transform bossBattleCameraPos;
+    public GameObject bossManager;
+}
 
 [RequireComponent(typeof(PhotonView))]
 public class TestVotingObject : MonoBehaviourPun//, IPunObservable
@@ -12,8 +19,9 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
     public GameObject votingObject;
     public TextMeshProUGUI text;
-    public Transform bossStart,bossCamera;
-    public GameObject boss;
+    //public Transform bossStart,bossCamera;
+    //public GameObject boss;
+    public BossBattleData data;
 
     private void Start()
     {
@@ -65,9 +73,9 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
         {
             //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
             //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
-            TestGameManager.instance.player.transform.position = bossStart.position;
-            TestGameManager.instance.cam.target = bossCamera;
-            boss.SetActive(true);
+            TestGameManager.instance.player.transform.position = data.bossStart.position;
+            TestGameManager.instance.cam.target = data.bossBattleCameraPos;
+            data.bossManager.SetActive(true);
         }
     }
 

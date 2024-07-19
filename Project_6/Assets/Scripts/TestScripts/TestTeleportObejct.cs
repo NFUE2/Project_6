@@ -1,10 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+[Serializable]
+public class StageData
+{
+    public GameObject stage,stageBackground;
+    public Transform stageStart;
+    public BGMList bgm;
+}
 
 public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
 {
-    public Transform destination;
+    //public Transform destination;
+    public StageData data;
 
     //public void OnInteraction()
     //{
@@ -14,8 +23,11 @@ public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.transform.position = destination.position;
+        data.stage.SetActive(true);
+        data.stageBackground.SetActive(true);
+        collision.transform.position = data.stageStart.position;
+        //collision.transform.position = destination.position;
         TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
-        Debug.Log(1);
+        SoundManager.instance.ChangeBGM(data.bgm);
     }
 }
