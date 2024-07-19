@@ -171,6 +171,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCooldown: 1
+  attackSize: {x: 1, y: 1.2}
+  attackOffset: {x: -0.8, y: 0}
   guardSkill: {fileID: 3530141661980807999}
   projectileSkill: {fileID: 7941044376589328438}
 --- !u!114 &3530141661980807999

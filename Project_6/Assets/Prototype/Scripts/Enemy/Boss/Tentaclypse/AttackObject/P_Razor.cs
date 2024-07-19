@@ -33,7 +33,6 @@ public class P_Razor : MonoBehaviour
         if(stateChangeTriggerTime >= stateChangeTime)
         {
             isAttackable = true;
-            spriteRenderer.color = new Color(255, 0, 0, 255);
         }
         if(isAttackable)
         {

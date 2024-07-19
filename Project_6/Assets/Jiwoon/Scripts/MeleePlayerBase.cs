@@ -1,20 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MeleePlayerBase : PlayerBase
 {
     public int attackDamage = 10;
     public LayerMask enemyLayer;
-    public float attackCooldown = 1.0f;  // 공격 쿨타임 설정
+    public float attackCooldown = 1f;  // 공격 쿨타임 설정
     protected bool isAttacking = false;
-
-    private BoxCollider2D attackCollider;
+    public Vector2 attackSize; // 공격 박스의 크기
+    public Vector2 attackOffset; // 공격 박스의 오프셋
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
         animator = GetComponent<Animator>();
-        attackCollider = transform.Find("AttackCollider").GetComponent<BoxCollider2D>();
     }
 
     public override void Attack()
@@ -32,21 +30,35 @@ public abstract class MeleePlayerBase : PlayerBase
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
-    public void EnableAttackCollider()
+    public void PerformAttack()
     {
-        attackCollider.enabled = true;
-    }
+        Vector2 attackPosition = CalculateAttackPosition();
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
 
-    public void DisableAttackCollider()
-    {
-        attackCollider.enabled = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        foreach (Collider2D enemy in hitEnemies)
         {
-            other.GetComponent<IDamagable>().TakeDamage(attackDamage);
+            enemy.GetComponent<IDamagable>()?.TakeDamage(attackDamage);
         }
+    }
+
+    private Vector2 CalculateAttackPosition()
+    {
+        Vector2 basePosition = (Vector2)transform.position;
+
+        if (transform.localScale.x < 0)
+        {
+            return basePosition + new Vector2(-attackOffset.x, attackOffset.y); // 왼쪽을 바라볼 때
+        }
+        else
+        {
+            return basePosition + attackOffset; // 오른쪽을 바라볼 때
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector2 attackPosition = CalculateAttackPosition();
+        Gizmos.DrawWireCube(attackPosition, attackSize);
     }
 }
