@@ -63,6 +63,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   attackCooldown: 1
+  attackSize: {x: 0.6, y: 1}
+  attackOffset: {x: -0.6, y: 0}
   dashSkill: {fileID: 2299752643210608358}
   stackSkill: {fileID: 530937857979230958}
 --- !u!114 &2299752643210608358
