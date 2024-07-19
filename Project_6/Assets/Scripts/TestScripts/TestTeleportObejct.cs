@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class StageData
 {
     public GameObject stage,stageBackground;
-    public Transform stageStart;
+    public Transform destination;
     public BGMList bgm;
 }
 
@@ -23,9 +23,10 @@ public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        data.stage.SetActive(true);
-        data.stageBackground.SetActive(true);
-        collision.transform.position = data.stageStart.position;
+        data.stage.SetActive(!data.stage.activeInHierarchy);
+        data.stage.SetActive(!data.stageBackground.activeInHierarchy);
+
+        collision.transform.position = data.destination.position;
         //collision.transform.position = destination.position;
         TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
         SoundManager.instance.ChangeBGM(data.bgm);

@@ -4052,7 +4052,7 @@ MonoBehaviour:
   data:
     stage: {fileID: 0}
     stageBackground: {fileID: 0}
-    stageStart: {fileID: 0}
+    destination: {fileID: 0}
     bgm: 0
 --- !u!1 &460842323
 GameObject:
@@ -28314,7 +28314,7 @@ MonoBehaviour:
   data:
     stage: {fileID: 0}
     stageBackground: {fileID: 0}
-    stageStart: {fileID: 0}
+    destination: {fileID: 0}
     bgm: 0
 --- !u!61 &1933821828
 BoxCollider2D:
@@ -31111,10 +31111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    stage: {fileID: 0}
-    stageBackground: {fileID: 0}
-    stageStart: {fileID: 0}
-    bgm: 0
+    stage: {fileID: 2031390855}
+    stageBackground: {fileID: 1639695002}
+    destination: {fileID: 666542412}
+    bgm: 1
 --- !u!1 &2319273172547200494
 GameObject:
   m_ObjectHideFlags: 0
@@ -31185,7 +31185,7 @@ MonoBehaviour:
   data:
     stage: {fileID: 2031390855}
     stageBackground: {fileID: 1639695002}
-    stageStart: {fileID: 774780832}
+    destination: {fileID: 774780832}
     bgm: 2
 --- !u!1 &5195500820379984523
 GameObject:
