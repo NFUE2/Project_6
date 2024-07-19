@@ -7510,6 +7510,7 @@ MonoBehaviour:
   roomInputField: {fileID: 378758710}
   lobbyFrame: {fileID: 127169679}
   choiceRoomName: 
+  textMeshPro: {fileID: 378758710}
 --- !u!114 &1589330392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7571,7 +7572,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1589330395
 RectTransform:
