@@ -1,7 +1,4 @@
-using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine;
-using System;
 
 //public enum MonsterAttackType
 //{
@@ -16,7 +13,7 @@ public class MonsterController : MonoBehaviour
     [Header("EnemyData")]
     public EnemyDataSO data;
     public Animator animator { get; private set; }
-    [field : SerializeField] public Rigidbody2D rigidbody { get; private set; }
+    public Rigidbody2D rigid;
     public Collider2D col;
 
     public Vector2 offsetPos;
@@ -41,15 +38,15 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
-        //rigidbody = GetComponent<Rigidbody2D>();
+        rigid = GetComponent<Rigidbody2D>();
         animationData.Initialize();
         animator = GetComponent<Animator>();
         stateMachine = new MonsterStateMachine(this);
         col = GetComponent<Collider2D>();
         offsetPos = col.offset;
 
-        condition.OnDie += ColliderToggle;
-        condition.OnSpawn += ColliderToggle;
+        condition.OnDie += ComponentToggle;
+        condition.OnSpawn += ComponentToggle;
 
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
@@ -80,7 +77,7 @@ public class MonsterController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void ColliderToggle()
+    private void ComponentToggle()
     {
         col.enabled = !col.enabled;
     }

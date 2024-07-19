@@ -363,6 +363,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 5
   jumpForce: 5
+  playerdefense: 0
 --- !u!114 &3387617015864025817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +399,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCooldown: 1
+  attackSize: {x: 0, y: 0}
+  attackOffset: {x: 0, y: 0}
   guardSkill: {fileID: 0}
   projectileSkill: {fileID: 0}
 --- !u!114 &3374280999797708764

@@ -13,7 +13,7 @@ public class MonsterTrackState : MonsterBaseState
         base.Enter();
         //rigidbody = stateMachine.controller.rigidbody;
         StartAnimation(stateMachine.controller.animationData.move);
-        rigidbody = stateMachine.controller.rigidbody;
+        rigidbody = stateMachine.controller.rigid;
     }
 
     public override void Exit()

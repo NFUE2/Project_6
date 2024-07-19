@@ -186,6 +186,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCooldown: 1
+  attackSize: {x: 0.6, y: 1}
+  attackOffset: {x: -0.6, y: 0}
   healAndBoostSkill: {fileID: 2362374036882893018}
   maceChargeSkill: {fileID: 5427429350239134251}
 --- !u!114 &2852413717840099530
