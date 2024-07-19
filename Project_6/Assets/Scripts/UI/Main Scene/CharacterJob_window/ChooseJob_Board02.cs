@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.TextCore.Text;
+using Photon.Pun;
 
-public class ChooseJob_Board02 : MonoBehaviour
+public class ChooseJob_Board02 : MonoBehaviourPun
 {
 
     public TextMeshProUGUI Character_Name;
@@ -16,6 +14,9 @@ public class ChooseJob_Board02 : MonoBehaviour
     public TextMeshProUGUI E_Info;
     public Button Button;
 
+    private GameObject choicePlayer; //추후 수정
+    public GameObject panel;
+    public TestUISlot choicebButton;
 
     public void ChooseJob(ObjectSO objectSO, SkillDataSO Skill_Q, SkillDataSO Skill_E)
     {
@@ -28,4 +29,31 @@ public class ChooseJob_Board02 : MonoBehaviour
         //Skill_Q = ;
         //Skill_E = ;
     }
+    public void ChooseJob(GameObject player, TestUISlot button)
+    {
+        choicePlayer = player;
+        choicebButton = button;
+    }
+
+    public void OnClick()
+    {
+        if (choicebButton == null || !choicebButton.GetComponent<Button>().interactable) return;
+        GameObject go = PhotonNetwork.Instantiate("Player/" + choicePlayer.name,Vector2.zero,Quaternion.identity);
+        TestGameManager.instance.player = go;
+        TestGameManager.instance.players.Add(go);
+
+
+        //photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, choicebButton);
+        choicebButton.ChangeInteraction();
+
+        panel.SetActive(false);
+    }
+
+    //[PunRPC]
+    //public void OnClickRPC(Button button)
+    //{
+    //    Debug.Log(button);
+    //    button.interactable = false;
+    //    //photonView.instan
+    //}
 }

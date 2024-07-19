@@ -21,6 +21,7 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
     public void OnClickGameStart()
     {
         PhotonNetwork.LoadLevel(1);
+        SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
     public override void OnJoinedRoom()

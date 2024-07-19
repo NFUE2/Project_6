@@ -15,27 +15,24 @@ public class NetworkConditionDelete : MonoBehaviourPun
     public Component[] components;
     public GameObject[] gameObjects;
     
-    private void Start()
+    private void Awake()
     {
         switch (type)
         {
             case DeleteType.NotisMaster:
-                Delete();
+                if(!PhotonNetwork.IsMasterClient) Delete();
                 break;
 
             case DeleteType.NotisMine:
-                Delete();
+                if(!photonView.IsMine) Delete();
                 break;
         }
     }
 
     void Delete()
     {
-        if(!photonView.IsMine)
-        {
-            foreach(var c in components) Destroy(c);
-            foreach (var g in gameObjects) Destroy(g);
-        }
+        foreach(var c in components) Destroy(c);
+        foreach (var g in gameObjects) Destroy(g);
 
         Destroy(this);
     }

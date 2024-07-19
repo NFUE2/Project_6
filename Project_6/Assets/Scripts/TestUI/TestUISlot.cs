@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.InteropServices;
 using Photon.Pun;
+using System.Data;
 
 [RequireComponent(typeof(PhotonView))]
 public class TestUISlot : MonoBehaviourPun //, IPunObservable
@@ -35,10 +36,9 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
     public void OnClick(/*GameObject panel*/)
     {
         Board_02.ChooseJob(character,Skill_Q,Skill_E);
+        Board_02.ChooseJob(prefab, this);
 
-
-
-
+        //Board_02.choicePlayer = prefab;
 
         //panel.SetActive(false);
         //TestMainScene.instance.CreateRPC(prefab);
@@ -49,12 +49,23 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
         //TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
     }
 
+    public void ChangeInteraction()
+    {
+        photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered);
+    }
+
     [PunRPC]
-    private void OnClickRPC(GameObject player)
+    public void OnClickRPC()
     {
         selectButton.interactable = false;
-        TestGameManager.instance.players.Add(player);
     }
+
+    //[PunRPC]
+    //private void OnClickRPC(GameObject player)
+    //{
+    //    selectButton.interactable = false;
+    //    TestGameManager.instance.players.Add(player);
+    //}
 
     //AllBuffered는 쓸 필요 없음
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

@@ -25,7 +25,7 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
     private void Start()
     {
-        //curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
   
@@ -60,6 +60,7 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
     public void VoteAgreement()
     {
+        Debug.Log(1);
         photonView.RPC(nameof(VoteAgreementRPC),RpcTarget.All);
     }
 
@@ -71,6 +72,8 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
         if (agree == curPlayersCount)
         {
+            Debug.Log("¿Ãµø");
+
             //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
             //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
             TestGameManager.instance.player.transform.position = data.bossStart.position;

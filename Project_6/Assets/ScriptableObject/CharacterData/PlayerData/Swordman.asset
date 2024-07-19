@@ -15,9 +15,13 @@ MonoBehaviour:
   id: 0
   name: "\uAC80\uC0AC"
   info: "\uD55C\uC190 \uAC80\uACFC \uBC29\uD328\uB97C \uC0AC\uC6A9\uD558\uB294 \uAC80\uC0AC."
-  maxHP: 0
-  moveSpeed: 0
+  maxHP: 100
+  moveSpeed: 3
   attackTime: 0
   attackDamage: 0
   deffenceDamage: 0
-  jumpForce: 0
+  jumpForce: 7
+  SkillQCooldown: 0
+  SkillECooldown: 0
+  walkSpeed: 3
+  runSpeed: 5

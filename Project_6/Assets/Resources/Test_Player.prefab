@@ -363,8 +363,6 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 5
   jumpForce: 5
-  SkillQCooldown: 1
-  SkillECooldown: 1
 --- !u!114 &3387617015864025817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,17 +389,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 9178035889672887536}
+  playerData: {fileID: 0}
   qCooldownText: {fileID: 6179806703486301277}
   eCooldownText: {fileID: 1449671674511187582}
   animator: {fileID: 0}
-  projectile: {fileID: 0}
-  attackTime: 3
-  attackRange: 1.5
   attackDamage: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  attackCooldown: 1
+  guardSkill: {fileID: 0}
+  projectileSkill: {fileID: 0}
 --- !u!114 &3374280999797708764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 9178035889672887536}
+  playerdata: {fileID: 0}
   player: {fileID: 6422326495414205650}
   groundCheck: {fileID: 8401688725888005663}
   groundCheckRadius: 0.1
