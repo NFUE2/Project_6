@@ -14,14 +14,14 @@ public abstract class MeleePlayerBase : PlayerBase
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
         animator = GetComponent<Animator>();
-        attackCollider = GetComponentInChildren<BoxCollider2D>(); // 하위 오브젝트에서 공격판정을 할 콜라이더를 가져온다.
+        attackCollider = transform.Find("AttackCollider").GetComponent<BoxCollider2D>();
     }
 
     public override void Attack()
     {
         if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("IsAttack");
         StartCoroutine(AttackCooldown());
     }
 

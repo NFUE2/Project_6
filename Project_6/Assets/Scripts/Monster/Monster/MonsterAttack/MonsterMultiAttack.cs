@@ -8,12 +8,14 @@ public class MonsterMultiAttack : MonsterAttack
 
     public override void Attack()
     {
-        Vector2 myPos = transform.position;
-        int direction = transform.localScale.x == 1 ? 1 : -1;
+        Vector2 myPos = (Vector2)transform.position + controller.offsetPos;
+        int direction = controller.isRight ? 1 : -1;
         //LayerMask target = controller.targetLayer;
         float attackDistance = data.attackDistance; //공격거리 필요
-
+        Debug.Log(direction);
         RaycastHit2D[] ray = Physics2D.RaycastAll(myPos, Vector2.right * direction * attackDistance, 5.0f, target);
+
+        Debug.Log(ray.Length);
 
         foreach(RaycastHit2D hit in ray)
         {

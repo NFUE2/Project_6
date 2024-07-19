@@ -12,8 +12,8 @@ public class SwordPlayer : MeleePlayerBase
 
     private void Start()
     {
-        guardSkill.SetCooldownText(qCooldownText);
-        projectileSkill.SetCooldownText(eCooldownText);
+        //guardSkill.SetCooldownText(qCooldownText);
+        //projectileSkill.SetCooldownText(eCooldownText);
     }
 
     public override void UseSkillQ()

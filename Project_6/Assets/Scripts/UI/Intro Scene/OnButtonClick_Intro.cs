@@ -13,8 +13,8 @@ public class OnButtonClick_Intro : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         ColorBlock colorBlock = button.colors;
 
-        colorBlock.highlightedColor = new Color(0f, 1f, 0f, 1f);
-        colorBlock.pressedColor = new Color(0f, 0.5f, 0f, 1f);
+        colorBlock.highlightedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+        colorBlock.pressedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
 
         button.colors = colorBlock;
     }
@@ -25,8 +25,8 @@ public class OnButtonClick_Intro : MonoBehaviour, IPointerEnterHandler, IPointer
 
         ColorBlock colorBlock = button.colors;
 
-        colorBlock.highlightedColor = new Color(0f, 1f, 0f, 1f);
-        colorBlock.pressedColor = new Color(0f, 0.5f, 0f, 1f);
+        colorBlock.highlightedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+        colorBlock.pressedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
 
         button.colors = colorBlock;
     }

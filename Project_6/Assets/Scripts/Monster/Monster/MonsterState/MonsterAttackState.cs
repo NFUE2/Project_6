@@ -40,6 +40,7 @@ public class MonsterAttackState : MonsterBaseState
     {
         base.HandleInput();
 
+
         if (!isAttacking && TargetDistance() > stateMachine.controller.data.attackDistance)
         {
             stateMachine.ChangeState(stateMachine.trackState);
@@ -47,6 +48,8 @@ public class MonsterAttackState : MonsterBaseState
 
         if (Time.time - lastAttackTime >= stateMachine.controller.data.attackTime)
         {
+            Aim();
+
             lastAttackTime = Time.time;
             StartTriggerAnimation(stateMachine.controller.animationData.attack);
             isAttacking = true;
