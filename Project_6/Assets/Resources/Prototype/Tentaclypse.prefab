@@ -12,15 +12,18 @@ GameObject:
   - component: {fileID: 2795842600209401589}
   - component: {fileID: 8700953941206259027}
   - component: {fileID: 5192295071191699009}
-  - component: {fileID: 8079506938585605978}
   - component: {fileID: 6298133117289036952}
+  - component: {fileID: 4471525601474105713}
+  - component: {fileID: 8815386669755593988}
+  - component: {fileID: 4272298900489271828}
+  - component: {fileID: 8920884288538020069}
   m_Layer: 0
   m_Name: Tentaclypse
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3048770281946294302
 Transform:
   m_ObjectHideFlags: 0
@@ -31,10 +34,9 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7268258389057862721}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2795842600209401589
@@ -77,9 +79,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 0d2df5106b5de7e45910a3b22b5ff3dd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,18 +123,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0016798675, y: -0.026878297}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.04, y: 0.56}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8017722, y: 0.5632268}
   m_EdgeRadius: 0
 --- !u!50 &5192295071191699009
 Rigidbody2D:
@@ -161,33 +163,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &8079506938585605978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3373813575177551619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc653d9b58179e4b84cff9f49eb47b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossName: 
-  bossPower: 0
-  maxHp: 0
-  bossHp: 0
-  players: []
-  targetSettingTime: 7
-  targetSettingTriggerTime: 5
-  attackCoolDown: 5
-  attackTriggerTime: 0
-  tentaclypseData: {fileID: 11400000, guid: e66aec7d1c97e4b49be7ea039c58a0fd, type: 2}
-  target: {fileID: 0}
-  attackPatternManager: {fileID: 8436797844595156799}
-  razorObject: {fileID: 9132095129911206727, guid: 4c8ee3156313e5f4e84cbb7564bb5d13, type: 3}
-  allRoundAttackObject: {fileID: 4447542676708199653, guid: 5818ec5d660b0124e9989e97cad77bc5, type: 3}
-  dispenser: {fileID: 6009523534789110895, guid: d78dfaacdf40d7d44928e2f8b1b5b22c, type: 3}
 --- !u!114 &6298133117289036952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,114 +181,72 @@ MonoBehaviour:
   Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8079506938585605978}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!1 &8436797844595156799
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7268258389057862721}
-  - component: {fileID: 3382421324770104696}
-  - component: {fileID: 3727192720376606154}
-  - component: {fileID: 3716061320344764938}
-  - component: {fileID: 7804579496908229005}
-  - component: {fileID: 1541057882875238158}
-  m_Layer: 0
-  m_Name: AttackPatternManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7268258389057862721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.33333334, z: 0}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3048770281946294302}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3382421324770104696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d78be1b3ef3fd46b3c21305f228ee0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3727192720376606154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467369c7cee1ea648889b9ed05be940f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3716061320344764938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae97efdee068144cbfed9fb7726b491, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7804579496908229005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a154f8627aaa394ea878b807313437e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1541057882875238158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8436797844595156799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!95 &4471525601474105713
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373813575177551619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d392c1e42c1b9da489e968b069fce43a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8815386669755593988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373813575177551619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e091173613c5a3943a15766acda984d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countOfAttack: 0
+  razorObject: {fileID: 9132095129911206727, guid: 4c8ee3156313e5f4e84cbb7564bb5d13, type: 3}
+  bullet: {fileID: 4447542676708199653, guid: 5818ec5d660b0124e9989e97cad77bc5, type: 3}
+  dispenser: {fileID: 6009523534789110895, guid: d78dfaacdf40d7d44928e2f8b1b5b22c, type: 3}
+  razorAudioClip: {fileID: 0}
+--- !u!114 &4272298900489271828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373813575177551619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc8ebf644edcb54284d5ae06948855e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  currentHp: 0
+  tentaclypseData: {fileID: 11400000, guid: cff711be33a9f8d43b39e156d00b6d20, type: 2}
+--- !u!114 &8920884288538020069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373813575177551619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afda38d44bfc5844b8a8e7b1fbdbfeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
