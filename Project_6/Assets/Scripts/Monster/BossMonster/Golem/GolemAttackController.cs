@@ -224,12 +224,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
         ExitAttack() ;
     }
 
-    private void ExitAttack()
-    {
-        BossBattleManager.Instance.ToggleIsAttacking();
-        BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
-    }
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting)

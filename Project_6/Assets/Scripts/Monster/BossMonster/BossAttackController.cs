@@ -8,4 +8,10 @@ public class BossAttackController : MonoBehaviour
     {
         
     }
+
+    public void ExitAttack()
+    {
+        BossBattleManager.Instance.ToggleIsAttacking();
+        BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
+    }
 }
