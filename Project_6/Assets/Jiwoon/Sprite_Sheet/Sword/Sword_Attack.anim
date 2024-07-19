@@ -71,16 +71,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: EnableAttackCollider
+    functionName: PerformAttack
     data: 
-    objectReferenceParameter: {fileID: 7432206576784740991, guid: dc1887c0f66389f4cb9da2f6e6a7c9bf, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.083333336
-    functionName: DisableAttackCollider
-    data: 
-    objectReferenceParameter: {fileID: 7432206576784740991, guid: dc1887c0f66389f4cb9da2f6e6a7c9bf, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
