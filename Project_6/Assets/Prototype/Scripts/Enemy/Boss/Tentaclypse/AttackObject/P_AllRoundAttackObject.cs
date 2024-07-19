@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class P_AllRoundAttackObject : MonoBehaviour
 {
-    private float keepingTime = 5;
+    private float keepingTime = 15;
     private float curTime = 0;
 
     PhotonView pv;
