@@ -7,17 +7,15 @@ public abstract class RangedPlayerBase : PlayerBase
     public Transform attackPoint;
     protected Camera mainCamera;
     private PlayerInput playerInput;
-    public float attackCooldown;
 
     private void Start()
     {
-        mainCamera = Camera.main;
         playerInput = GetComponent<PlayerInput>();
     }
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < attackCooldown) return;
+        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
         lastAttackTime = Time.time;
 
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(playerInput.GetMousePosition());

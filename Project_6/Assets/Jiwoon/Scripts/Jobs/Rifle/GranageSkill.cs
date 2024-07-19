@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GrenadeSkill : MonoBehaviour
+public class GrenadeSkill : SkillBase
 {
     public GameObject rifleGrenade;
     private RiflePlayer player; //public으로 transform을 받아옵시다
+    public PlayerDataSO PlayerData;
 
-    public void SetPlayer(RiflePlayer player)
+    void Start()
     {
-        this.player = player;
+        cooldownDuration = PlayerData.SkillQCooldown;
     }
 
-    public void UseSkill()
+    public override void UseSkill()
     {
-        //if (Time.time - player.GetLastEActionTime() < player.PlayerData.SkillECooldown) return;
+        if (Time.time - lastActionTime < cooldownDuration) return;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); //PlayerInput에서의 데이터 받아서 처리
 
@@ -23,7 +24,5 @@ public class GrenadeSkill : MonoBehaviour
         grenadeInstance.GetComponent<Rigidbody2D>().velocity = attackDirection * 10f; //velocity 수정
 
         grenadeInstance.GetComponent<Grenade>().Initialize(10f, 5f, 3f); //데이터 부분은 ScriptableObject가 처리합니다
-
-        player.SetLastEActionTime(Time.time); //쿨타임 처리는 상위클래스에서 처리
     }
 }

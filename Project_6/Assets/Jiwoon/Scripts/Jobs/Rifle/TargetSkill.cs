@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class TargetSkill : MonoBehaviour
+public class TargetSkill : SkillBase
 {
     public GameObject targetPrefab;
     public int qSkillMaxTargets = 3;
@@ -10,15 +10,15 @@ public class TargetSkill : MonoBehaviour
     private List<GameObject> targetMarkers = new List<GameObject>();
     private int remainingChances;
     private RiflePlayer player;
+    public PlayerDataSO PlayerData;
 
     public void SetPlayer(RiflePlayer player)
     {
-        this.player = player;
-        remainingChances = qSkillMaxTargets;
+        cooldownDuration = PlayerData.SkillQCooldown;
     }
 
     //오버라이드
-    public void UseSkill()
+    public override void UseSkill()
     {
         if (remainingChances <= 0) return;
 

@@ -13,12 +13,10 @@ public class BookPlayer : RangedPlayerBase
     [SerializeField] private LaserSkill laserSkill;
 
     [Header("Attack")]
-    public float attackTime;
-    private float lastAttackTime;
-    private float attackRange;
-    private LayerMask targetLayer;
-    private Vector3 projectileSpeed;
-    private GameObject projectilePrefab;
+    public float attackRange;
+    public LayerMask targetLayer;
+    public float projectileSpeed;
+    public GameObject projectilePrefab;
 
     private void Start()
     {
@@ -28,20 +26,19 @@ public class BookPlayer : RangedPlayerBase
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime >= attackTime)
-        {
-            Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
+        if (Time.time - lastAttackTime < PlayerData.attackCooldown) return;
 
-            if (closestTarget != null)
-            {
-                Debug.Log("타겟 공격!");
-                LaunchProjectile(closestTarget);
-                lastAttackTime = Time.time;
-            }
-            else
-            {
-                Debug.Log("범위 내 타겟 없음.");
-            }
+        Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
+
+        if (closestTarget != null)
+        {
+            Debug.Log("타겟 공격!");
+            LaunchProjectile(closestTarget);
+            lastAttackTime = Time.time;
+        }
+        else
+        {
+            Debug.Log("범위 내 타겟 없음.");
         }
     }
 
@@ -80,7 +77,8 @@ public class BookPlayer : RangedPlayerBase
     {
         Vector2 direction = (target.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody>().velocity = direction * projectileSpeed;
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
         Destroy(projectile, 5f);
     }
 }
+
