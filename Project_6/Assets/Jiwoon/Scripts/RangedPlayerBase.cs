@@ -5,7 +5,7 @@ public abstract class RangedPlayerBase : PlayerBase
 {
     public GameObject attackPrefab;
     public Transform attackPoint;
-    protected Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private PlayerInput playerInput; // 인스펙터에서 할당할 수 있도록 설정
 
     private void Start()
@@ -47,6 +47,7 @@ public abstract class RangedPlayerBase : PlayerBase
             Debug.LogError("PlayerInput이 초기화되지 않았습니다.");
             return;
         }
+        Debug.Log(mainCamera);
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(playerInput.GetMousePosition());
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
         GameObject attackInstance = Instantiate(attackPrefab, attackPoint.position, Quaternion.identity);
