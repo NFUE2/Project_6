@@ -25,6 +25,7 @@ public class BossMonster : MonoBehaviour, IDamagable
             currentHp = 0;
             hpBar.fillAmount = 0;
             // »ç¸Á Ã³¸®
+            BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
         }
         else
         {

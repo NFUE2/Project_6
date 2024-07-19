@@ -10,8 +10,7 @@ public class P_Razor : MonoBehaviour
     private float stateChangeTriggerTime;
     private float objectDestroyTime = 0.25f;
     private float objectDestroyTriggerTime;
-    private GameObject boss;
-    private P_Tentaclypse tentaclypse;
+    
     SpriteRenderer spriteRenderer;
     BoxCollider2D razorCollider;
 
@@ -21,8 +20,6 @@ public class P_Razor : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        boss = GameObject.FindGameObjectWithTag("Boss");
-        tentaclypse = boss.GetComponent<P_Tentaclypse>();
         razorCollider = gameObject.GetComponent<BoxCollider2D>();
         stateChangeTriggerTime = 0;
         objectDestroyTriggerTime = 0;
@@ -45,8 +42,8 @@ public class P_Razor : MonoBehaviour
             if(objectDestroyTriggerTime >= objectDestroyTime)
             {
                 //Destroy(gameObject);
-                //DestroyObject();
-                pv.RPC("DestroyObject", RpcTarget.All);
+                DestroyObject();
+                //(복원)pv.RPC("DestroyObject", RpcTarget.All);
             }
         }
     }
@@ -57,19 +54,24 @@ public class P_Razor : MonoBehaviour
         {
             if (collision.CompareTag("Player"))
             {
-                P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
-                player.TakeDamage(tentaclypse.bossPower);
-                //DestroyObject();
-                pv.RPC("DestroyObject", RpcTarget.All);
+                if(collision.TryGetComponent<IDamagable>(out IDamagable player))
+                {
+                    float damage = BossBattleManager.Instance.boss.attackPower * 1.5f;
+                    player.TakeDamage(damage);
+                    DestroyObject();
+                }
+                //P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
+                //player.TakeDamage(tentaclypse.bossPower);
+                //(복원)pv.RPC("DestroyObject", RpcTarget.All);
 
             }
-            else if(collision.TryGetComponent(out P_Sheild shield))
-            {
-                shield.TakeDamage(tentaclypse.bossPower);
+            //else if(collision.TryGetComponent(out P_Sheild shield))
+            //{
+            //    shield.TakeDamage(tentaclypse.bossPower);
                 //DestroyObject();
-                pv.RPC("DestroyObject", RpcTarget.All);
+            //    pv.RPC("DestroyObject", RpcTarget.All);
 
-            }
+            //}
         }
     }
 

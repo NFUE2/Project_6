@@ -21,8 +21,8 @@ public class P_Dispenser : MonoBehaviour
         if (curTime >= targetTime)
         {
             //Destroy(gameObject);
-            //DestroyObject();
-            pv.RPC("DestroyObject", RpcTarget.All);
+            DestroyObject();
+            //(º¹¿ø)pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
     [PunRPC]

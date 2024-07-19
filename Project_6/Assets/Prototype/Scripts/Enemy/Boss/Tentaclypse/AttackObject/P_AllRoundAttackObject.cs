@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class P_AllRoundAttackObject : MonoBehaviour
 {
-    private GameObject boss;
-    private P_Tentaclypse tentaclypse;
     private float keepingTime = 5;
     private float curTime = 0;
 
@@ -12,8 +10,6 @@ public class P_AllRoundAttackObject : MonoBehaviour
 
     private void Start()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
-        tentaclypse = boss.GetComponent<P_Tentaclypse>();
         pv = GetComponent<PhotonView>();
     }
 
@@ -23,8 +19,8 @@ public class P_AllRoundAttackObject : MonoBehaviour
         if(curTime >= keepingTime)
         {
             //Destroy(gameObject);
-            //DestroyObject();
-            pv.RPC("DestroyObject", RpcTarget.All);
+            DestroyObject();
+            //(복원)pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
 
@@ -32,20 +28,23 @@ public class P_AllRoundAttackObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            P_PlayerCondition player = collision.GetComponent<P_PlayerCondition>();
-            player.TakeDamage(tentaclypse.bossPower);
+            if(collision.TryGetComponent<IDamagable>(out IDamagable player))
+            {
+                float damage = BossBattleManager.Instance.boss.attackPower;
+                player.TakeDamage(damage);
+                DestroyObject();
+            }
             //Destroy(gameObject);
-            //DestroyObject();
-            pv.RPC("DestroyObject", RpcTarget.All);
+            //(복원)pv.RPC("DestroyObject", RpcTarget.All);
 
         }
-        else if (collision.TryGetComponent(out P_Sheild shield))
-        {
-            shield.TakeDamage(tentaclypse.bossPower);
+        //else if (collision.TryGetComponent(out P_Sheild shield))
+        //{
+        //    shield.TakeDamage(tentaclypse.attackPower);
             //Destroy(gameObject);
             //DestroyObject();
-            pv.RPC("DestroyObject", RpcTarget.All);
-        }
+       //     pv.RPC("DestroyObject", RpcTarget.All);
+       // }
     }
 
     [PunRPC]

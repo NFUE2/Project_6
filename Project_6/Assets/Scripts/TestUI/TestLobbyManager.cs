@@ -42,6 +42,8 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnClickJoinRoom() //방 입장버튼 클릭
     {
+        if (choiceRoomName.Length == 0) return;
+
         StartCoroutine(NetworkManager.instance.ChangeState(
           connectRoomMessage,
           ClientState.Joined,
