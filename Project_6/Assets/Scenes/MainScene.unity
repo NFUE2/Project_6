@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &78846675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,6 +739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &110994292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3288,6 +3290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &141060413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3990,7 +3993,7 @@ Transform:
   m_GameObject: {fileID: 219320311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 128.24, y: -4.74, z: 0}
+  m_LocalPosition: {x: 285.34, y: -4.85, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4428,6 +4431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &232229055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5010,6 +5014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &315510303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,6 +5078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &332049386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5249,6 +5255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7818000955478623138, guid: 7b8edd798de0fb447b7fe3d50d9b6119, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &345085157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5676,6 +5683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &403153631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5739,6 +5747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &408333675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5915,6 +5924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &437607629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6124,6 +6134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &441538001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7949,6 +7960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7818000955478623138, guid: 7b8edd798de0fb447b7fe3d50d9b6119, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &449544334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10663,6 +10675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &594391208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11090,6 +11103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &619050106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13167,6 +13181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &825812034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13364,6 +13379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &900033342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13769,6 +13785,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5384387503974816807, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
   m_PrefabInstance: {fileID: 950304394}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &961703344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 961703345}
+  m_Layer: 0
+  m_Name: MonsterList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961703345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961703344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412358510}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982868369
 GameObject:
   m_ObjectHideFlags: 0
@@ -14083,6 +14130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &989952188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14256,6 +14304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1000591044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15528,6 +15577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7818000955478623138, guid: 7b8edd798de0fb447b7fe3d50d9b6119, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1071553731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16076,7 +16126,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0.039064527}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -16170,6 +16220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1217327220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16430,6 +16481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1287007250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17131,6 +17183,7 @@ Transform:
   - {fileID: 584552540}
   - {fileID: 439575286}
   - {fileID: 1626237302}
+  - {fileID: 961703345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1412358511
@@ -17192,6 +17245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1421031012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32410,6 +32464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7818000955478623138, guid: 7b8edd798de0fb447b7fe3d50d9b6119, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &1814337583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34109,6 +34164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &2060148541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34206,6 +34262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &2088098890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34498,6 +34555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!114 &2106093662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34764,6 +34822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2807938960035369981, guid: e509f491b5a88b7438ecaca2c409c805, type: 3}
   spawnTime: 60
+  monsterList: {fileID: 961703345}
 --- !u!1 &3641002487323098306
 GameObject:
   m_ObjectHideFlags: 0
