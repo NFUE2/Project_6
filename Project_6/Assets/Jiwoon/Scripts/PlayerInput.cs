@@ -25,6 +25,9 @@ public class PlayerInput : MonoBehaviour
     [Header("Mouse_Data")]
     protected Vector2 lookInput; // 마우스 위치 저장 변수
 
+    [Header("Input On/Off Controll")]
+    public bool isDead = false;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,12 +53,20 @@ public class PlayerInput : MonoBehaviour
 
     private void Movement()
     {
+        if (isDead)
+        {
+            return;
+        }
         float speed = isRunning ? playerdata.runSpeed : playerdata.walkSpeed;
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
     }
 
     private void Jump()
     {
+        if (isDead)
+        {
+            return;
+        }
         if (isGrounded)
         {
             rb.AddForce(Vector2.up * playerdata.jumpForce, ForceMode2D.Impulse);
@@ -114,6 +125,10 @@ public class PlayerInput : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
+        if (isDead)
+        {
+            return;
+        }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(lookInput);
         mousePosition.z = 0;
 
@@ -124,11 +139,19 @@ public class PlayerInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         if (context.performed)
         {
             Jump();
@@ -137,11 +160,19 @@ public class PlayerInput : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         isRunning = context.ReadValueAsButton();
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         lookInput = context.ReadValue<Vector2>(); // 마우스 위치 입력 받기
     }
 
@@ -152,6 +183,10 @@ public class PlayerInput : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         if (context.performed)
         {
             player.Attack();
@@ -160,6 +195,10 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillQ(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         if (context.performed)
         {
             player.UseSkillQ();
@@ -168,6 +207,10 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillE(InputAction.CallbackContext context)
     {
+        if (isDead)
+        {
+            return;
+        }
         if (context.performed)
         {
             player.UseSkillE();

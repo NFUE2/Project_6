@@ -6,6 +6,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public float maxHealth = 100f;
     private float currentHealth;
 
+    public PlayerInput input;
     public Image healthBarImage; // 체력바 이미지
 
     void Start()
@@ -36,6 +37,8 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     void Die()
     {
         Debug.Log("Player died!");
-        Destroy(gameObject);
+        input.isDead = true;
+        // SetBool("isDead", true); 애니메이터
+        //Destroy(gameObject);
     }
 }
