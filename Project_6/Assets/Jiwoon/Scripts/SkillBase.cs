@@ -4,7 +4,7 @@ using TMPro;
 public abstract class SkillBase : MonoBehaviour
 {
     protected float lastActionTime;
-    protected TextMeshProUGUI cooldownText;
+    public TextMeshProUGUI cooldownText;
     protected float cooldownDuration;
 
     public void SetCooldownText(TextMeshProUGUI text)
@@ -16,9 +16,10 @@ public abstract class SkillBase : MonoBehaviour
     {
         if (cooldownText != null)
         {
+            Debug.Log(1);
             if (Time.time - lastActionTime >= cooldownDuration)
             {
-                cooldownText.text = "쿨타임 완료";
+                cooldownText.text = "준비 완료";
             }
             else
             {
