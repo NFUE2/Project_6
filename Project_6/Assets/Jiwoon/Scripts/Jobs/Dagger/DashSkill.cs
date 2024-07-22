@@ -6,6 +6,7 @@ public class DashSkill : SkillBase
 {
     public float dashDistance = 5f;
     public float dashSpeed = 10f;
+    public Transform playerTransform;
     public LayerMask enemyLayer;
     public PlayerDataSO PlayerData;
 
@@ -25,7 +26,16 @@ public class DashSkill : SkillBase
     private IEnumerator Dash()
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = transform.position + transform.forward * dashDistance;
+        Vector3 endPosition;
+        if (playerTransform.localScale.x == 1)
+        {
+            endPosition = transform.position + transform.right * -(dashDistance);
+        }
+        else
+        {
+            endPosition = transform.position + transform.right * dashDistance;
+        }
+        
         float startTime = Time.time;
 
         while (Time.time < startTime + (dashDistance / dashSpeed))
