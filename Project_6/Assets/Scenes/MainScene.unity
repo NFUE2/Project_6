@@ -17623,7 +17623,7 @@ MonoBehaviour:
   Q_Info: {fileID: 1665453558}
   E_Info: {fileID: 2142467104}
   Button: {fileID: 1683651574}
-  panel: {fileID: 0}
+  panel: {fileID: 1471252011}
   choicebButton: {fileID: 0}
 --- !u!114 &1440157986
 MonoBehaviour:
