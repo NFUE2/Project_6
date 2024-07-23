@@ -20,16 +20,16 @@ public class Button_Highlighted : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.color = new Color(1f, 1f, 1f, 1f);
+        image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
     }
 
     public void OnEnabled()
     {
-        image.color = new Color(1f, 1f, 1f, 1f);
+        image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
     }
 
     public void OnDisable()
     {
-        image.color = new Color(1f, 1f, 1f, 1f);
+        image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
     }
 }
