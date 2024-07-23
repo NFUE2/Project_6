@@ -50,9 +50,11 @@ public class MonsterAttackState : MonsterBaseState
         {
             Aim();
 
-            lastAttackTime = Time.time;
-            StartTriggerAnimation(stateMachine.controller.animationData.attack);
             isAttacking = true;
+            lastAttackTime = Time.time;
+            StartAnimation(stateMachine.controller.animationData.attack);
+
+            //StartTriggerAnimation(stateMachine.controller.animationData.attack);
             //StopAnimation(stateMachine.controller.animationData.attack);
             //attack.Attack();
         }
@@ -68,8 +70,12 @@ public class MonsterAttackState : MonsterBaseState
     {
         Animator animator = stateMachine.controller.animator;
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-
-        if (info.normalizedTime >= 1.0f) isAttacking = false;
+        
+        if (info.normalizedTime >= 1.5f)
+        {
+            isAttacking = false;
+            StopAnimation(stateMachine.controller.animationData.attack);
+        }
     }
 
 
