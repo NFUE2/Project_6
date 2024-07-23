@@ -17374,10 +17374,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    stage: {fileID: 0}
-    stageBackground: {fileID: 0}
-    destination: {fileID: 0}
-    bgm: 0
+    stage: {fileID: 1412358509}
+    stageBackground: {fileID: 1626237301}
+    destination: {fileID: 1060252967}
+    bgm: 2
 --- !u!61 &1400989806
 BoxCollider2D:
   m_ObjectHideFlags: 0
