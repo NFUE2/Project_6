@@ -17693,10 +17693,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    stage: {fileID: 0}
-    stageBackground: {fileID: 0}
-    destination: {fileID: 0}
-    bgm: 0
+    stage: {fileID: 1412358509}
+    stageBackground: {fileID: 1626237301}
+    destination: {fileID: 1060252967}
+    bgm: 2
 --- !u!61 &1400989806
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17942,7 +17942,7 @@ MonoBehaviour:
   Q_Info: {fileID: 1665453558}
   E_Info: {fileID: 2142467104}
   Button: {fileID: 1683651574}
-  panel: {fileID: 0}
+  panel: {fileID: 1471252011}
   choicebButton: {fileID: 0}
 --- !u!114 &1440157986
 MonoBehaviour:
