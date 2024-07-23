@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChooseJob_Button : MonoBehaviour
+public class ChooseJob_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public Button SwordmanBtn;
@@ -16,6 +16,15 @@ public class ChooseJob_Button : MonoBehaviour
     public Button MagicianBtn;
     public Button AssassinBtn;
 
+    public Image SwordmanIMG;
+    public Image ArcherIMG;
+    public Image HammerIMG;
+    public Image GunnerIMG;
+    public Image SniperIMG;
+    public Image PaladinIMG;
+    public Image MagicianIMG;
+    public Image AssassinIMG;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,123 +35,117 @@ public class ChooseJob_Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ColorChange(SwordmanBtn);
-        ColorChange(ArcherBtn);
-        ColorChange(HammerBtn);
-        ColorChange(GunnerBtn);
-        ColorChange(SniperBtn);
-        ColorChange(PaladinBtn);
-        ColorChange(MagicianBtn);
-        ColorChange(AssassinBtn);
+
     }
 
-// public void OnPointerClick(PointerEventData eventData)
-// {
-//     SwordmanBtn.GetComponent<Outline>().enabled = true;
-//     ArcherBtn.GetComponent<Outline>().enabled = true;
-//     HammerBtn.GetComponent<Outline>().enabled = true;
-//     GunnerBtn.GetComponent<Outline>().enabled = true;
-//     SniperBtn.GetComponent<Outline>().enabled = true;
-//     PaladinBtn.GetComponent<Outline>().enabled = true;
-//     MagicianBtn.GetComponent<Outline>().enabled = true;
-//     AssassinBtn.GetComponent<Outline>().enabled = true;
-// }
-// 
-// public void OnPointerEnter(PointerEventData eventData)
-// {
-//     SwordmanBtn.GetComponent<Outline>().enabled = true;
-//     ArcherBtn.GetComponent<Outline>().enabled = true;
-//     HammerBtn.GetComponent<Outline>().enabled = true;
-//     GunnerBtn.GetComponent<Outline>().enabled = true;
-//     SniperBtn.GetComponent<Outline>().enabled = true;
-//     PaladinBtn.GetComponent<Outline>().enabled = true;
-//     MagicianBtn.GetComponent<Outline>().enabled = true;
-//     AssassinBtn.GetComponent<Outline>().enabled = true;
-// }
-// 
-// public void OnPointerExit(PointerEventData eventData)
-// {
-//     SwordmanBtn.GetComponent<Outline>().enabled = false;
-//     ArcherBtn.GetComponent<Outline>().enabled = false;
-//     HammerBtn.GetComponent<Outline>().enabled = false;
-//     GunnerBtn.GetComponent<Outline>().enabled = false;
-//     SniperBtn.GetComponent<Outline>().enabled = false;
-//     PaladinBtn.GetComponent<Outline>().enabled = false;
-//     MagicianBtn.GetComponent<Outline>().enabled = false;
-//     AssassinBtn.GetComponent<Outline>().enabled = false;
-// }
+
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+    }
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
+    }
 
     public void ColorChange(Button button)
     {
-        //ColorBlock colorBlock = button.colors;
 
-        //colorBlock.highlightedColor = new Color(0f, 1f, 0f, 1f);
-        //colorBlock.pressedColor = new Color(0f, 0.5f, 0f, 1f);
+        SwordmanBtn.GetComponent<Button_Highlighted>().enabled = true;
+        ArcherBtn.GetComponent<Button_Highlighted>().enabled = true;
+        HammerBtn.GetComponent<Button_Highlighted>().enabled = true;
+        GunnerBtn.GetComponent<Button_Highlighted>().enabled = true;
+        SniperBtn.GetComponent<Button_Highlighted>().enabled = true;
+        PaladinBtn.GetComponent<Button_Highlighted>().enabled = true;
+        MagicianBtn.GetComponent<Button_Highlighted>().enabled = true;
+        AssassinBtn.GetComponent<Button_Highlighted>().enabled = true;
 
+        SwordmanBtn.GetComponent<Button_isOn>().ButtonIsOn = button == SwordmanBtn;
+        ArcherBtn.GetComponent<Button_isOn>().ButtonIsOn = button == ArcherBtn;
+        HammerBtn.GetComponent<Button_isOn>().ButtonIsOn = button == HammerBtn;
+        GunnerBtn.GetComponent<Button_isOn>().ButtonIsOn = button == GunnerBtn;
+        SniperBtn.GetComponent<Button_isOn>().ButtonIsOn = button == SniperBtn;
+        PaladinBtn.GetComponent<Button_isOn>().ButtonIsOn = button == PaladinBtn; 
+        MagicianBtn.GetComponent<Button_isOn>().ButtonIsOn = button == MagicianBtn;
+        AssassinBtn.GetComponent<Button_isOn>().ButtonIsOn = button == AssassinBtn;
+
+        
+        SwordmanIMG.color = new Color(1f, 1f, 1f, 1f);
+        ArcherIMG.color = new Color(1f, 1f, 1f, 1f);
+        HammerIMG.color = new Color(1f, 1f, 1f, 1f);
+        GunnerIMG.color = new Color(1f, 1f, 1f, 1f);
+        SniperIMG.color = new Color(1f, 1f, 1f, 1f);
+        PaladinIMG.color = new Color(1f, 1f, 1f, 1f);
+        MagicianIMG.color = new Color(1f, 1f, 1f, 1f);
+        AssassinIMG.color = new Color(1f, 1f, 1f, 1f);
+       
 
         if (SwordmanBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
 
-            SwordmanBtn.GetComponent<Outline>().enabled = true;
+            SwordmanBtn.GetComponent<Button_Highlighted>().enabled = false;
+            
+            
+            SwordmanIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (ArcherBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
+            ArcherBtn.GetComponent<Button_Highlighted>().enabled = false;
 
-            ArcherBtn.GetComponent<Outline>().enabled = true;
+            
+            ArcherIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (HammerBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
 
-            HammerBtn.GetComponent<Outline>().enabled = true;
+            HammerBtn.GetComponent<Button_Highlighted>().enabled = false;
+
+            
+            HammerIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (GunnerBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
+            GunnerBtn.GetComponent<Button_Highlighted>().enabled = false;
 
-            GunnerBtn.GetComponent<Outline>().enabled = true;
+            
+            GunnerIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (SniperBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
+            SniperBtn.GetComponent<Button_Highlighted>().enabled = false;
 
-            SniperBtn.GetComponent<Outline>().enabled = true;
+            
+            SniperIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (PaladinBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+            
+            PaladinBtn.GetComponent<Button_Highlighted>().enabled = false;
 
-            PaladinBtn.GetComponent<Outline>().enabled = true;
+            
+            PaladinIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (MagicianBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
+           
+            MagicianBtn.GetComponent<Button_Highlighted>().enabled = false;
 
-            MagicianBtn.GetComponent<Outline>().enabled = true;
+            
+            MagicianIMG.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (AssassinBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {
-            //colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
-            //button.colors = colorBlock;
 
-            AssassinBtn.GetComponent<Outline>().enabled = true;
+            AssassinBtn.GetComponent<Button_Highlighted>().enabled = false;
+
+            AssassinIMG.color = new Color(0f, 1f, 0f, 1f);
         }
-        else
-        {
-            //colorBlock.selectedColor = Color.white;
-            //button.colors = colorBlock;
-
-        }
-
-        //button.colors = colorBlock;
     }
 }

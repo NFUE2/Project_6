@@ -29,7 +29,7 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
         selectButton = GetComponent<Button>();
 
         //characterName.text = data.name;
-        image.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+        //image.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
     }
 
     public void OnClick(/*GameObject panel*/)
