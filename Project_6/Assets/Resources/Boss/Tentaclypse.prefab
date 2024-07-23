@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8815386669755593988}
   - component: {fileID: 4272298900489271828}
   - component: {fileID: 8920884288538020069}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tentaclypse
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1467551383740915762, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5286571439384531182, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -343,9 +347,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321108517342786864, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319226179282378960, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8319226179282378960, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547671169546599181, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8547671169546599181, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
       propertyPath: m_IsActive

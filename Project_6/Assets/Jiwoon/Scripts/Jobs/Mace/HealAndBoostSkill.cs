@@ -25,7 +25,8 @@ public class HealAndBoostSkill : SkillBase
 
     private IEnumerator HealAndBoost()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); // Èú ¹üÀ§
+        //Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); // Èú ¹üÀ§
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 5f); // Èú ¹üÀ§
 
         int healedPlayers = 0;
 
