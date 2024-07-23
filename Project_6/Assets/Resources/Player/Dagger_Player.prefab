@@ -91,7 +91,7 @@ MonoBehaviour:
   playerTransform: {fileID: 8514089115535958139}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   damage: 10
 --- !u!114 &530937857979230958
