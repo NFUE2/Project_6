@@ -19,6 +19,7 @@ public class ChargeSkill : SkillBase
     {
         animator = GetComponent<Animator>();
         cooldownDuration = PlayerData.SkillECooldown;
+        lastActionTime = -cooldownDuration; // lastActionTime을 초기화하여 처음에 쿨다운이 적용되지 않도록 함
     }
 
     public override void UseSkill()
@@ -26,7 +27,7 @@ public class ChargeSkill : SkillBase
         if (isCharging || Time.time - lastActionTime < cooldownDuration) return;
 
         isCharging = true;
-        animator.SetBool("Charging", true);
+        animator.SetBool("IsCharging", true);
         StartCoroutine(Charging());
     }
 
@@ -40,7 +41,7 @@ public class ChargeSkill : SkillBase
             yield return null;
         }
         isCharging = false;
-        animator.SetBool("Charging", false);
+        animator.SetBool("IsCharging", false);
         isSkillAttack = true;
         lastActionTime = Time.time;
         Smash(currentDamage);
