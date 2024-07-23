@@ -105,7 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   ShieldDuration: 0
-  shield: {fileID: 0}
+  shieldPrefab: {fileID: 0}
+  shieldDistance: 1
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
 --- !u!114 &5883604329999571394
 MonoBehaviour:
@@ -126,6 +127,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &6928284306107983700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +485,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: IsAttack
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsCharging
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -523,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  input: {fileID: 5883604329999571394}
   healthBarImage: {fileID: 7948426973171890689}
 --- !u!1 &3400988016390340859
 GameObject:
