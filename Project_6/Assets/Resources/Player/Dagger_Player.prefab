@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b27dda7484ee647a8489b1462a409a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   dashDistance: 5
   dashSpeed: 10
   enemyLayer:
@@ -103,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5730d230cf6d17148acc5d86c0cf121c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   currentStack: 0
   maxStack: 10
   damagePerStack: 10
@@ -310,7 +312,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1830426979, guid: 5a587cb3a3877144ea15a23ed2b51a84, type: 3}
+  m_Sprite: {fileID: -1328111920, guid: e86b12fce4f1df142a2941932dddb401, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -403,7 +405,7 @@ Animator:
   m_GameObject: {fileID: 3303011862137926036}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03d6b95fbf4fa0d4880d6e7bad8fc929, type: 2}
+  m_Controller: {fileID: 9100000, guid: 49a4e60c5eab4404c9f501fcf6b1401f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -505,7 +507,6 @@ MonoBehaviour:
   - {fileID: 2299752643210608358}
   - {fileID: 530937857979230958}
   - {fileID: 921877507740208664}
-  - {fileID: 3112970485965755033}
   - {fileID: 6589220687722505623}
   - {fileID: 2595931983627241318}
   - {fileID: 8892705457421504442}

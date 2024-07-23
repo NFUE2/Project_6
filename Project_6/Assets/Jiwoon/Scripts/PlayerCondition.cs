@@ -35,7 +35,9 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     void Die()
     {
-        Debug.Log("Player died!");
-        Destroy(gameObject);
+        //Debug.Log("Player died!");
+        //Destroy(gameObject);
+
+        currentHealth = maxHealth;
     }
 }

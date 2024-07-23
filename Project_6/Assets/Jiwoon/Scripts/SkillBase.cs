@@ -16,7 +16,6 @@ public abstract class SkillBase : MonoBehaviour
     {
         if (cooldownText != null)
         {
-            Debug.Log(1);
             if (Time.time - lastActionTime >= cooldownDuration)
             {
                 cooldownText.text = "준비 완료";

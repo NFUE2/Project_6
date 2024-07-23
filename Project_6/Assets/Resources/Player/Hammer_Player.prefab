@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45bb38aa45cba34c9ab20a97fcb4bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   maxChargingTime: 0
   isCharging: 0
   damage: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181142436eae4c24f8e5f1db28051c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   ShieldDuration: 0
   shield: {fileID: 0}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
@@ -307,7 +309,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1830426979, guid: 5a587cb3a3877144ea15a23ed2b51a84, type: 3}
+  m_Sprite: {fileID: 382337242, guid: ce1a3ea3dc56d7340bfb12439fa60309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -400,7 +402,7 @@ Animator:
   m_GameObject: {fileID: 2638713023670290105}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03d6b95fbf4fa0d4880d6e7bad8fc929, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5e9ebeb547489f04eb8034b86379bbc9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -502,7 +504,6 @@ MonoBehaviour:
   - {fileID: 6180402554713959692}
   - {fileID: 1214569859611142660}
   - {fileID: 6928284306107983700}
-  - {fileID: 7933141440633709771}
   - {fileID: 4551887635642697737}
   - {fileID: 1740896559584676973}
   - {fileID: 5883604329999571394}

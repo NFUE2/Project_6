@@ -14,7 +14,6 @@ public class MonsterLongAttack : MonsterAttack
         Vector2 direction = Direction(fire.position,controller.target.position);
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
         //string projectileName = data.projectile.name; //투사체 이름
         //GameObject proejectile = PhotonNetwork.Instantiate($"Projectile/{projectileName}", fire.position, Quaternion.identity); //복사할 투사체
         GameObject proejectile = Instantiate(data.projectile, fire.position, Quaternion.identity); //복사할 투사체

@@ -3993,7 +3993,7 @@ Transform:
   m_GameObject: {fileID: 219320311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 285.34, y: -4.85, z: 0}
+  m_LocalPosition: {x: 125.96, y: -4.85, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4058,7 +4058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   votingObject: {fileID: 1625198682}
-  text: {fileID: 1531933951}
+  text: {fileID: 982868371}
   data:
     bossStart: {fileID: 51564751}
     bossBattleCameraPos: {fileID: 1079956363}
@@ -11335,7 +11335,7 @@ PrefabInstance:
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 1295449624862701543, guid: 2b91f627dc6dc384e8bfcd758104be3f, type: 3}
+      objectReference: {fileID: 1295449624862701543, guid: bb8d249c655229d47b4053e78f2f4619, type: 3}
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: Skill_E
       value: 
@@ -11689,8 +11689,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b8728d20b5d4c540b335c3789517218, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11773,8 +11773,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11907,8 +11907,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13882,8 +13882,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14065,8 +14065,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b8728d20b5d4c540b335c3789517218, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16633,7 +16633,7 @@ PrefabInstance:
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 7432206576784740991, guid: dc1887c0f66389f4cb9da2f6e6a7c9bf, type: 3}
+      objectReference: {fileID: 7432206576784740991, guid: bdedd50de84cbe94985988575b102d04, type: 3}
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: Skill_E
       value: 
@@ -18018,8 +18018,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18703,7 +18703,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e4c261293bfe98f4fa9d9591373bc443, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -32620,7 +32620,7 @@ PrefabInstance:
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 2638713023670290105, guid: fc9fe5862d3c4f04491c8aed6332b66e, type: 3}
+      objectReference: {fileID: 2638713023670290105, guid: b1f1d29584c96f94ba1d7c352346dd52, type: 3}
     - target: {fileID: 2700530224519053287, guid: f61547ad1e777164e8688ea2449a3432, type: 3}
       propertyPath: Skill_E
       value: 
