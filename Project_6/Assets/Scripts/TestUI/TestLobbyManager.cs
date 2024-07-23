@@ -89,6 +89,8 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
 
     public void OnCreateRoom(GameObject panel) //방만들기
     {
+        if (roomInputField.text == "") return;
+
         panel.SetActive(false);
 
         RoomOptions roomOptions = new RoomOptions();
