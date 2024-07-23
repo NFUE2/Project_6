@@ -84,6 +84,11 @@ MonoBehaviour:
   damage: 100
   damageRate: 3
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  attackSize: {x: 2, y: 2}
+  attackOffset: {x: -1, y: 0.3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1214569859611142660
 MonoBehaviour:
   m_ObjectHideFlags: 0
