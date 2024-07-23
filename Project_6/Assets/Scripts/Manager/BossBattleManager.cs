@@ -16,7 +16,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
     public BossStateMachine bossStateMachine;
     public GameObject[] bossEndObject;
 
-    private float attackCoolDown = 3f;
+    private float attackCoolDown = 6f;
     private float curCoolDown = 0f;
     private bool isFirst = true;
     public bool isAttacking;
