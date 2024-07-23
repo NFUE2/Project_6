@@ -19,7 +19,7 @@ public class DaggerPlayer : MeleePlayerBase
     public override void Attack()
     {
         base.Attack();
-        stackSkill.IncreaseStack();
+        CheckAndIncreaseStack();
     }
 
     public override void UseSkillQ()
@@ -32,5 +32,17 @@ public class DaggerPlayer : MeleePlayerBase
         stackSkill.UseSkill();
     }
 
-    // Attack 메서드는 MeleePlayerBase에서 상속받음
+    private void CheckAndIncreaseStack()
+    {
+        Vector2 attackPosition = CalculateAttackPosition();
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            if (enemy.GetComponent<IDamagable>() != null)
+            {
+                stackSkill.IncreaseStack();
+            }
+        }
+    }
 }

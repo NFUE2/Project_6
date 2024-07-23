@@ -67,7 +67,7 @@ MonoBehaviour:
   attackDamage: 10
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   attackCooldown: 1
   attackSize: {x: 0.6, y: 1}
   attackOffset: {x: -0.6, y: 0}
@@ -93,6 +93,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  damage: 10
 --- !u!114 &530937857979230958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,12 @@ MonoBehaviour:
   damagePerStack: 10
   stackText: {fileID: 0}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackSize: {x: 0.6, y: 1}
+  attackOffset: {x: -0.6, y: 0}
+  animator: {fileID: 6244255465410107989}
 --- !u!114 &8892705457421504442
 MonoBehaviour:
   m_ObjectHideFlags: 0

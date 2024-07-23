@@ -12,6 +12,7 @@ public class StackSkill : SkillBase
     public LayerMask enemyLayer;
     public Vector2 attackSize; // 공격 박스 크기
     public Vector2 attackOffset; // 공격 박스 오프셋
+    public Animator animator; // Animator 추가
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class StackSkill : SkillBase
     {
         if (currentStack > 0)
         {
+            animator.SetTrigger("IsAttack"); // 일반 공격 애니메이션 트리거
             DealDamageWithStack();
             currentStack = 0;
             //stackText.text = "스택: 0";

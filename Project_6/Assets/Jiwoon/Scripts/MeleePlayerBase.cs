@@ -41,7 +41,7 @@ public abstract class MeleePlayerBase : PlayerBase
         }
     }
 
-    private Vector2 CalculateAttackPosition()
+    protected Vector2 CalculateAttackPosition()
     {
         Vector2 basePosition = (Vector2)transform.position;
 
