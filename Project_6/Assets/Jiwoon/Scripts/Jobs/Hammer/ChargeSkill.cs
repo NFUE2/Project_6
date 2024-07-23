@@ -19,6 +19,7 @@ public class ChargeSkill : SkillBase
     {
         animator = GetComponent<Animator>();
         cooldownDuration = PlayerData.SkillECooldown;
+        lastActionTime = -cooldownDuration; // lastActionTime을 초기화하여 처음에 쿨다운이 적용되지 않도록 함
     }
 
     public override void UseSkill()
