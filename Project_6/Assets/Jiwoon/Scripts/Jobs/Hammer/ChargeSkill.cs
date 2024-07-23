@@ -26,7 +26,7 @@ public class ChargeSkill : SkillBase
         if (isCharging || Time.time - lastActionTime < cooldownDuration) return;
 
         isCharging = true;
-        animator.SetBool("Charging", true);
+        animator.SetBool("IsCharging", true);
         StartCoroutine(Charging());
     }
 
@@ -40,7 +40,7 @@ public class ChargeSkill : SkillBase
             yield return null;
         }
         isCharging = false;
-        animator.SetBool("Charging", false);
+        animator.SetBool("IsCharging", false);
         isSkillAttack = true;
         lastActionTime = Time.time;
         Smash(currentDamage);
