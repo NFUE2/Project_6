@@ -62,8 +62,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCooldown: 3
-  attackSize: {x: 0.6, y: 1}
-  attackOffset: {x: -0.6, y: 0}
+  attackSize: {x: 1.4, y: 2}
+  attackOffset: {x: -1, y: 0.4}
   shieldSkill: {fileID: 1214569859611142660}
   chargeSkill: {fileID: 6180402554713959692}
 --- !u!114 &6180402554713959692
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   ShieldDuration: 3
-  shieldPrefab: {fileID: 0}
+  shieldPrefab: {fileID: 9139348047338328184, guid: 52940a8d7c969e446bcb797f51a94ef1, type: 3}
   shieldDistance: 1
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
 --- !u!114 &5883604329999571394

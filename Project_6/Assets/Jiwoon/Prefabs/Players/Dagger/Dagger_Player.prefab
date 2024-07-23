@@ -61,10 +61,10 @@ MonoBehaviour:
   attackDamage: 10
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   attackCooldown: 1
-  attackSize: {x: 0.6, y: 1}
-  attackOffset: {x: -0.6, y: 0}
+  attackSize: {x: 0.6, y: 0.5}
+  attackOffset: {x: -0.6, y: -0.2}
   dashSkill: {fileID: 2299752643210608358}
   stackSkill: {fileID: 530937857979230958}
 --- !u!114 &2299752643210608358
@@ -79,8 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b27dda7484ee647a8489b1462a409a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   dashDistance: 5
   dashSpeed: 10
+  playerTransform: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -97,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5730d230cf6d17148acc5d86c0cf121c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   currentStack: 0
   maxStack: 10
   damagePerStack: 10
@@ -121,6 +124,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &921877507740208664
 MonoBehaviour:
   m_ObjectHideFlags: 0
