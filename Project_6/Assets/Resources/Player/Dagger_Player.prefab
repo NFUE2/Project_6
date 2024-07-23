@@ -88,6 +88,7 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   dashDistance: 5
   dashSpeed: 10
+  playerTransform: {fileID: 8514089115535958139}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &921877507740208664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  input: {fileID: 8892705457421504442}
   healthBarImage: {fileID: 6527393112636791992}
 --- !u!1 &7132501707916259111
 GameObject:

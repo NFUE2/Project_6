@@ -21,12 +21,12 @@ public class StackSkill : SkillBase
         {
             DealDamageWithStack();
             currentStack = 0;
-            stackText.text = "스택: 0";
+            //stackText.text = "스택: 0";
             lastActionTime = Time.time;
         }
         else
         {
-            Debug.Log("스택이 부족합니다.");
+            Debug.Log($"스택이 부족합니다. 현재 스택 : {currentStack}");
         }
     }
 
@@ -45,6 +45,7 @@ public class StackSkill : SkillBase
         {
             currentStack = maxStack;
         }
-        stackText.text = $"스택: {currentStack}";
+        Debug.Log($"스택 증가! 현재 스택 : {currentStack}");
+        //stackText.text = $"스택: {currentStack}";
     }
 }

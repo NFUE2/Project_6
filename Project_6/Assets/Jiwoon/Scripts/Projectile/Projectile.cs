@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            //collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.GetComponent<IDamagable>()?.TakeDamage(damage);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Obstacle"))

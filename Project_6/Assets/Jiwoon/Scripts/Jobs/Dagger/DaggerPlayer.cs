@@ -16,6 +16,12 @@ public class DaggerPlayer : MeleePlayerBase
         stackSkill.SetCooldownText(eCooldownText);
     }
 
+    public override void Attack()
+    {
+        base.Attack();
+        stackSkill.IncreaseStack();
+    }
+
     public override void UseSkillQ()
     {
         dashSkill.UseSkill();

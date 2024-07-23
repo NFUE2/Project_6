@@ -231,6 +231,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &6325477453461356325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,6 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  input: {fileID: 2355582851979590813}
   healthBarImage: {fileID: 1888730603558714307}
 --- !u!1001 &6265712663075130703
 PrefabInstance:

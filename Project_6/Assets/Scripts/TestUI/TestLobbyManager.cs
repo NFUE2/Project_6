@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class TestLobbyManager : MonoBehaviourPunCallbacks
@@ -23,6 +24,8 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
     public readonly string connectRoomMessage = "방에 입장중입니다.";
 
     public string choiceRoomName = string.Empty;
+
+    public TMP_InputField textMeshPro;
 
     public override void OnJoinedLobby() //로비에 입장
     {
@@ -89,12 +92,15 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
 
     public void OnCreateRoom(GameObject panel) //방만들기
     {
-        if (roomInputField.text == "") return;
+        
+        if(textMeshPro.text != "" || textMeshPro.text != null)
+        {
+            panel.SetActive(false);
 
-        panel.SetActive(false);
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 4;
+            PhotonNetwork.CreateRoom(roomInputField.text, roomOptions);
+        }
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4;
-        PhotonNetwork.CreateRoom(roomInputField.text, roomOptions);
     }
 }
