@@ -18,10 +18,12 @@ MonoBehaviour:
   maxHP: 0
   moveSpeed: 0
   attackTime: 0
-  attackDamage: 0
+  attackDamage: 10
   deffenceDamage: 0
-  jumpForce: 5
-  SkillQCooldown: 0
-  SkillECooldown: 0
+  jumpForce: 7
+  SkillQCooldown: 5
+  SkillECooldown: 5
+  attackCooldown: 1
   walkSpeed: 3
   runSpeed: 5
+  playerdefense: 0

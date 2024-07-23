@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4eb273f325a133429e88640d62ce1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   healDuration: 5
   healAmount: 10
   statBoostDuration: 10
@@ -157,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a8257d09b9b5849a427a4b82c649f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   dashSpeed: 10
   dashDuration: 0.5
   dashDamage: 20

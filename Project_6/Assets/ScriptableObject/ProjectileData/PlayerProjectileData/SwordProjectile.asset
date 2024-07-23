@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83381c35ee8551648ab5207841541820, type: 3}
-  m_Name: ObjectSO 3
+  m_Script: {fileID: 11500000, guid: 94094e45c21c13c4c84e46926c93894d, type: 3}
+  m_Name: SwordProjectile
   m_EditorClassIdentifier: 
-  id: 4
-  name: "\uAD81\uC218"
+  id: 0
+  name: 
   info: 
+  moveSpeed: 10
+  damage: 15
+  target:
+    serializedVersion: 2
+    m_Bits: 8
