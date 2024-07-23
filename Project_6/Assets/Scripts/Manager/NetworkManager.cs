@@ -30,9 +30,9 @@ public class NetworkManager : PunSingleton<NetworkManager>
     public override void Awake()
     {
         base.Awake();
-#if UNITY_EDITOR
-        state.enabled = true;
-#endif
+//#if UNITY_EDITOR
+//        state.enabled = true;
+//#endif
     }
 
     private void Update()

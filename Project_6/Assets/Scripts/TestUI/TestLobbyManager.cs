@@ -92,15 +92,14 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
 
     public void OnCreateRoom(GameObject panel) //방만들기
     {
-        
-        if(textMeshPro.text != "" || textMeshPro.text != null)
-        {
-            panel.SetActive(false);
 
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 4;
-            PhotonNetwork.CreateRoom(roomInputField.text, roomOptions);
-        }
+        if (textMeshPro.text == "") return;
+
+        panel.SetActive(false);
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 4;
+        PhotonNetwork.CreateRoom(roomInputField.text, roomOptions);
 
     }
 }
