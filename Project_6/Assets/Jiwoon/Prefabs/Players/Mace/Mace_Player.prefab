@@ -131,13 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4eb273f325a133429e88640d62ce1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   healDuration: 5
   healAmount: 10
   statBoostDuration: 10
   defenseBoost: 10
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
 --- !u!114 &5427429350239134251
 MonoBehaviour:
@@ -151,14 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a8257d09b9b5849a427a4b82c649f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 10
+  cooldownText: {fileID: 0}
+  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   dashDuration: 0.5
-  dashDamage: 20
-  reducedDamage: 0.5
+  dashSpeed: 10
   bossLayer:
     serializedVersion: 2
     m_Bits: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  dashDamage: 20
+  reducedDamageDuringDash: 0.5
+  damageReduction: 0
 --- !u!114 &7355382180850020735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCooldown: 1
-  attackSize: {x: 0.6, y: 1}
+  attackSize: {x: 0.6, y: 1.2}
   attackOffset: {x: -0.6, y: 0}
   healAndBoostSkill: {fileID: 2362374036882893018}
   maceChargeSkill: {fileID: 5427429350239134251}
@@ -203,6 +206,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &2210869623878421206
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -72,15 +72,15 @@ public class ChooseJob_Button : MonoBehaviour, IPointerEnterHandler, IPointerExi
         AssassinBtn.GetComponent<Button_isOn>().ButtonIsOn = button == AssassinBtn;
 
         
-        SwordmanIMG.color = new Color(1f, 1f, 1f, 1f);
-        ArcherIMG.color = new Color(1f, 1f, 1f, 1f);
-        HammerIMG.color = new Color(1f, 1f, 1f, 1f);
-        GunnerIMG.color = new Color(1f, 1f, 1f, 1f);
-        SniperIMG.color = new Color(1f, 1f, 1f, 1f);
-        PaladinIMG.color = new Color(1f, 1f, 1f, 1f);
-        MagicianIMG.color = new Color(1f, 1f, 1f, 1f);
-        AssassinIMG.color = new Color(1f, 1f, 1f, 1f);
-       
+        SwordmanIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        ArcherIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        HammerIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        GunnerIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        SniperIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        PaladinIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        MagicianIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        AssassinIMG.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+
 
         if (SwordmanBtn.GetComponent<Button_isOn>().ButtonIsOn == true)
         {

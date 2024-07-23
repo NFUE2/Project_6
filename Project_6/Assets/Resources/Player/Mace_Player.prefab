@@ -165,6 +165,9 @@ MonoBehaviour:
   bossLayer:
     serializedVersion: 2
     m_Bits: 0
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
   dashDamage: 20
   reducedDamageDuringDash: 0.5
   damageReduction: 0
@@ -610,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  input: {fileID: 2852413717840099530}
+  input: {fileID: 0}
   healthBarImage: {fileID: 174005878808005513}
 --- !u!1 &4120180061044369264
 GameObject:
