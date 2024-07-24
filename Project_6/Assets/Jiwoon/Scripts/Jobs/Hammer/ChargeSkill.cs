@@ -13,6 +13,7 @@ public class ChargeSkill : SkillBase
     public LayerMask enemyLayer; // 적 레이어
 
     private bool isCharging; // 충전 중인지 여부
+    private bool isAttacking; // 스킬 공격 여부
     private Animator animator; // 애니메이터
     private float currentDamage; // 현재 피해량
     private Rigidbody2D rb; // Rigidbody2D 참조
@@ -31,7 +32,7 @@ public class ChargeSkill : SkillBase
 
     public override void UseSkill()
     {
-        if (isCharging || Time.time - lastActionTime < cooldownDuration) return;
+        if (isCharging || isAttacking || Time.time - lastActionTime < cooldownDuration) return;
 
         isCharging = true;
         animator.SetBool("IsCharging", true);
@@ -76,13 +77,14 @@ public class ChargeSkill : SkillBase
         isCharging = false;
         animator.SetBool("IsCharging", false);
         lastActionTime = Time.time;
+        isAttacking = true;
         animator.SetTrigger("IsAttack"); // 공격 애니메이션 트리거
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
-        if (!isCharging)
+        if (!isCharging && isAttacking)
         {
             Vector2 attackPosition = CalculateAttackPosition();
             Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
@@ -93,6 +95,7 @@ public class ChargeSkill : SkillBase
             }
 
             currentDamage = damage;
+            isAttacking = false;
             EnableMovement(); // 공격이 끝난 후 움직임 다시 활성화
         }
     }
