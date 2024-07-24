@@ -109,8 +109,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackSize: {x: 0, y: 0}
-  attackOffset: {x: 0, y: 0}
+  attackSize: {x: 1, y: 0.5}
+  attackOffset: {x: -0.8, y: -0.2}
+  animator: {fileID: 6244255465410107989}
 --- !u!114 &8892705457421504442
 MonoBehaviour:
   m_ObjectHideFlags: 0

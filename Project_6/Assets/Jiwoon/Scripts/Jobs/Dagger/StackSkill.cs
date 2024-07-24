@@ -26,7 +26,6 @@ public class StackSkill : SkillBase
             animator.SetTrigger("IsAttack"); // 일반 공격 애니메이션 트리거
             DealDamageWithStack();
             currentStack = 0;
-            //stackText.text = "스택: 0";
             lastActionTime = Time.time;
         }
         else
@@ -77,7 +76,6 @@ public class StackSkill : SkillBase
             currentStack = maxStack;
         }
         Debug.Log($"스택 증가! 현재 스택 : {currentStack}");
-        //stackText.text = $"스택: {currentStack}";
     }
 
     private void OnDrawGizmosSelected()
