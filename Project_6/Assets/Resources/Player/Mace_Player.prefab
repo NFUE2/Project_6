@@ -159,14 +159,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  dashSpeed: 10
+  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   dashDuration: 0.5
-  dashDamage: 20
-  reducedDamage: 0.5
+  dashSpeed: 10
   bossLayer:
     serializedVersion: 2
     m_Bits: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  dashDamage: 20
+  reducedDamageDuringDash: 0.5
+  damageReduction: 0
 --- !u!114 &7355382180850020735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +212,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &2210869623878421206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  input: {fileID: 0}
   healthBarImage: {fileID: 174005878808005513}
 --- !u!1 &4120180061044369264
 GameObject:
@@ -648,6 +651,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2967229150111531164}
     m_Modifications:
+    - target: {fileID: 694700692200527335, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_text
+      value: 0.0
+      objectReference: {fileID: 0}
     - target: {fileID: 1694630360464439370, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Pivot.x
       value: 0
