@@ -5,7 +5,6 @@ using System.Collections;
 public class ChargeSkill : SkillBase
 {
     public float maxChargingTime; // 최대 충전 시간
-    public bool isCharging; // 충전 중인지 여부
     public float damage; // 기본 피해량
     public float damageRate; // 충전 시 증가하는 피해량 비율
     public PlayerDataSO PlayerData; // 플레이어 데이터
@@ -13,6 +12,7 @@ public class ChargeSkill : SkillBase
     public Vector2 attackOffset; // 공격 박스 오프셋
     public LayerMask enemyLayer; // 적 레이어
 
+    private bool isCharging; // 충전 중인지 여부
     private Animator animator; // 애니메이터
     private float currentDamage; // 현재 피해량
     private Rigidbody2D rb; // Rigidbody2D 참조
@@ -82,16 +82,19 @@ public class ChargeSkill : SkillBase
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
-        Vector2 attackPosition = CalculateAttackPosition();
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
-
-        foreach (Collider2D enemy in hitEnemies)
+        if (!isCharging)
         {
-            enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
-        }
+            Vector2 attackPosition = CalculateAttackPosition();
+            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
 
-        currentDamage = damage;
-        EnableMovement(); // 공격이 끝난 후 움직임 다시 활성화
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
+            }
+
+            currentDamage = damage;
+            EnableMovement(); // 공격이 끝난 후 움직임 다시 활성화
+        }
     }
 
     private Vector2 CalculateAttackPosition()
