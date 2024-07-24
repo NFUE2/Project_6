@@ -18,14 +18,14 @@ public class ChargeSkill : SkillBase
     private float currentDamage; // 현재 피해량
     private bool isAttacking; // 공격 중인지 여부
     private Rigidbody2D rb; // Rigidbody2D 참조
-    private PlayerInput characterController; // CharacterController 참조 (있을 경우)
+    private CharacterController characterController; // CharacterController 참조 (있을 경우)
     private bool wasKinematic; // Rigidbody2D의 원래 kinematic 상태 저장
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        characterController = GetComponent<PlayerInput>();
+        characterController = GetComponent<CharacterController>();
         if (rb != null) wasKinematic = rb.isKinematic;
         cooldownDuration = PlayerData.SkillECooldown;
         lastActionTime = -cooldownDuration; // 초기 쿨다운 설정
@@ -77,9 +77,8 @@ public class ChargeSkill : SkillBase
         }
         isCharging = false;
         animator.SetBool("IsCharging", false);
-        isSkillAttack = true;
         lastActionTime = Time.time;
-        PerformAttack();
+        PerformAttack(); // 충전이 끝난 후에 공격 수행
         EnableMovement(); // 움직임 다시 활성화
     }
 
