@@ -87,7 +87,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   maxChargingTime: 3
-  isCharging: 0
   damage: 30
   damageRate: 5
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
@@ -733,11 +732,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2827318837713335597, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2827318837713335597, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827318837713335597, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827318837713335597, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2827318837713335597, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -749,11 +756,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6328126413248667002, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6328126413248667002, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328126413248667002, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328126413248667002, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6328126413248667002, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_AnchoredPosition.x
