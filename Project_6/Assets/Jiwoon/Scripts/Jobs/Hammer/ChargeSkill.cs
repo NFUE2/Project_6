@@ -17,10 +17,16 @@ public class ChargeSkill : SkillBase
     private Animator animator; // 애니메이터
     private float currentDamage; // 현재 피해량
     private bool isAttacking; // 공격 중인지 여부
+    private Rigidbody2D rb; // Rigidbody2D 참조
+    private PlayerInput characterController; // CharacterController 참조 (있을 경우)
+    private bool wasKinematic; // Rigidbody2D의 원래 kinematic 상태 저장
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        characterController = GetComponent<PlayerInput>();
+        if (rb != null) wasKinematic = rb.isKinematic;
         cooldownDuration = PlayerData.SkillECooldown;
         lastActionTime = -cooldownDuration; // 초기 쿨다운 설정
     }
@@ -31,7 +37,33 @@ public class ChargeSkill : SkillBase
 
         isCharging = true;
         animator.SetBool("IsCharging", true);
+        DisableMovement();
         StartCoroutine(Charging());
+    }
+
+    private void DisableMovement()
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true; // Rigidbody2D가 있을 경우 비활성화
+        }
+        if (characterController != null)
+        {
+            characterController.enabled = false; // CharacterController가 있을 경우 비활성화
+        }
+    }
+
+    private void EnableMovement()
+    {
+        if (rb != null)
+        {
+            rb.isKinematic = wasKinematic; // 원래 kinematic 상태 복원
+        }
+        if (characterController != null)
+        {
+            characterController.enabled = true; // CharacterController 다시 활성화
+        }
     }
 
     private IEnumerator Charging()
@@ -48,6 +80,7 @@ public class ChargeSkill : SkillBase
         isSkillAttack = true;
         lastActionTime = Time.time;
         PerformAttack();
+        EnableMovement(); // 움직임 다시 활성화
     }
 
     private void PerformAttack()

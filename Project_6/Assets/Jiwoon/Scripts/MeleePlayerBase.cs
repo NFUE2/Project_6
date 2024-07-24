@@ -23,7 +23,7 @@ public abstract class MeleePlayerBase : PlayerBase
         StartCoroutine(AttackCooldown());
     }
 
-    private IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
+    protected IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
     {
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;

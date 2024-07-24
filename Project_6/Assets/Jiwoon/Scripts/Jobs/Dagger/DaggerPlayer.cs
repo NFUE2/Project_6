@@ -19,10 +19,36 @@ public class DaggerPlayer : MeleePlayerBase
 
     public override void Attack()
     {
-        if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
+        if (isAttacking) return; // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
         animator.SetTrigger("IsAttack");
         StartCoroutine(PerformAttackWithStackCheck());
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator PerformAttackWithStackCheck()
+    {
+        yield return new WaitForSeconds(0.1f); // 공격 애니메이션의 타이밍에 맞춰 대기
+
+        Vector2 attackPosition = CalculateAttackPosition();
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
+
+        bool hasIncreasedStack = false; // 스택이 이미 증가했는지 확인하는 플래그
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            var damagable = enemy.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(attackDamage);
+
+                if (!hasIncreasedStack)
+                {
+                    stackSkill.IncreaseStack(); // 적이 데미지를 입었을 때만 스택 증가
+                    hasIncreasedStack = true; // 스택이 한 번 증가했음을 표시
+                }
+            }
+        }
     }
 
     public override void UseSkillQ()
@@ -33,27 +59,5 @@ public class DaggerPlayer : MeleePlayerBase
     public override void UseSkillE()
     {
         stackSkill.UseSkill();
-    }
-
-    private IEnumerator PerformAttackWithStackCheck()
-    {
-        //공격이 넣어지고 데미지가 들어갔을때만 스택이 오른다.
-        yield return new WaitForSeconds(0.1f); // 공격 애니메이션의 타이밍에 맞춰 대기
-
-        Vector2 attackPosition = CalculateAttackPosition();
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            var damageable = enemy.GetComponent<IDamagable>();
-            if (damageable != null)
-            {
-                damageable.TakeDamage(attackDamage);
-                stackSkill.IncreaseStack(); // 적이 데미지를 입었을 때만 스택 증가
-            }
-        }
-
-        yield return new WaitForSeconds(attackCooldown - 0.1f); // 남은 쿨타임 대기
-        isAttacking = false;
     }
 }

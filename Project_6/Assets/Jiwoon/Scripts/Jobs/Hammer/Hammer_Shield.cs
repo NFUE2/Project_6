@@ -3,13 +3,21 @@ using UnityEngine;
 public class Hammer_Shield : MonoBehaviour
 {
     public float maxDamage; // 방어막이 받을 수 있는 최대 데미지
-    public bool isBossAttack; // 보스 공격 여부를 체크하는 변수
-
     private float currentDamage; // 현재 받은 데미지
 
     void Start()
     {
         currentDamage = 0f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyAttack"))
+        {
+            float damage = 10f;
+            TakeDamage(damage, false);
+            Destroy(other.gameObject); // 투사체 파괴
+        }
     }
 
     public void TakeDamage(float damage, bool isBossAttack)
@@ -33,4 +41,3 @@ public class Hammer_Shield : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
