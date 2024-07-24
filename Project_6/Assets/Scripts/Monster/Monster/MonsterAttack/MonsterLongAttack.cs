@@ -9,7 +9,9 @@ public class MonsterLongAttack : MonsterAttack
 
     public override void Attack()
     {
-        base.Attack();
+        AttackClip();
+
+        //base.Attack();
 
         Vector2 direction = Direction(fire.position,controller.target.position);
 

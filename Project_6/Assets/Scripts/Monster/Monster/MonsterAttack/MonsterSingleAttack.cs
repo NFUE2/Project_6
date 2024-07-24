@@ -9,7 +9,9 @@ public class MonsterSingleAttack : MonsterAttack
 
     public override void Attack()
     {
-        base.Attack();
+        AttackClip();
+
+        //base.Attack();
         //Debug.Log("АјАн");
 
         //Vector2 myPos = transform.position;

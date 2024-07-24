@@ -9,7 +9,9 @@ public class MonsterMultiAttack : MonsterAttack
 
     public override void Attack()
     {
-        base.Attack();
+        AttackClip();
+
+        //base.Attack();
 
         //Vector2 myPos = ((Vector2)transform.position + controller.offsetPos) * Direction();
         //int direction = TargetisRight() ? 1 : -1;
