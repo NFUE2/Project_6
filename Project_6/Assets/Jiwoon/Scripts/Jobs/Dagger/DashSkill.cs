@@ -9,6 +9,7 @@ public class DashSkill : SkillBase
     public Transform playerTransform;
     public LayerMask enemyLayer;
     public PlayerDataSO PlayerData;
+    public float damage = 10f; // 데미지 값 추가
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class DashSkill : SkillBase
         {
             endPosition = transform.position + transform.right * dashDistance;
         }
-        
+
         float startTime = Time.time;
 
         while (Time.time < startTime + (dashDistance / dashSpeed))
@@ -50,11 +51,15 @@ public class DashSkill : SkillBase
 
     private void DealDamageToEnemiesOnPath(Vector3 startPosition, Vector3 endPosition)
     {
-        RaycastHit[] hits = Physics.RaycastAll(startPosition, endPosition - startPosition, dashDistance, enemyLayer);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, endPosition - startPosition, dashDistance, enemyLayer);
         foreach (var hit in hits)
         {
-            // 여기에 적에게 데미지를 입히는 코드를 추가
-            Debug.Log($"적 {hit.collider.name}에게 데미지!");
+            IDamagable enemy = hit.collider.GetComponent<IDamagable>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                Debug.Log($"적 {hit.collider.name}에게 데미지 {damage}!");
+            }
         }
     }
 }

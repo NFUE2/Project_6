@@ -33,7 +33,8 @@ public class ShieldSkill : SkillBase
         // createdShield = PhotonNetwork.Instantiate("Prototype/" + shieldPrefab.name, shieldPosition, Quaternion.identity);
 
         // 로컬에서 방패 생성
-        createdShield = Instantiate(shieldPrefab, shieldPosition, Quaternion.identity);
+        //createdShield = Instantiate(shieldPrefab, shieldPosition, Quaternion.identity);
+        createdShield = PhotonNetwork.Instantiate("Player/" + shieldPrefab.name,shieldPosition,Quaternion.identity);
 
         // 방패의 회전을 초기화하여 고정
         createdShield.transform.rotation = Quaternion.identity;
@@ -67,7 +68,8 @@ public class ShieldSkill : SkillBase
         yield return new WaitForSeconds(ShieldDuration);
         if (createdShield != null)
         {
-            Destroy(createdShield);
+            //Destroy(createdShield);
+            PhotonNetwork.Destroy(createdShield);
         }
     }
 }
