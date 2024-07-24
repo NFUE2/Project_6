@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,9 +18,9 @@ public class ProjectileObject : MonoBehaviour
         int layerValue = data.target.value;
         int colLayer = collision.gameObject.layer;
 
-        if(layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable player))
+        if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
-            player.TakeDamage(data.damage);
+            target.TakeDamage(data.damage);
             Destroy(gameObject);
         }
     }
