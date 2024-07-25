@@ -10,7 +10,7 @@ public class BackGroundControl : MonoBehaviour
 
     private void Start()
     {
-        cam = TestGameManager.instance.cam.transform;
+        cam = GameManager.instance.cam.transform;
     }
     private void Update()
     {

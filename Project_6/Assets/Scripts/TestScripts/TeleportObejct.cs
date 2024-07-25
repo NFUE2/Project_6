@@ -10,7 +10,7 @@ public class StageData
     public BGMList bgm;
 }
 
-public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
+public class TeleportObejct : MonoBehaviour//, TestIInteraction
 {
     //public Transform destination;
     public StageData data;
@@ -28,7 +28,7 @@ public class TestTeleportObejct : MonoBehaviour//, TestIInteraction
 
         collision.transform.position = data.destination.position;
         //collision.transform.position = destination.position;
-        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
+        GameManager.instance.cam.target = GameManager.instance.player.transform;
         SoundManager.instance.ChangeBGM(data.bgm);
     }
 }
