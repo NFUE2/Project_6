@@ -136,8 +136,8 @@ MonoBehaviour:
   qCooldownText: {fileID: 0}
   eCooldownText: {fileID: 0}
   animator: {fileID: 817965381581470148}
-  attackPrefab: {fileID: 8906174536271126433, guid: 7d357497e2a959948aed888c13ea33ff, type: 3}
-  attackPoint: {fileID: 105955398845922730}
+  attackPrefab: {fileID: 8906174536271126433, guid: 26d45cb4d56519141b92f59a35755317, type: 3}
+  attackPoint: {fileID: 4667699244300833591}
   mainCamera: {fileID: 0}
   playerInput: {fileID: 6622760348263712995}
   wireArrowSkill: {fileID: 4414155874532968815}
@@ -490,6 +490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4667699244300833591}
   - component: {fileID: 207859253281523636}
+  - component: {fileID: 7027013422186499164}
   m_Layer: 0
   m_Name: Bow_Weapon
   m_TagString: Untagged
@@ -564,6 +565,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7027013422186499164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538632515875853614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801168adc07546c45b2d20ad575dac4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 105955398845922730}
 --- !u!1 &4781462265036985715
 GameObject:
   m_ObjectHideFlags: 0
