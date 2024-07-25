@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
-public class TestMainScene : PunSingleton<TestMainScene>//, IPunObservable
+public class MainScene : PunSingleton<MainScene>//, IPunObservable
 {
     //캐릭터 생성
     //Dictionary<int, GameObject> dict = new Dictionary<int, GameObject>();

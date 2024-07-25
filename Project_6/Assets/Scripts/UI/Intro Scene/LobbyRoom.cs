@@ -6,11 +6,11 @@ using UnityEngine.UI;
 using Photon.Pun;
 using System.Text;
 
-public class TestLobbyRoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class LobbyRoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI roomName;
     public TextMeshProUGUI currentPlayer;
-    public TestLobbyManager lobbyManager;
+    public LobbyManager lobbyManager;
 
     private Outline outline;
 

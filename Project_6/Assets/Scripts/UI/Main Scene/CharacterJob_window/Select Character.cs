@@ -17,17 +17,17 @@ public class SelectCharacter : MonoBehaviourPun
         panel.SetActive(false);
         //TestMainScene.instance.CreateRPC(prefab);
         //TestMainScene.instance.CreateRPC(data.id);
-        TestGameManager.instance.player = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity); //해당 오브젝트 Photon View필요
-        photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, TestGameManager.instance.player);
+        GameManager.instance.player = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity); //해당 오브젝트 Photon View필요
+        photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, GameManager.instance.player);
         //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = go.transform;
-        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
+        GameManager.instance.cam.target = GameManager.instance.player.transform;
     }
 
     [PunRPC]
     private void OnClickRPC(GameObject player)
     {
         selectButton.interactable = false;
-        TestGameManager.instance.players.Add(player);
+        GameManager.instance.players.Add(player);
     }
 
 }

@@ -13,7 +13,7 @@ public class BossBattleData
 }
 
 [RequireComponent(typeof(PhotonView))]
-public class TestVotingObject : MonoBehaviourPun//, IPunObservable
+public class VotingObject : MonoBehaviourPun//, IPunObservable
 {
     int playerCount = 0,curPlayersCount, agree = 0;
 
@@ -76,8 +76,8 @@ public class TestVotingObject : MonoBehaviourPun//, IPunObservable
 
             //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
             //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
-            TestGameManager.instance.player.transform.position = data.bossStart.position;
-            TestGameManager.instance.cam.target = data.bossBattleCameraPos;
+            GameManager.instance.player.transform.position = data.bossStart.position;
+            GameManager.instance.cam.target = data.bossBattleCameraPos;
             data.bossManager.SetActive(true);
         }
     }

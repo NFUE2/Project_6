@@ -16,7 +16,7 @@ public class ChooseJob_Board02 : MonoBehaviourPun
 
     private GameObject choicePlayer; //추후 수정
     public GameObject panel;
-    public TestUISlot choicebButton;
+    public UISlot choicebButton;
 
     public void ChooseJob(ObjectSO objectSO, SkillDataSO Skill_Q, SkillDataSO Skill_E)
     {
@@ -29,7 +29,7 @@ public class ChooseJob_Board02 : MonoBehaviourPun
         //Skill_Q = ;
         //Skill_E = ;
     }
-    public void ChooseJob(GameObject player, TestUISlot button)
+    public void ChooseJob(GameObject player, UISlot button)
     {
         choicePlayer = player;
         choicebButton = button;
@@ -39,8 +39,8 @@ public class ChooseJob_Board02 : MonoBehaviourPun
     {
         if (choicebButton == null || !choicebButton.GetComponent<Button>().interactable) return;
         GameObject go = PhotonNetwork.Instantiate("Player/" + choicePlayer.name,Vector2.zero,Quaternion.identity);
-        TestGameManager.instance.player = go;
-        TestGameManager.instance.players.Add(go);
+        GameManager.instance.player = go;
+        GameManager.instance.players.Add(go);
 
 
         //photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, choicebButton);

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
-public class TestLobbyManager : MonoBehaviourPunCallbacks
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [Header("방")]
     [Tooltip("방리스트 표기 위치")]
@@ -70,7 +70,7 @@ public class TestLobbyManager : MonoBehaviourPunCallbacks
         {
             if (roomInfo.PlayerCount == 0) continue;
 
-            TestLobbyRoom room = Instantiate(roomPrefab,roomContent).GetComponent<TestLobbyRoom>();
+            LobbyRoom room = Instantiate(roomPrefab,roomContent).GetComponent<LobbyRoom>();
             room.SetRoomInfo(roomInfo);
             room.lobbyManager = this;
         }

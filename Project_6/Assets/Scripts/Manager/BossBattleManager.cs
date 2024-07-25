@@ -146,7 +146,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         foreach(GameObject g in bossEndObject)
             g.SetActive(!g.activeInHierarchy);
 
-        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
+        GameManager.instance.cam.target = GameManager.instance.player.transform;
     }
 }
     // 보스 소환 및 FSM 생성

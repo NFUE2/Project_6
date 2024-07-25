@@ -6,7 +6,7 @@ using Photon.Pun;
 using System.Data;
 
 [RequireComponent(typeof(PhotonView))]
-public class TestUISlot : MonoBehaviourPun //, IPunObservable
+public class UISlot : MonoBehaviourPun //, IPunObservable
 {
     public GameObject prefab;
     public Transform spawnPoint;
@@ -20,7 +20,7 @@ public class TestUISlot : MonoBehaviourPun //, IPunObservable
 
     private TextMeshProUGUI characterName;
     private Image image;
-    TestCameraController camController;
+    CameraController camController;
     Button selectButton;
 
     private void Start()
