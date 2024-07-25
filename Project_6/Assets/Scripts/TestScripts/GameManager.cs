@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-
     public CameraController cam { get; private set; }
     public GameObject player;
     public List<GameObject> players = new List<GameObject>();
+    public Transform enemyList;
 
     public override void Awake()
     {
