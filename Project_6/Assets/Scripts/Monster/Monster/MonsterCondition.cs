@@ -2,7 +2,7 @@ using Photon.Pun;
 using System;
 using UnityEngine;
 
-public class MonsterCondition : MonoBehaviour,IDamagable,IPunObservable
+public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
 {
     MonsterController controller;
 
@@ -38,15 +38,15 @@ public class MonsterCondition : MonoBehaviour,IDamagable,IPunObservable
         curHP = controller.data.maxHP;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(curHP);
-        }
-        else
-        {
-            curHP = (float)stream.ReceiveNext();
-        }
-    }
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if(stream.IsWriting)
+    //    {
+    //        stream.SendNext(curHP);
+    //    }
+    //    else
+    //    {
+    //        curHP = (float)stream.ReceiveNext();
+    //    }
+    //}
 }
