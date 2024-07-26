@@ -9,6 +9,8 @@ public class ShieldSkill : SkillBase
     public float shieldDistance = 1.0f; // 캐릭터 앞 방패 거리
     private GameObject createdShield; // 생성된 방패를 저장할 변수
     public PlayerDataSO PlayerData; // 플레이어 데이터를 저장할 ScriptableObject
+    public AudioClip shieldSound; // 방어 시 효과음 추가
+    private AudioSource audioSource; // AudioSource 컴포넌트 추가
 
     private Coroutine followCoroutine;
     private Coroutine destroyCoroutine;
@@ -17,6 +19,7 @@ public class ShieldSkill : SkillBase
     {
         cooldownDuration = PlayerData.SkillQCooldown; // 쿨다운 시간을 플레이어 데이터에서 가져옴
         lastActionTime = -cooldownDuration; // lastActionTime을 초기화하여 처음에 쿨다운이 적용되지 않도록 함
+        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
     }
 
     public override void UseSkill()
@@ -33,11 +36,13 @@ public class ShieldSkill : SkillBase
         // createdShield = PhotonNetwork.Instantiate("Prototype/" + shieldPrefab.name, shieldPosition, Quaternion.identity);
 
         // 로컬에서 방패 생성
-        //createdShield = Instantiate(shieldPrefab, shieldPosition, Quaternion.identity);
-        createdShield = PhotonNetwork.Instantiate("Player/" + shieldPrefab.name,shieldPosition,Quaternion.identity);
+        // createdShield = Instantiate(shieldPrefab, shieldPosition, Quaternion.identity);
+        createdShield = PhotonNetwork.Instantiate("Player/" + shieldPrefab.name, shieldPosition, Quaternion.identity);
 
         // 방패의 회전을 초기화하여 고정
         createdShield.transform.rotation = Quaternion.identity;
+
+        PlayShieldSound(); // 방패 생성 시 효과음 재생
 
         if (followCoroutine != null) StopCoroutine(followCoroutine);
         followCoroutine = StartCoroutine(FollowPlayer(direction));
@@ -72,4 +77,13 @@ public class ShieldSkill : SkillBase
             PhotonNetwork.Destroy(createdShield);
         }
     }
+
+    private void PlayShieldSound()
+    {
+        if (shieldSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shieldSound);
+        }
+    }
 }
+
