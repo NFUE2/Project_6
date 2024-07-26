@@ -509,9 +509,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   components:
-  - {fileID: 1246212614557664795}
-  - {fileID: 6180402554713959692}
-  - {fileID: 1214569859611142660}
   - {fileID: 6928284306107983700}
   - {fileID: 4551887635642697737}
   - {fileID: 1740896559584676973}
