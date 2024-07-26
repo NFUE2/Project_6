@@ -4675,6 +4675,7 @@ MonoBehaviour:
     bossStart: {fileID: 51564751}
     bossBattleCameraPos: {fileID: 1079956363}
     bossManager: {fileID: 1317873570}
+  enemyList: {fileID: 961703344}
 --- !u!114 &219320315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5942,7 +5943,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &332049384
 Transform:
   m_ObjectHideFlags: 0
@@ -6627,7 +6628,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &441537999
 Transform:
   m_ObjectHideFlags: 0
@@ -11673,7 +11674,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &594391206
 Transform:
   m_ObjectHideFlags: 0
@@ -20876,7 +20877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2510211098159587462, guid: 98c4badcbd8955d4f831dd1f4e19808c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922992521751792912, guid: 98c4badcbd8955d4f831dd1f4e19808c, type: 3}
       propertyPath: bossMonster
@@ -41256,7 +41257,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2106093660
 Transform:
   m_ObjectHideFlags: 0
