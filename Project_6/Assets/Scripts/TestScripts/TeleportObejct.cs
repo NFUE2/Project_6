@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,7 +11,7 @@ public class StageData
     public BGMList bgm;
 }
 
-public class TeleportObejct : MonoBehaviour//, TestIInteraction
+public class TeleportObejct : MonoBehaviourPun//, TestIInteraction
 {
     //public Transform destination;
     public StageData data;
@@ -23,6 +24,8 @@ public class TeleportObejct : MonoBehaviour//, TestIInteraction
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!photonView.IsMine) return;
+
         //data.stage.SetActive(!data.stage.activeInHierarchy);
         data.stageBackground.SetActive(!data.stageBackground.activeInHierarchy);
 
