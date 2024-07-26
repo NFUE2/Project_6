@@ -9,10 +9,15 @@ public abstract class MeleePlayerBase : PlayerBase
     protected bool isAttacking = false;
     public Vector2 attackSize; // 공격 박스의 크기
     public Vector2 attackOffset; // 공격 박스의 오프셋
+    public float knockbackForce = 5f; // 넉백 힘
+    public AudioClip attackSound; // 공격 시 효과음
+    public AudioClip hitSound; // 피격 시 효과음
+    private AudioSource audioSource; // 오디오 소스
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
     }
 
     public override void Attack()
@@ -20,6 +25,7 @@ public abstract class MeleePlayerBase : PlayerBase
         if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
         animator.SetTrigger("IsAttack");
+        PlaySound(attackSound); // 공격 시 효과음 재생
         StartCoroutine(AttackCooldown());
     }
 
@@ -37,7 +43,23 @@ public abstract class MeleePlayerBase : PlayerBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<IDamagable>()?.TakeDamage(attackDamage);
+            IDamagable damagable = enemy.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(attackDamage);
+                ApplyKnockback(enemy);
+                PlaySound(hitSound); // 피격 시 효과음 재생
+            }
+        }
+    }
+
+    protected void ApplyKnockback(Collider2D enemy)
+    {
+        Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         }
     }
 
@@ -61,4 +83,13 @@ public abstract class MeleePlayerBase : PlayerBase
         Vector2 attackPosition = CalculateAttackPosition();
         Gizmos.DrawWireCube(attackPosition, attackSize);
     }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
 }
+
