@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 //public enum MonsterAttackType
@@ -8,7 +9,7 @@ using UnityEngine;
 //}
 
 //[RequireComponent(typeof(PhotonView),typeof(Rigidbody2D),typeof(Animator))]
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
 {
     [Header("EnemyData")]
     public EnemyDataSO data;
@@ -84,5 +85,11 @@ public class MonsterController : MonoBehaviour
         rigid.constraints =
             rigid.constraints == RigidbodyConstraints2D.FreezeAll ?
             RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeAll;
+    }
+
+    //생성될때 작동하는 함수
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        transform.SetParent(GameManager.instance.enemyList);
     }
 }
