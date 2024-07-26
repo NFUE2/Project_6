@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e37441d62b146af42852a60e279f312a, type: 2}
-  <rigidbody>k__BackingField: {fileID: 2965558872414622499}
+  rigid: {fileID: 0}
   col: {fileID: 0}
   offsetPos: {x: 0, y: 0}
   condition: {fileID: 6595435613770258262}

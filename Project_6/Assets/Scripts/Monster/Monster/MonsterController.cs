@@ -80,5 +80,9 @@ public class MonsterController : MonoBehaviour
     private void ComponentToggle()
     {
         col.enabled = !col.enabled;
+
+        rigid.constraints =
+            rigid.constraints == RigidbodyConstraints2D.FreezeAll ?
+            RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeAll;
     }
 }
