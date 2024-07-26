@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,7 +11,8 @@ public class StageData
     public BGMList bgm;
 }
 
-public class TeleportObejct : MonoBehaviour//, TestIInteraction
+[RequireComponent(typeof(PhotonView))]
+public class TeleportObejct : MonoBehaviourPun//, TestIInteraction
 {
     //public Transform destination;
     public StageData data;
