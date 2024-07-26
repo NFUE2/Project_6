@@ -9,10 +9,12 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public GameObject swingHitBoxLeft;
     public GameObject swingHitBoxRight;
     public GameObject razorHitBox;
+    public GameObject fireBallHitBox;
 
     public AudioClip swingAudioClip;
     public AudioClip stompAudioClip;
     public AudioClip razorAudioClip;
+    public AudioClip fireBallAudioClip;
 
     public BoxCollider2D bossCollider;
     public BoxCollider2D chargeCollider;
@@ -31,7 +33,8 @@ public class GolemAttackController : BossAttackController, IPunObservable
         Debug.Log(distanceToTarget);
         if(distanceToTarget > 7)
         {
-            RazorReady();
+            //RazorReady();
+            FireBallReady();
         }
         else if(distanceToTarget <= 7)
         {
@@ -222,6 +225,31 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", false);
         ExitAttack() ;
+    }
+
+    public void FireBallReady()
+    {
+        BossBattleManager.Instance.ToggleIsAttacking();
+        BossBattleManager.Instance.bossAnimator.SetBool("isFireBallReady", true);
+    }
+    
+    private void SpawnFireBall()
+    {
+        GameObject fireBall = Instantiate(fireBallHitBox);
+        fireBall.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
+        fireBall.transform.position += new Vector3(0, 5, 0);
+    }
+
+    private void FireBall()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isFireBallReady", false);
+        BossBattleManager.Instance.bossAnimator.SetBool("isFireBall", true);
+    }
+
+    private void FireBallEnd()
+    {
+        BossBattleManager.Instance.bossAnimator.SetBool("isFireBall", false);
+        ExitAttack();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

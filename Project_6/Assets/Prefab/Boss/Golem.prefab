@@ -757,9 +757,11 @@ MonoBehaviour:
   swingHitBoxLeft: {fileID: 6971944512912290860}
   swingHitBoxRight: {fileID: 3613309489476932604}
   razorHitBox: {fileID: 4408024815513723099}
+  fireBallHitBox: {fileID: 4495961191601108873, guid: bfd0c6271b17e4e4ab2deb896673527c, type: 3}
   swingAudioClip: {fileID: 0}
   stompAudioClip: {fileID: 0}
   razorAudioClip: {fileID: 0}
+  fireBallAudioClip: {fileID: 0}
   bossCollider: {fileID: 2459596844110712909}
   chargeCollider: {fileID: 1818960447348982995}
 --- !u!114 &-8486991095086764195
