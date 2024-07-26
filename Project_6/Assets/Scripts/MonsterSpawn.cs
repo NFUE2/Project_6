@@ -5,19 +5,22 @@ public class MonsterSpawn : MonoBehaviour
 {
     public GameObject monsterPrefab;
     private GameObject monster;
-    MonsterCondition monsterCondition;
     public int spawnTime;
 
-    public Transform monsterList;
+    //public Transform monsterList;
 
     private void Start()
     {
-        monster = PhotonNetwork.Instantiate("Monster/" + monsterPrefab.name, transform.position, Quaternion.identity);
-        monster.transform.SetParent(monsterList);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            monster = PhotonNetwork.Instantiate("Monster/" + monsterPrefab.name, transform.position, Quaternion.identity);
 
+            MonsterCondition monsterCondition;
+            monsterCondition = monster.GetComponent<MonsterCondition>();
+            monsterCondition.OnDie += ReSpawnCoolTime;
+        }
+        //monster.transform.SetParent(monsterList);
         //monster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-        monsterCondition = monster.GetComponent<MonsterCondition>();
-        monsterCondition.OnDie += ReSpawnCoolTime;
     }
 
     private void ReSpawnCoolTime()
