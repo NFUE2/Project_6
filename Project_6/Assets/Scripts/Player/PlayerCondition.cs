@@ -48,7 +48,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     {
         Debug.Log("Player died!");
         input.isDead = true;
-        animator.SetTrigger("IsDie"); // 죽는 애니메이션 트리거 설정
+        animator.SetTrigger("ISDie"); // 죽는 애니메이션 트리거 설정
         // Destroy(gameObject); // 게임 오브젝트 파괴는 애니메이션 이후에 수행
     }
 

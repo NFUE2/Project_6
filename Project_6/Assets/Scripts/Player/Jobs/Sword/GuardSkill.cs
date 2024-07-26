@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class GuardSkill : SkillBase
+public class GuardSkill : SkillBase, IDamagable
 {
     public bool IsGuard { get; private set; }
     public float GuardDuration = 1.0f; // 가드 지속 시간
@@ -85,5 +85,19 @@ public class GuardSkill : SkillBase
             audioSource.PlayOneShot(guardSound); // 방어 성공 시 효과음 재생
         }
     }
-}
 
+    public void TakeDamage(float damage)
+    {
+        if (IsGuard)
+        {
+            // 방어 중일 때 데미지 효과음 재생
+            PlayGuardSound();
+            // 데미지를 무시할 수 있지만, 여기서 데미지 처리 로직을 추가할 수 있음
+        }
+        else
+        {
+            // 방어 중이 아닐 때는 기본 데미지 처리 로직을 호출하거나 처리할 수 있음
+            playerCondition.TakeDamage(damage); // 이 부분은 인터페이스 구현에 따라 다름
+        }
+    }
+}

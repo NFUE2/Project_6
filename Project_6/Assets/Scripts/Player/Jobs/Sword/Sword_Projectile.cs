@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sword_Projectile : MonoBehaviour
@@ -13,7 +10,12 @@ public class Sword_Projectile : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        // AudioSource 컴포넌트가 있는지 확인하고 없으면 추가
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class Sword_Projectile : MonoBehaviour
         if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
+            Debug.Log("Hit detected! Playing hit effects."); // 디버그 로그 추가
             PlayHitEffects(collision.transform.position); // 적중 시 효과 재생
             Destroy(gameObject);
         }
@@ -39,7 +42,12 @@ public class Sword_Projectile : MonoBehaviour
         // 적중 시 효과음 재생
         if (hitSound != null && audioSource != null)
         {
+            Debug.Log("Playing hit sound."); // 디버그 로그 추가
             audioSource.PlayOneShot(hitSound);
+        }
+        else
+        {
+            Debug.LogWarning("Hit sound or audio source is null.");
         }
 
         // 적중 시 파티클 효과 생성
@@ -50,3 +58,4 @@ public class Sword_Projectile : MonoBehaviour
         }
     }
 }
+
