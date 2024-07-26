@@ -21,8 +21,8 @@ public class ProjectileSkill : SkillBase
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         //GameObject projectileInstance = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
-        GameObject projectile = PhotonNetwork.Instantiate("Projectile/" + projectilePrefab.name,transform.position,Quaternion.identity);
-        projectile.transform.localEulerAngles = new Vector3(0, 0, angle);
+        GameObject projectile = PhotonNetwork.Instantiate("Projectile/" + projectilePrefab.name,transform.position,Quaternion.Euler(0,0,angle));
+        //projectile.transform.localEulerAngles = new Vector3(0, 0, angle);
         //projectileInstance.GetComponent<Projectile>().SetDirection(dir);
 
         lastActionTime = Time.time;
