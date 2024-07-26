@@ -11,6 +11,7 @@ public class StageData
     public BGMList bgm;
 }
 
+[RequireComponent(typeof(PhotonView))]
 public class TeleportObejct : MonoBehaviourPun//, TestIInteraction
 {
     //public Transform destination;
@@ -24,8 +25,6 @@ public class TeleportObejct : MonoBehaviourPun//, TestIInteraction
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!photonView.IsMine) return;
-
         //data.stage.SetActive(!data.stage.activeInHierarchy);
         data.stageBackground.SetActive(!data.stageBackground.activeInHierarchy);
 

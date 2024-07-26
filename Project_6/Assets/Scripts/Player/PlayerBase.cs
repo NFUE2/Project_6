@@ -1,7 +1,8 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-public abstract class PlayerBase : MonoBehaviour
+public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     public PlayerDataSO playerData;
 
@@ -31,5 +32,12 @@ public abstract class PlayerBase : MonoBehaviour
     public float GetLastEActionTime()
     {
         return lastEActionTime;
+    }
+
+    public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        if (photonView.IsMine) GameManager.instance.player = gameObject;
+
+        GameManager.instance.players.Add(gameObject);
     }
 }
