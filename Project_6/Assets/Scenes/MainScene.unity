@@ -4272,6 +4272,7 @@ MonoBehaviour:
     bossStart: {fileID: 51564751}
     bossBattleCameraPos: {fileID: 1079956363}
     bossManager: {fileID: 1317873570}
+  enemyList: {fileID: 961703344}
 --- !u!114 &219320315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18681,7 +18682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2510211098159587462, guid: 98c4badcbd8955d4f831dd1f4e19808c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922992521751792912, guid: 98c4badcbd8955d4f831dd1f4e19808c, type: 3}
       propertyPath: bossMonster

@@ -22,6 +22,7 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
     //public Transform bossStart,bossCamera;
     //public GameObject boss;
     public BossBattleData data;
+    public GameObject enemyList;
 
     private void Start()
     {
@@ -79,6 +80,7 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
             GameManager.instance.player.transform.position = data.bossStart.position;
             GameManager.instance.cam.target = data.bossBattleCameraPos;
             data.bossManager.SetActive(true);
+            enemyList.SetActive(false);
         }
     }
 
