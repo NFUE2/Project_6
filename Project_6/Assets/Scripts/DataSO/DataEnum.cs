@@ -15,8 +15,8 @@ public enum ApplyType
     Amount,
 }
 
-public enum UsedType
-{
-    Heal,
-    Enhance,
-}
+//public enum UsedType
+//{
+//    Heal,
+//    Enhance,
+//}
