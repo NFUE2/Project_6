@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  wireArrow: {fileID: 0}
+  wireArrow: {fileID: 4652639966666034163, guid: 0ba0bbff1fec5304c8b08ea008b3dbd6, type: 3}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
 --- !u!114 &6622760348263712995
 MonoBehaviour:
