@@ -39,8 +39,8 @@ public class ChooseJob_Board02 : MonoBehaviourPun
     {
         if (choicebButton == null || !choicebButton.GetComponent<Button>().interactable) return;
         GameObject go = PhotonNetwork.Instantiate("Player/" + choicePlayer.name,Vector2.zero,Quaternion.identity);
-        GameManager.instance.player = go;
-        GameManager.instance.players.Add(go);
+        //GameManager.instance.player = go;
+        //GameManager.instance.players.Add(go);
 
 
         //photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, choicebButton);

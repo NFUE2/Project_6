@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f2a9eda0c5db3ed4797d026c7fba26bd, type: 2}
-  <rigidbody>k__BackingField: {fileID: 7411000788468212308}
+  rigid: {fileID: 0}
   col: {fileID: 0}
   offsetPos: {x: 0, y: 0}
   condition: {fileID: 1157865854799134461}
@@ -239,7 +239,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!114 &3130981513886213659
 MonoBehaviour:
   m_ObjectHideFlags: 0
