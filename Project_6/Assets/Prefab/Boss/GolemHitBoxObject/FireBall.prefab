@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2476964381158421766}
   - component: {fileID: 248515993010548440}
   - component: {fileID: 5378022622925385156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,4 +135,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.0001
+  m_Radius: 0.5
