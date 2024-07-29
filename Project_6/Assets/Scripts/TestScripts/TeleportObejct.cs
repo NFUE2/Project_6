@@ -26,7 +26,8 @@ public class TeleportObejct : MonoBehaviourPun//, TestIInteraction
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //data.stage.SetActive(!data.stage.activeInHierarchy);
-        data.stageBackground.SetActive(!data.stageBackground.activeInHierarchy);
+        if (collision.gameObject == GameManager.instance.player)
+            data.stageBackground.SetActive(!data.stageBackground.activeInHierarchy);
 
         collision.transform.position = data.destination.position;
         //collision.transform.position = destination.position;
