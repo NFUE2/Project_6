@@ -6,23 +6,23 @@ using UnityEngine.UI;
 public class Close_window : MonoBehaviour
 {
 
-    public GameObject window;
+    //public GameObject window;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    //// Start is called before the first frame update
+    //void Start()
+    //{
         
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 
-    public void CloseWindow()
-    {
-        window.SetActive(false);
-    }
+    //public void CloseWindow()
+    //{
+    //    window.SetActive(false);
+    //}
 }
