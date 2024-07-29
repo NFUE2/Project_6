@@ -1,36 +1,40 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCondition : MonoBehaviour, IDamagable
+public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
 {
     public float maxHealth = 100f;
     private float currentHealth;
 
-    public PlayerDataSO PlayerData; // PlayerDataSO 추가
+    public PlayerDataSO PlayerData;
     public PlayerInput input;
-    public Image healthBarImage; // 체력바 이미지
-    private Animator animator; // Animator 컴포넌트 추가
-    public AudioClip hitSound; // 피격 시 효과음 추가
-    private AudioSource audioSource; // AudioSource 컴포넌트 추가
-    public GameObject hitEffect; // 피격 시 시각 효과 추가
+    public Image healthBarImage;
+    private Animator animator;
+    public AudioClip hitSound;
+    private AudioSource audioSource;
+    public GameObject hitEffectPrefab;
+
+    private Rigidbody2D rb;
+    public float knockbackForce = 5f;
 
     void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>(); // Animator 컴포넌트 가져오기
-        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
         UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
     {
-        float damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0); // PlayerData의 방어력을 적용한 데미지 계산
+        float damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
         currentHealth -= damageAfterDefense;
         Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
 
-        PlaySound(hitSound); // 피격 시 효과음 재생
-        PlayHitEffect(); // 피격 시 시각 효과 재생
-        UpdateHealthBar(); // 체력바 업데이트
+        PlaySound(hitSound);
+        PlayHitEffect();
+        UpdateHealthBar();
 
         if (currentHealth <= 0)
         {
@@ -38,18 +42,25 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         }
     }
 
+    public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (rb != null)
+        {
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        }
+    }
+
     void UpdateHealthBar()
     {
         float healthRatio = currentHealth / maxHealth;
-        healthBarImage.fillAmount = healthRatio; // 체력바의 fillAmount 조정
+        healthBarImage.fillAmount = healthRatio;
     }
 
     void Die()
     {
         Debug.Log("Player died!");
         input.isDead = true;
-        animator.SetTrigger("ISDie"); // 죽는 애니메이션 트리거 설정
-        // Destroy(gameObject); // 게임 오브젝트 파괴는 애니메이션 이후에 수행
+        animator.SetTrigger("ISDie");
     }
 
     public void ModifyDefense(float amount)
@@ -68,15 +79,10 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     private void PlayHitEffect()
     {
-        if (hitEffect != null)
+        if (hitEffectPrefab != null)
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 1.0f); // 효과가 1초 후에 사라지도록 설정
+            GameObject effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(effect, 1.0f);
         }
-    }
-
-    void DestroyGameObject()
-    {
-        Destroy(gameObject);
     }
 }
