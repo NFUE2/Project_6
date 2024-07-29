@@ -89,10 +89,17 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log($"{collision.gameObject.name}가 피격됨");
-            if (collision.TryGetComponent<IDamagable>(out IDamagable P))
+            if (collision.TryGetComponent<IDamagable>(out IDamagable P) && collision.TryGetComponent<IKnockBackable>(out IKnockBackable K))
             {
+                
                 float damage = BossBattleManager.Instance.boss.attackPower * 1.25f;
                 P.TakeDamage(damage);
+                Vector2 playerPos = collision.transform.position;
+                Vector2 bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+
+                Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                K.ApplyKnockback(knockbackDirection, 5);
+               
                 StopAllCoroutines();
                 Destroy(gameObject);
             }

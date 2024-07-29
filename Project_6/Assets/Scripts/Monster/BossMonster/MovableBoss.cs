@@ -29,7 +29,7 @@ public class MovableBoss : MonoBehaviour
             }
             Vector3 targetPosition = BossBattleManager.Instance.targetPlayer.transform.position;
             float distance = Vector3.Distance(targetPosition, transform.position);
-            if (distance > 2f)
+            if (distance > 3f)
             {
                 
                 if (targetPosition.x >= this.transform.position.x)
@@ -45,6 +45,10 @@ public class MovableBoss : MonoBehaviour
                 float direction = movePositive ? 1 : -1;
                 transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
                 //elapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                animator.SetBool("isWalk", false);
             }
         }
         else

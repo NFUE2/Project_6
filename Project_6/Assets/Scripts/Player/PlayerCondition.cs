@@ -28,13 +28,26 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
 
     public void TakeDamage(float damage)
     {
-        float damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
+        float damageAfterDefense;
+        if (PlayerData !=  null)
+        {
+
+            damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
+        }
+        else
+        {
+            damageAfterDefense = Mathf.Max(damage, 0);
+        }
         currentHealth -= damageAfterDefense;
         Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
 
         PlaySound(hitSound);
         PlayHitEffect();
-        UpdateHealthBar();
+        if(healthBarImage != null)
+        {
+            UpdateHealthBar();
+        }
+        
 
         if (currentHealth <= 0)
         {
