@@ -114,11 +114,37 @@ public class GolemAttackController : BossAttackController, IPunObservable
         Debug.Log(BossBattleManager.Instance.targetPlayer);
         if(transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
         {
-            swingHitBoxLeft.SetActive(true);
+            //swingHitBoxLeft.SetActive(true);
+            var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x + 0.5f, bossPos.y), new Vector2(10, 3), 0);
+            foreach(Collider2D col in hit)
+            {
+                if(col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                {
+                    float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
+                    P.TakeDamage(damage);
+                    Vector2 playerPos = col.transform.position;
+                    Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                    K.ApplyKnockback(knockbackDirection, 5);
+                }
+            }
         }
         else
         {
-            swingHitBoxRight.SetActive(true);
+            //swingHitBoxRight.SetActive(true);
+            var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x - 0.5f, bossPos.y), new Vector2(5, 1), 0);
+            foreach (Collider2D col in hit)
+            {
+                if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                {
+                    float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
+                    P.TakeDamage(damage);
+                    Vector2 playerPos = col.transform.position;
+                    Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                    K.ApplyKnockback(knockbackDirection, 5);
+                }
+            }
         }
         BossBattleManager.Instance.bossAnimator.SetBool("isSwing", false);
         additionalAttack = Random.Range(0, 2);
@@ -192,10 +218,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
             Debug.Log("Â÷Áö");
             chargeAttackReady = false;
             BossBattleManager.Instance.ToggleIsAttacking();
-            BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
             bossCollider.enabled = false;
             chargeCollider.enabled = true;
             beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
+            BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
         }
         else
         {
@@ -206,10 +232,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void EndCharge()
     {
+        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", false);
         afterChargeHP = BossBattleManager.Instance.boss.currentHp;
         chargeCollider.enabled = false;
         bossCollider.enabled = true;
-        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", false);
         if(beforeChargeHP - afterChargeHP >= chargeCancleDamage)
         {
             BossBattleManager.Instance.bossAnimator.SetBool("isFaint", true);
