@@ -45,7 +45,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4366961832662647608}
-  - {fileID: 236365579760708717}
   - {fileID: 3857408237830884000}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73,7 +72,7 @@ MonoBehaviour:
   attackSize: {x: 0.6, y: 1}
   attackOffset: {x: -0.6, y: 0}
   knockbackForce: 5
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
   shieldSkill: {fileID: 1214569859611142660}
   chargeSkill: {fileID: 6180402554713959692}
@@ -99,6 +98,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  hammerImpactEffect: {fileID: 3142795443215796759, guid: c7811f4b98ed58a45a118c26086aaa4d, type: 3}
+  hammerImpactSound: {fileID: 8300000, guid: 9460b299e7a823b4899101a3e435cae0, type: 3}
 --- !u!114 &1214569859611142660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,8 +541,9 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 5883604329999571394}
   healthBarImage: {fileID: 7984489669952029798}
-  hitSound: {fileID: 0}
-  hitEffect: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: edda52b4424d4d341a0b6a9d9db7d3ac, type: 3}
+  hitEffectPrefab: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  knockbackForce: 5
 --- !u!82 &-3469997500931655315
 AudioSource:
   m_ObjectHideFlags: 0
@@ -669,83 +671,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6994986936418556670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8495759503028916062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 236365579760708717}
-  - component: {fileID: 6912114466327719200}
-  m_Layer: 6
-  m_Name: AttackCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &236365579760708717
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8495759503028916062}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.73, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6994986936418556670}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6912114466327719200
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8495759503028916062}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.11558056, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2311611, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &2453561362601767658
 PrefabInstance:
   m_ObjectHideFlags: 0

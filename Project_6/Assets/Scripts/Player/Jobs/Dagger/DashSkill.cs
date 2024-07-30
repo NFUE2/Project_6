@@ -10,10 +10,17 @@ public class DashSkill : SkillBase
     public LayerMask enemyLayer;
     public PlayerDataSO PlayerData;
     public float damage = 10f; // 데미지 값 추가
+    public AudioClip dashSound; // 대시 효과음 추가
+    private AudioSource audioSource;
 
     private void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     public override void UseSkill()
@@ -21,7 +28,16 @@ public class DashSkill : SkillBase
         if (Time.time - lastActionTime < cooldownDuration) return;
 
         lastActionTime = Time.time;
+        PlayDashSound();
         StartCoroutine(Dash());
+    }
+
+    private void PlayDashSound()
+    {
+        if (dashSound != null)
+        {
+            audioSource.PlayOneShot(dashSound);
+        }
     }
 
     private IEnumerator Dash()
@@ -63,3 +79,4 @@ public class DashSkill : SkillBase
         }
     }
 }
+
