@@ -42,12 +42,19 @@ public class ChooseJob_Board02 : MonoBehaviourPun
         //GameManager.instance.player = go;
         //GameManager.instance.players.Add(go);
 
-
         //photonView.RPC(nameof(OnClickRPC), RpcTarget.AllBuffered, choicebButton);
         choicebButton.ChangeInteraction();
 
         panel.SetActive(false);
     }
+
+    //추후 스킬 수정되면가져오기
+    //public void Display(PlayerBase player)
+    //{
+    //    Character_Name.text = player.playerData.name;
+    //    Character_Info.text = player.playerData.info;
+
+    //}
 
     //[PunRPC]
     //public void OnClickRPC(Button button)

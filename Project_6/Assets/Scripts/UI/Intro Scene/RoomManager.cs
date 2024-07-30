@@ -14,9 +14,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private Dictionary<int, GameObject> playerListEntries;
 
-    private void Awake()
-    {
-    }
+    //private void Awake()
+    //{
+    //}
 
     public void OnClickGameStart()
     {
@@ -37,7 +37,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             GameObject go = Instantiate(playerPrefab);
             go.transform.parent = playerList;
-            go.GetComponentInChildren<TextMeshProUGUI>().text += p.ActorNumber;
+            //go.GetComponentInChildren<TextMeshProUGUI>().text += p.ActorNumber;
+            go.GetComponentInChildren<TextMeshProUGUI>().text += PhotonNetwork.CurrentRoom.PlayerCount;
+
+            if (p == PhotonNetwork.LocalPlayer) go.GetComponent<RoomPlayer>().IsMine();
 
             playerListEntries.Add(p.ActorNumber, go);
         }
@@ -49,7 +52,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         GameObject go = Instantiate(playerPrefab);
         go.transform.parent = playerList;
-        go.GetComponentInChildren<TextMeshProUGUI>().text += newPlayer.ActorNumber;
+        //go.GetComponentInChildren<TextMeshProUGUI>().text += newPlayer.ActorNumber;
+        go.GetComponentInChildren<TextMeshProUGUI>().text += PhotonNetwork.CurrentRoom.PlayerCount;
 
         playerListEntries.Add(newPlayer.ActorNumber, go);
     }
