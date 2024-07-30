@@ -28,7 +28,7 @@ public class Sword_Projectile : MonoBehaviour
         int layerValue = data.target.value;
         int colLayer = collision.gameObject.layer;
 
-        if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
+        if (layerValue == (1 << colLayer) && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
             Debug.Log("Hit detected! Playing hit effects."); // 디버그 로그 추가
@@ -58,4 +58,5 @@ public class Sword_Projectile : MonoBehaviour
         }
     }
 }
+
 

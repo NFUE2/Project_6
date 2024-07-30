@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
 {
     public float maxHealth = 100f;
-    private float currentHealth;
+    public float currentHealth;
 
     public PlayerDataSO PlayerData;
     public PlayerInput input;
@@ -23,6 +23,11 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
+        UpdateHealthBar();
+    }
+
+    void Update()
+    {
         UpdateHealthBar();
     }
 
@@ -67,6 +72,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
     {
         float healthRatio = currentHealth / maxHealth;
         healthBarImage.fillAmount = healthRatio;
+        Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
     }
 
     void Die()

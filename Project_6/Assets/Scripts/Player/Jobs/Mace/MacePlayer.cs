@@ -10,6 +10,8 @@ public class MacePlayer : MeleePlayerBase
     [Header("Skill E")]
     [SerializeField] private MaceChargeSkill maceChargeSkill;
 
+    public object PlayerCondition { get; internal set; }
+
     private void Start()
     {
         healAndBoostSkill.SetCooldownText(qCooldownText);
