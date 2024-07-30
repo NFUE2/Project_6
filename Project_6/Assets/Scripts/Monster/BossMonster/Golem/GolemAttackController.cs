@@ -24,21 +24,32 @@ public class GolemAttackController : BossAttackController, IPunObservable
     private float chargeCancleDamage = 50;
 
     private int additionalAttack;
+    private bool chargeAttackReady = true;
 
     public override void SelectAttack()
     {
         base.SelectAttack();
-        countOfAttack = 3;
+        countOfAttack = 5;
+        int countOfMeleeAttack = 3;
+        int countOfDistanceAttack = 2;
         float distanceToTarget = BossBattleManager.Instance.distanceToTarget;
         Debug.Log(distanceToTarget);
         if(distanceToTarget > 7)
         {
-            //RazorReady();
-            FireBallReady();
+            int index = Random.Range(0, countOfDistanceAttack);
+            switch (index)
+            {
+                case 0:
+                    RazorReady(); 
+                    break;
+                case 1:
+                    FireBallReady();
+                    break;
+            }
         }
         else if(distanceToTarget <= 7)
         {
-            int index = Random.Range(0, countOfAttack - 1);
+            int index = Random.Range(0, countOfMeleeAttack);
             switch (index)
             {
                 case 0:
@@ -48,15 +59,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     SwingReady();
                     break;
                 case 2:
-                    SwingReady();
-                    break;
-                case 3:
                     Charge();
                     break;
             }
         }
-        
-        //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
     }
 
     // 지진
@@ -181,11 +187,21 @@ public class GolemAttackController : BossAttackController, IPunObservable
     // 차지
     public void Charge()
     {
-        BossBattleManager.Instance.ToggleIsAttacking();
-        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
-        bossCollider.enabled = false;
-        chargeCollider.enabled = true;
-        beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
+        if(chargeAttackReady)
+        {
+            Debug.Log("차지");
+            chargeAttackReady = false;
+            BossBattleManager.Instance.ToggleIsAttacking();
+            BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
+            bossCollider.enabled = false;
+            chargeCollider.enabled = true;
+            beforeChargeHP = BossBattleManager.Instance.boss.currentHp;
+        }
+        else
+        {
+            chargeAttackReady = true;
+            SelectAttack();
+        }
     }
 
     private void EndCharge()
@@ -202,7 +218,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             BossBattleManager.Instance.bossAnimator.SetBool("isChargePunch", true);
         }
-        BossBattleManager.Instance.bossAnimator.SetBool("isCharging", true);
     }
 
     private void FaintEnd()
@@ -218,6 +233,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             PlayerCondition condition = P.GetComponent<PlayerCondition>();
             condition.TakeDamage(BossBattleManager.Instance.boss.attackPower);
+            Vector2 playerPos = P.transform.position;
+            Vector2 bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+            Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+            condition.ApplyKnockback(knockbackDirection, 5);
         }
     }
 
