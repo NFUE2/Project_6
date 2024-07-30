@@ -645,6 +645,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 8700694705525571591}
   hitSound: {fileID: 8300000, guid: edda52b4424d4d341a0b6a9d9db7d3ac, type: 3}
   hitEffectPrefab: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  knockbackForce: 5
 --- !u!82 &5755271552007557060
 AudioSource:
   m_ObjectHideFlags: 0

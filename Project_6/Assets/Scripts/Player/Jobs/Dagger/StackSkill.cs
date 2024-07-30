@@ -13,16 +13,24 @@ public class StackSkill : SkillBase
     public Vector2 attackSize; // 공격 박스 크기
     public Vector2 attackOffset; // 공격 박스 오프셋
     public Animator animator; // Animator 추가
+    public AudioClip skillSound; // 스킬 효과음 추가
+    private AudioSource audioSource;
 
     private void Start()
     {
         cooldownDuration = PlayerData.SkillECooldown;
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     public override void UseSkill()
     {
         if (currentStack > 0)
         {
+            PlaySkillSound(); // 스킬 사운드 재생
             animator.SetTrigger("IsAttack"); // 일반 공격 애니메이션 트리거
             DealDamageWithStack();
             currentStack = 0;
@@ -31,6 +39,14 @@ public class StackSkill : SkillBase
         else
         {
             Debug.Log($"스택이 부족합니다. 현재 스택 : {currentStack}");
+        }
+    }
+
+    private void PlaySkillSound()
+    {
+        if (skillSound != null)
+        {
+            audioSource.PlayOneShot(skillSound);
         }
     }
 
