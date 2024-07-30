@@ -24,7 +24,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     private float chargeCancleDamage = 50;
 
     private int additionalAttack;
-    private bool chargeAttackReady = true;
+    private int chargePassCount;
 
     public override void SelectAttack()
     {
@@ -213,10 +213,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
     // 차지
     public void Charge()
     {
-        if(chargeAttackReady)
+        if(chargePassCount == 0)
         {
             Debug.Log("차지");
-            chargeAttackReady = false;
+            chargePassCount++;
             BossBattleManager.Instance.ToggleIsAttacking();
             bossCollider.enabled = false;
             chargeCollider.enabled = true;
@@ -225,7 +225,11 @@ public class GolemAttackController : BossAttackController, IPunObservable
         }
         else
         {
-            chargeAttackReady = true;
+            chargePassCount++;
+            if(chargePassCount == 3)
+            {
+                chargePassCount = 0;
+            }
             SelectAttack();
         }
     }
