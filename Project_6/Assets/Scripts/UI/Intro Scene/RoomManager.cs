@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -10,16 +11,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject roomFrame;
 
+    public Button[] buttons;
+
     //private GameObject curPlayer;
 
     private Dictionary<int, GameObject> playerListEntries;
 
-    //private void Awake()
-    //{
-    //}
-
     public void OnClickGameStart()
     {
+        foreach(var b in buttons)
+            b.interactable = false;
+
         PhotonNetwork.LoadLevel(1);
         SoundManager.instance.ChangeBGM(BGMList.Town);
     }
@@ -28,6 +30,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         roomFrame.SetActive(true);
+
+        foreach (var b in buttons)
+            b.interactable = true;
 
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
 
