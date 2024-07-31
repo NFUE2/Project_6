@@ -13,8 +13,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public Button[] buttons;
 
-    //private GameObject curPlayer;
-
     private Dictionary<int, GameObject> playerListEntries;
 
     public void OnClickGameStart()
@@ -23,6 +21,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
             b.interactable = false;
 
         PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
         SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
