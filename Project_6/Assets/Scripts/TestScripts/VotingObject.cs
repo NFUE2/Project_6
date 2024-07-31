@@ -5,10 +5,10 @@ using System;
 using JetBrains.Annotations;
 
 [Serializable]
-public class BossBattleData
+public class DestinationData
 {
-    public Transform bossStart;
-    public Transform bossBattleCameraPos;
+    public Transform startTransform;
+    public Transform CameraPos;
     public GameObject bossManager;
 }
 
@@ -21,15 +21,12 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
     public TextMeshProUGUI text;
     //public Transform bossStart,bossCamera;
     //public GameObject boss;
-    public BossBattleData data;
-    public GameObject enemyList;
+    public DestinationData data;
 
     private void Start()
     {
         curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
-
-  
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -61,7 +58,6 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 
     public void VoteAgreement()
     {
-        Debug.Log(1);
         photonView.RPC(nameof(VoteAgreementRPC),RpcTarget.All);
     }
 
@@ -73,21 +69,18 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 
         if (agree == curPlayersCount)
         {
-            Debug.Log("¿Ãµø");
-
             //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
             //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
-            GameManager.instance.player.transform.position = data.bossStart.position;
-            GameManager.instance.cam.target = data.bossBattleCameraPos;
-            data.bossManager.SetActive(true);
-            enemyList.SetActive(false);
+            GameManager.instance.player.transform.position = data.startTransform.position;
+            GameManager.instance.cam.target = data.CameraPos;
+
+            if(data.bossManager != null) data.bossManager.SetActive(true);
         }
     }
 
     public void VoteOpposition()
     {
         photonView.RPC(nameof(VoteOppositionRPC), RpcTarget.All);
-
     }
 
     [PunRPC]

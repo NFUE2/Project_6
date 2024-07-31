@@ -21,6 +21,8 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public MonsterCondition condition;
     public bool isRight;
 
+    public MonsterStageList stage;
+
     //[Header("AttackType")]
     //public MonsterAttackType type;
 
@@ -90,6 +92,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     //생성될때 작동하는 함수
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        transform.SetParent(GameManager.instance.enemyList);
+        //transform.SetParent(GameManager.instance.enemyList);
+        transform.SetParent(GameManager.instance.SpawnStage(stage));
     }
 }
