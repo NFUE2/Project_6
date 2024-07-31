@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8913264176159693627}
   - component: {fileID: -3666473818244661399}
   - component: {fileID: 758802826642512903}
+  - component: {fileID: -3391657314229905412}
   m_Layer: 6
   m_Name: Mace_Player
   m_TagString: Player
@@ -140,12 +141,15 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   healDuration: 5
   healAmount: 10
-  statBoostDuration: 10
-  defenseBoost: 10
+  statBoostDuration: 3
+  defenseBoost: 5
+  healRange: 5
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerCondition: {fileID: 758802826642512903}
+  skillSound: {fileID: 8300000, guid: 6f46761819eb96d48bde07e8c2fec10f, type: 3}
 --- !u!114 &5427429350239134251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +175,8 @@ MonoBehaviour:
   dashDamage: 20
   reducedDamageDuringDash: 0.5
   damageReduction: 0
+  skillSound: {fileID: 8300000, guid: cf5bec7565063bb4dabe6497f198f08f, type: 3}
+  hitSound: {fileID: 8300000, guid: 14568f49147661846b6dcda9531e7f41, type: 3}
 --- !u!114 &7355382180850020735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +200,9 @@ MonoBehaviour:
   attackCooldown: 1
   attackSize: {x: 0.6, y: 1}
   attackOffset: {x: -0.6, y: 0}
+  knockbackForce: 5
+  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
+  hitSound: {fileID: 0}
   healAndBoostSkill: {fileID: 2362374036882893018}
   maceChargeSkill: {fileID: 5427429350239134251}
 --- !u!114 &2852413717840099530
@@ -573,6 +582,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: IsAttack
+  - Type: 9
+    SynchronizeType: 0
+    Name: IsDie
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -610,8 +622,109 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 0}
   healthBarImage: {fileID: 174005878808005513}
+  hitSound: {fileID: 0}
+  hitEffectPrefab: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  knockbackForce: 5
+--- !u!82 &-3391657314229905412
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295449624862701543}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4120180061044369264
 GameObject:
   m_ObjectHideFlags: 0

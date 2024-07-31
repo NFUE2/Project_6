@@ -64,6 +64,9 @@ MonoBehaviour:
   attackCooldown: 3
   attackSize: {x: 1.4, y: 2}
   attackOffset: {x: -1, y: 0.4}
+  knockbackForce: 5
+  attackSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
+  hitSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
   shieldSkill: {fileID: 1214569859611142660}
   chargeSkill: {fileID: 6180402554713959692}
 --- !u!114 &6180402554713959692
@@ -80,7 +83,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   maxChargingTime: 3
-  isCharging: 0
   damage: 100
   damageRate: 3
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
@@ -106,6 +108,7 @@ MonoBehaviour:
   shieldPrefab: {fileID: 9139348047338328184, guid: 52940a8d7c969e446bcb797f51a94ef1, type: 3}
   shieldDistance: 1
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  shieldSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!114 &5883604329999571394
 MonoBehaviour:
   m_ObjectHideFlags: 0

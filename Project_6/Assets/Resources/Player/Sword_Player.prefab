@@ -182,7 +182,7 @@ MonoBehaviour:
   attackOffset: {x: -0.8, y: 0}
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: f694f65744d838847bf0bf0f25899972, type: 3}
   guardSkill: {fileID: 3530141661980807999}
   projectileSkill: {fileID: 7941044376589328438}
 --- !u!114 &3530141661980807999
@@ -202,7 +202,7 @@ MonoBehaviour:
   DefenseBoostDuringGuard: 50
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   DamageReduction: 0
-  guardSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
+  guardSound: {fileID: 8300000, guid: f60c71440a78c7b4f99800ee49860f03, type: 3}
 --- !u!114 &7941044376589328438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +643,9 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 2355582851979590813}
   healthBarImage: {fileID: 8700694705525571591}
-  hitSound: {fileID: 0}
-  hitEffect: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: edda52b4424d4d341a0b6a9d9db7d3ac, type: 3}
+  hitEffectPrefab: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  knockbackForce: 5
 --- !u!82 &5755271552007557060
 AudioSource:
   m_ObjectHideFlags: 0

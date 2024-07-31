@@ -173,6 +173,9 @@ MonoBehaviour:
   attackCooldown: 1
   attackSize: {x: 1, y: 1.2}
   attackOffset: {x: -0.8, y: 0}
+  knockbackForce: 5
+  attackSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
+  hitSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
   guardSkill: {fileID: 3530141661980807999}
   projectileSkill: {fileID: 7941044376589328438}
 --- !u!114 &3530141661980807999
@@ -187,8 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a69dec0106bfd429a4c037f77a8746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   GuardDuration: 1
+  DefenseBoostDuringGuard: 50
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  DamageReduction: 0
+  guardSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!114 &7941044376589328438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,9 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f35a193c8070043b1897c31e615464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
   projectilePrefab: {fileID: 0}
   attackPoint: {fileID: 0}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  shootSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!114 &2355582851979590813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +232,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  isDead: 0
 --- !u!114 &6325477453461356325
 MonoBehaviour:
   m_ObjectHideFlags: 0

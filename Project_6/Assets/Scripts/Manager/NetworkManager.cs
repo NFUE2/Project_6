@@ -12,10 +12,10 @@ public class NetworkManager : PunSingleton<NetworkManager>
 {
     public GameObject networkPanel, panelExitButton;//,lobby; //상태변화 안내패널, 닫기버튼
     public TextMeshProUGUI infoText; //한글이 안되서 주석처리, 상태변화 메세지 표시
-    //public Text infoText; //
+    //public Text infoText;
 
     //public TMP_InputField roomInputField; //한글이 안되서 주석처리
-    public TextMeshProUGUI state; //현재 포톤 접속상태 확인, 에디터에서만 사용
+    //public TextMeshProUGUI state; //현재 포톤 접속상태 확인, 에디터에서만 사용
 
     //현재 상태를 나타내는 메세지들
     public readonly string connectServerMessage = "서버에 접속중입니다.";
@@ -37,9 +37,9 @@ public class NetworkManager : PunSingleton<NetworkManager>
 
     private void Update()
     {
-#if UNITY_EDITOR
-        state.text = PhotonNetwork.NetworkClientState.ToString();
-#endif
+//#if UNITY_EDITOR
+//        state.text = PhotonNetwork.NetworkClientState.ToString();
+//#endif
     }
 
     public void OnClickEnterServer()
