@@ -24,8 +24,11 @@ public class StageData : MonoBehaviour
 
     private void Start()
     {
-        foreach (var m in monsterSpawn)
-            PhotonNetwork.Instantiate($"Monster/{stage.ToString()}/{m.monster.name}", m.transform.position, Quaternion.identity);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach (var m in monsterSpawn)
+                PhotonNetwork.Instantiate($"Monster/{stage.ToString()}/{m.monster.name}", m.transform.position, Quaternion.identity);
+        }
 
         GameManager.instance.enemyList[(int)stage] = monsterList;
     }
