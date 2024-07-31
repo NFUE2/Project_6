@@ -2156,6 +2156,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 0}
     deactiveGameObject: []
+    bgm: 1
   voting: {fileID: 0}
   vdata: {fileID: 0}
 --- !u!1 &2480830229050148692
@@ -20828,6 +20829,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 6097850982872855960}
     deactiveGameObject: []
+    bgm: 4
   stage: 1
 --- !u!1 &6157324552571848036
 GameObject:
@@ -21731,6 +21733,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 0}
     deactiveGameObject: []
+    bgm: 1
   voting: {fileID: 0}
   vdata: {fileID: 0}
 --- !u!1 &7868781660361313528
@@ -31328,6 +31331,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 0}
     deactiveGameObject: []
+    bgm: 0
   voting: {fileID: 0}
   vdata: {fileID: 0}
 --- !u!61 &2615038905902203773
