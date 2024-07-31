@@ -1553,6 +1553,10 @@ MonoBehaviour:
   panelExitButton: {fileID: 1703403170}
   infoText: {fileID: 294681618}
   curChoiceRoom: 
+  buttons:
+  - {fileID: 874633333}
+  - {fileID: 2083541308}
+  - {fileID: 1359903378}
 --- !u!1 &539005034
 GameObject:
   m_ObjectHideFlags: 0
