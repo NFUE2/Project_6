@@ -78,13 +78,13 @@ public class Voting : MonoBehaviourPun
         if (data.isCamPlayer) GameManager.instance.cam.target = player.transform;
         else GameManager.instance.cam.target = data.CameraPos;
 
-        Debug.Log(1);
-
         foreach(var g in data.activeGameObject)
             g.SetActive(true);
 
         foreach (var g in data.deactiveGameObject)
             g.SetActive(false);
+
+        SoundManager.instance.ChangeBGM(data.bgm);
     }
 
     void ResetVote()

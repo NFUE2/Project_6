@@ -622,6 +622,7 @@ MonoBehaviour:
     - {fileID: 6333219920795511525}
     deactiveGameObject:
     - {fileID: 542650903806586263}
+    bgm: 3
   voting: {fileID: 0}
   vdata: {fileID: 11400000, guid: fbc58c5ec1454da45a44e0db53438bcd, type: 2}
 --- !u!61 &2129877142934162455
@@ -10977,6 +10978,7 @@ MonoBehaviour:
     activeGameObject: []
     deactiveGameObject:
     - {fileID: 6770889267126221208}
+    bgm: 1
   voting: {fileID: 0}
   vdata: {fileID: 11400000, guid: 70a38f52651295f4a84721915d166415, type: 2}
 --- !u!1 &3525962450056211385
@@ -14669,6 +14671,7 @@ MonoBehaviour:
     activeGameObject: []
     deactiveGameObject:
     - {fileID: 6770889267126221208}
+    bgm: 1
   voting: {fileID: 0}
   vdata: {fileID: 11400000, guid: 70a38f52651295f4a84721915d166415, type: 2}
 --- !u!1 &5499825390397037866
@@ -21147,6 +21150,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 6770889267126221208}
     deactiveGameObject: []
+    bgm: 2
   stage: 0
 --- !u!1 &6823595343741280883
 GameObject:
