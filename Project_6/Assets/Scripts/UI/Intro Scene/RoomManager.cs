@@ -24,6 +24,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
+        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
+        //SoundManager.instance.ChangeBGM(BGMList.Town);
+    }
+
+    [PunRPC]
+    void ChangeClipRPC()
+    {
         SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
