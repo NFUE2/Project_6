@@ -17,6 +17,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void OnClickGameStart()
     {
+        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
+
         foreach(var b in buttons)
             b.interactable = false;
 
@@ -24,7 +26,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
-        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
         //SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
@@ -42,7 +43,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         foreach (var b in buttons)
             b.interactable = true;
 
-        if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
+        startButton.SetActive(PhotonNetwork.IsMasterClient);
 
         if (playerListEntries == null) playerListEntries = new Dictionary<int, GameObject>();
 

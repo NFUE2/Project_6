@@ -3019,8 +3019,6 @@ GameObject:
   m_Component:
   - component: {fileID: 348504166}
   - component: {fileID: 348504167}
-  - component: {fileID: 348504169}
-  - component: {fileID: 348504168}
   m_Layer: 0
   m_Name: TX Village Props Billboard
   m_TagString: Untagged
@@ -3095,50 +3093,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &348504168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348504165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    type: 0
-    startTransform: {fileID: 0}
-    isCamPlayer: 0
-    CameraPos: {fileID: 0}
-    activeGameObject:
-    - {fileID: 0}
-    deactiveGameObject: []
-  voting: {fileID: 1625198682}
-  vdata: {fileID: 0}
---- !u!114 &348504169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348504165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 6
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &376263448
 GameObject:
   m_ObjectHideFlags: 0
@@ -14824,6 +14778,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 0}
     deactiveGameObject: []
+    bgm: 0
   voting: {fileID: 1625198682}
   vdata: {fileID: 11400000, guid: e60d056284d3bab41af3f8d8db7ac07e, type: 2}
 --- !u!1 &1425963285
@@ -20683,12 +20638,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f659b6cdba1564288547c818c04374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cleaStageCount: 0
   player: {fileID: 0}
   players: []
   maps:
   - {fileID: 6770889267126221208, guid: 48d30f6c871511640a69eae94182639e, type: 3}
   - {fileID: 6097850982872855960, guid: 6578fbbe2c18be647a27f3db11141e46, type: 3}
+  cleaStageCount: 0
   enemyList: []
   nextStage: []
   <town>k__BackingField:
@@ -20699,6 +20654,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 0}
     deactiveGameObject: []
+    bgm: 0
   voting: {fileID: 1400989808}
   vote: {fileID: 1625198682}
 --- !u!4 &2033156692
