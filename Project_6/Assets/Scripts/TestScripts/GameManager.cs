@@ -10,18 +10,21 @@ public enum MonsterStageList
 
 public class GameManager : Singleton<GameManager>
 {
-    public int cleaStageCount;
     public CameraController cam { get; private set; }
     public GameObject player;
     public List<GameObject> players = new List<GameObject>();
-    public Transform[] enemyList;
 
-    public GameObject[] maps;
-    public DestinationData[] nextStage;
+    public GameObject[] maps; //만들어야하는 맵들
+
+    //수정하고싶은곳=================
+    public int cleaStageCount;
+    public Transform[] enemyList; //적들의 생성위치
+    public DestinationData[] nextStage; //다음 스테이지
     [field:SerializeField] public DestinationData town { get; private set; }
 
     public VotingObject voting;
     public GameObject vote;
+    //================================
 
     public override void Awake()
     {
@@ -32,10 +35,12 @@ public class GameManager : Singleton<GameManager>
 
         foreach (var m in maps)
         {
-            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
+            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity); //맵생성
+
             StageData stage = go.GetComponent<StageData>();
             enemyList[(int)stage.stage] = stage.monsterList;
             nextStage[(int)stage.stage] = stage.data;
+
             go.SetActive(false);
         }
         SetNextStage();
