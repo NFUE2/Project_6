@@ -27,10 +27,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public TMP_InputField textMeshPro;
 
+    public Button[] buttons;
+
     public override void OnJoinedLobby() //로비에 입장
     {
         base.OnJoinedLobby();
         lobbyFrame.SetActive(true);
+
+        foreach (var b in buttons)
+            b.interactable = true;
     }
 
     public override void OnJoinedRoom() //방 들어갔을때
@@ -47,11 +52,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (choiceRoomName.Length == 0) return;
 
+        foreach (var b in buttons)
+            b.interactable = false;
+
         StartCoroutine(NetworkManager.instance.ChangeState(
           connectRoomMessage,
           ClientState.Joined,
           JoinRoom));
     }
+
     public void OnClickDisconnect()
     {
         PhotonNetwork.Disconnect();
