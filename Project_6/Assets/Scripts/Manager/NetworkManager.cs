@@ -27,6 +27,8 @@ public class NetworkManager : PunSingleton<NetworkManager>
 
     public string curChoiceRoom;
 
+    public Button[] buttons;
+
     public override void Awake()
     {
         base.Awake();
@@ -44,6 +46,9 @@ public class NetworkManager : PunSingleton<NetworkManager>
 
     public void OnClickEnterServer()
     {
+        foreach (var b in buttons)
+            b.interactable = false;
+
         StartCoroutine(ChangeState(
             connectServerMessage,
             ClientState.ConnectedToMasterServer,
@@ -85,10 +90,10 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //}
     
     //네트워크매니저 처리
-    public void OnClickDisconnect()
-    {
-        PhotonNetwork.Disconnect();
-    }
+    //public void OnClickDisconnect()
+    //{
+    //    PhotonNetwork.Disconnect();
+    //}
 
     //public bool JoinRoom() //로비 매니저로 이관
     //{
@@ -166,6 +171,14 @@ public class NetworkManager : PunSingleton<NetworkManager>
         //Debug.Log("마스터 접속 성공");
         OnJoinLobby(); //마스터서버 접속되면 로비로 접속
     }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+
+        foreach (var b in buttons)
+            b.interactable = true;
+    }
+
     #endregion
 
     #region LobbyCallbacks

@@ -1,106 +1,128 @@
 using Photon.Pun;
 using UnityEngine;
-using TMPro;
 using System;
-using JetBrains.Annotations;
+
+public enum DestinationType
+{
+    Town,
+    Stage,
+}
 
 [Serializable]
-public class BossBattleData
+public class DestinationData
 {
-    public Transform bossStart;
-    public Transform bossBattleCameraPos;
-    public GameObject bossManager;
+    public DestinationType type;
+    public Transform startTransform;
+
+    public bool isCamPlayer;
+    public Transform CameraPos;
+
+    public GameObject[] activeGameObject;
+    public GameObject[] deactiveGameObject;
 }
 
 [RequireComponent(typeof(PhotonView))]
 public class VotingObject : MonoBehaviourPun//, IPunObservable
 {
-    int playerCount = 0,curPlayersCount, agree = 0;
+    int playerCount = 0, curPlayersCount;
+    public DestinationData data;
 
-    public GameObject votingObject;
-    public TextMeshProUGUI text;
+    public GameObject voting;
+    public VotingDataSO vdata;
+    //public TextMeshProUGUI text;
     //public Transform bossStart,bossCamera;
     //public GameObject boss;
-    public BossBattleData data;
-    public GameObject enemyList;
-
     private void Start()
     {
-        curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
-    }
+        if (data.type == DestinationType.Town)
+        {
+            var d = GameManager.instance.town;
 
-  
+            data.startTransform = d.startTransform;
+            data.CameraPos = d.CameraPos;
+        }
+
+        curPlayersCount = PhotonNetwork.CurrentRoom.PlayerCount;
+
+        if (voting == null) voting = GameManager.instance.vote;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        playerCount++;
+        if (playerCount == curPlayersCount)
+        {
+            voting.SetActive(true);
+            voting.GetComponent<Voting>().Display(vdata,data);
+        }
+
         //photonView.RPC(nameof(VotingRPC),RpcTarget.AllBuffered);
         //playerCount++;
-        photonView.RPC(nameof(EnterRPC),RpcTarget.All);
+        //photonView.RPC(nameof(EnterRPC),RpcTarget.All);
     }
     
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //playerCount--;
-        photonView.RPC(nameof(ExitRPC), RpcTarget.All);
-        VoteReset();
-    }
-
-    [PunRPC]
-    void EnterRPC()
-    {
-        playerCount++;
-        votingObject.SetActive(playerCount == curPlayersCount);
-    }
-
-    [PunRPC]
-    void ExitRPC()
-    {
         playerCount--;
-        votingObject.SetActive(false);
+        voting.SetActive(false);
+
+        //playerCount--;
+        //photonView.RPC(nameof(ExitRPC), RpcTarget.All);
+        //VoteReset();
     }
 
-    public void VoteAgreement()
-    {
-        Debug.Log(1);
-        photonView.RPC(nameof(VoteAgreementRPC),RpcTarget.All);
-    }
+    //[PunRPC]
+    //void EnterRPC()
+    //{
+    //    playerCount++;
+    //    votingObject.SetActive(playerCount == curPlayersCount);
+    //}
 
-    [PunRPC]
-    void VoteAgreementRPC()
-    {
-        agree++;
-        text.text = agree.ToString();
+    //[PunRPC]
+    //void ExitRPC()
+    //{
+    //    playerCount--;
+    //    votingObject.SetActive(false);
+    //}
 
-        if (agree == curPlayersCount)
-        {
-            Debug.Log("¿Ãµø");
+    //public void VoteAgreement()
+    //{
+    //    photonView.RPC(nameof(VoteAgreementRPC),RpcTarget.All);
+    //}
 
-            //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
-            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
-            GameManager.instance.player.transform.position = data.bossStart.position;
-            GameManager.instance.cam.target = data.bossBattleCameraPos;
-            data.bossManager.SetActive(true);
-            enemyList.SetActive(false);
-        }
-    }
+    //[PunRPC]
+    //void VoteAgreementRPC()
+    //{
+    //    agree++;
+    //    text.text = agree.ToString();
 
-    public void VoteOpposition()
-    {
-        photonView.RPC(nameof(VoteOppositionRPC), RpcTarget.All);
+    //    if (agree == curPlayersCount)
+    //    {
+    //        //photonView.RPC(nameof(EnterBossRoomRPC),RpcTarget.MasterClient);
+    //        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TestCameraController>().target = bossCamera;
+    //        GameManager.instance.player.transform.position = data.startTransform.position;
+    //        GameManager.instance.cam.target = data.CameraPos;
 
-    }
+    //        if(data.bossManager != null) data.bossManager.SetActive(true);
+    //    }
+    //}
 
-    [PunRPC]
-    void VoteOppositionRPC()
-    {
-        VoteReset();
-    }
+    //public void VoteOpposition()
+    //{
+    //    photonView.RPC(nameof(VoteOppositionRPC), RpcTarget.All);
+    //}
 
-    void VoteReset()
-    {
-        agree = 0;
-        votingObject.SetActive(false);
-    }
+    //[PunRPC]
+    //void VoteOppositionRPC()
+    //{
+    //    VoteReset();
+    //}
+
+    //void VoteReset()
+    //{
+    //    agree = 0;
+    //    votingObject.SetActive(false);
+    //}
 
     //[PunRPC]
     //void EnterBossRoomRPC()

@@ -124,7 +124,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5239344786957623370}
-  - {fileID: 6165928487229274052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2028195349515842073
@@ -218,6 +217,7 @@ MonoBehaviour:
   offsetPos: {x: 0, y: 0}
   condition: {fileID: 7201916654247401965}
   isRight: 0
+  stage: 1
   <animationData>k__BackingField:
     idleParameterName: Idle
     moveParameterName: Move
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ec8b355d7a1774194a6507a75bd73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 6665228736478153977}
+  sprite: {fileID: 2028195349515842073}
 --- !u!61 &4859201384870545808
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -396,124 +396,3 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!1001 &4197900664124026186
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1854785286227991319}
-    m_Modifications:
-    - target: {fileID: 2468080748293806931, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569765250318476889, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_Name
-      value: MonsterUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569765250318476889, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
---- !u!224 &6165928487229274052 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8057000361002408590, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-  m_PrefabInstance: {fileID: 4197900664124026186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6665228736478153977 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7367420947659006387, guid: 90e960436b6fbf64d88dc9818379a8c6, type: 3}
-  m_PrefabInstance: {fileID: 4197900664124026186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

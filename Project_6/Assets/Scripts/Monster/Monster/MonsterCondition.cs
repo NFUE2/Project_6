@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
 {
     MonsterController controller;
+    public SpriteRenderer sprite;
 
     public Image hpBar;
     //public event Action OnAlive;
@@ -35,11 +37,13 @@ public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
         curHP = Mathf.Clamp(curHP - damage, 0, controller.data.maxHP);
         hpBar.fillAmount = curHP / controller.data.maxHP;
 
-        if (curHP == 0)
+        if (curHP == 0) 
         {
             hpParent.SetActive(false);
             OnDie?.Invoke();
         }
+
+        else StartCoroutine(Damaged());
     }
 
     private void SetHP()
@@ -58,4 +62,11 @@ public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
     //        curHP = (float)stream.ReceiveNext();
     //    }
     //}
+
+    IEnumerator Damaged()
+    {
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        sprite.color = Color.white;
+    }
 }

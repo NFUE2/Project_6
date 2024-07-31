@@ -51,11 +51,11 @@ public class UISlot : MonoBehaviourPun //, IPunObservable
 
     public void ChangeInteraction()
     {
-        photonView.RPC(nameof(OnClickRPC),RpcTarget.AllBuffered);
+        photonView.RPC(nameof(DeactiveRPC),RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    public void OnClickRPC()
+    public void DeactiveRPC()
     {
         selectButton.interactable = false;
     }
