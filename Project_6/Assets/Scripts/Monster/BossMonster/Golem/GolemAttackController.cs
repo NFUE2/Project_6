@@ -6,8 +6,6 @@ using UnityEngine;
 public class GolemAttackController : BossAttackController, IPunObservable
 {
     public GameObject stompHitBox;
-    public GameObject swingHitBoxLeft;
-    public GameObject swingHitBoxRight;
     public GameObject razorHitBox;
     public GameObject fireBallHitBox;
 
@@ -116,7 +114,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             //swingHitBoxLeft.SetActive(true);
             var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x + 0.5f, bossPos.y), new Vector2(10, 3), 0);
+            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x + 0.5f, bossPos.y), new Vector2(13, 3), 0);
             foreach(Collider2D col in hit)
             {
                 if(col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
@@ -133,7 +131,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             //swingHitBoxRight.SetActive(true);
             var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x - 0.5f, bossPos.y), new Vector2(5, 1), 0);
+            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x - 0.5f, bossPos.y), new Vector2(13, 3), 0);
             foreach (Collider2D col in hit)
             {
                 if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
@@ -306,15 +304,15 @@ public class GolemAttackController : BossAttackController, IPunObservable
         if(stream.IsWriting)
         {
             stream.SendNext(stompHitBox.activeInHierarchy);
-            stream.SendNext(swingHitBoxLeft.activeInHierarchy);
-            stream.SendNext(swingHitBoxRight.activeInHierarchy);
+            //stream.SendNext(swingHitBoxLeft.activeInHierarchy);
+            //stream.SendNext(swingHitBoxRight.activeInHierarchy);
             stream.SendNext(razorHitBox.activeInHierarchy);
         }
         else
         {
             stompHitBox.SetActive((bool)stream.ReceiveNext());
-            swingHitBoxLeft.SetActive((bool)stream.ReceiveNext()); ;
-            swingHitBoxRight.SetActive((bool)stream.ReceiveNext()); ;
+            //swingHitBoxLeft.SetActive((bool)stream.ReceiveNext()); ;
+            //swingHitBoxRight.SetActive((bool)stream.ReceiveNext()); ;
             razorHitBox.SetActive((bool)stream.ReceiveNext()); ;
         }
     }
