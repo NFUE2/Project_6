@@ -19,6 +19,8 @@ public class DestinationData
 
     public GameObject[] activeGameObject;
     public GameObject[] deactiveGameObject;
+
+    public BGMList bgm;
 }
 
 [RequireComponent(typeof(PhotonView))]
@@ -26,7 +28,7 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 {
     int playerCount = 0, curPlayersCount;
     public DestinationData data;
-
+    
     public GameObject voting;
     public VotingDataSO vdata;
     //public TextMeshProUGUI text;

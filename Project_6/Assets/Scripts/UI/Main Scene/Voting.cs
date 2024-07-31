@@ -85,6 +85,8 @@ public class Voting : MonoBehaviourPun
 
         foreach (var g in data.deactiveGameObject)
             g.SetActive(false);
+
+        SoundManager.instance.ChangeBGM(data.bgm);
     }
 
     void ResetVote()
