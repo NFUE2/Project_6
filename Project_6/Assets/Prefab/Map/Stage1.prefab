@@ -613,13 +613,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  votingObject: {fileID: 0}
-  text: {fileID: 0}
   data:
-    bossStart: {fileID: 6609185367502559230}
-    bossBattleCameraPos: {fileID: 5761114552620246478}
-    bossManager: {fileID: 6333219920795511525}
-  enemyList: {fileID: 542650903806586263}
+    type: 1
+    startTransform: {fileID: 6609185367502559230}
+    isCamPlayer: 0
+    CameraPos: {fileID: 5761114552620246478}
+    activeGameObject:
+    - {fileID: 6333219920795511525}
+    deactiveGameObject:
+    - {fileID: 542650903806586263}
+  voting: {fileID: 0}
+  vdata: {fileID: 11400000, guid: fbc58c5ec1454da45a44e0db53438bcd, type: 2}
 --- !u!61 &2129877142934162455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10809,8 +10813,8 @@ GameObject:
   - component: {fileID: 9136064969652931947}
   - component: {fileID: 2267227373785527138}
   - component: {fileID: 1147242079210467540}
-  - component: {fileID: 1377508044262857062}
-  - component: {fileID: 4911701145919830186}
+  - component: {fileID: 2393523420679678737}
+  - component: {fileID: 1931657701497743353}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -10915,7 +10919,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.015625, y: 0.5}
@@ -10931,19 +10935,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96875, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &1377508044262857062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3467424777287958122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daac610faca6f88489b4400a9e3e2686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4911701145919830186
+--- !u!114 &2393523420679678737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10965,6 +10957,28 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1931657701497743353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3467424777287958122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    type: 0
+    startTransform: {fileID: 0}
+    isCamPlayer: 0
+    CameraPos: {fileID: 0}
+    activeGameObject: []
+    deactiveGameObject:
+    - {fileID: 6770889267126221208}
+  voting: {fileID: 0}
+  vdata: {fileID: 11400000, guid: 70a38f52651295f4a84721915d166415, type: 2}
 --- !u!1 &3525962450056211385
 GameObject:
   m_ObjectHideFlags: 0
@@ -14491,8 +14505,8 @@ GameObject:
   - component: {fileID: 8964105548030116112}
   - component: {fileID: 3757871636573332742}
   - component: {fileID: 2477415543797440530}
-  - component: {fileID: 2888757325696253290}
-  - component: {fileID: 3369636847560309862}
+  - component: {fileID: 9153723857714258643}
+  - component: {fileID: 1442744377775404703}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -14597,7 +14611,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.015625, y: 0.5}
@@ -14613,19 +14627,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96875, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &2888757325696253290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435582486411578577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daac610faca6f88489b4400a9e3e2686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3369636847560309862
+--- !u!114 &9153723857714258643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14647,6 +14649,28 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1442744377775404703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435582486411578577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    type: 0
+    startTransform: {fileID: 0}
+    isCamPlayer: 0
+    CameraPos: {fileID: 0}
+    activeGameObject: []
+    deactiveGameObject:
+    - {fileID: 6770889267126221208}
+  voting: {fileID: 0}
+  vdata: {fileID: 11400000, guid: 70a38f52651295f4a84721915d166415, type: 2}
 --- !u!1 &5499825390397037866
 GameObject:
   m_ObjectHideFlags: 0
@@ -21115,6 +21139,15 @@ MonoBehaviour:
   - transform: {fileID: 1874178748502103230}
     monster: {fileID: 6140137726146580348, guid: 615fba50d87b54548890e0716bcc5fcd, type: 3}
   monsterList: {fileID: 5681201716169381617}
+  data:
+    type: 1
+    startTransform: {fileID: 8871741723123401880}
+    isCamPlayer: 1
+    CameraPos: {fileID: 0}
+    activeGameObject:
+    - {fileID: 6770889267126221208}
+    deactiveGameObject: []
+  stage: 0
 --- !u!1 &6823595343741280883
 GameObject:
   m_ObjectHideFlags: 0

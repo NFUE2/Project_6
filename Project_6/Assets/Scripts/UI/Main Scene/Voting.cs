@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(PhotonView))]
 public class Voting : MonoBehaviourPun
@@ -11,15 +12,38 @@ public class Voting : MonoBehaviourPun
     public TextMeshProUGUI oppositeText;
     public TextMeshProUGUI count;
 
-    int agree = 0;
+    DestinationData data;
+    int agree = 0,playerCount;
 
-    public void Display()
+    public Button[] buttons;
+
+    private void Awake()
     {
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+    }
 
+    private void OnEnable()
+    {
+        ResetButton(true);
+    }
+
+    void ResetButton(bool active)
+    {
+        foreach (Button b in buttons)
+            b.interactable = active;
+    }
+
+    public void Display(VotingDataSO data,DestinationData data2)
+    {
+        message.text = data.votingMessage;
+        agreeText.text = data.agreeText;
+        oppositeText.text = data.oppositeText;
+        this.data = data2;
     }
 
     public void Agree()
     {
+        ResetButton(false);
         photonView.RPC(nameof(AgreeRPC), RpcTarget.All);
     }
 
@@ -33,12 +57,39 @@ public class Voting : MonoBehaviourPun
     {
         agree++;
         count.text = agree.ToString();
+        if (agree == playerCount) VotingEnd();
     }
 
     [PunRPC]
     public void OppositeRPC()
     {
+        ResetVote();
         gameObject.SetActive(false);
+    }
+
+
+    void VotingEnd()
+    {
+        ResetVote();
+
+        GameObject player = GameManager.instance.player;
+        player.transform.position = data.startTransform.position;
+
+        if (data.isCamPlayer) GameManager.instance.cam.target = player.transform;
+        else GameManager.instance.cam.target = data.CameraPos;
+
+        Debug.Log(1);
+
+        foreach(var g in data.activeGameObject)
+            g.SetActive(true);
+
+        foreach (var g in data.deactiveGameObject)
+            g.SetActive(false);
+    }
+
+    void ResetVote()
+    {
         agree = 0;
+        count.text = agree.ToString();
     }
 }

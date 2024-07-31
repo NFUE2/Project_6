@@ -3099,10 +3099,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    type: 0
     startTransform: {fileID: 0}
+    isCamPlayer: 0
     CameraPos: {fileID: 0}
-    bossManager: {fileID: 0}
+    activeGameObject:
+    - {fileID: 0}
+    deactiveGameObject: []
   voting: {fileID: 1625198682}
+  vdata: {fileID: 0}
 --- !u!114 &348504169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7467,9 +7472,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TestVotingObject, Assembly-CSharp
-        m_MethodName: VoteOpposition
+      - m_Target: {fileID: 1625198686}
+        m_TargetAssemblyTypeName: Voting, Assembly-CSharp
+        m_MethodName: Opposite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11181,9 +11186,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TestVotingObject, Assembly-CSharp
-        m_MethodName: VoteAgreement
+      - m_Target: {fileID: 1625198686}
+        m_TargetAssemblyTypeName: Voting, Assembly-CSharp
+        m_MethodName: Agree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14751,10 +14756,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    type: 1
     startTransform: {fileID: 0}
+    isCamPlayer: 0
     CameraPos: {fileID: 0}
-    bossManager: {fileID: 0}
+    activeGameObject:
+    - {fileID: 0}
+    deactiveGameObject: []
   voting: {fileID: 1625198682}
+  vdata: {fileID: 11400000, guid: e60d056284d3bab41af3f8d8db7ac07e, type: 2}
 --- !u!1 &1425963285
 GameObject:
   m_ObjectHideFlags: 0
@@ -17037,6 +17047,9 @@ MonoBehaviour:
   agreeText: {fileID: 725749021}
   oppositeText: {fileID: 688653685}
   count: {fileID: 982868371}
+  buttons:
+  - {fileID: 986343437}
+  - {fileID: 635544667}
 --- !u!114 &1625198687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20604,12 +20617,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f659b6cdba1564288547c818c04374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cleaStageCount: 0
   player: {fileID: 0}
   players: []
-  enemyList:
-  - {fileID: 0}
+  enemyList: []
   maps:
   - {fileID: 6770889267126221208, guid: 48d30f6c871511640a69eae94182639e, type: 3}
+  - {fileID: 6097850982872855960, guid: 6578fbbe2c18be647a27f3db11141e46, type: 3}
+  nextStage: []
+  <town>k__BackingField:
+    type: 0
+    startTransform: {fileID: 238358818}
+    isCamPlayer: 0
+    CameraPos: {fileID: 1182056529}
+    activeGameObject:
+    - {fileID: 0}
+    deactiveGameObject: []
+  voting: {fileID: 1400989808}
+  vote: {fileID: 1625198682}
 --- !u!4 &2033156692
 Transform:
   m_ObjectHideFlags: 0
