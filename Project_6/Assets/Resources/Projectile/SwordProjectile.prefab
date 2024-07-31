@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8570787685611516460}
   - component: {fileID: 1594857941043259504}
   - component: {fileID: 4646986859882237409}
-  - component: {fileID: 2469923174272643168}
+  - component: {fileID: 6871901401351656082}
   m_Layer: 0
   m_Name: SwordProjectile
   m_TagString: Untagged
@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f742152d53dfd144b83d39673c9fb868, type: 2}
-  hitSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
-  hitEffect: {fileID: 0}
---- !u!82 &2469923174272643168
+  hitSound: {fileID: 8300000, guid: 868b15fb402c2834083c96f12989df57, type: 3}
+  hitEffect: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+--- !u!82 &6871901401351656082
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,8 +180,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 868b15fb402c2834083c96f12989df57, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class EquipItemDataSO : ItemDataSO
 {
-
     public StateData[] stateData;
 
     public ItemEnhanceDataSO itemEnhanceData;
-
 }

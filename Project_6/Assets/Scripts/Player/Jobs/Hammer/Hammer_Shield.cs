@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class Shield : MonoBehaviour, IDamagable
+public class Hammer_Shield : MonoBehaviour, IDamagable
 {
     public AudioClip hitSound; // 피격 시 효과음
     public GameObject hitEffect; // 피격 시 파티클 효과

@@ -443,6 +443,10 @@ PrefabInstance:
       propertyPath: wireArrow
       value: 
       objectReference: {fileID: 4652639966666034163, guid: 0ba0bbff1fec5304c8b08ea008b3dbd6, type: 3}
+    - target: {fileID: 4414155874532968815, guid: e7fca33d649a6aa48b62aba4086d5675, type: 3}
+      propertyPath: skillSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
