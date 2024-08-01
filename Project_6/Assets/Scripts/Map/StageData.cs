@@ -18,12 +18,7 @@ public class StageData : MonoBehaviour
     public List<GameObject> monsters = new List<GameObject>();
     //public MonsterStageList stage;
 
-    public bool isClear;
-
-    //private void Awake()
-    //{
-    //    //GameManager.instance.nextStage[(int)stage] = data;
-    //}
+    public GameObject returnTown;
 
     private void Start()
     {
@@ -36,7 +31,6 @@ public class StageData : MonoBehaviour
             }
         }
 
-        isClear = false;
         //GameManager.instance.enemyList = monsterList;
     }
 

@@ -1,4 +1,6 @@
+using Photon.Pun.Demo.Cockpit;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MonsterStageList
@@ -21,9 +23,10 @@ public class GameManager : Singleton<GameManager>
     //public Transform[] enemyList; //적들의 생성위치
     //public DestinationData[] nextStage; //다음 스테이지
 
+    Queue<StageData> stage = new Queue<StageData>();
+
     Transform enemyList; //적들의 생성위치
     //DestinationData nextStage; //다음 스테이지
-
     [field:SerializeField] public DestinationData town { get; private set; }
 
     public VotingObject voting;
@@ -34,6 +37,15 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         cam = Camera.main.GetComponent<CameraController>();
+
+        foreach(var m in maps)
+        {
+            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
+            stage.Enqueue(go.GetComponent<StageData>());
+            go.SetActive(false);
+        }
+
+        SetNextStage();
         //enemyList = new Transform[maps.Length];
         //nextStage = new DestinationData[maps.Length];
 
@@ -47,7 +59,7 @@ public class GameManager : Singleton<GameManager>
 
         //    go.SetActive(false);
         //}
-        SetNextStage();
+        //SetNextStage();
     }
 
     public Transform SpawnStage()
@@ -55,13 +67,36 @@ public class GameManager : Singleton<GameManager>
         return enemyList;
     }
 
-    public void SetNextStage()
+    void SetNextStage()
     {
-        GameObject go = Instantiate(maps[cleaStageCount],new Vector2(100,0),Quaternion.identity);
+        if (stage.Count == 0) return;
 
-        StageData stage = go.GetComponent<StageData>();
-        enemyList = stage.monsterList;
-        voting.data =/* nextStage = */stage.data;
-        go.SetActive(false);
+        StageData data = stage.Peek();
+        enemyList = data.monsterList;
+        voting.data = data.data;
+
+        //voting.data = curMap.data;
+        //GameObject go = Instantiate(maps[cleaStageCount], new Vector2(100, 0), Quaternion.identity); ;
+
+        //curMap = go.GetComponent<StageData>();
+        //enemyList = curMap.monsterList;
+        //go.SetActive(false);
     }
+
+    public void StageClear()
+    {
+        cleaStageCount++;
+        StageData data = stage.Peek();
+        data.returnTown.SetActive(true);
+
+        stage.Dequeue();
+        SetNextStage();
+    }
+
+    //public void StageClear()
+    //{
+    //    cleaStageCount++;
+    //    Destroy(curMap);
+    //    SetNextStage();
+    //}
 }
