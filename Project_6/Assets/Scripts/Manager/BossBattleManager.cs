@@ -24,12 +24,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
-        if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        //if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
     }
 
     private void Start()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         GetPlayers();
         SpawnBossMonster();
         isAttacking = false;
@@ -91,9 +92,10 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     private void SpawnBossMonster() // 보스 소환
     {
-        spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
+        //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
         //
-        //(복원)spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonster.name, transform.position, Quaternion.identity);
+        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonster.name, transform.position, Quaternion.identity);
+
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)

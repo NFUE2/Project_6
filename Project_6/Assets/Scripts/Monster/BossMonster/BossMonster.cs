@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossMonster : MonoBehaviour, IDamagable
+public class BossMonster : MonoBehaviour, IDamagable,IPunInstantiateMagicCallback
 {
     public float maxHp { get; set; }
     public float attackPower { get; set; }
@@ -30,6 +31,16 @@ public class BossMonster : MonoBehaviour, IDamagable
         else
         {
             hpBar.fillAmount = GetFillAmountHP();
+        }
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Debug.Log("¿€µø");
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            BossBattleManager.instance.boss = this;
+            BossBattleManager.instance.spawnedBoss = gameObject;
         }
     }
 }
