@@ -26,6 +26,8 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
     private Coroutine coroutine;
     private bool isThrown = false;
 
+    public AudioClip audioClip;
+
     private void Start()
     {
         targetObject = Instantiate(target, BossBattleManager.Instance.spawnedBoss.transform);
@@ -70,6 +72,7 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
 
     private IEnumerator ThrowObject()
     {
+        SoundManager.Instance.Shot(audioClip);
         isThrown = true;
         float currentTime = 0;
         Destroy(targetObject);

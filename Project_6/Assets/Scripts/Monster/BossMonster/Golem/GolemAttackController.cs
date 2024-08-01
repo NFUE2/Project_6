@@ -14,7 +14,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public AudioClip swingAudioClip;
     public AudioClip stompAudioClip;
     public AudioClip razorAudioClip;
-    public AudioClip fireBallAudioClip;
+    public AudioClip chargePunchAudioClip;
 
     public BoxCollider2D bossCollider;
     public BoxCollider2D chargeCollider;
@@ -113,7 +113,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void Swing()
     {
-        //SoundManager.Instance.Shot(swingAudioClip);
+        SoundManager.Instance.Shot(swingAudioClip);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwingReady", false);
         BossBattleManager.Instance.bossAnimator.SetBool("isSwing", true);
     }
@@ -267,7 +267,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void ChargePunch()
     {
-        //SoundManager.Instance.Shot(swingAudioClip);
+        SoundManager.Instance.Shot(chargePunchAudioClip);
         foreach (GameObject P in BossBattleManager.Instance.players)
         {
             PlayerCondition condition = P.GetComponent<PlayerCondition>();
