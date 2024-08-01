@@ -877,7 +877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831d032632873c34e8074b40f28e0677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossMonster: {fileID: 6937834297774713849, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
+  bossMonsters:
+  - {fileID: 3373813575177551619, guid: 380faad7eefd5bf4593ff03e424b105d, type: 3}
+  - {fileID: 6937834297774713849, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
   spawnedBoss: {fileID: 0}
   boss: {fileID: 0}
   attackController: {fileID: 0}

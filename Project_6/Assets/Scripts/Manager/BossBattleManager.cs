@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BossBattleManager : Singleton<BossBattleManager>
 {
-    public GameObject bossMonster;
+    public GameObject[] bossMonsters = new GameObject[2];
     public GameObject spawnedBoss;
     public BossMonster boss;
     public BossAttackController attackController;
@@ -28,19 +28,10 @@ public class BossBattleManager : Singleton<BossBattleManager>
         base.Awake();
     }
 
-    private void Start()
-    {
-        GetPlayers();
-        SpawnBossMonster();
-        isAttacking = false;
-    }
-
     private void Update()
     {
         if(spawnedBoss != null && bossStateMachine != null)
         {
-            
-            
             if(players != null)
             {
                 if (targetPlayer != null)
@@ -89,11 +80,19 @@ public class BossBattleManager : Singleton<BossBattleManager>
         return Vector3.Distance(targetPlayer.transform.position, spawnedBoss.transform.position);
     }
 
-    private void SpawnBossMonster() // 보스 소환
+    public void SpawnBossMonster() // 보스 소환
     {
-        spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
-        //
-        //(복원)spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonster.name, transform.position, Quaternion.identity);
+        GetPlayers();
+        isAttacking = false;
+        int bossMonsterIndex;
+        //조건이 들어갈 자리(맵id?와 같은 조건 추가)
+        //if(id가 1이라면?)
+        //  bossMonsterIndex = 0;
+        //else
+          bossMonsterIndex = 1;
+        //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
+        
+        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[bossMonsterIndex].name, transform.position, Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)
