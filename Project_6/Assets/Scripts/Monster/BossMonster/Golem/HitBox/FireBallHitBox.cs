@@ -17,7 +17,7 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
     private float expandDuration = 3;
     private float speed = 10;
     private Vector3 startScale = new Vector3(0, 0, 1);
-    private Vector3 endScale = new Vector3(3, 3, 1);
+    private Vector3 endScale = new Vector3(1, 1, 1);
     private float startColliderRadius = 0;
     private float endColliderRadius = 1.5f;
     public CircleCollider2D circleCollider;
@@ -25,6 +25,8 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
     GameObject targetObject;
     private Coroutine coroutine;
     private bool isThrown = false;
+
+    public AudioClip audioClip;
 
     private void Start()
     {
@@ -47,6 +49,10 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
                 Destroy(gameObject);
             }
         }
+        if(BossBattleManager.Instance.bossStateMachine.GetCurrentState() == BossBattleManager.Instance.bossStateMachine.DieState)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator ScaleExpand()
@@ -66,6 +72,7 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
 
     private IEnumerator ThrowObject()
     {
+        SoundManager.Instance.Shot(audioClip);
         isThrown = true;
         float currentTime = 0;
         Destroy(targetObject);
@@ -74,10 +81,7 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
         {
             float distance = speed * Time.deltaTime;
             Vector3 newPosition = transform.position + moveDirection * distance;
-            if (circleCollider != null)
-            {
-                circleCollider.radius = Mathf.Lerp(startColliderRadius, endColliderRadius, currentTime / expandDuration);
-            }
+           
             transform.position = newPosition;
             yield return null;
         }
@@ -88,10 +92,17 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log($"{collision.gameObject.name}가 피격됨");
-            if (collision.TryGetComponent<IDamagable>(out IDamagable P))
+            if (collision.TryGetComponent<IDamagable>(out IDamagable P) && collision.TryGetComponent<IKnockBackable>(out IKnockBackable K))
             {
+                
                 float damage = BossBattleManager.Instance.boss.attackPower * 1.25f;
                 P.TakeDamage(damage);
+                Vector2 playerPos = collision.transform.position;
+                Vector2 bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+
+                Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                K.ApplyKnockback(knockbackDirection, 5);
+               
                 StopAllCoroutines();
                 Destroy(gameObject);
             }
@@ -100,6 +111,7 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
         {
             var field = Instantiate(burningField);
             field.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.7f, collision.transform.position.z);
+            Destroy(gameObject);
         }
     }
 }

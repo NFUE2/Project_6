@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2476964381158421766}
   - component: {fileID: 248515993010548440}
   - component: {fileID: 5378022622925385156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   target: {fileID: 5516716105022133086, guid: 6047e9f2f3f903a40a3dc75d77882e8e, type: 3}
   burningField: {fileID: 4807170921041474770, guid: 59362509143bd1e4cbc6892e05b7d9c4, type: 3}
   circleCollider: {fileID: 5378022622925385156}
+  audioClip: {fileID: 8300000, guid: 0a58b3aefa1764149824c0aef86cd7d8, type: 3}
 --- !u!58 &5378022622925385156
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,4 +136,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.0001
+  m_Radius: 0.5
