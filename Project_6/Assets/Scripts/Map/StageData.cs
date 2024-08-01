@@ -16,7 +16,9 @@ public class StageData : MonoBehaviour
     public Transform monsterList;
     public DestinationData data;
     public List<GameObject> monsters = new List<GameObject>();
-    public MonsterStageList stage;
+    //public MonsterStageList stage;
+
+    public bool isClear;
 
     //private void Awake()
     //{
@@ -29,11 +31,12 @@ public class StageData : MonoBehaviour
         {
             foreach (var m in monsterSpawn)
             {
-                GameObject go = PhotonNetwork.Instantiate($"Monster/{stage.ToString()}/{m.monster.name}", m.transform.position, Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate($"Monster/{m.monster.name}", m.transform.position, Quaternion.identity);
                 monsters.Add(go);
             }
         }
 
+        isClear = false;
         //GameManager.instance.enemyList = monsterList;
     }
 
