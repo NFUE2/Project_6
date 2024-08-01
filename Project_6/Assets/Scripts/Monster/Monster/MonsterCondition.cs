@@ -16,7 +16,7 @@ public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
     public event Action OnDie;
     public event Action OnSpawn;
 
-    float curHP;
+    public float curHP { get; private set; }
 
     private void Awake()
     {
@@ -44,6 +44,12 @@ public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
         }
 
         else StartCoroutine(Damaged());
+    }
+
+    private void OnDisable()
+    {
+        GameObject hpParent = hpBar.transform.parent.gameObject;
+        hpParent.SetActive(false);
     }
 
     private void SetHP()
