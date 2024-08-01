@@ -80,19 +80,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
         return Vector3.Distance(targetPlayer.transform.position, spawnedBoss.transform.position);
     }
 
-    public void SpawnBossMonster() // 보스 소환
+    public void SpawnBossMonster(int index) // 보스 소환
     {
         GetPlayers();
         isAttacking = false;
-        int bossMonsterIndex;
-        //조건이 들어갈 자리(맵id?와 같은 조건 추가)
-        //if(id가 1이라면?)
-        //  bossMonsterIndex = 0;
-        //else
-          bossMonsterIndex = 1;
         //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
         
-        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[bossMonsterIndex].name, transform.position, Quaternion.identity);
+        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[index].name, transform.position, Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
         if (boss != null && bossStateMachine == null)
