@@ -8,6 +8,8 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public GameObject stompHitBox;
     public GameObject razorHitBox;
     public GameObject fireBallHitBox;
+    public GameObject swingHitBoxRight;
+    public GameObject swingHitBoxLeft;
 
     public AudioClip swingAudioClip;
     public AudioClip stompAudioClip;
@@ -79,7 +81,16 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void EnableStompHitBox()
     {
-        stompHitBox.SetActive(true);
+        //stompHitBox.SetActive(true);
+        Collider2D[] hit = Physics2D.OverlapBoxAll(stompHitBox.transform.position, stompHitBox.transform.localScale, 0);
+        foreach (Collider2D col in hit)
+        {
+            if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+            {
+                float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
+                P.TakeDamage(damage);
+            }
+        }
         BossBattleManager.Instance.bossAnimator.SetBool("isStomp", false);
         additionalAttack = Random.Range(0, 2);
         if( additionalAttack == 0 ) 
@@ -114,7 +125,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             //swingHitBoxLeft.SetActive(true);
             var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x + 0.5f, bossPos.y), new Vector2(13, 3), 0);
+            Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxLeft.transform.position, swingHitBoxLeft.transform.localScale, 0);
             foreach(Collider2D col in hit)
             {
                 if(col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
@@ -131,7 +142,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
         {
             //swingHitBoxRight.SetActive(true);
             var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(new Vector2(bossPos.x - 0.5f, bossPos.y), new Vector2(13, 3), 0);
+            Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxRight.transform.position, swingHitBoxRight.transform.localScale, 0);
             foreach (Collider2D col in hit)
             {
                 if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
