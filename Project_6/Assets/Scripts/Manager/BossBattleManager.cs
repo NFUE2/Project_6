@@ -143,13 +143,15 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public void DestroyBoss()
     {
-        Debug.Log(1);
+        //Debug.Log(1);
         //Destroy(bossMonster);
         spawnedBoss.SetActive(false);
-        foreach(GameObject g in bossEndObject)
-            g.SetActive(!g.activeInHierarchy);
 
-        GameManager.instance.cam.target = GameManager.instance.player.transform;
+        foreach(GameObject g in bossEndObject)
+            g.SetActive(true);
+
+        //GameManager.instance.cleaStageCount++;
+        //GameManager.instance.cam.target = GameManager.instance.player.transform;
     }
 }
     // 보스 소환 및 FSM 생성

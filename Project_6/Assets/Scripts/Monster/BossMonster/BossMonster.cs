@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossMonster : MonoBehaviour, IDamagable,IPunInstantiateMagicCallback
+public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCallback
 {
     public float maxHp { get; set; }
     public float attackPower { get; set; }
@@ -26,7 +26,8 @@ public class BossMonster : MonoBehaviour, IDamagable,IPunInstantiateMagicCallbac
             currentHp = 0;
             hpBar.fillAmount = 0;
             // 사망 처리
-            BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
+            //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
+            photonView.RPC(nameof(BossDie),RpcTarget.All);
         }
         else
         {
@@ -36,11 +37,16 @@ public class BossMonster : MonoBehaviour, IDamagable,IPunInstantiateMagicCallbac
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        Debug.Log("작동");
         if(!PhotonNetwork.IsMasterClient)
         {
             BossBattleManager.instance.boss = this;
             BossBattleManager.instance.spawnedBoss = gameObject;
         }
+    }
+
+    [PunRPC]
+    protected void BossDie()
+    {
+        BossBattleManager.instance.DestroyBoss();
     }
 }
