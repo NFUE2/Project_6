@@ -18,8 +18,12 @@ public class GameManager : Singleton<GameManager>
 
     //수정하고싶은곳=================
     public int cleaStageCount;
-    public Transform[] enemyList; //적들의 생성위치
-    public DestinationData[] nextStage; //다음 스테이지
+    //public Transform[] enemyList; //적들의 생성위치
+    //public DestinationData[] nextStage; //다음 스테이지
+
+    Transform enemyList; //적들의 생성위치
+    //DestinationData nextStage; //다음 스테이지
+
     [field:SerializeField] public DestinationData town { get; private set; }
 
     public VotingObject voting;
@@ -30,29 +34,34 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         cam = Camera.main.GetComponent<CameraController>();
-        enemyList = new Transform[maps.Length];
-        nextStage = new DestinationData[maps.Length];
+        //enemyList = new Transform[maps.Length];
+        //nextStage = new DestinationData[maps.Length];
 
-        foreach (var m in maps)
-        {
-            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity); //맵생성
+        //foreach (var m in maps)
+        //{
+        //    GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity); //맵생성
 
-            StageData stage = go.GetComponent<StageData>();
-            enemyList[(int)stage.stage] = stage.monsterList;
-            nextStage[(int)stage.stage] = stage.data;
+        //    StageData stage = go.GetComponent<StageData>();
+        //    enemyList[(int)stage.stage] = stage.monsterList;
+        //    nextStage[(int)stage.stage] = stage.data;
 
-            go.SetActive(false);
-        }
+        //    go.SetActive(false);
+        //}
         SetNextStage();
     }
 
-    public Transform SpawnStage(MonsterStageList stage)
+    public Transform SpawnStage()
     {
-        return enemyList[(int)stage];
+        return enemyList;
     }
 
     public void SetNextStage()
     {
-        voting.data = nextStage[cleaStageCount];
+        GameObject go = Instantiate(maps[cleaStageCount],new Vector2(100,0),Quaternion.identity);
+
+        StageData stage = go.GetComponent<StageData>();
+        enemyList = stage.monsterList;
+        voting.data =/* nextStage = */stage.data;
+        go.SetActive(false);
     }
 }

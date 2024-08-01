@@ -165,7 +165,7 @@ MonoBehaviour:
   offsetPos: {x: 0, y: 0}
   condition: {fileID: 624032379804857084}
   isRight: 0
-  stage: 1
+  ui: {fileID: 655975605301395470}
   <animationData>k__BackingField:
     idleParameterName: Idle
     moveParameterName: Move

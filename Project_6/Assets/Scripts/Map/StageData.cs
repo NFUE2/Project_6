@@ -18,10 +18,10 @@ public class StageData : MonoBehaviour
     public List<GameObject> monsters = new List<GameObject>();
     public MonsterStageList stage;
 
-    private void Awake()
-    {
-        GameManager.instance.nextStage[(int)stage] = data;
-    }
+    //private void Awake()
+    //{
+    //    //GameManager.instance.nextStage[(int)stage] = data;
+    //}
 
     private void Start()
     {
@@ -34,7 +34,7 @@ public class StageData : MonoBehaviour
             }
         }
 
-        GameManager.instance.enemyList[(int)stage] = monsterList;
+        //GameManager.instance.enemyList = monsterList;
     }
 
     private void OnEnable()
