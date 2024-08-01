@@ -21,6 +21,8 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public MonsterCondition condition;
     public bool isRight;
 
+    public MonsterStageList stage;
+
     //[Header("AttackType")]
     //public MonsterAttackType type;
 
@@ -76,20 +78,21 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public void Disable()
     {
         gameObject.SetActive(false);
+        target = null;
     }
 
     private void ComponentToggle()
     {
-        col.enabled = !col.enabled;
+        col.enabled = condition.curHP == 0 ? false : true;
 
-        rigid.constraints =
-            rigid.constraints == RigidbodyConstraints2D.FreezeAll ?
-            RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeAll;
+        rigid.constraints = condition.curHP == 0 ?
+            RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation;
     }
 
     //생성될때 작동하는 함수
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        transform.SetParent(GameManager.instance.enemyList);
+        //transform.SetParent(GameManager.instance.enemyList);
+        transform.SetParent(GameManager.instance.SpawnStage(stage));
     }
 }

@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -10,17 +11,27 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject roomFrame;
 
-    //private GameObject curPlayer;
+    public Button[] buttons;
 
     private Dictionary<int, GameObject> playerListEntries;
 
-    //private void Awake()
-    //{
-    //}
-
     public void OnClickGameStart()
     {
+        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
+
+        foreach(var b in buttons)
+            b.interactable = false;
+
         PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        //SoundManager.instance.ChangeBGM(BGMList.Town);
+    }
+
+    [PunRPC]
+    void ChangeClipRPC()
+    {
         SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
@@ -29,7 +40,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         roomFrame.SetActive(true);
 
-        if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
+        foreach (var b in buttons)
+            b.interactable = true;
+
+        startButton.SetActive(PhotonNetwork.IsMasterClient);
 
         if (playerListEntries == null) playerListEntries = new Dictionary<int, GameObject>();
 

@@ -53,6 +53,10 @@ MonoBehaviour:
   - ExitRPC
   - VoteAgreementRPC
   - VoteOppositionRPC
+  - AgreeRPC
+  - OppositeRPC
+  - DeactiveRPC
+  - ChangeClipRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
