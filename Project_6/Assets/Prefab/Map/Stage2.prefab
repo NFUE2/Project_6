@@ -468,7 +468,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -11
   m_Sprite: {fileID: 21300000, guid: 3339b7b35cacb3d4289b5510e27a27fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1774,7 +1774,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1796461765, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 0, g: 0.9600265, b: 1, a: 1}
   m_FlipX: 0
@@ -1969,7 +1969,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1796461765, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 0, g: 0.9600265, b: 1, a: 1}
   m_FlipX: 0
@@ -2057,7 +2057,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1758970209, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2098,7 +2098,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.015625, y: 0.5}
@@ -2151,11 +2151,12 @@ MonoBehaviour:
   data:
     type: 0
     startTransform: {fileID: 0}
+    bossSpawn: {fileID: 0}
     isCamPlayer: 0
     CameraPos: {fileID: 0}
-    activeGameObject:
-    - {fileID: 0}
-    deactiveGameObject: []
+    activeGameObject: []
+    deactiveGameObject:
+    - {fileID: 6097850982872855960}
     bgm: 1
   voting: {fileID: 0}
   vdata: {fileID: 0}
@@ -18568,7 +18569,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &6529794646054667753
 MonoBehaviour:
@@ -18641,6 +18642,7 @@ Transform:
   m_Children:
   - {fileID: 1469298262041208519}
   - {fileID: 3053375678634822729}
+  - {fileID: 2851567925090773921}
   m_Father: {fileID: 305723776797294386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5382367832505402054
@@ -20824,13 +20826,15 @@ MonoBehaviour:
   data:
     type: 1
     startTransform: {fileID: 1469298262041208519}
+    bossSpawn: {fileID: 0}
     isCamPlayer: 1
     CameraPos: {fileID: 0}
     activeGameObject:
     - {fileID: 6097850982872855960}
     deactiveGameObject: []
     bgm: 4
-  stage: 1
+  monsters: []
+  returnTown: {fileID: 7839311283382646850}
 --- !u!1 &6157324552571848036
 GameObject:
   m_ObjectHideFlags: 0
@@ -20915,6 +20919,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6205602417809424104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630234830757022739}
+  m_Layer: 0
+  m_Name: BossSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630234830757022739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6205602417809424104}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 221, y: -5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1343421160318280056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6357637653961645142
 GameObject:
   m_ObjectHideFlags: 0
@@ -21515,7 +21550,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -11
   m_Sprite: {fileID: 21300000, guid: 3339b7b35cacb3d4289b5510e27a27fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21577,7 +21612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7071900011182017418
 Transform:
   m_ObjectHideFlags: 0
@@ -21634,7 +21669,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1758970209, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21675,7 +21710,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.015625, y: 0.5}
@@ -21728,14 +21763,15 @@ MonoBehaviour:
   data:
     type: 0
     startTransform: {fileID: 0}
+    bossSpawn: {fileID: 0}
     isCamPlayer: 0
     CameraPos: {fileID: 0}
-    activeGameObject:
-    - {fileID: 0}
-    deactiveGameObject: []
+    activeGameObject: []
+    deactiveGameObject:
+    - {fileID: 6097850982872855960}
     bgm: 1
   voting: {fileID: 0}
-  vdata: {fileID: 0}
+  vdata: {fileID: 11400000, guid: 70a38f52651295f4a84721915d166415, type: 2}
 --- !u!1 &7868781660361313528
 GameObject:
   m_ObjectHideFlags: 0
@@ -31230,12 +31266,12 @@ Transform:
   m_GameObject: {fileID: 8101545544452354782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 191.96, y: -4.95, z: 0}
+  m_LocalPosition: {x: 3, y: -4.95, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 607658484895684407}
-  m_Father: {fileID: 1343421160318280056}
+  m_Father: {fileID: 3400200754769293208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7513919403239813111
 SpriteRenderer:
@@ -31277,7 +31313,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 363260238, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -31324,16 +31360,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    type: 1
+    type: 2
     startTransform: {fileID: 1321224511755126242}
+    bossSpawn: {fileID: 630234830757022739}
     isCamPlayer: 0
     CameraPos: {fileID: 4424184038808699562}
-    activeGameObject:
-    - {fileID: 0}
-    deactiveGameObject: []
-    bgm: 0
+    activeGameObject: []
+    deactiveGameObject:
+    - {fileID: 8720256584524557415}
+    bgm: 5
   voting: {fileID: 0}
-  vdata: {fileID: 0}
+  vdata: {fileID: 11400000, guid: fbc58c5ec1454da45a44e0db53438bcd, type: 2}
 --- !u!61 &2615038905902203773
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31661,7 +31698,7 @@ Transform:
   m_Children:
   - {fileID: 1321224511755126242}
   - {fileID: 4424184038808699562}
-  - {fileID: 2851567925090773921}
+  - {fileID: 630234830757022739}
   m_Father: {fileID: 2601579503971763619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9219701607834759100

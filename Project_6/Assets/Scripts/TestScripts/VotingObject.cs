@@ -6,6 +6,7 @@ public enum DestinationType
 {
     Town,
     Stage,
+    Boss,
 }
 
 [Serializable]
@@ -13,6 +14,7 @@ public class DestinationData
 {
     public DestinationType type;
     public Transform startTransform;
+    public Transform bossSpawn;
 
     public bool isCamPlayer;
     public Transform CameraPos;

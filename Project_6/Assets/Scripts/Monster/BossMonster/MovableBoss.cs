@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovableBoss : MonoBehaviour
+public class MovableBoss : MonoBehaviourPun
 {
     private float speed = 1f; //임시 고정값, 추후 수정
     public float duration = 2.0f;
@@ -19,6 +20,8 @@ public class MovableBoss : MonoBehaviour
 
     void Update()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         var isAttacking = BossBattleManager.Instance.isAttacking;
         Debug.Log(isAttacking);
         if (isAttacking == false && BossBattleManager.Instance.targetPlayer != null)
@@ -35,12 +38,14 @@ public class MovableBoss : MonoBehaviour
                 if (targetPosition.x >= this.transform.position.x)
                 {
                     movePositive = true;
-                    spriteRenderer.flipX = false;
+                    photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, false);
+                    //spriteRenderer.flipX = false;
                 }
                 else
                 {
                     movePositive = false;
-                    spriteRenderer.flipX = true;
+                    photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, true);
+                    //spriteRenderer.flipX = true;
                 }
                 float direction = movePositive ? 1 : -1;
                 transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
@@ -58,5 +63,11 @@ public class MovableBoss : MonoBehaviour
                 animator.SetBool("isWalk", false);
             }
         }
+    }
+
+    [PunRPC]
+    void FlipXRPC(bool chk)
+    {
+        if(spriteRenderer != null) spriteRenderer.flipX = chk;
     }
 }

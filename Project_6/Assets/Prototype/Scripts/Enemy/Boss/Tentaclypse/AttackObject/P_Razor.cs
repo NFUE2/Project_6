@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_Razor : MonoBehaviour
+public class P_Razor : MonoBehaviour, IPunInstantiateMagicCallback
 {
     private bool isAttackable = false;
     private float stateChangeTime = 0.75f;
@@ -14,7 +14,7 @@ public class P_Razor : MonoBehaviour
     SpriteRenderer spriteRenderer;
     BoxCollider2D razorCollider;
 
-    PhotonView pv;
+    //PhotonView pv;
 
 
     private void Start()
@@ -24,7 +24,7 @@ public class P_Razor : MonoBehaviour
         stateChangeTriggerTime = 0;
         objectDestroyTriggerTime = 0;
 
-        pv = GetComponent<PhotonView>();
+        //pv = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -79,6 +79,11 @@ public class P_Razor : MonoBehaviour
     {
         //PhotonNetwork.Destroy(gameObject);
         Destroy(gameObject);
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
     }
 }
 
