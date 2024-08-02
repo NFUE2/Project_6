@@ -76,6 +76,7 @@ public class FireBallHitBox : MonoBehaviour, IPunInstantiateMagicCallback // ¿œπ
             currentTime += Time.deltaTime;
             yield return null;
         }
+        PhotonNetwork.Destroy(targetObject);
         coroutine = StartCoroutine(ThrowObject());
         transform.localScale = endScale;
     }
@@ -86,7 +87,10 @@ public class FireBallHitBox : MonoBehaviour, IPunInstantiateMagicCallback // ¿œπ
         isThrown = true;
         float currentTime = 0;
         //Destroy(targetObject);
-        PhotonNetwork.Destroy(targetObject);
+        if (targetObject)
+        {
+            PhotonNetwork.Destroy(targetObject);
+        }
         Vector3 moveDirection = (targetPosition - transform.position).normalized;
         while (true)
         {
