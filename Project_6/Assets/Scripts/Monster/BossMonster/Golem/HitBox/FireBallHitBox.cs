@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 파괴가 이루어져야함, 충돌 시 파괴되어야 함
+public class FireBallHitBox : MonoBehaviour, IPunInstantiateMagicCallback // 일반적인 HitBox와 다르게 생성 및 파괴가 이루어져야함, 충돌 시 파괴되어야 함
 {
     // 점점 커져야함(3초)
     // 일정 속도로 목표로 날아가야함
@@ -30,9 +31,17 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
 
     private void Start()
     {
-        targetObject = Instantiate(target, BossBattleManager.Instance.spawnedBoss.transform);
-        targetPosition = BossBattleManager.Instance.targetPlayer.transform.position;
+        //targetObject = Instantiate(target, BossBattleManager.Instance.spawnedBoss.transform);
+        //targetPosition = BossBattleManager.Instance.targetPlayer.transform.position;
+        //targetObject.transform.position = targetPosition;
+
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        Vector2 pos = BossBattleManager.Instance.targetPlayer.transform.position;
+        targetObject = PhotonNetwork.Instantiate("Boss/" + target.name, pos, Quaternion.identity);
+        //targetObject.transform.SetParent(BossBattleManager.instance.boss.transform);
         targetObject.transform.position = targetPosition;
+
 
         transform.localScale = startScale;
         coroutine = StartCoroutine(ScaleExpand());
@@ -49,9 +58,10 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
                 Destroy(gameObject);
             }
         }
-        if(BossBattleManager.Instance.bossStateMachine.GetCurrentState() == BossBattleManager.Instance.bossStateMachine.DieState)
+        if(PhotonNetwork.IsMasterClient && BossBattleManager.Instance.bossStateMachine.GetCurrentState() == BossBattleManager.Instance.bossStateMachine.DieState)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject); 
+            //Destroy(gameObject);
         }
     }
 
@@ -75,7 +85,8 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
         SoundManager.Instance.Shot(audioClip);
         isThrown = true;
         float currentTime = 0;
-        Destroy(targetObject);
+        //Destroy(targetObject);
+        PhotonNetwork.Destroy(targetObject);
         Vector3 moveDirection = (targetPosition - transform.position).normalized;
         while (true)
         {
@@ -113,5 +124,10 @@ public class FireBallHitBox : MonoBehaviour // 일반적인 HitBox와 다르게 생성 및 
             field.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.7f, collision.transform.position.z);
             Destroy(gameObject);
         }
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        gameObject.transform.SetParent(BossBattleManager.instance.boss.transform);
     }
 }

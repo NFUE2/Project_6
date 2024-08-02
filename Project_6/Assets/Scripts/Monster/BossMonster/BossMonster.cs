@@ -43,6 +43,8 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
         {
             BossBattleManager.instance.boss = this;
             BossBattleManager.instance.spawnedBoss = gameObject;
+            BossBattleManager.instance.attackController = GetComponent<BossAttackController>();
+            BossBattleManager.instance.bossAnimator = GetComponent<Animator>();
         }
     }
 
