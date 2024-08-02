@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class RiflePlayer : RangedPlayerBase
 {
-    //해당 클래스의 상위 클래스를 받아와주세요
     [Header("Skill Q")]
     [SerializeField] private TargetSkill targetSkill; // TargetSkill 인스턴스
 
     [Header("Skill E")]
     [SerializeField] private GrenadeSkill grenadeSkill; // GrenadeSkill 인스턴스
-
 
     private void Start()
     {
@@ -22,6 +20,7 @@ public class RiflePlayer : RangedPlayerBase
 
     public override void UseSkillQ()
     {
+        Debug.Log("UseSkillQ 호출됨"); // 디버그 메시지 추가
         targetSkill.UseSkill();
     }
 

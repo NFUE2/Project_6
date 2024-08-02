@@ -1,87 +1,97 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TargetSkill : SkillBase
 {
-    public GameObject targetPrefab;
-    public int qSkillMaxTargets = 3;
-    public LayerMask enemyLayerMask;
-    private List<GameObject> targetMarkers = new List<GameObject>();
-    private int remainingChances;
-    private RiflePlayer player;
-    public PlayerDataSO PlayerData;
+    public GameObject targetMarkerPrefab; // 조준점 프리팹
+    public float skillDamage = 10f; // 스킬 데미지, 인스펙터에서 조절 가능
+    public PlayerDataSO PlayerData; // 플레이어 데이터를 포함하는 ScriptableObject
+    public float targetingRange = 10f; // 타겟팅 범위
+    public LayerMask enemyLayerMask; // 적의 레이어 마스크
+    public int maxTargets = 3; // 최대 타겟 수
 
-    public void SetPlayer(RiflePlayer player)
+    private List<GameObject> targetMarkers = new List<GameObject>();
+    private Camera mainCamera;
+
+    void Start()
     {
+        // 플레이어 데이터에서 스킬의 쿨다운 시간을 초기화합니다.
         cooldownDuration = PlayerData.SkillQCooldown;
+        mainCamera = Camera.main;
     }
 
-    //오버라이드
     public override void UseSkill()
     {
-        if (remainingChances <= 0) return;
-
-        remainingChances--;
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 10f, enemyLayerMask);
-        var sortedEnemies = hitEnemies.OrderBy(e => Vector2.Distance(transform.position, e.transform.position)).Take(qSkillMaxTargets);
-
-        foreach (var enemy in sortedEnemies)
+        // 스킬이 아직 쿨다운 중인지 확인합니다.
+        if (Time.time - lastActionTime < cooldownDuration)
         {
-            int markerCount = enemy.CompareTag("Boss") ? 3 : 1;
-            for (int i = 0; i < markerCount; i++)
+            Debug.Log("스킬이 쿨다운 중입니다.");
+            return;
+        }
+
+        // 타겟팅 범위 내의 모든 적을 찾습니다.
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, targetingRange, enemyLayerMask);
+        List<Collider2D> enemies = hitEnemies.OrderBy(h => Vector2.Distance(transform.position, h.transform.position)).Take(maxTargets).ToList();
+
+        // 기존 조준점 제거
+        ClearTargetMarkers();
+
+        // 조준점 생성
+        foreach (Collider2D enemy in enemies)
+        {
+            if (enemy.CompareTag("Boss"))
             {
-                Vector2 markerPosition = enemy.CompareTag("Boss") ? GetRandomPointInCollider(enemy) : enemy.transform.position;
-                GameObject targetMarker = Instantiate(targetPrefab, markerPosition, Quaternion.identity);
-                targetMarker.GetComponent<TargetMarker>().Initialize(enemy.gameObject, player);
-                targetMarkers.Add(targetMarker);
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 randomPoint = (Vector2)enemy.bounds.center + Random.insideUnitCircle * enemy.bounds.extents;
+                    CreateTargetMarker(randomPoint, enemy.gameObject);
+                }
+            }
+            else
+            {
+                CreateTargetMarker(enemy.bounds.center, enemy.gameObject);
             }
         }
+
+        // 마지막 액션 시간을 현재 시간으로 업데이트합니다.
+        lastActionTime = Time.time;
+
+        // 쿨다운 텍스트를 업데이트합니다.
+        UpdateCooldownText();
     }
 
-    private Vector2 GetRandomPointInCollider(Collider2D collider)
+    private void ClearTargetMarkers()
     {
-        Bounds bounds = collider.bounds;
-        return new Vector2(
-            Random.Range(bounds.min.x, bounds.max.x),
-            Random.Range(bounds.min.y, bounds.max.y)
-        );
-    }
-
-    public void TargetMarkerClicked(GameObject enemy)
-    {
-        Debug.Log($"데미지 적용: {enemy.name}");
-        RemoveMarker();
-    }
-
-    public void TargetMarkerMissed()
-    {
-        Debug.Log("타겟 마커 놓침");
-        RemoveMarker();
-    }
-
-    private void RemoveMarker()
-    {
-        remainingChances--;
-        Debug.Log($"남은 기회: {remainingChances}");
-        if (remainingChances <= 0)
+        foreach (GameObject marker in targetMarkers)
         {
-            ClearAllMarkers();
-        }
-    }
-
-    private void ClearAllMarkers()
-    {
-        foreach (var marker in targetMarkers)
-        {
-            if (marker != null)
-            {
-                Destroy(marker); //비활성화 상태로 변경
-                Debug.Log("마커 제거");
-            }
+            Destroy(marker);
         }
         targetMarkers.Clear();
-        Debug.Log("모든 마커 제거됨");
+    }
+
+    private void CreateTargetMarker(Vector2 position, GameObject target)
+    {
+        GameObject markerInstance = Instantiate(targetMarkerPrefab, position, Quaternion.identity);
+        TargetMarker marker = markerInstance.GetComponent<TargetMarker>();
+        if (marker != null)
+        {
+            marker.Initialize(target, this);
+        }
+        targetMarkers.Add(markerInstance);
+    }
+
+    public void OnTargetClicked(GameObject target)
+    {
+        // 적에게 데미지를 입힙니다.
+        IDamagable damagable = target.GetComponent<IDamagable>();
+        if (damagable != null)
+        {
+            damagable.TakeDamage(skillDamage); // 인스펙터에서 설정된 스킬 데미지를 적용
+        }
+
+        // 클릭된 조준점 제거
+        targetMarkers.RemoveAll(marker => marker == null || marker.GetComponent<TargetMarker>().target == target);
     }
 }

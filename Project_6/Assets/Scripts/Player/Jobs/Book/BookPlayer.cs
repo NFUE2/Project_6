@@ -4,8 +4,6 @@ using TMPro;
 
 public class BookPlayer : RangedPlayerBase
 {
-    public PlayerDataSO PlayerData;
-
     [Header("Skill Q")]
     [SerializeField] private BookShieldSkill bookshieldSkill;
 
@@ -16,7 +14,6 @@ public class BookPlayer : RangedPlayerBase
     public float attackRange;
     public LayerMask targetLayer;
     public float projectileSpeed;
-    public GameObject projectilePrefab;
 
     private void Start()
     {
@@ -26,7 +23,7 @@ public class BookPlayer : RangedPlayerBase
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < PlayerData.attackCooldown) return;
+        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
 
         Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
 
@@ -54,12 +51,15 @@ public class BookPlayer : RangedPlayerBase
 
     private Transform FindClosestTarget(Vector3 position, float range, LayerMask layer)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(position, range, layer);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, range, layer);
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (Collider hitCollider in hitColliders)
+        Debug.Log($"찾은 타겟 수: {hitColliders.Length}");
+
+        foreach (Collider2D hitCollider in hitColliders)
         {
+            Debug.Log($"충돌한 객체: {hitCollider.gameObject.name}, 레이어: {hitCollider.gameObject.layer}");
             if (hitCollider.transform == transform) continue;
 
             float distance = Vector3.Distance(position, hitCollider.transform.position);
@@ -76,9 +76,8 @@ public class BookPlayer : RangedPlayerBase
     private void LaunchProjectile(Transform target)
     {
         Vector2 direction = (target.position - transform.position).normalized;
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
         Destroy(projectile, 5f);
     }
 }
-
