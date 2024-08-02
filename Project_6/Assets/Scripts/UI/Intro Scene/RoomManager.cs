@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -37,6 +38,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        if (!PhotonNetwork.IsMasterClient) PhotonNetwork.EnableCloseConnection = true;
+
+
         base.OnJoinedRoom();
         roomFrame.SetActive(true);
 
@@ -83,9 +87,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         playerListEntries = null;
     }
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+
         base.OnPlayerLeftRoom(otherPlayer);
+        if (otherPlayer.ActorNumber == 1) PhotonNetwork.LeaveRoom();
 
         if(playerListEntries.TryGetValue(otherPlayer.ActorNumber,out GameObject go))
         {
@@ -96,7 +102,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void OnClickLeaveRoom()
     {
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.CurrentRoom.IsOpen = false;
 
         PhotonNetwork.LeaveRoom();
