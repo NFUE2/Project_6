@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     public override void Awake()
     {
         base.Awake();
+        cleaStageCount = 0;
         cam = Camera.main.GetComponent<CameraController>();
 
         foreach(var m in maps)

@@ -27,7 +27,9 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
             hpBar.fillAmount = 0;
             // »ç¸Á Ã³¸®
             //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
-            photonView.RPC(nameof(BossDie),RpcTarget.All);
+
+            //photonView.RPC(nameof(BossDie),RpcTarget.All);
+            BossDie();
         }
         else
         {
@@ -44,7 +46,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     protected void BossDie()
     {
         GameManager.instance.StageClear();
