@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NetworkManager : PunSingleton<NetworkManager>
@@ -218,16 +219,24 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //}
 
     ////다른플레이어가 방에 입장했을때
-    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    //{
-    //    base.OnPlayerEnteredRoom(newPlayer);
-    //}
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+    }
 
     ////다른플레이어가 방을 나갔을때
-    //public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    //{
-    //    base.OnPlayerLeftRoom(otherPlayer);
-    //}
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        if (otherPlayer.ActorNumber == 1)
+        {
+            int index = SceneManager.GetActiveScene().buildIndex;
+
+            if (index == 1) PhotonNetwork.LoadLevel(0);
+
+            PhotonNetwork.LeaveRoom();
+        }
+    }
 
     ////방장 변경되었을때
     //public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
