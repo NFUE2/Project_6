@@ -91,6 +91,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
 
         base.OnPlayerLeftRoom(otherPlayer);
+        if (otherPlayer.ActorNumber == 1) PhotonNetwork.LeaveRoom();
 
         if(playerListEntries.TryGetValue(otherPlayer.ActorNumber,out GameObject go))
         {

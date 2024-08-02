@@ -16,14 +16,15 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource BGM,EFF;
     public AudioClip[] clipBGM;
 
-    public override void Awake()
-    {
-        base.Awake();
-        ChangeBGM(BGMList.Intro);
-    }
+    //public override void Awake()
+    //{
+    //    base.Awake();
+    //    //ChangeBGM(BGMList.Intro);
+    //}
 
     public void ChangeBGM(BGMList b)
     {
+        Debug.Log(1);
         BGM.clip = clipBGM[(int)b];
         BGM.Play();
     }

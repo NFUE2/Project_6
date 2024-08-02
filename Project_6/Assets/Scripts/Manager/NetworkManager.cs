@@ -219,7 +219,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //}
 
     ////다른플레이어가 방에 입장했을때
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
     }
@@ -232,7 +232,11 @@ public class NetworkManager : PunSingleton<NetworkManager>
         {
             int index = SceneManager.GetActiveScene().buildIndex;
 
-            if (index == 1) PhotonNetwork.LoadLevel(0);
+            if (index == 1)
+            {
+                PhotonNetwork.LoadLevel(0);
+                SoundManager.instance.ChangeBGM(BGMList.Intro);
+            }
 
             PhotonNetwork.LeaveRoom();
         }
