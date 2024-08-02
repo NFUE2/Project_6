@@ -2,10 +2,29 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 15; // 투사체의 속도
+    public float speed = 15f; // 투사체의 속도
     private Vector2 direction; // 투사체의 방향
     public int damage = 10; // 투사체가 입히는 데미지
     public float offScreenMargin = 0.5f; // 화면 밖으로 간주할 여백
+    public GameObject explosionEffect; // 폭발 효과 프리팹
+    public float explosionLifetime = 2.0f; // 폭발 효과의 생존 시간
+    public AudioClip explosionSound; // 폭발 효과음
+    private AudioSource audioSource; // 오디오 소스 컴포넌트
+
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.isKinematic = true; // 투사체가 물리 엔진의 영향을 받지 않도록 설정
+
+        // 오디오 소스 컴포넌트 가져오기 또는 추가하기
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     public void SetDirection(Vector2 newDirection)
     {
@@ -18,30 +37,43 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)direction * speed * Time.deltaTime;
-
-        // 투사체가 화면 밖으로 나가면 파괴
-        if (IsOffScreen())
-        {
-            Destroy(gameObject);
-        }
     }
 
-    private bool IsOffScreen()
+    private void OnBecameInvisible()
     {
-        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
-        return screenPoint.x < -offScreenMargin || screenPoint.x > 1 + offScreenMargin || screenPoint.y < -offScreenMargin || screenPoint.y > 1 + offScreenMargin;
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.GetComponent<IDamagable>()?.TakeDamage(damage);
-            Destroy(gameObject);
+            IDamagable damagable = collision.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(damage);
+                Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
+            }
+            Explode();
         }
-        else if (collision.CompareTag("Obstacle"))
+    }
+
+    private void Explode()
+    {
+        // 폭발 효과 재생
+        if (explosionEffect != null)
         {
-            Destroy(gameObject);
+            GameObject effect = Instantiate(explosionEffect, transform.position, transform.rotation);
+            Destroy(effect, explosionLifetime); // 일정 시간이 지나면 폭발 효과 파괴
         }
+
+        // 폭발 효과음 재생
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+        }
+
+        // 투사체 파괴
+        Destroy(gameObject);
     }
 }

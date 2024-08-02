@@ -1,82 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &712334482141559149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7843060920337363157}
-  - component: {fileID: 5821211430959830993}
-  m_Layer: 0
-  m_Name: AttackCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7843060920337363157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712334482141559149}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.73, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 105955398845922730}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5821211430959830993
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712334482141559149}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.11558056, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2311611, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &2902345027627310317
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,16 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 105955398845922730}
-  - component: {fileID: 2842726093199862757}
-  - component: {fileID: 4629112120262233842}
-  - component: {fileID: 4414155874532968815}
+  - component: {fileID: 6516999131418106374}
+  - component: {fileID: 6698493541975220501}
+  - component: {fileID: 3588301510770552227}
   - component: {fileID: 6622760348263712995}
   - component: {fileID: 754553495647215865}
   - component: {fileID: 993735159311167382}
   - component: {fileID: 867728500263411753}
   - component: {fileID: 7321761268478164590}
   - component: {fileID: 817965381581470148}
-  m_Layer: 0
+  - component: {fileID: 2795534105139705731}
+  m_Layer: 6
   m_Name: Bow_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -116,11 +40,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 149430350009225027}
-  - {fileID: 7843060920337363157}
   - {fileID: 4667699244300833591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2842726093199862757
+--- !u!114 &6516999131418106374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,17 +55,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0f7a5adbdde20438b595d8bd78d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 0}
   qCooldownText: {fileID: 0}
   eCooldownText: {fileID: 0}
-  animator: {fileID: 817965381581470148}
-  attackPrefab: {fileID: 8906174536271126433, guid: 26d45cb4d56519141b92f59a35755317, type: 3}
-  attackPoint: {fileID: 4667699244300833591}
+  animator: {fileID: 0}
+  attackPrefab: {fileID: 0}
+  attackPoint: {fileID: 0}
   mainCamera: {fileID: 0}
-  playerInput: {fileID: 6622760348263712995}
-  wireArrowSkill: {fileID: 4414155874532968815}
-  bombArrowSkill: {fileID: 4629112120262233842}
---- !u!114 &4629112120262233842
+  playerInput: {fileID: 0}
+  attackSound: {fileID: 0}
+  wireArrowSkill: {fileID: 0}
+  bombArrowSkill: {fileID: 0}
+--- !u!114 &6698493541975220501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902345027627310317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f01fad6089a93d44986705e5d215ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
+  wireArrow: {fileID: 0}
+  PlayerData: {fileID: 0}
+  skillSound: {fileID: 0}
+--- !u!114 &3588301510770552227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,22 +97,8 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   bombArrow: {fileID: 0}
   fireAngle: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
---- !u!114 &4414155874532968815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2902345027627310317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f01fad6089a93d44986705e5d215ae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownText: {fileID: 0}
-  wireArrow: {fileID: 4652639966666034163, guid: 0ba0bbff1fec5304c8b08ea008b3dbd6, type: 3}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 0}
+  fireSound: {fileID: 0}
 --- !u!114 &6622760348263712995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  player: {fileID: 2842726093199862757}
+  player: {fileID: 0}
   groundCheck: {fileID: 149430350009225027}
   groundCheckRadius: 0.1
   groundLayer:
@@ -480,6 +406,102 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &2795534105139705731
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902345027627310317}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3538632515875853614
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,8 +513,8 @@ GameObject:
   - component: {fileID: 4667699244300833591}
   - component: {fileID: 207859253281523636}
   - component: {fileID: 7027013422186499164}
-  m_Layer: 0
-  m_Name: Bow_Weapon
+  m_Layer: 6
+  m_Name: Book_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,7 +609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 149430350009225027}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
