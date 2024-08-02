@@ -89,7 +89,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[index].name, transform.position, Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
-        if (boss != null && bossStateMachine == null)
+        if (boss != null)
         {
             CreateBossMonsterStateMachine(boss);  
         }
