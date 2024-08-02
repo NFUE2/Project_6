@@ -11,15 +11,31 @@ public class TargetSkill : SkillBase
     public float targetingRange = 10f; // 타겟팅 범위
     public LayerMask enemyLayerMask; // 적의 레이어 마스크
     public int maxTargets = 3; // 최대 타겟 수
+    public AudioClip hitSound; // 타겟을 맞췄을 때의 효과음
+    public AudioClip useSkillSound; // 스킬 사용 시 효과음
+    public AudioClip missSound; // 타겟이 아닌 곳 클릭 시 효과음
+    private AudioSource audioSource; // 오디오 소스 컴포넌트
 
     private List<GameObject> targetMarkers = new List<GameObject>();
     private Camera mainCamera;
+    private RiflePlayer riflePlayer; // RiflePlayer 참조
 
     void Start()
     {
         // 플레이어 데이터에서 스킬의 쿨다운 시간을 초기화합니다.
         cooldownDuration = PlayerData.SkillQCooldown;
         mainCamera = Camera.main;
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
+    public void Initialize(RiflePlayer player)
+    {
+        riflePlayer = player;
     }
 
     public override void UseSkill()
@@ -29,6 +45,12 @@ public class TargetSkill : SkillBase
         {
             Debug.Log("스킬이 쿨다운 중입니다.");
             return;
+        }
+
+        // 스킬 사용 시 효과음 재생
+        if (useSkillSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(useSkillSound);
         }
 
         // 타겟팅 범위 내의 모든 적을 찾습니다.
@@ -43,11 +65,7 @@ public class TargetSkill : SkillBase
         {
             if (enemy.CompareTag("Boss"))
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    Vector2 randomPoint = (Vector2)enemy.bounds.center + Random.insideUnitCircle * enemy.bounds.extents;
-                    CreateTargetMarker(randomPoint, enemy.gameObject);
-                }
+                CreateBossTargetMarkers(enemy);
             }
             else
             {
@@ -60,9 +78,12 @@ public class TargetSkill : SkillBase
 
         // 쿨다운 텍스트를 업데이트합니다.
         UpdateCooldownText();
+
+        // 타겟팅 모드 활성화
+        riflePlayer.SetTargeting(true);
     }
 
-    private void ClearTargetMarkers()
+    public void ClearTargetMarkers()
     {
         foreach (GameObject marker in targetMarkers)
         {
@@ -82,6 +103,27 @@ public class TargetSkill : SkillBase
         targetMarkers.Add(markerInstance);
     }
 
+    private void CreateBossTargetMarkers(Collider2D bossCollider)
+    {
+        Vector2 center = bossCollider.bounds.center;
+
+        // 중심에 첫 번째 타겟 마커 생성
+        CreateTargetMarker(center, bossCollider.gameObject);
+
+        // 중심에서 일정 거리만큼 떨어진 위치에 나머지 두 개의 타겟 마커 생성
+        float distance = Mathf.Min(bossCollider.bounds.size.x, bossCollider.bounds.size.y) * 0.5f; // 보스 콜라이더 크기의 50% 거리로 설정
+        Vector2[] offsets = {
+            new Vector2(distance, distance),
+            new Vector2(-distance, -distance)
+        };
+
+        foreach (var offset in offsets)
+        {
+            Vector2 newPosition = center + offset;
+            CreateTargetMarker(newPosition, bossCollider.gameObject);
+        }
+    }
+
     public void OnTargetClicked(GameObject target)
     {
         // 적에게 데미지를 입힙니다.
@@ -91,7 +133,38 @@ public class TargetSkill : SkillBase
             damagable.TakeDamage(skillDamage); // 인스펙터에서 설정된 스킬 데미지를 적용
         }
 
+        // 효과음 재생
+        if (hitSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
+
         // 클릭된 조준점 제거
-        targetMarkers.RemoveAll(marker => marker == null || marker.GetComponent<TargetMarker>().target == target);
+        var markersToRemove = targetMarkers.Where(marker => marker != null && marker.GetComponent<TargetMarker>().target == target).ToList();
+        foreach (var marker in markersToRemove)
+        {
+            targetMarkers.Remove(marker);
+            Destroy(marker);
+        }
+
+        // 타겟 마커가 모두 제거되었는지 확인
+        if (targetMarkers.Count == 0)
+        {
+            // 타겟팅 모드 비활성화
+            riflePlayer.SetTargeting(false);
+        }
+    }
+
+    public void OnMissClick()
+    {
+        // 효과음 재생
+        if (missSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(missSound);
+        }
+
+        // 타겟 마커 제거 및 타겟팅 모드 비활성화
+        ClearTargetMarkers();
+        riflePlayer.SetTargeting(false);
     }
 }

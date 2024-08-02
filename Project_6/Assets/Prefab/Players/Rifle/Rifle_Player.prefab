@@ -118,6 +118,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   maxTargets: 3
+  hitSound: {fileID: 8300000, guid: 2f46e7d33f5047b4e9e0823d102630cf, type: 3}
+  useSkillSound: {fileID: 8300000, guid: 47790f04364bc24419e07e0159e57e57, type: 3}
+  missSound: {fileID: 8300000, guid: fb3495811bff04a43b342c9fb16d8ddd, type: 3}
 --- !u!114 &4509431132364026990
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,7 +25,6 @@ public abstract class MeleePlayerBase : PlayerBase
         if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
         isAttacking = true;
         animator.SetTrigger("IsAttack");
-        PlaySound(attackSound); // 공격 시 효과음 재생
         StartCoroutine(AttackCooldown());
     }
 
@@ -51,6 +50,8 @@ public abstract class MeleePlayerBase : PlayerBase
                 PlaySound(hitSound); // 피격 시 효과음 재생
             }
         }
+
+        PlaySound(attackSound); // 실제 공격 시 효과음 재생
     }
 
     protected void ApplyKnockback(Collider2D enemy)
@@ -92,4 +93,3 @@ public abstract class MeleePlayerBase : PlayerBase
         }
     }
 }
-
