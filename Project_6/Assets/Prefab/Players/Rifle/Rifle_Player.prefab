@@ -110,14 +110,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  targetPrefab: {fileID: 2418151180483233116}
-  qSkillMaxTargets: 3
-  skillQMaxChances: 5
+  targetMarkerPrefab: {fileID: 965910934545324556, guid: 4aca31b86f700704cb9d94df96c561ba, type: 3}
+  skillDamage: 20
+  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  targetingRange: 30
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  damage: 0
+  maxTargets: 3
 --- !u!114 &4509431132364026990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  rifleGrenade: {fileID: 0}
+  rifleGrenade: {fileID: 536658925977434239, guid: 35b9810b3f127d742953057dd89ea3c0, type: 3}
+  attackPoint: {fileID: 5360370097011898358}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  fireSound: {fileID: 8300000, guid: c4b832f9616cf7849a09ad8b30943013, type: 3}
 --- !u!114 &1555344151604424356
 MonoBehaviour:
   m_ObjectHideFlags: 0
