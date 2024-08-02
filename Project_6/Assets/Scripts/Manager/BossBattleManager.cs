@@ -24,7 +24,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
-        //if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
     }
 
@@ -80,19 +80,16 @@ public class BossBattleManager : Singleton<BossBattleManager>
         return Vector3.Distance(targetPlayer.transform.position, spawnedBoss.transform.position);
     }
 
-    public void SpawnBossMonster(int index,Vector3 spawnPos) // 보스 소환
+    public void SpawnBossMonster(int index) // 보스 소환
     {
-        Debug.Log(index);
-
         GetPlayers();
         isAttacking = false;
         //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
         
-        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[index].name, spawnPos, Quaternion.identity);
+        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[index].name, transform.position, Quaternion.identity);
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
-
-        if (boss != null && bossStateMachine == null)
+        if (boss != null)
         {
             CreateBossMonsterStateMachine(boss);  
         }
@@ -140,13 +137,10 @@ public class BossBattleManager : Singleton<BossBattleManager>
         Debug.Log(1);
         //Destroy(bossMonster);
         spawnedBoss.SetActive(false);
+        foreach(GameObject g in bossEndObject)
+            g.SetActive(!g.activeInHierarchy);
 
-        
-
-        //foreach(GameObject g in bossEndObject)
-        //    g.SetActive(true);
-
-        //GameManager.instance.cam.target = GameManager.instance.player.transform;
+        GameManager.instance.cam.target = GameManager.instance.player.transform;
     }
 }
     // 보스 소환 및 FSM 생성
