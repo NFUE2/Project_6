@@ -23,15 +23,30 @@ public class ChargeSkill : SkillBase
     private Rigidbody2D rb; // Rigidbody2D 참조
     private CharacterController characterController; // CharacterController 참조 (있을 경우)
     private bool wasKinematic; // Rigidbody2D의 원래 kinematic 상태 저장
+    private float originalGravityScale; // Rigidbody2D의 원래 gravityScale 상태 저장
 
     void Start()
+    {
+        InitializeComponents();
+        InitializePlayerData();
+    }
+
+    private void InitializeComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         characterController = GetComponent<CharacterController>();
-        audioSource = GetComponent<AudioSource>(); // 오디오 소스 초기화
+        audioSource = GetComponent<AudioSource>();
 
-        if (rb != null) wasKinematic = rb.isKinematic;
+        if (rb != null)
+        {
+            wasKinematic = rb.isKinematic;
+            originalGravityScale = rb.gravityScale;
+        }
+    }
+
+    private void InitializePlayerData()
+    {
         cooldownDuration = PlayerData.SkillECooldown;
         lastActionTime = -cooldownDuration; // 초기 쿨다운 설정
     }
@@ -42,33 +57,7 @@ public class ChargeSkill : SkillBase
 
         isCharging = true;
         animator.SetBool("IsCharging", true);
-        DisableMovement();
         StartCoroutine(Charging());
-    }
-
-    private void DisableMovement()
-    {
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
-            rb.isKinematic = true; // Rigidbody2D가 있을 경우 비활성화
-        }
-        if (characterController != null)
-        {
-            characterController.enabled = false; // CharacterController가 있을 경우 비활성화
-        }
-    }
-
-    private void EnableMovement()
-    {
-        if (rb != null)
-        {
-            rb.isKinematic = wasKinematic; // 원래 kinematic 상태 복원
-        }
-        if (characterController != null)
-        {
-            characterController.enabled = true; // CharacterController 다시 활성화
-        }
     }
 
     private IEnumerator Charging()
@@ -100,22 +89,28 @@ public class ChargeSkill : SkillBase
                 enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
             }
 
-            // 파티클 효과 인스턴스화
-            if (hammerImpactEffect != null)
-            {
-                GameObject effect = Instantiate(hammerImpactEffect, attackPosition, Quaternion.identity);
-                Destroy(effect, 1.0f); // 효과가 1초 후에 사라지도록 설정
-            }
-
-            // 사운드 효과 재생
-            if (hammerImpactSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(hammerImpactSound);
-            }
+            SpawnImpactEffect(attackPosition);
+            PlayImpactSound();
 
             currentDamage = damage;
             isAttacking = false;
-            EnableMovement(); // 공격이 끝난 후 움직임 다시 활성화
+        }
+    }
+
+    private void SpawnImpactEffect(Vector2 position)
+    {
+        if (hammerImpactEffect != null)
+        {
+            GameObject effect = Instantiate(hammerImpactEffect, position, Quaternion.identity);
+            Destroy(effect, 1.0f); // 효과가 1초 후에 사라지도록 설정
+        }
+    }
+
+    private void PlayImpactSound()
+    {
+        if (hammerImpactSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hammerImpactSound);
         }
     }
 
