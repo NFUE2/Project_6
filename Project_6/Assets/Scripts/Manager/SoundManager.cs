@@ -7,7 +7,8 @@ public enum BGMList
     Town,
     Stage1,
     Stage1Boss,
-    Stage2
+    Stage2,
+    Stage2Boss,
 }
 
 public class SoundManager : Singleton<SoundManager>

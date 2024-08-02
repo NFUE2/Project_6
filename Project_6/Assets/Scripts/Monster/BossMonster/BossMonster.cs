@@ -47,6 +47,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
     [PunRPC]
     protected void BossDie()
     {
+        GameManager.instance.StageClear();
         BossBattleManager.instance.DestroyBoss();
     }
 }

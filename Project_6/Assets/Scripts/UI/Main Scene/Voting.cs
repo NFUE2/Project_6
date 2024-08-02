@@ -84,7 +84,7 @@ public class Voting : MonoBehaviourPun
         foreach (var g in data.deactiveGameObject)
             g.SetActive(false);
 
-        if(data.type == DestinationType.Boss)
+        if(PhotonNetwork.IsMasterClient && data.type == DestinationType.Boss)
         {
             BossBattleManager.instance.SpawnBossMonster(GameManager.instance.cleaStageCount, data.bossSpawn.position);
         }

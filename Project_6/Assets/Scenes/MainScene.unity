@@ -14773,6 +14773,7 @@ MonoBehaviour:
   data:
     type: 1
     startTransform: {fileID: 0}
+    bossSpawn: {fileID: 0}
     isCamPlayer: 0
     CameraPos: {fileID: 0}
     activeGameObject:
@@ -20665,6 +20666,10 @@ PrefabInstance:
       propertyPath: bossMonsters.Array.data[0]
       value: 
       objectReference: {fileID: 3373813575177551619, guid: 380faad7eefd5bf4593ff03e424b105d, type: 3}
+    - target: {fileID: 7922992521751792912, guid: 98c4badcbd8955d4f831dd1f4e19808c, type: 3}
+      propertyPath: bossMonsters.Array.data[1]
+      value: 
+      objectReference: {fileID: 6937834297774713849, guid: 78fd87f44fab5e949a7dcea4c89357c1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20708,6 +20713,7 @@ MonoBehaviour:
   <town>k__BackingField:
     type: 0
     startTransform: {fileID: 238358818}
+    bossSpawn: {fileID: 0}
     isCamPlayer: 0
     CameraPos: {fileID: 1182056529}
     activeGameObject:
