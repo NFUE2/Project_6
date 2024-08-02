@@ -317,6 +317,8 @@ GameObject:
   - component: {fileID: 4084773527433425396}
   - component: {fileID: 5511804900521326518}
   - component: {fileID: 1613171036245538987}
+  - component: {fileID: 7716511892526148117}
+  - component: {fileID: 1804220320754844669}
   m_Layer: 0
   m_Name: RazorObject
   m_TagString: Untagged
@@ -400,6 +402,45 @@ MonoBehaviour:
   duration: 0.2
   curDuration: 0
   burningField: {fileID: 4807170921041474770, guid: 59362509143bd1e4cbc6892e05b7d9c4, type: 3}
+--- !u!114 &7716511892526148117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408024815513723099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1804220320754844669}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1804220320754844669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408024815513723099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1 &4869628083196471997
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,40 +902,40 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isStompReady
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isStomp
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isSwingReady
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isSwing
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRazorReady
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRazor
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isCharging
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isChargePunch
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isFaint
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isWalk
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isFireBallReady
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isFireBall
   m_SynchronizeLayers:
   - SynchronizeType: 0
