@@ -26,4 +26,4 @@ MonoBehaviour:
   attackCooldown: 1
   walkSpeed: 3
   runSpeed: 5
-  playerdefense: 100
+  playerdefense: 0
