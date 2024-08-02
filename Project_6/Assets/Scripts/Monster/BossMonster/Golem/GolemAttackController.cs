@@ -43,7 +43,8 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     RazorReady(); 
                     break;
                 case 1:
-                    FireBallReady();
+                    RazorReady();
+                    //FireBallReady();
                     break;
             }
         }
