@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6613177183658204693}
   - component: {fileID: 5222548490337472292}
   - component: {fileID: -1027190036961366402}
+  - component: {fileID: -2439937195463282032}
   m_Layer: 6
   m_Name: Hammer_Shield
   m_TagString: Untagged
@@ -293,3 +294,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2439937195463282032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139348047338328184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba7b04682d0be04fbc755b6dbf5ade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  components:
+  - {fileID: -6613177183658204693}
+  gameObjects: []

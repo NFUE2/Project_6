@@ -263,10 +263,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1467551383740915762, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5286571439384531182, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -347,23 +343,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5321108517342786864, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
-      propertyPath: m_Layer
-      value: 3
+    - target: {fileID: 5921389663047331325, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_text
+      value: "\uD150\uD0C0\uD074\uB9BD\uC2A4"
       objectReference: {fileID: 0}
-    - target: {fileID: 8319226179282378960, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8319226179282378960, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 5921389663047331325, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8547671169546599181, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
-      propertyPath: m_Layer
-      value: 3
+    - target: {fileID: 5921389663047331325, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+      propertyPath: m_characterSpacing
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 8547671169546599181, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
+    - target: {fileID: 8319226179282378960, guid: 7e61ad702431e0a41a527982e49beaa2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

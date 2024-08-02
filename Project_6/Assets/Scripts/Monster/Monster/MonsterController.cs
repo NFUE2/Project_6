@@ -21,7 +21,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public MonsterCondition condition;
     public bool isRight;
 
-    public MonsterStageList stage;
+    //public MonsterStageList stage;
 
     //[Header("AttackType")]
     //public MonsterAttackType type;
@@ -30,6 +30,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     //public LayerMask targetLayer;
 
     MonsterStateMachine stateMachine;
+    public RectTransform ui;
 
     [field : Header("Animation")]
     [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
@@ -93,6 +94,6 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         //transform.SetParent(GameManager.instance.enemyList);
-        transform.SetParent(GameManager.instance.SpawnStage(stage));
+        transform.SetParent(GameManager.instance.SpawnStage());
     }
 }
