@@ -61,7 +61,10 @@ public class Grenade : MonoBehaviour
         // 폭발 파티클 효과 시작
         if (explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, transform.rotation);
+            ParticleSystem explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
+            var mainModule = explosionInstance.main;
+            mainModule.stopAction = ParticleSystemStopAction.Destroy;
+            explosionInstance.Play();
         }
 
         // 폭발 반경 내의 모든 적을 찾음
@@ -93,11 +96,13 @@ public class Grenade : MonoBehaviour
         audioSource.Play();
 
         // 타는 듯한 파티클 효과 시작
-        ParticleSystem effect = null;
+        ParticleSystem burningInstance = null;
         if (burningEffect != null)
         {
-            effect = Instantiate(burningEffect, transform.position, transform.rotation);
-            effect.Play();
+            burningInstance = Instantiate(burningEffect, transform.position, transform.rotation);
+            var mainModule = burningInstance.main;
+            mainModule.stopAction = ParticleSystemStopAction.Destroy;
+            burningInstance.Play();
         }
 
         while (elapsed < dotDuration)
@@ -115,10 +120,10 @@ public class Grenade : MonoBehaviour
         audioSource.Stop();
 
         // 타는 듯한 파티클 효과 중지 및 파괴
-        if (effect != null)
+        if (burningInstance != null)
         {
-            effect.Stop();
-            Destroy(effect.gameObject, effect.main.duration);
+            burningInstance.Stop();
+            Destroy(burningInstance.gameObject, burningInstance.main.duration);
         }
     }
 
