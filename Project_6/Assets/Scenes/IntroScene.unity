@@ -2032,7 +2032,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1508940666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3956,7 +3956,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1508940666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -4643,7 +4643,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1508940666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5354,6 +5354,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3734843861911360741, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734843861911360741, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734843861911360741, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 3788318712222837687, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -5369,6 +5381,14 @@ PrefabInstance:
     - target: {fileID: 3788318712222837687, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640946996937794250, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1508940666}
+    - target: {fileID: 5640946996937794250, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5759445166674090683, guid: 39443da525e82ea4080aa64a1fdb5ba9, type: 3}
       propertyPath: m_AnchorMax.x

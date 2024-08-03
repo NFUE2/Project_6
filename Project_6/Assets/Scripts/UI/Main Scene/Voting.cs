@@ -92,7 +92,7 @@ public class Voting : MonoBehaviourPun
         SoundManager.instance.ChangeBGM(data.bgm);
     }
 
-    void ResetVote()
+    public void ResetVote()
     {
         agree = 0;
         count.text = agree.ToString();
