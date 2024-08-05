@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 // using Photon.Pun; // 서버 관련 부분 주석 처리
 
@@ -34,13 +35,15 @@ public class BombArrowSkill : SkillBase
         {
             // 서버 관련 부분 주석 처리
             // GameObject go = PhotonNetwork.Instantiate("Prototype/" + bombArrow.name, transform.position, Quaternion.identity);
-            GameObject go = Instantiate(bombArrow, transform.position, Quaternion.identity);
+            //GameObject go = Instantiate(bombArrow, transform.position, Quaternion.identity);
             float angle = baseAngle + (i - 1) * fireAngle;
-            go.transform.rotation = Quaternion.Euler(0, 0, angle);
+            GameObject go = PhotonNetwork.Instantiate(bombArrow.name, transform.position, Quaternion.Euler(0,0,angle));
 
-            // 폭탄 화살의 방향 설정
-            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-            go.GetComponent<BombArrow>().SetDirection(direction);
+            //go.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            //// 폭탄 화살의 방향 설정
+            //Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+            //go.GetComponent<BombArrow>().SetDirection(direction);
         }
 
         // 발사 효과음 재생

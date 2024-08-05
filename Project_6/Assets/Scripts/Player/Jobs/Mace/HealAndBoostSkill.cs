@@ -34,7 +34,7 @@ public class HealAndBoostSkill : SkillBase
         }
 
         lastActionTime = Time.time;
-        Debug.Log("스킬 사용됨, 현재 시간: " + Time.time);
+        //Debug.Log("스킬 사용됨, 현재 시간: " + Time.time);
         PlaySkillSound(); // 스킬 효과음 재생
         StartCoroutine(HealAndBoost());
     }
@@ -49,7 +49,7 @@ public class HealAndBoostSkill : SkillBase
 
     private IEnumerator HealAndBoost()
     {
-        Debug.Log("HealAndBoost 코루틴 시작됨");
+        //Debug.Log("HealAndBoost 코루틴 시작됨");
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange); // 힐 범위
         int healedPlayers = 0;
@@ -62,7 +62,8 @@ public class HealAndBoostSkill : SkillBase
                 PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
                 if (player != null && playerCondition != null)
                 {
-                    Debug.Log("플레이어 발견, 힐 시작: " + player.name);
+                    //Debug.Log("플레이어 발견, 힐 시작: " + player.name);
+                    Debug.Log(playerCondition.name);
                     StartCoroutine(HealPlayer(playerCondition));
                     healedPlayers++;
                 }
@@ -71,43 +72,44 @@ public class HealAndBoostSkill : SkillBase
 
         if (healedPlayers > 0)
         {
-            Debug.Log(healedPlayers + "명의 플레이어가 힐됨, 방어력 증가 시작");
+            //Debug.Log(healedPlayers + "명의 플레이어가 힐됨, 방어력 증가 시작");
             StartCoroutine(BoostDefense(healedPlayers));
         }
 
         yield return new WaitForSeconds(PlayerData.SkillQCooldown);
-        Debug.Log("Q스킬 쿨타임 완료");
+        //Debug.Log("Q스킬 쿨타임 완료");
     }
 
     private IEnumerator HealPlayer(PlayerCondition playerCondition)
     {
         float startTime = Time.time;
-        Debug.Log("HealPlayer 코루틴 시작됨, 플레이어: " + playerCondition.name);
+        //Debug.Log("HealPlayer 코루틴 시작됨, 플레이어: " + playerCondition.name);
 
         while (Time.time - startTime < healDuration)
         {
             // 힐량 계산 및 적용
-            playerCondition.currentHealth += healAmount * Time.deltaTime;
-            playerCondition.currentHealth = Mathf.Clamp(playerCondition.currentHealth, 0, playerCondition.maxHealth); // 체력 범위 제한
-            Debug.Log($"힐량: {healAmount * Time.deltaTime}, 현재 체력: {playerCondition.currentHealth}");
+            //playerCondition.currentHealth += healAmount * Time.deltaTime;
+            //playerCondition.currentHealth = Mathf.Clamp(playerCondition.currentHealth, 0, playerCondition.maxHealth); // 체력 범위 제한
+            playerCondition.Heal(healAmount * Time.deltaTime);
+            //Debug.Log($"힐량: {healAmount * Time.deltaTime}, 현재 체력: {playerCondition.currentHealth}");
             yield return null;
         }
 
-        Debug.Log("힐 종료, 플레이어: " + playerCondition.name);
+        //Debug.Log("힐 종료, 플레이어: " + playerCondition.name);
     }
 
     private IEnumerator BoostDefense(int healedPlayers)
     {
         float originalDefense = PlayerData.playerdefense; // 현재 방어력 저장
-        Debug.Log("BoostDefense 코루틴 시작됨, 원래 방어력: " + originalDefense);
+        //Debug.Log("BoostDefense 코루틴 시작됨, 원래 방어력: " + originalDefense);
 
         PlayerData.playerdefense += defenseBoost * healedPlayers;
-        Debug.Log("방어력 증가, 증가량: " + (defenseBoost * healedPlayers));
+        //Debug.Log("방어력 증가, 증가량: " + (defenseBoost * healedPlayers));
 
         yield return new WaitForSeconds(statBoostDuration);
 
         PlayerData.playerdefense = originalDefense; // 방어력 원상복구
-        Debug.Log("방어력 원상복구, 현재 방어력: " + PlayerData.playerdefense);
+        //Debug.Log("방어력 원상복구, 현재 방어력: " + PlayerData.playerdefense);
     }
 
     private void OnDrawGizmos()

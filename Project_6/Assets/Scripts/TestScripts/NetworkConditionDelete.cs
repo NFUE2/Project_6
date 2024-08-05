@@ -27,13 +27,12 @@ public class NetworkConditionDelete : MonoBehaviourPun
                 if(!photonView.IsMine) Delete();
                 break;
         }
+        Destroy(this);
     }
 
     void Delete()
     {
         foreach(var c in components) Destroy(c);
         foreach (var g in gameObjects) Destroy(g);
-
-        Destroy(this);
     }
 }

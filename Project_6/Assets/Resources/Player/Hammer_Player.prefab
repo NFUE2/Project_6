@@ -496,10 +496,10 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsAttack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: IsCharging
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: IsDie
   m_SynchronizeLayers:
   - SynchronizeType: 0
@@ -520,7 +520,6 @@ MonoBehaviour:
   components:
   - {fileID: 6928284306107983700}
   - {fileID: 4551887635642697737}
-  - {fileID: 1740896559584676973}
   - {fileID: 5883604329999571394}
   gameObjects:
   - {fileID: 3400988016390340859}

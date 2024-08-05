@@ -2,11 +2,10 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 
-public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
+public class MonsterCondition : MonoBehaviourPun,IDamagable//,IPunObservable
 {
     MonsterController controller;
     public SpriteRenderer sprite;
@@ -74,5 +73,16 @@ public class MonsterCondition : MonoBehaviour,IDamagable//,IPunObservable
         sprite.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         sprite.color = Color.white;
+    }
+
+    public void Damage(float damage)
+    {
+        photonView.RPC(nameof(DamageRPC),RpcTarget.All,damage);
+    }
+
+    [PunRPC]
+    public void DamageRPC(float damage)
+    {
+        TakeDamage(damage);
     }
 }
