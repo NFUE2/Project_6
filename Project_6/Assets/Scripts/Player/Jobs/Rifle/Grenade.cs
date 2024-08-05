@@ -73,11 +73,15 @@ public class Grenade : MonoBehaviour
         foreach (var enemy in hitEnemies)
         {
             // 적에게 DoT 데미지를 적용
-            IDamagable damagable = enemy.GetComponent<IDamagable>();
-            if (damagable != null)
-            {
-                StartCoroutine(ApplyDotDamage(damagable));
-            }
+            //IDamagable damagable = enemy.GetComponent<IDamagable>();
+            //if (damagable != null)
+            //{
+            //    StartCoroutine(ApplyDotDamage(damagable));
+            //}
+
+            if(enemy.TryGetComponent(out MonsterCondition m))
+                StartCoroutine(ApplyDotDamage(m));
+
         }
 
         // 도트 딜 적용 후 수류탄 오브젝트 파괴
