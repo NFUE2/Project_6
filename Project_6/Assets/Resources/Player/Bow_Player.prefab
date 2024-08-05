@@ -549,7 +549,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -2477885296669060848}
   - {fileID: 1665226179025079738}
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &-2477885296669060848
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba7b04682d0be04fbc755b6dbf5ade6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   components:
   - {fileID: 6622760348263712995}
   - {fileID: 754553495647215865}

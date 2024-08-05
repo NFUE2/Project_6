@@ -84,7 +84,7 @@ public class BookShieldSkill : SkillBase
             }
 
             //GameObject shield = Instantiate(shieldPrefab, target.position, Quaternion.identity);
-            GameObject shield = PhotonNetwork.Instantiate(shieldPrefab.name, target.position, Quaternion.identity);
+            GameObject shield = PhotonNetwork.Instantiate("Prefabs/" + shieldPrefab.name, target.position, Quaternion.identity);
 
             shield.transform.SetParent(target);
 

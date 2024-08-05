@@ -728,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba7b04682d0be04fbc755b6dbf5ade6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   components:
   - {fileID: 247599780970100400}
   - {fileID: 6866953738281719878}

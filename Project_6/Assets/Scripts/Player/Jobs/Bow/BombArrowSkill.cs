@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+
 // using Photon.Pun; // 辑滚 包访 何盒 林籍 贸府
 
 public class BombArrowSkill : SkillBase
@@ -37,7 +38,7 @@ public class BombArrowSkill : SkillBase
             // GameObject go = PhotonNetwork.Instantiate("Prototype/" + bombArrow.name, transform.position, Quaternion.identity);
             //GameObject go = Instantiate(bombArrow, transform.position, Quaternion.identity);
             float angle = baseAngle + (i - 1) * fireAngle;
-            GameObject go = PhotonNetwork.Instantiate(bombArrow.name, transform.position, Quaternion.Euler(0,0,angle));
+            GameObject go = PhotonNetwork.Instantiate("Prefabs/" + bombArrow.name, transform.position, Quaternion.Euler(0,0,angle));
 
             //go.transform.rotation = Quaternion.Euler(0, 0, angle);
 

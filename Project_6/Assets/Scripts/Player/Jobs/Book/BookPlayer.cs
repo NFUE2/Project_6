@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 public class BookPlayer : RangedPlayerBase
 {
@@ -75,9 +76,11 @@ public class BookPlayer : RangedPlayerBase
 
     private void LaunchProjectile(Transform target)
     {
-        Vector2 direction = (target.position - transform.position).normalized;
-        GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
-        Destroy(projectile, 5f);
+        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
+
+        //Vector2 direction = (target.position - transform.position).normalized;
+        //GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+        //projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+        //Destroy(projectile, 5f);
     }
 }
