@@ -65,8 +65,10 @@ public class StackSkill : SkillBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<IDamagable>()?.TakeDamage(damage);
-            Debug.Log($"적 {enemy.name}에게 {damage}의 데미지를 입혔습니다.");
+            if (enemy.transform.TryGetComponent(out MonsterCondition m))
+                m.Damage(damage);
+            //enemy.GetComponent<IDamagable>()?.TakeDamage(damage);
+            //Debug.Log($"적 {enemy.name}에게 {damage}의 데미지를 입혔습니다.");
         }
     }
 

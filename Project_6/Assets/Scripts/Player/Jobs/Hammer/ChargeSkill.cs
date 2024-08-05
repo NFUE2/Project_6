@@ -86,7 +86,10 @@ public class ChargeSkill : SkillBase
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
+                if (enemy.TryGetComponent(out MonsterCondition e))
+                    e.Damage(currentDamage);
+
+                //enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
             }
 
             SpawnImpactEffect(attackPosition);

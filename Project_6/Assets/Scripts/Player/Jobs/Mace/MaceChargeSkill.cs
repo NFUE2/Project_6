@@ -90,9 +90,10 @@ public class MaceChargeSkill : SkillBase
             {
                 if (hitEnemies.Contains(hitCollider)) continue;
 
-                if (hitCollider.TryGetComponent<IDamagable>(out var enemy))
+                if (hitCollider.TryGetComponent(out MonsterCondition enemy))
                 {
-                    enemy.TakeDamage(dashDamage);
+                    enemy.Damage(dashDamage);
+                    //enemy.TakeDamage(dashDamage);
                     PlayHitSound(); // 적에게 부딪쳤을 때 효과음 재생
                     hitEnemies.Add(hitCollider);
                 }

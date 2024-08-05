@@ -622,7 +622,6 @@ MonoBehaviour:
   components:
   - {fileID: 6325477453461356325}
   - {fileID: 4563823980398286394}
-  - {fileID: 1881171634771871447}
   - {fileID: 2355582851979590813}
   gameObjects:
   - {fileID: 7917195768539059514}
