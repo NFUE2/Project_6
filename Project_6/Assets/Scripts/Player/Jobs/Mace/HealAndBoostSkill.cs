@@ -60,7 +60,7 @@ public class HealAndBoostSkill : SkillBase
             {
                 MacePlayer player = hitCollider.GetComponent<MacePlayer>();
                 PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
-                if (player != null && playerCondition != null && player != this)
+                if (player != null && playerCondition != null)
                 {
                     Debug.Log("플레이어 발견, 힐 시작: " + player.name);
                     StartCoroutine(HealPlayer(playerCondition));
@@ -116,6 +116,3 @@ public class HealAndBoostSkill : SkillBase
         Gizmos.DrawWireSphere(transform.position, healRange);
     }
 }
-
-
-
