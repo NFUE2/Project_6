@@ -85,11 +85,14 @@ public class TargetSkill : SkillBase
     public void OnTargetClicked(GameObject target)
     {
         // 적에게 데미지를 입힙니다.
-        IDamagable damagable = target.GetComponent<IDamagable>();
-        if (damagable != null)
-        {
-            damagable.TakeDamage(skillDamage); // 인스펙터에서 설정된 스킬 데미지를 적용
-        }
+        //IDamagable damagable = target.GetComponent<IDamagable>();
+        //if (damagable != null)
+        //{
+        //    damagable.TakeDamage(skillDamage); // 인스펙터에서 설정된 스킬 데미지를 적용
+        //}
+
+        if (target.TryGetComponent(out MonsterCondition m))
+            m.Damage(skillDamage);
 
         // 클릭된 조준점 제거
         targetMarkers.RemoveAll(marker => marker == null || marker.GetComponent<TargetMarker>().target == target);

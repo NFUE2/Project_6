@@ -84,7 +84,7 @@ public class Grenade : MonoBehaviour
         StartCoroutine(DestroyAfterDotDuration());
     }
 
-    private IEnumerator ApplyDotDamage(IDamagable enemy)
+    private IEnumerator ApplyDotDamage(/*IDamagable enemy*/ MonsterCondition enemy)
     {
         float elapsed = 0f;
         float interval = 1f;
@@ -107,9 +107,14 @@ public class Grenade : MonoBehaviour
 
         while (elapsed < dotDuration)
         {
+            //if (enemy != null)
+            //{
+            //    enemy.TakeDamage(dotDamage);
+            //}
+
             if (enemy != null)
             {
-                enemy.TakeDamage(dotDamage);
+                enemy.Damage(dotDamage);
             }
 
             elapsed += interval;
