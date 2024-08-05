@@ -54,8 +54,6 @@ public class HealAndBoostSkill : SkillBase
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange); // 힐 범위
         int healedPlayers = 0;
 
-        Debug.Log(hitColliders.Length);
-
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Player"))
@@ -65,6 +63,7 @@ public class HealAndBoostSkill : SkillBase
                 if (player != null && playerCondition != null && player != this)
                 {
                     //Debug.Log("플레이어 발견, 힐 시작: " + player.name);
+                    Debug.Log(playerCondition.name);
                     StartCoroutine(HealPlayer(playerCondition));
                     healedPlayers++;
                 }

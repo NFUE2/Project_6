@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
 public class BookShieldSkill : SkillBase
 {
@@ -82,7 +83,9 @@ public class BookShieldSkill : SkillBase
                 Debug.Log("보호막 효과음 재생: " + shieldSound.name);
             }
 
-            GameObject shield = Instantiate(shieldPrefab, target.position, Quaternion.identity);
+            //GameObject shield = Instantiate(shieldPrefab, target.position, Quaternion.identity);
+            GameObject shield = PhotonNetwork.Instantiate(shieldPrefab.name, target.position, Quaternion.identity);
+
             shield.transform.SetParent(target);
 
             // Shield 컴포넌트 추가

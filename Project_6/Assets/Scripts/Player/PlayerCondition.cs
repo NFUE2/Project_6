@@ -53,7 +53,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         {
             UpdateHealthBar();
         }
-        
 
         if (currentHealth <= 0)
         {
@@ -63,7 +62,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public void Heal(float amount)
     {
-        Debug.Log(gameObject.name);
         photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
     }
