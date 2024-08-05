@@ -496,10 +496,10 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsAttack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: IsCharging
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: IsDie
   m_SynchronizeLayers:
   - SynchronizeType: 0
@@ -520,7 +520,6 @@ MonoBehaviour:
   components:
   - {fileID: 6928284306107983700}
   - {fileID: 4551887635642697737}
-  - {fileID: 1740896559584676973}
   - {fileID: 5883604329999571394}
   gameObjects:
   - {fileID: 3400988016390340859}
@@ -538,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 5883604329999571394}
   healthBarImage: {fileID: 7984489669952029798}
