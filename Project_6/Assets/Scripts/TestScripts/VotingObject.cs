@@ -64,5 +64,6 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
     {
         playerCount--;
         voting.SetActive(false);
+        voting.GetComponent<Voting>().ResetVote();
     }
 }

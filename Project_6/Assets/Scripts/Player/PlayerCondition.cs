@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
+public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 {
     public float maxHealth = 100f;
     public float currentHealth;
@@ -44,7 +45,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
             damageAfterDefense = Mathf.Max(damage, 0);
         }
         currentHealth -= damageAfterDefense;
-        Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
+        //Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
 
         PlaySound(hitSound);
         PlayHitEffect();
@@ -52,12 +53,23 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
         {
             UpdateHealthBar();
         }
-        
 
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public void Heal(float amount)
+    {
+        photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
+    }
+
+    [PunRPC]
+    public void HealRPC(float amount)
+    {
+        currentHealth += amount;
     }
 
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
@@ -72,7 +84,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable, IKnockBackable
     {
         float healthRatio = currentHealth / maxHealth;
         healthBarImage.fillAmount = healthRatio;
-        Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
+        //Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
     }
 
     void Die()

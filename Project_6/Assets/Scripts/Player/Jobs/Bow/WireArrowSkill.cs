@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class WireArrowSkill : SkillBase
@@ -25,15 +26,18 @@ public class WireArrowSkill : SkillBase
         Debug.Log("Wire Arrow Skill 사용됨");
 
         PlaySkillSound(); // 스킬 사용 시 효과음 재생
-
-        GameObject go = Instantiate(wireArrow, transform.position, Quaternion.identity);
-
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0; // 2D 게임이므로 Z축을 0으로 설정
-        Vector2 direction = (mousePos - transform.position).normalized;
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        go.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //GameObject go = Instantiate(wireArrow, transform.position, Quaternion.identity);
+        GameObject go = PhotonNetwork.Instantiate("Prefabs/" + wireArrow.name, transform.position, Quaternion.Euler(0,0,angle));
+
+
+        //mousePos.z = 0; // 2D 게임이므로 Z축을 0으로 설정
+        //Vector2 direction = (mousePos - transform.position).normalized;
+
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //go.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         Bow_WireArrow wireArrowComponent = go.GetComponent<Bow_WireArrow>();
         if (wireArrowComponent != null)

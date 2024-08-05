@@ -50,8 +50,8 @@ public class P_AllRoundAttackObject : MonoBehaviour,IPunInstantiateMagicCallback
     [PunRPC]
     private void DestroyObject()
     {
-        Destroy(gameObject);
-        //PhotonNetwork.Destroy(gameObject);
+        //Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)

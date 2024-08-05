@@ -24,7 +24,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void ChangeBGM(BGMList b)
     {
-        Debug.Log(1);
+        //Debug.Log(1);
         BGM.clip = clipBGM[(int)b];
         BGM.Play();
     }

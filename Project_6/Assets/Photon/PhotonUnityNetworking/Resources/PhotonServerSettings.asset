@@ -61,6 +61,8 @@ MonoBehaviour:
   - FlipXRPC
   - SetTargetPlayer
   - SetTargetPlayerRPC
+  - DamageRPC
+  - HealRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

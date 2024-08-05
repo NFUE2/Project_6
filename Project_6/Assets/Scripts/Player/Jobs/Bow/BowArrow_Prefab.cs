@@ -51,7 +51,9 @@ public class BombArrow : MonoBehaviour
 
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        //transform.position += (Vector3)direction * speed * Time.deltaTime;
+        transform.position += transform.right * speed * Time.deltaTime;
+
 
         // 화살이 화면 밖으로 나가면 파괴
         if (IsOffScreen())

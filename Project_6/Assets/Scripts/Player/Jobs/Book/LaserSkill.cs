@@ -129,11 +129,13 @@ public class LaserSkill : SkillBase
             {
                 if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    if (damagable != null)
+                    //IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+                    //if (damagable != null)
+                    if(hit.transform.TryGetComponent(out MonsterCondition damagable))
                     {
-                        damagable.TakeDamage(laserDamage); // 적에게 피해 적용
-                        Debug.Log($"적 {hit.collider.gameObject.name}에게 {laserDamage}의 피해를 입혔습니다.");
+                        //damagable.TakeDamage(laserDamage); // 적에게 피해 적용
+                        damagable.Damage(laserDamage);
+                        //Debug.Log($"적 {hit.collider.gameObject.name}에게 {laserDamage}의 피해를 입혔습니다.");
 
                         // 충돌 지점에 파티클 효과 생성
                         if (impactEffectPrefab != null)

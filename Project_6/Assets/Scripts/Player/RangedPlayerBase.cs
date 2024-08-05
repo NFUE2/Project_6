@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -76,11 +77,13 @@ public abstract class RangedPlayerBase : PlayerBase
 
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
-        GameObject attackInstance = Instantiate(attackPrefab, attackPoint.position, Quaternion.identity);
 
-        attackInstance.GetComponent<Projectile>().SetDirection(attackDirection);
-
+        float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+        //GameObject attackInstance = Instantiate(attackPrefab, attackPoint.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs/" + attackPrefab.name, attackPoint.position, Quaternion.Euler(0,0,angle));
+        //attackInstance.GetComponent<Projectile>().SetDirection(attackDirection);
         // 공격 효과음 재생
+
         PlayAttackSound();
     }
 

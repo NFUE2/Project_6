@@ -1,6 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PistolPlayer : RangedPlayerBase
 {
@@ -17,6 +18,8 @@ public class PistolPlayer : RangedPlayerBase
     [Header("Reload Sound")]
     [SerializeField] private AudioClip reloadSound; // 장전 효과음
 
+    private bool isUsingSkill = false;
+
     private void Start()
     {
         fanningSkill.SetCooldownText(qCooldownText);
@@ -32,7 +35,7 @@ public class PistolPlayer : RangedPlayerBase
 
     public override void Attack()
     {
-        if (!isAttackCooldown && CanAttack())
+        if (!isAttackCooldown && CanAttack() && !isUsingSkill)
         {
             // RangedPlayerBase의 Attack 메서드를 호출하여 공격을 수행
             base.Attack();
@@ -41,11 +44,7 @@ public class PistolPlayer : RangedPlayerBase
 
             if (attackCount >= 6)
             {
-                isAttackCooldown = true;
-                attackCount = 0;
-                lastAttackTime = Time.time;
-                Debug.Log("Reloading: Attack count reached 6, starting cooldown.");
-                PlayReloadSound(); // 장전 시작 시 장전 효과음 재생
+                StartCooldown();
             }
         }
         else
@@ -70,17 +69,48 @@ public class PistolPlayer : RangedPlayerBase
 
     public override void UseSkillQ()
     {
-        fanningSkill.UseSkill();
+        if (!isUsingSkill)
+        {
+            isUsingSkill = true;
+            fanningSkill.UseSkill();
+            StartCoroutine(HandleFanningSkillCompletion());
+        }
     }
 
     public override void UseSkillE()
     {
-        rollingSkill.UseSkill();
+        if (!isUsingSkill)
+        {
+            rollingSkill.UseSkill();
+        }
+    }
+
+    private IEnumerator HandleFanningSkillCompletion()
+    {
+        while (fanningSkill.IsFanningReady)
+        {
+            yield return null;
+        }
+
+        // 스킬이 끝난 후 완전히 장전된 상태로 설정
+        attackCount = 0;
+        isAttackCooldown = false;
+        lastAttackTime = Time.time;
+        isUsingSkill = false;
+        Debug.Log("Fanning skill complete: Fully reloaded.");
     }
 
     private bool CanAttack()
     {
         return Time.time - lastAttackTime >= playerData.attackCooldown;
+    }
+
+    private void StartCooldown()
+    {
+        isAttackCooldown = true;
+        lastAttackTime = Time.time;
+        PlayReloadSound(); // 장전 시작 시 장전 효과음 재생
+        Debug.Log("Reloading: Attack count reached 6, starting cooldown.");
     }
 
     private void PlayReloadSound()

@@ -19,11 +19,16 @@ public class DaggerPlayer : MeleePlayerBase
 
     public override void Attack()
     {
-        if (isAttacking) return; // 공격 중이 아닌 경우에만 공격
+        if (isAttacking) return; // 공격 중이거나 쿨다운 중인 경우 공격 불가
         isAttacking = true;
         animator.SetTrigger("IsAttack");
-        StartCoroutine(PerformAttackWithStackCheck());
         StartCoroutine(AttackCooldown());
+    }
+
+    // 애니메이션 이벤트에서 호출될 메서드
+    public new void PerformAttack()
+    {
+        StartCoroutine(PerformAttackWithStackCheck());
     }
 
     private IEnumerator PerformAttackWithStackCheck()
@@ -41,11 +46,13 @@ public class DaggerPlayer : MeleePlayerBase
             if (damagable != null)
             {
                 damagable.TakeDamage(attackDamage);
+                ApplyKnockback(enemy); // 넉백 적용
 
                 if (!hasIncreasedStack)
                 {
                     stackSkill.IncreaseStack(); // 적이 데미지를 입었을 때만 스택 증가
                     hasIncreasedStack = true; // 스택이 한 번 증가했음을 표시
+                    Debug.Log("스택 증가: " + stackSkill.currentStack);
                 }
             }
         }

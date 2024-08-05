@@ -27,16 +27,19 @@ public abstract class MeleePlayerBase : PlayerBase
         animator.SetTrigger("IsAttack");
         StartCoroutine(AttackCooldown());
     }
-
     protected IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
     {
         yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
+        isAttacking = false; // 쿨다운이 끝나면 isAttacking을 false로 설정
     }
+
+
 
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
+        if (!isAttacking) return; // 공격 중이 아닐 때만 공격 수행
+
         Vector2 attackPosition = CalculateAttackPosition();
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
 
@@ -53,6 +56,7 @@ public abstract class MeleePlayerBase : PlayerBase
 
         PlaySound(attackSound); // 실제 공격 시 효과음 재생
     }
+
 
     protected void ApplyKnockback(Collider2D enemy)
     {
