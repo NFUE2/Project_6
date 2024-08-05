@@ -53,7 +53,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         {
             UpdateHealthBar();
         }
-        
 
         if (currentHealth <= 0)
         {
