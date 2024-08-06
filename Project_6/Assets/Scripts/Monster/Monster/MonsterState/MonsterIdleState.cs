@@ -36,10 +36,11 @@ public class MonsterIdleState : MonsterBaseState
             if (distance < stateMachine.controller.data.searchDistance)
             {
                 stateMachine.controller.target = p.transform;
-                stateMachine.ChangeState(stateMachine.trackState);
+                if(isTrackable()) stateMachine.ChangeState(stateMachine.trackState);
+
+                if (distance < stateMachine.controller.data.attackDistance)
+                    stateMachine.ChangeState(stateMachine.attackState);
             }
         }
     }
-
-
 }
