@@ -64,6 +64,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     {
         photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
+        UpdateHealthBar();
     }
 
     [PunRPC]
