@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -21,7 +22,7 @@ public class ProjectileObject : MonoBehaviour
         if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
