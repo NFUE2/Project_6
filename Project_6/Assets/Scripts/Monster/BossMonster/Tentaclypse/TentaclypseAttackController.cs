@@ -54,7 +54,7 @@ public class TentaclypseAttackController : BossAttackController
         for (int i = 0; i < 5; i++)
         {
             Vector3 razorPosition = BossBattleManager.Instance.targetPlayer.transform.position;
-            var razor = PhotonNetwork.Instantiate("Boss/" + razorObject.name, Vector2.zero, Quaternion.identity);
+            var razor = PhotonNetwork.Instantiate(razorObject.name, Vector2.zero, Quaternion.identity);
             //var razor = Instantiate(razorObject, transform);
             //razor.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
             razor.transform.position = razorPosition;
@@ -95,7 +95,7 @@ public class TentaclypseAttackController : BossAttackController
             for (int j = 0; j < bulletCount; j++)
             {
                 //GameObject go = Instantiate(bullet, BossBattleManager.Instance.spawnedBoss.transform.position, Quaternion.identity);
-                GameObject go = PhotonNetwork.Instantiate("Boss/" + bullet.name, BossBattleManager.Instance.spawnedBoss.transform.position, Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate(bullet.name, BossBattleManager.Instance.spawnedBoss.transform.position, Quaternion.identity);
                 //go.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
                 go.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * j / bulletCount), speed * Mathf.Sin(Mathf.PI * j * 2 / bulletCount)), ForceMode2D.Force);
 
@@ -148,7 +148,7 @@ public class TentaclypseAttackController : BossAttackController
         {
             //(º¹¿ø)var vertRazor1 = PhotonNetwork.Instantiate("Boss/" + razorObject.name, Vector3.zero, Quaternion.identity);
             //vertRazors[i] = Instantiate(razorObject, transform);
-            vertRazors[i] = PhotonNetwork.Instantiate("Boss/" + razorObject.name, Vector3.zero, Quaternion.identity);
+            vertRazors[i] = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
             //vertRazors[i].transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
             Vector3 vertRotation = vertRazors[i].transform.eulerAngles;
             vertRotation.z = 90f;
@@ -161,7 +161,7 @@ public class TentaclypseAttackController : BossAttackController
         {
             //var horiRazor1 = PhotonNetwork.Instantiate("Boss/" + razorObject.name, Vector3.zero, Quaternion.identity);
             //horiRazors[j] = Instantiate(razorObject, transform);
-            horiRazors[j] = PhotonNetwork.Instantiate("Boss/" + razorObject.name, Vector3.zero, Quaternion.identity);
+            horiRazors[j] = PhotonNetwork.Instantiate(razorObject.name, Vector3.zero, Quaternion.identity);
             //horiRazors[j].transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
             Vector3 horiRotation = horiRazors[j].transform.eulerAngles;
             horiRotation.z = 0f;
@@ -196,12 +196,12 @@ public class TentaclypseAttackController : BossAttackController
 
     private IEnumerator DispenserAttack(Vector3 randPosLeft, Vector3 randPosRight)
     {
-        var dispenserLeft = PhotonNetwork.Instantiate("Boss/" + dispenser.name, transform.localPosition, Quaternion.identity);
+        var dispenserLeft = PhotonNetwork.Instantiate(dispenser.name, transform.localPosition, Quaternion.identity);
         //var dispenserLeft = Instantiate(dispenser);
         //dispenserLeft.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
         //dispenserLeft.transform.position = BossBattleManager.Instance.spawnedBoss.transform.position;
 
-        var dispenserRight = PhotonNetwork.Instantiate("Boss/" + dispenser.name, transform.localPosition, Quaternion.identity);
+        var dispenserRight = PhotonNetwork.Instantiate(dispenser.name, transform.localPosition, Quaternion.identity);
         //var dispenserRight = Instantiate(dispenser);
         //dispenserRight.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
 
@@ -230,7 +230,7 @@ public class TentaclypseAttackController : BossAttackController
             float angle = 360 / bulletCount;
             for (int j = 0; j < bulletCount; j++)
             {
-                GameObject go1 = PhotonNetwork.Instantiate("Boss/" + bullet.name, dispenser.transform.position, Quaternion.identity);
+                GameObject go1 = PhotonNetwork.Instantiate(bullet.name, dispenser.transform.position, Quaternion.identity);
                 //GameObject go1 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
                 //go1.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
 
@@ -238,7 +238,7 @@ public class TentaclypseAttackController : BossAttackController
                 go1.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * j / bulletCount), speed * Mathf.Sin(Mathf.PI * j * 2 / bulletCount)), ForceMode2D.Force);
                 go1.transform.Rotate(new Vector3(0, 0, 360 * j / bulletCount - 90));
 
-                GameObject go2 = PhotonNetwork.Instantiate("Boss/" + bullet.name, dispenser.transform.position, Quaternion.identity);
+                GameObject go2 = PhotonNetwork.Instantiate(bullet.name, dispenser.transform.position, Quaternion.identity);
                 //GameObject go2 = Instantiate(bullet, dispenser.transform.position, Quaternion.identity);
                 //go2.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
                 go2.transform.position = randPosRight;

@@ -38,7 +38,7 @@ public class FireBallHitBox : MonoBehaviour, IPunInstantiateMagicCallback // ¿œπ
         if (!PhotonNetwork.IsMasterClient) return;
 
         Vector2 pos = BossBattleManager.Instance.targetPlayer.transform.position;
-        targetObject = PhotonNetwork.Instantiate("Boss/" + target.name, pos, Quaternion.identity);
+        targetObject = PhotonNetwork.Instantiate(target.name, pos, Quaternion.identity);
         //targetObject.transform.SetParent(BossBattleManager.instance.boss.transform);
         targetObject.transform.position = targetPosition;
 

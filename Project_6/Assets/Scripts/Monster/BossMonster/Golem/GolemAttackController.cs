@@ -297,7 +297,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     private void SpawnFireBall()
     {
         //GameObject fireBall = Instantiate(fireBallHitBox);
-        GameObject fireBall = PhotonNetwork.Instantiate("Boss/" + fireBallHitBox.name, transform.position, Quaternion.identity);
+        GameObject fireBall = PhotonNetwork.Instantiate(fireBallHitBox.name, transform.position, Quaternion.identity);
         //fireBall.transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
         fireBall.transform.position += new Vector3(0, 5, 0);
     }

@@ -26,7 +26,7 @@ public class StageData : MonoBehaviour
         {
             foreach (var m in monsterSpawn)
             {
-                GameObject go = PhotonNetwork.Instantiate($"Monster/{m.monster.name}", m.transform.position, Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate(m.monster.name, m.transform.position, Quaternion.identity);
                 monsters.Add(go);
             }
         }

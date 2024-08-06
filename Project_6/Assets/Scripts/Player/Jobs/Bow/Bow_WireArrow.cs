@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class Bow_WireArrow : MonoBehaviour
 {
@@ -22,22 +23,22 @@ public class Bow_WireArrow : MonoBehaviour
 
         Invoke("DestroyObject", 5.0f);
 
-        if (player == null)
-        {
-            Debug.LogError("Player Transform이 할당되지 않았습니다.");
-        }
+        //if (player == null)
+        //{
+        //    Debug.LogError("Player Transform이 할당되지 않았습니다.");
+        //}
 
         // 플레이어와의 충돌 무시
-        Collider2D playerCollider = player.GetComponent<Collider2D>();
-        if (playerCollider != null)
-        {
-            Physics2D.IgnoreCollision(arrowCollider, playerCollider, true);
-        }
+        //Collider2D playerCollider = player.GetComponent<Collider2D>();
+        //if (playerCollider != null)
+        //{
+        //    Physics2D.IgnoreCollision(arrowCollider, playerCollider, true);
+        //}
 
-        if (ignoreObject != null)
-        {
-            Physics2D.IgnoreCollision(arrowCollider, ignoreObject, true);
-        }
+        //if (ignoreObject != null)
+        //{
+        //    Physics2D.IgnoreCollision(arrowCollider, ignoreObject, true);
+        //}
     }
 
     private void Update()
@@ -85,6 +86,7 @@ public class Bow_WireArrow : MonoBehaviour
 
     private void DestroyObject()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
