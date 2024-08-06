@@ -166,8 +166,6 @@ MonoBehaviour:
   animator: {fileID: 6794827612316430545}
   attackPrefab: {fileID: 6038683907410269147, guid: 7fd53afe13524bb458b8937aa208a212, type: 3}
   attackPoint: {fileID: 3235675879935659566}
-  mainCamera: {fileID: 0}
-  playerInput: {fileID: 247599780970100400}
   attackSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
   fanningSkill: {fileID: 8315751390811590512}
   rollingSkill: {fileID: 7116577893831461285}
@@ -203,8 +201,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  rollingForce: 10
+  rollingDistance: 5
   rollingDuration: 1
+  rollingSound: {fileID: 0}
 --- !u!114 &247599780970100400
 MonoBehaviour:
   m_ObjectHideFlags: 0
