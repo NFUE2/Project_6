@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionUI : MonoBehaviour
+public class OptionUI : UIBase
 {
-    public void OnClickLeaveGame()
+    //public void OnClickLeaveGame()
+    //{
+    //    PhotonNetwork.Disconnect();
+    //    PhotonNetwork.LoadLevel(0);
+    //    SoundManager.instance.ChangeBGM(BGMList.Intro);
+    //}
+    public void GoToMain()
     {
-        PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(0);
-        SoundManager.instance.ChangeBGM(BGMList.Intro);
+        Hide();
+        UIManager.Instance.Show<IntroPopup>();
     }
 }
