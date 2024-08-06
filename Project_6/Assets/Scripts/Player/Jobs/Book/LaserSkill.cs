@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LaserSkill : SkillBase
 {
@@ -15,6 +16,8 @@ public class LaserSkill : SkillBase
     public AudioClip laserSound;      // 레이저 효과음
     public GameObject impactEffectPrefab; // 충돌 시 생성할 파티클 효과 프리팹
     private AudioSource audioSource;  // 오디오 소스
+
+    private List<GameObject> activeImpactEffects = new List<GameObject>();
 
     private void Start()
     {
@@ -95,14 +98,30 @@ public class LaserSkill : SkillBase
         laserRendererEdge.SetPosition(0, transform.position);
         Vector3 laserEndPoint = transform.position + direction * 100; // 기본 레이저 끝점 설정
 
+        HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
+
         if (hits.Length > 0)
         {
             laserEndPoint = hits[hits.Length - 1].point; // 마지막 충돌점으로 레이저 끝점 설정
 
             // 충돌 지점에 파티클 효과 생성
-            if (impactEffectPrefab != null)
+            foreach (var hit in hits)
             {
-                Instantiate(impactEffectPrefab, laserEndPoint, Quaternion.identity);
+                if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    GameObject enemy = hit.collider.gameObject;
+                    if (!hitEnemies.Contains(enemy))
+                    {
+                        hitEnemies.Add(enemy);
+
+                        if (impactEffectPrefab != null)
+                        {
+                            GameObject impactEffect = Instantiate(impactEffectPrefab, hit.point, Quaternion.identity);
+                            activeImpactEffects.Add(impactEffect);
+                            Destroy(impactEffect, 2f); // 2초 후에 파티클 효과 파괴
+                        }
+                    }
+                }
             }
         }
 
@@ -129,19 +148,9 @@ public class LaserSkill : SkillBase
             {
                 if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    //IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    //if (damagable != null)
-                    if(hit.transform.TryGetComponent(out MonsterCondition damagable))
+                    if (hit.transform.TryGetComponent(out MonsterCondition damagable))
                     {
-                        //damagable.TakeDamage(laserDamage); // 적에게 피해 적용
                         damagable.Damage(laserDamage);
-                        //Debug.Log($"적 {hit.collider.gameObject.name}에게 {laserDamage}의 피해를 입혔습니다.");
-
-                        // 충돌 지점에 파티클 효과 생성
-                        if (impactEffectPrefab != null)
-                        {
-                            Instantiate(impactEffectPrefab, hit.point, Quaternion.identity);
-                        }
                     }
                 }
             }
@@ -150,5 +159,15 @@ public class LaserSkill : SkillBase
 
         laserRendererCore.enabled = false; // 레이저 중심부 렌더러 비활성화
         laserRendererEdge.enabled = false; // 레이저 테두리 렌더러 비활성화
+
+        // 남아있는 모든 파티클 효과 제거
+        foreach (var effect in activeImpactEffects)
+        {
+            if (effect != null)
+            {
+                Destroy(effect);
+            }
+        }
+        activeImpactEffects.Clear();
     }
 }

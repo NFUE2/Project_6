@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3744046105682257372}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3744046105682257370
 MonoBehaviour:
@@ -43,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75342fe1d6ecf4d899773eb76f45e71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _version: 130
+  _version: 166
   _characterPivot: {fileID: 0}
   _mainBody: {fileID: 2800000, guid: d24756e433435b249be5737019648d69, type: 3}
   _mainEye: {fileID: 2800000, guid: e2579aadb18ab4cf1b2461fb9e0f0cdf, type: 3}
@@ -72,15 +73,63 @@ MonoBehaviour:
   _unitCode: {fileID: 0}
   _unitNumber: {fileID: 0}
   _drawItemObj: {fileID: 0}
-  _childItem: {fileID: 5577627943664093003, guid: 1634d8045e75445b7a39f6e29b9fca12,
-    type: 3}
+  _drawItemIndex: 0
+  _childItem: {fileID: 5577627943664093003, guid: 1634d8045e75445b7a39f6e29b9fca12, type: 3}
   _childPool: {fileID: 0}
   _spumVersion: {fileID: 0}
   _packageList: []
+  _panelTitle: {fileID: 0}
+  _packageButtonList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _packageButtonPool: {fileID: 0}
+  _packageButtonScroll: {fileID: 0}
+  _packageButtonObj: {fileID: 8656653761146463238, guid: 8691c5da729ff784596ea1cad12b9f9b, type: 3}
+  _horseCheck: 0
+  _rootList:
+  - {fileID: 0}
+  - {fileID: 0}
+  _rootAnimList:
+  - {fileID: 0}
+  - {fileID: 0}
+  _animControllerList:
+  - {fileID: 9100000, guid: ab937231d0600440fb0d8757568d78d7, type: 2}
+  - {fileID: 9100000, guid: 7d202f578bec24e928d3baa75058aae5, type: 2}
   _colorPicker: {fileID: 0}
   _nowColorNum: 0
   _basicColor: {r: 0.4433962, g: 0.14849591, b: 0.14849591, a: 1}
   _nowColor: {r: 0.4433962, g: 0.14849591, b: 0.14849591, a: 1}
+  _colorPanelType:
+  - {fileID: 0}
+  - {fileID: 0}
+  _nowColorShow: {fileID: 0}
+  _hexColorText: {fileID: 0}
+  _colorSaveList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _nowSelectColorNum: 0
+  _nowSelectColor: {fileID: 0}
   _prefabUnitList: []
   editObjNum: 0
   _loadObjCanvas: {fileID: 0}

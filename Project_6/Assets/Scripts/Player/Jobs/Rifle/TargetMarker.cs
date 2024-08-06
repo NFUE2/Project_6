@@ -5,30 +5,26 @@ public class TargetMarker : MonoBehaviour
     public GameObject target; // 타겟팅 대상
     private TargetSkill targetingSkill;
     public float rotationSpeed = 100f; // 회전 속도 (초당 회전 각도)
-    private Collider2D markerCollider; // 타겟 마커의 Collider
 
     public void Initialize(GameObject target, TargetSkill skill)
     {
         this.target = target;
         this.targetingSkill = skill;
-        markerCollider = GetComponent<Collider2D>();
 
-        if (markerCollider == null)
-        {
-            Debug.LogError("Collider2D is missing on the TargetMarker");
-        }
+        // 타겟 오브젝트의 중심에 위치하도록 설정
+        transform.position = target.GetComponent<Collider2D>().bounds.center;
     }
 
     void Update()
     {
-        if (target != null)
+        if (target == null)
         {
-            // 타겟을 따라 이동
-            transform.position = target.transform.position;
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            // 타겟을 따라 이동
+            transform.position = target.GetComponent<Collider2D>().bounds.center;
         }
 
         // 회전 로직 추가
@@ -37,7 +33,7 @@ public class TargetMarker : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (target != null && markerCollider != null)
+        if (target != null)
         {
             targetingSkill.OnTargetClicked(target);
             Destroy(gameObject);

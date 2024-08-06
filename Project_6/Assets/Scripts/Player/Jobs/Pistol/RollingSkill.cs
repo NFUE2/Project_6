@@ -48,9 +48,8 @@ public class RollingSkill : SkillBase
 
         // 이동 방향 및 목표 위치 계산
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Z축 값 고정
+        mousePosition.z = 0; // Z축 값 무시
         Vector3 direction = (mousePosition - transform.position).normalized;
-        direction.y = 0; // 수평 방향으로만 구르도록 설정
         targetPosition = transform.position + direction * rollingDistance;
 
         // 롤링 효과음 재생
