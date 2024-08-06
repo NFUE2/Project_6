@@ -15,6 +15,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     public AudioClip stompAudioClip;
     public AudioClip razorAudioClip;
     public AudioClip chargePunchAudioClip;
+    public AudioClip faintAudioClip;
 
     public BoxCollider2D bossCollider;
     public BoxCollider2D chargeCollider;
@@ -253,6 +254,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
         if(beforeChargeHP - afterChargeHP >= chargeCancleDamage)
         {
             BossBattleManager.Instance.bossAnimator.SetBool("isFaint", true);
+            SoundManager.Instance.Shot(faintAudioClip);
         }
         else
         {
