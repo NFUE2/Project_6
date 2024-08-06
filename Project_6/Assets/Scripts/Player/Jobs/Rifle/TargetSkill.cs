@@ -127,14 +127,10 @@ public class TargetSkill : SkillBase
     public void OnTargetClicked(GameObject target)
     {
         // 적에게 데미지를 입힙니다.
-        //IDamagable damagable = target.GetComponent<IDamagable>();
-        //if (damagable != null)
-        //{
-        //    damagable.TakeDamage(skillDamage); // 인스펙터에서 설정된 스킬 데미지를 적용
-        //}
-
         if (target.TryGetComponent(out MonsterCondition m))
+        {
             m.Damage(skillDamage);
+        }
 
         // 효과음 재생
         if (hitSound != null && audioSource != null)
@@ -150,11 +146,10 @@ public class TargetSkill : SkillBase
             Destroy(marker);
         }
 
-        // 타겟 마커가 모두 제거되었는지 확인
+        // 타겟 마커가 모두 제거되었는지 확인하지 않고 타겟팅 모드 유지
         if (targetMarkers.Count == 0)
         {
-            // 타겟팅 모드 비활성화
-            riflePlayer.SetTargeting(false);
+            riflePlayer.SetTargeting(true);
         }
     }
 

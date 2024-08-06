@@ -98,8 +98,6 @@ MonoBehaviour:
   animator: {fileID: 2801281022605535709}
   attackPrefab: {fileID: 6038683907410269147, guid: e780ed31b5def5d4ea1cae55d0c9c5df, type: 3}
   attackPoint: {fileID: 4216952468387308599}
-  mainCamera: {fileID: 0}
-  playerInput: {fileID: 1555344151604424356}
   attackSound: {fileID: 8300000, guid: c4b832f9616cf7849a09ad8b30943013, type: 3}
   targetSkill: {fileID: 3122396701900153560}
   grenadeSkill: {fileID: 4509431132364026990}
