@@ -39,14 +39,4 @@ public class Hammer_Shield : MonoBehaviourPun
             PlayHitEffects();
         }
     }
-    public void SetParent(int index)
-    {
-        photonView.RPC(nameof(SetParentRPC), RpcTarget.All, index);
-    }
-
-    [PunRPC]
-    public void SetParentRPC(int index)
-    {
-        transform.SetParent(GameManager.instance.players[index].transform);
-    }
 }
