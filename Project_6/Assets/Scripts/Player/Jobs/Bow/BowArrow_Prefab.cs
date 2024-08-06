@@ -54,7 +54,6 @@ public class BombArrow : MonoBehaviour
         //transform.position += (Vector3)direction * speed * Time.deltaTime;
         transform.position += transform.right * speed * Time.deltaTime;
 
-
         // 화살이 화면 밖으로 나가면 파괴
         if (IsOffScreen())
         {
@@ -70,7 +69,7 @@ public class BombArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             Explode();
         }
