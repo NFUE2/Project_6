@@ -24,13 +24,16 @@ public class Projectile : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+
+        // SetDirection을 호출하여 초기 방향 설정
+        // SetDirection 메서드는 외부에서 호출되어야 합니다.
     }
 
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
         // 투사체를 방향으로 회전시킴
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 180; // 각도를 조정하여 투사체가 올바른 방향으로 향하도록 함
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
