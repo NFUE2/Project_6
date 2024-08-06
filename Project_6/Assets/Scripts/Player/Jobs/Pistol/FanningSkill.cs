@@ -49,7 +49,7 @@ public class FanningSkill : SkillBase
             //Vector3 offset = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
             //GameObject go = Instantiate(attackPrefab, transform.position + offset, Quaternion.identity);
             //go.GetComponent<Projectile>().SetDirection(Quaternion.Euler(0, 0, fireAngle) * direction);
-            GameObject go = PhotonNetwork.Instantiate("Prefabs/" + attackPrefab.name, transform.position,Quaternion.Euler(0, 0, fireAngle));
+            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position,Quaternion.Euler(0, 0, fireAngle));
             // 발사 효과음 재생
             PlayFiringSound();
 

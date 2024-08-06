@@ -62,7 +62,7 @@ public abstract class RangedPlayerBase : PlayerBase
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
 
         float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-        GameObject projectile = PhotonNetwork.Instantiate("Prefabs/" + attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
+        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
 
         Projectile proj = projectile.GetComponent<Projectile>();
         if (proj != null)

@@ -87,7 +87,7 @@ public class BookShieldSkill : SkillBase
             }
 
             // 보호막 프리팹을 생성하고 타겟에 부착
-            GameObject shield = PhotonNetwork.Instantiate("Prefabs/" + shieldPrefab.name, target.position, Quaternion.identity);
+            GameObject shield = PhotonNetwork.Instantiate(shieldPrefab.name, target.position, Quaternion.identity);
             if (shield.TryGetComponent(out Book_Shield b)) b.SetParent(index);
 
             // 지정된 지속 시간 동안 보호막 유지

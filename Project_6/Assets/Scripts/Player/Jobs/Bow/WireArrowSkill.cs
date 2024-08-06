@@ -30,7 +30,7 @@ public class WireArrowSkill : SkillBase
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
         //GameObject go = Instantiate(wireArrow, transform.position, Quaternion.identity);
-        GameObject go = PhotonNetwork.Instantiate("Prefabs/" + wireArrow.name, transform.position, Quaternion.Euler(0,0,angle));
+        GameObject go = PhotonNetwork.Instantiate(wireArrow.name, transform.position, Quaternion.Euler(0,0,angle));
 
 
         //mousePos.z = 0; // 2D 게임이므로 Z축을 0으로 설정

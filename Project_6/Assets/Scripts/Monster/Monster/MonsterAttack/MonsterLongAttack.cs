@@ -20,7 +20,7 @@ public class MonsterLongAttack : MonsterAttack
         //string projectileName = data.projectile.name; //투사체 이름
         //GameObject proejectile = PhotonNetwork.Instantiate($"Projectile/{projectileName}", fire.position, Quaternion.identity); //복사할 투사체
 
-        GameObject proejectile = PhotonNetwork.Instantiate("Prefabs/" + data.projectile.name, fire.position, Quaternion.Euler(0, 0, angle)); //복사할 투사체
+        GameObject proejectile = PhotonNetwork.Instantiate(data.projectile.name, fire.position, Quaternion.Euler(0, 0, angle)); //복사할 투사체
 
         //GameObject proejectile = PhotonNetwork.Instantiate("Projectile/ + "data.projectile.name, fire.position, Quaternion.identity); //복사할 투사체
         //proejectile.transform.localEulerAngles = new Vector3(0, 0, angle); //투사체 각도

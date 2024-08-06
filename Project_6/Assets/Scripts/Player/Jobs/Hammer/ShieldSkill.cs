@@ -33,7 +33,7 @@ public class ShieldSkill : SkillBase
         Vector3 shieldPosition = transform.position + direction * shieldDistance;
 
         // 로컬에서 방패 생성
-        createdShield = PhotonNetwork.Instantiate("Player/" + shieldPrefab.name, shieldPosition, Quaternion.identity);
+        createdShield = PhotonNetwork.Instantiate(shieldPrefab.name, shieldPosition, Quaternion.identity);
 
         int index = GameManager.instance.players.IndexOf(gameObject);
 
