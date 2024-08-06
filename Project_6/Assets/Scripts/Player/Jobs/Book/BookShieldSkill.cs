@@ -38,7 +38,7 @@ public class BookShieldSkill : SkillBase
         {
             // 인덱스를 사용하여 가장 가까운 플레이어의 Transform을 가져옴
             Transform closestPlayer = GameManager.Instance.players[closestPlayerIndex].transform;
-            StartCoroutine(ApplyShield(closestPlayer,closestPlayerIndex));
+            StartCoroutine(ApplyShield(closestPlayer, closestPlayerIndex));
         }
         else
         {
@@ -56,6 +56,8 @@ public class BookShieldSkill : SkillBase
         // 모든 플레이어를 순회하며 가장 가까운 플레이어를 찾음
         for (int i = 0; i < players.Count; i++)
         {
+            if (players[i] == this.gameObject) continue; // 자기 자신은 무시
+
             float distance = Vector3.Distance(position, players[i].transform.position);
             if (distance < closestDistance && distance <= range)
             {
@@ -68,7 +70,7 @@ public class BookShieldSkill : SkillBase
     }
 
     // 보호막을 적용하는 코루틴
-    private IEnumerator ApplyShield(Transform target,int index)
+    private IEnumerator ApplyShield(Transform target, int index)
     {
         PlayerBase player = target.GetComponent<PlayerBase>();
 
@@ -76,7 +78,6 @@ public class BookShieldSkill : SkillBase
         {
             float originalDefense = PlayerData.playerdefense;
             PlayerData.playerdefense += 50; // 방어막 적용 시 방어력 증가 (예: 50)
-            //Debug.Log($"{target.name}에게 보호막 적용! 방어력 증가: {PlayerData.playerdefense}");
 
             // 보호막 효과음 재생
             if (shieldSound != null && audioSource != null)
@@ -88,20 +89,12 @@ public class BookShieldSkill : SkillBase
             // 보호막 프리팹을 생성하고 타겟에 부착
             GameObject shield = PhotonNetwork.Instantiate("Prefabs/" + shieldPrefab.name, target.position, Quaternion.identity);
             if (shield.TryGetComponent(out Book_Shield b)) b.SetParent(index);
-            //shield.transform.SetParent(target);
-
-            // Shield 컴포넌트 추가 (필요한 경우)
-            //if (shield.GetComponent<Book_Shield>() == null)
-            //{
-            //    shield.AddComponent<Book_Shield>();
-            //}
 
             // 지정된 지속 시간 동안 보호막 유지
             yield return new WaitForSeconds(shieldDuration);
 
             // 보호막 종료 후 방어력 원래대로 복원
             PlayerData.playerdefense = originalDefense;
-            //Destroy(shield);
             PhotonNetwork.Destroy(shield);
             Debug.Log($"{target.name}의 보호막 종료! 방어력 복원: {PlayerData.playerdefense}");
         }
