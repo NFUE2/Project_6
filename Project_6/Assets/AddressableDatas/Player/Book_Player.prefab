@@ -152,8 +152,6 @@ MonoBehaviour:
   animator: {fileID: 421372824621078534}
   attackPrefab: {fileID: 4784781078324220614, guid: 701870084acf0cd4392c6d57ce4c9ccf, type: 3}
   attackPoint: {fileID: 2032611465856404724}
-  mainCamera: {fileID: 0}
-  playerInput: {fileID: 1072658269317441210}
   attackSound: {fileID: 8300000, guid: 48cef49a56f984142a71b31b9fa874ad, type: 3}
   bookshieldSkill: {fileID: 5308551978664115118}
   laserSkill: {fileID: 1709624757084851518}
@@ -208,7 +206,7 @@ MonoBehaviour:
     m_Bits: 8
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   laserSound: {fileID: 8300000, guid: 85b6d867193aa01428934ba4e9c2d84f, type: 3}
-  impactEffectPrefab: {fileID: 3142795443215796759, guid: 84816262658c57641b769b23304fe50f, type: 3}
+  impactEffectPrefab: {fileID: 2865595404649841647, guid: 2bd46c3902071804bace048d983e8422, type: 3}
 --- !u!114 &1072658269317441210
 MonoBehaviour:
   m_ObjectHideFlags: 0

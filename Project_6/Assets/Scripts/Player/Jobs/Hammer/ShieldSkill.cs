@@ -77,7 +77,7 @@ public class ShieldSkill : SkillBase
             Vector3 shieldPosition = transform.position + direction * shieldDistance;
             createdShield.transform.position = shieldPosition;
 
-            // 방어막 방향 설정
+            // 방패 방향 설정
             if (direction == Vector3.left)
             {
                 createdShield.transform.localScale = new Vector3(-1, 1, 1);
