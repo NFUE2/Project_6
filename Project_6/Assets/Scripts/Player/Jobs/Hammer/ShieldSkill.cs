@@ -35,7 +35,12 @@ public class ShieldSkill : SkillBase
         // 로컬에서 방패 생성
         createdShield = PhotonNetwork.Instantiate("Player/" + shieldPrefab.name, shieldPosition, Quaternion.identity);
 
-        // 방어막 방향 설정
+        int index = GameManager.instance.players.IndexOf(gameObject);
+
+        if (createdShield.TryGetComponent(out Hammer_Shield s))
+            s.SetParent(index);
+
+        // 방패 방향 설정
         if (direction == Vector3.left)
         {
             createdShield.transform.localScale = new Vector3(-1, 1, 1);
