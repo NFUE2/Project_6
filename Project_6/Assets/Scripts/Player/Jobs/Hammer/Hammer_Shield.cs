@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class Hammer_Shield : MonoBehaviour
+public class Hammer_Shield : MonoBehaviourPun
 {
     public AudioClip hitSound; // 피격 시 효과음
     public GameObject hitEffect; // 피격 시 파티클 효과
@@ -38,5 +38,15 @@ public class Hammer_Shield : MonoBehaviour
             // 피격 효과 재생
             PlayHitEffects();
         }
+    }
+    public void SetParent(int index)
+    {
+        photonView.RPC(nameof(SetParentRPC), RpcTarget.All, index);
+    }
+
+    [PunRPC]
+    public void SetParentRPC(int index)
+    {
+        transform.SetParent(GameManager.instance.players[index].transform);
     }
 }
