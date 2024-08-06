@@ -37,13 +37,13 @@ public class MonsterTrackState : MonsterBaseState
 
         float distance = TargetDistance();
 
-        if(distance > stateMachine.controller.data.searchDistance)
-        {
-            stateMachine.ChangeState(stateMachine.idleState);
-        }
-        else if (distance < stateMachine.controller.data.attackDistance)
+        if (distance < stateMachine.controller.data.attackDistance)
         {
             stateMachine.ChangeState(stateMachine.attackState);
+        }
+        else if(!isTrackable() || distance > stateMachine.controller.data.searchDistance)
+        {
+            stateMachine.ChangeState(stateMachine.idleState);
         }
         else
         {

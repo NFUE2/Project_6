@@ -24,12 +24,12 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
 
     void Update()
     {
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
