@@ -63,14 +63,14 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     public void Heal(float amount)
     {
         photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
-        UpdateHealthBar();
     }
 
     [PunRPC]
     public void HealRPC(float amount)
     {
         currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
+        UpdateHealthBar();
     }
 
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
@@ -83,6 +83,8 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void UpdateHealthBar()
     {
+        if (!photonView.IsMine) return;
+
         float healthRatio = currentHealth / maxHealth;
         healthBarImage.fillAmount = healthRatio;
         //Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
