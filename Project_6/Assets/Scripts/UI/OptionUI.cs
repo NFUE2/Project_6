@@ -8,7 +8,8 @@ public class OptionUI : MonoBehaviour
     public void OnClickLeaveGame()
     {
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(0);
+        //PhotonNetwork.LoadLevel(0);
+        SceneManager.instance.LoadScene(Scene.Intro);
         SoundManager.instance.ChangeBGM(BGMList.Intro);
     }
 }

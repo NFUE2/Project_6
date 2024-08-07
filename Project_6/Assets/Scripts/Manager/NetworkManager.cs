@@ -230,11 +230,12 @@ public class NetworkManager : PunSingleton<NetworkManager>
         base.OnPlayerLeftRoom(otherPlayer);
         if (otherPlayer.ActorNumber == 1)
         {
-            int index = SceneManager.GetActiveScene().buildIndex;
+            int index = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
             if (index == 1)
             {
-                PhotonNetwork.LoadLevel(0);
+                //PhotonNetwork.LoadLevel(0);
+                SceneManager.instance.LoadScene(Scene.Intro);
                 SoundManager.instance.ChangeBGM(BGMList.Intro);
             }
 

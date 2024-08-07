@@ -72,6 +72,6 @@ public class P_Network : MonoBehaviourPunCallbacks
             yield return null;
         }
 
-        PhotonNetwork.LoadLevel(/*(int)target*/1);
+        //PhotonNetwork.LoadLevel(/*(int)target*/1);
     }
 }
