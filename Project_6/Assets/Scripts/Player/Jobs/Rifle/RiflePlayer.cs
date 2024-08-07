@@ -1,8 +1,6 @@
 using Photon.Pun;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RiflePlayer : RangedPlayerBase
 {
@@ -62,28 +60,7 @@ public class RiflePlayer : RangedPlayerBase
     {
         if (isTargeting) return; // 타겟팅 모드일 때 공격 무시
 
-        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
-        lastAttackTime = Time.time;
-
-        if (mainCamera == null)
-        {
-            Debug.LogError("Main Camera가 초기화되지 않았습니다.");
-            return;
-        }
-
-        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
-
-        float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
-        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
-
-        Projectile proj = projectile.GetComponent<Projectile>();
-        if (proj != null)
-        {
-            proj.SetDirection(attackDirection); // 투사체의 방향 설정
-        }
-
-        PlayAttackSound();
+        base.Attack(); // 기본 공격 로직 호출
     }
 
     public void SetTargeting(bool targeting)
