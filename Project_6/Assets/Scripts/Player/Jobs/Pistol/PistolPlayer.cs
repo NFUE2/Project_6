@@ -63,6 +63,7 @@ public class PistolPlayer : RangedPlayerBase
         if (isAttackCooldown && Time.time - lastAttackTime >= cooldownDuration)
         {
             isAttackCooldown = false;
+            attackCount = 0; // 공격 카운트를 초기화
             Debug.Log("Cooldown complete: You can attack again.");
         }
     }

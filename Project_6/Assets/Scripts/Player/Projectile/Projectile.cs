@@ -11,35 +11,31 @@ public class Projectile : MonoBehaviour
     public AudioClip explosionSound; // 폭발 효과음
     private AudioSource audioSource; // 오디오 소스 컴포넌트
 
-    private Rigidbody2D rb;
-
-    void Start()
+    void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.isKinematic = true; // 투사체가 물리 엔진의 영향을 받지 않도록 설정
-
-        // 오디오 소스 컴포넌트 가져오기 또는 추가하기
+        // 오디오 소스 컴포넌트를 캐싱합니다.
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-
-        // SetDirection을 호출하여 초기 방향 설정
-        // SetDirection 메서드는 외부에서 호출되어야 합니다.
     }
 
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
-        // 투사체를 방향으로 회전시킴
+
+        // 투사체를 방향으로 회전시킵니다.
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        if (direction != Vector2.zero) // 방향이 설정되어 있을 때만 업데이트합니다.
+        {
+            transform.position += (Vector3)direction * speed * Time.deltaTime;
+        }
     }
 
     private void OnBecameInvisible()

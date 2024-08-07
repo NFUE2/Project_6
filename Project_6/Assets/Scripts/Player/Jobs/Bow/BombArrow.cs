@@ -15,6 +15,7 @@ public class BombArrow : MonoBehaviour
 
     void Awake()
     {
+        // Rigidbody2D 캐싱 및 초기화
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
@@ -22,6 +23,7 @@ public class BombArrow : MonoBehaviour
             rb.isKinematic = true; // 물리 엔진의 영향을 받지 않도록 설정
         }
 
+        // Collider2D 캐싱 및 초기화
         arrowCollider = GetComponent<Collider2D>();
         if (arrowCollider == null)
         {
@@ -29,6 +31,7 @@ public class BombArrow : MonoBehaviour
             arrowCollider.isTrigger = true; // 트리거로 설정
         }
 
+        // AudioSource 캐싱 및 초기화
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -36,23 +39,18 @@ public class BombArrow : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
         // 화살을 방향으로 회전시킴
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도를 조정하여 화살이 올바른 방향으로 향하도록 함
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void Update()
     {
-        //transform.position += (Vector3)direction * speed * Time.deltaTime;
-        transform.position += transform.right * speed * Time.deltaTime;
+        // 화살의 이동 처리
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
 
         // 화살이 화면 밖으로 나가면 파괴
         if (IsOffScreen())

@@ -53,6 +53,7 @@ MonoBehaviour:
   damage: 50
   radius: 3
   dotDuration: 3
+  speed: 15
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8

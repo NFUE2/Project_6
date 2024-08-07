@@ -150,7 +150,9 @@ MonoBehaviour:
   wireSpeed: 5
   player: {fileID: 0}
   wireEndDistance: 1
-  ignoreObject: {fileID: 0}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &4230479259184397664
 Rigidbody2D:
   serializedVersion: 4
@@ -196,7 +198,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7105236668138447669}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

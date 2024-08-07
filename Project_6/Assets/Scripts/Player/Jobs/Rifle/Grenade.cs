@@ -7,6 +7,7 @@ public class Grenade : MonoBehaviour
     public float damage = 10f; // 수류탄의 데미지
     public float radius = 5f; // 폭발 반경
     public float dotDuration = 3f; // 데미지 오버 타임(DoT) 지속 시간
+    public float speed = 15f; // 수류탄의 속도
 
     [Header("Layer Masks")]
     public LayerMask enemyLayerMask; // 적의 레이어 마스크
@@ -21,16 +22,20 @@ public class Grenade : MonoBehaviour
 
     private AudioSource audioSource; // 오디오 소스
     private Vector2 direction; // 투사체의 방향
-    private Rigidbody2D rb; // 리지드바디 컴포넌트
 
-    private void Start()
+    private void Awake()
     {
         // 오디오 소스 초기화
         audioSource = gameObject.AddComponent<AudioSource>();
+    }
 
-        // 리지드바디 컴포넌트 초기화
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = false; // 리지드바디를 물리적으로 반응하게 설정
+    private void Start()
+    {
+        // 투사체가 이동 방향을 설정하지 않았을 경우 초기 방향 설정
+        if (direction == Vector2.zero)
+        {
+            direction = Vector2.right; // 기본 방향을 오른쪽으로 설정
+        }
     }
 
     public void SetDirection(Vector2 newDirection)
@@ -41,12 +46,30 @@ public class Grenade : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
+    private void Update()
+    {
+        // 수류탄의 이동 처리
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
+
+        // 수류탄이 화면 밖으로 나가면 파괴
+        if (IsOffScreen())
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private bool IsOffScreen()
+    {
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        return screenPoint.x < -0.5f || screenPoint.x > 1.5f || screenPoint.y < -0.5f || screenPoint.y > 1.5f;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (((1 << collision.gameObject.layer) & enemyLayerMask) != 0)
         {
             // 적과 충돌 시 속도 0으로 설정하여 멈춤
-            rb.velocity = Vector2.zero;
+            direction = Vector2.zero;
 
             // 적과 충돌 시 폭발
             Explode();
@@ -73,22 +96,17 @@ public class Grenade : MonoBehaviour
         foreach (var enemy in hitEnemies)
         {
             // 적에게 DoT 데미지를 적용
-            //IDamagable damagable = enemy.GetComponent<IDamagable>();
-            //if (damagable != null)
-            //{
-            //    StartCoroutine(ApplyDotDamage(damagable));
-            //}
-
-            if(enemy.TryGetComponent(out MonsterCondition m))
-                StartCoroutine(ApplyDotDamage(m));
-
+            if (enemy.TryGetComponent(out MonsterCondition monsterCondition))
+            {
+                StartCoroutine(ApplyDotDamage(monsterCondition));
+            }
         }
 
         // 도트 딜 적용 후 수류탄 오브젝트 파괴
         StartCoroutine(DestroyAfterDotDuration());
     }
 
-    private IEnumerator ApplyDotDamage(/*IDamagable enemy*/ MonsterCondition enemy)
+    private IEnumerator ApplyDotDamage(MonsterCondition enemy)
     {
         float elapsed = 0f;
         float interval = 1f;
@@ -111,11 +129,6 @@ public class Grenade : MonoBehaviour
 
         while (elapsed < dotDuration)
         {
-            //if (enemy != null)
-            //{
-            //    enemy.TakeDamage(dotDamage);
-            //}
-
             if (enemy != null)
             {
                 enemy.Damage(dotDamage);

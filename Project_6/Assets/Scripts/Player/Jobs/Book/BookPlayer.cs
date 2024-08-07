@@ -77,10 +77,33 @@ public class BookPlayer : RangedPlayerBase
     private void LaunchProjectile(Transform target)
     {
         GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
+        Vector3 direction = (target.position - projectile.transform.position).normalized;
 
-        //Vector2 direction = (target.position - transform.position).normalized;
-        //GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
-        //projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
-        //Destroy(projectile, 5f);
+        // Projectile 클래스의 SetDirection 메서드 호출
+        Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        if (projectileComponent != null)
+        {
+            projectileComponent.SetDirection(direction);
+        }
+
+        StartCoroutine(MoveProjectile(projectile, target));
+    }
+
+    private IEnumerator MoveProjectile(GameObject projectile, Transform target)
+    {
+        while (projectile != null && target != null)
+        {
+            Vector3 direction = (target.position - projectile.transform.position).normalized;
+            projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
+
+            // 목표물과의 거리 체크
+            if (Vector3.Distance(projectile.transform.position, target.position) < 0.1f)
+            {
+                // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
+                Destroy(projectile);
+            }
+
+            yield return null;
+        }
     }
 }
