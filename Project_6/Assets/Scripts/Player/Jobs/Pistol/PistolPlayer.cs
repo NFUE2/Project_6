@@ -37,8 +37,23 @@ public class PistolPlayer : RangedPlayerBase
     {
         if (!isAttackCooldown && CanAttack() && !isUsingSkill)
         {
-            // RangedPlayerBase의 Attack 메서드를 호출하여 공격을 수행
-            base.Attack();
+            if (Time.time - lastAttackTime < playerData.attackCooldown) return;
+            lastAttackTime = Time.time;
+
+            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
+
+            float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg; // 수정된 부분
+            GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
+
+            Projectile proj = projectile.GetComponent<Projectile>();
+            if (proj != null)
+            {
+                proj.SetDirection(attackDirection); // 투사체의 방향 설정
+            }
+
+            PlayAttackSound();
+
             attackCount++;
             Debug.Log($"Attack {attackCount}: Performed an attack.");
 
@@ -93,7 +108,6 @@ public class PistolPlayer : RangedPlayerBase
             yield return null;
         }
 
-        // 스킬이 끝난 후 완전히 장전된 상태로 설정
         attackCount = 0;
         isAttackCooldown = false;
         lastAttackTime = Time.time;

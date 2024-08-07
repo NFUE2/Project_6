@@ -50,6 +50,10 @@ public class RollingSkill : SkillBase
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; // Z축 값 무시
         Vector3 direction = (mousePosition - transform.position).normalized;
+
+        // 좌우 방향으로만 제한
+        direction = new Vector3(direction.x, 0, 0).normalized;
+
         targetPosition = transform.position + direction * rollingDistance;
 
         // 롤링 효과음 재생

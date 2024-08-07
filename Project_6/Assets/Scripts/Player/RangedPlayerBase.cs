@@ -5,7 +5,7 @@ public abstract class RangedPlayerBase : PlayerBase
 {
     public GameObject attackPrefab;
     public Transform attackPoint;
-    private Camera mainCamera;
+    protected Camera mainCamera;
     [SerializeField] private AudioClip attackSound; // 공격 효과음 클립
     protected AudioSource audioSource; // 오디오 소스 컴포넌트
 
