@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -40,7 +41,7 @@ public class Projectile : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
