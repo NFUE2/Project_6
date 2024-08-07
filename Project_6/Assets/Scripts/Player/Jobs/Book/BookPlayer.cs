@@ -77,7 +77,16 @@ public class BookPlayer : RangedPlayerBase
     private void LaunchProjectile(Transform target)
     {
         GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
-        Vector3 direction = (target.position - projectile.transform.position).normalized;
+        Vector3 targetPosition = target.position;
+
+        // 타겟의 콜라이더가 있는 경우 콜라이더의 오프셋을 추가
+        Collider2D targetCollider = target.GetComponent<Collider2D>();
+        if (targetCollider != null)
+        {
+            targetPosition = targetCollider.bounds.center;
+        }
+
+        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
 
         // Projectile 클래스의 SetDirection 메서드 호출
         Projectile projectileComponent = projectile.GetComponent<Projectile>();
@@ -86,18 +95,18 @@ public class BookPlayer : RangedPlayerBase
             projectileComponent.SetDirection(direction);
         }
 
-        StartCoroutine(MoveProjectile(projectile, target));
+        StartCoroutine(MoveProjectile(projectile, targetPosition));
     }
 
-    private IEnumerator MoveProjectile(GameObject projectile, Transform target)
+    private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
     {
-        while (projectile != null && target != null)
+        while (projectile != null)
         {
-            Vector3 direction = (target.position - projectile.transform.position).normalized;
+            Vector3 direction = (targetPosition - projectile.transform.position).normalized;
             projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
 
             // 목표물과의 거리 체크
-            if (Vector3.Distance(projectile.transform.position, target.position) < 0.1f)
+            if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
             {
                 // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
                 Destroy(projectile);
