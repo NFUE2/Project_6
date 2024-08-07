@@ -183,9 +183,14 @@ public class LaserSkill : SkillBase
                         }
                     }
 
-                    if (hit.transform.TryGetComponent(out IDamagable damagable))
+                    //if (hit.transform.TryGetComponent(out IDamagable damagable))
+                    //{
+                    //    damagable.TakeDamage(laserDamage);
+                    //}
+
+                    if (hit.transform.TryGetComponent(out IPunDamagable damagable))
                     {
-                        damagable.TakeDamage(laserDamage);
+                        damagable.Damage(laserDamage);
                     }
                 }
             }

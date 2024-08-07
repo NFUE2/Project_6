@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class BombArrow : MonoBehaviour
@@ -110,7 +111,8 @@ public class BombArrow : MonoBehaviour
         }
 
         // È­»ì ÆÄ±«
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

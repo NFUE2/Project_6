@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
@@ -35,7 +36,8 @@ public class Sword_Projectile : MonoBehaviour
 
             Debug.Log("Hit detected! Playing hit effects."); // 디버그 로그 추가
             PlayHitEffects(collision.transform.position); // 적중 시 효과 재생
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
