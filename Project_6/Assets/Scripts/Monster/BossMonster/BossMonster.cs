@@ -55,12 +55,12 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
         BossBattleManager.instance.DestroyBoss();
     }
 
-    [PunRPC]
     public void Damage(float damage)
     {
         photonView.RPC(nameof(DamageRPC), RpcTarget.All, damage);
     }
 
+    [PunRPC]
     public void DamageRPC(float damage)
     {
         TakeDamage(damage);
