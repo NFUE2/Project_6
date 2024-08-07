@@ -9,7 +9,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public PlayerDataSO PlayerData;
     public PlayerInput input;
-    public Image healthBarImage;
+    public Image healthBarImage; // Optional
     private Animator animator;
     public AudioClip hitSound;
     private AudioSource audioSource;
@@ -20,24 +20,23 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth; // 초기화
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        //UpdateHealthBar();
+        UpdateHealthBar();
     }
 
     void Update()
     {
-        //UpdateHealthBar();
+        UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
     {
         float damageAfterDefense;
-        if (PlayerData !=  null)
+        if (PlayerData != null)
         {
-
             damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
         }
         else
@@ -45,14 +44,11 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             damageAfterDefense = Mathf.Max(damage, 0);
         }
         currentHealth -= damageAfterDefense;
-        //Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
+        Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
 
         PlaySound(hitSound);
         PlayHitEffect();
-        if(healthBarImage != null)
-        {
-            UpdateHealthBar();
-        }
+        UpdateHealthBar();
 
         if (currentHealth <= 0)
         {
@@ -60,17 +56,13 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         }
     }
 
+    [PunRPC]
     public void Heal(float amount)
     {
-        photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
+        currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
         UpdateHealthBar();
-    }
-
-    [PunRPC]
-    public void HealRPC(float amount)
-    {
-        currentHealth += amount;
+        Debug.Log($"Heal applied: {amount}, current health: {currentHealth}");
     }
 
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
@@ -83,9 +75,12 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void UpdateHealthBar()
     {
-        float healthRatio = currentHealth / maxHealth;
-        healthBarImage.fillAmount = healthRatio;
-        //Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
+        if (healthBarImage != null)
+        {
+            float healthRatio = currentHealth / maxHealth;
+            healthBarImage.fillAmount = healthRatio;
+            Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
+        }
     }
 
     void Die()
