@@ -183,9 +183,9 @@ public class LaserSkill : SkillBase
                         }
                     }
 
-                    if (hit.transform.TryGetComponent(out MonsterCondition damagable))
+                    if (hit.transform.TryGetComponent(out IDamagable damagable))
                     {
-                        damagable.Damage(laserDamage);
+                        damagable.TakeDamage(laserDamage);
                     }
                 }
             }

@@ -127,8 +127,10 @@ public class TargetSkill : SkillBase
     public void OnTargetClicked(GameObject target)
     {
         // 적에게 데미지를 입힙니다.
-        if (target.TryGetComponent(out MonsterCondition m))
+        //if (target.TryGetComponent(out IDamagable m))
+        if (target.TryGetComponent(out IPunDamagable m))
         {
+            //m.TakeDamage(skillDamage);
             m.Damage(skillDamage);
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MonsterCondition : MonoBehaviourPun,IDamagable//,IPunObservable
+public class MonsterCondition : MonoBehaviourPun,IDamagable, IPunDamagable
 {
     MonsterController controller;
     public SpriteRenderer sprite;
@@ -75,14 +75,19 @@ public class MonsterCondition : MonoBehaviourPun,IDamagable//,IPunObservable
         sprite.color = Color.white;
     }
 
-    public void Damage(float damage)
-    {
-        photonView.RPC(nameof(DamageRPC),RpcTarget.All,damage);
-    }
+    //public void Damage(float damage)
+    //{
+    //    photonView.RPC(nameof(DamageRPC),RpcTarget.All,damage);
+    //}
 
     [PunRPC]
     public void DamageRPC(float damage)
     {
         TakeDamage(damage);
+    }
+
+    public void Damage(float damage)
+    {
+        photonView.RPC(nameof(DamageRPC), RpcTarget.All, damage);
     }
 }

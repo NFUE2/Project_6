@@ -98,10 +98,12 @@ public class BombArrow : MonoBehaviour
         {
             if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                IDamagable damagable = hit.GetComponent<IDamagable>();
+                //IDamagable damagable = hit.GetComponent<IDamagable>();
+                IPunDamagable damagable = hit.GetComponent<IPunDamagable>();
+
                 if (damagable != null)
                 {
-                    damagable.TakeDamage(damage);
+                    damagable.Damage(damage);
                     Debug.Log($"적 {hit.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
                 }
             }

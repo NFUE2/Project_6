@@ -106,7 +106,7 @@ public class Grenade : MonoBehaviour
         StartCoroutine(DestroyAfterDotDuration());
     }
 
-    private IEnumerator ApplyDotDamage(MonsterCondition enemy)
+    private IEnumerator ApplyDotDamage(IPunDamagable enemy)
     {
         float elapsed = 0f;
         float interval = 1f;
@@ -131,6 +131,7 @@ public class Grenade : MonoBehaviour
         {
             if (enemy != null)
             {
+                //enemy.TakeDamage(dotDamage);
                 enemy.Damage(dotDamage);
             }
 

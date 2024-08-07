@@ -47,10 +47,14 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            IDamagable damagable = collision.GetComponent<IDamagable>();
+            //IDamagable damagable = collision.GetComponent<IDamagable>();
+            IPunDamagable damagable = collision.GetComponent<IPunDamagable>();
+
             if (damagable != null)
             {
-                damagable.TakeDamage(damage);
+                //damagable.TakeDamage(damage);
+                damagable.Damage(damage);
+
                 Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
             }
             Explode();

@@ -33,8 +33,6 @@ public abstract class MeleePlayerBase : PlayerBase
         isAttacking = false; // 쿨다운이 끝나면 isAttacking을 false로 설정
     }
 
-
-
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
@@ -46,12 +44,12 @@ public abstract class MeleePlayerBase : PlayerBase
         foreach (Collider2D enemy in hitEnemies)
         {
             //IDamagable damagable = enemy.GetComponent<IDamagable>();
-            MonsterCondition damagable = enemy.GetComponent<MonsterCondition>();
+            IPunDamagable damagable = enemy.GetComponent<IPunDamagable>();
 
             if (damagable != null)
             {
-                //damagable.TakeDamage(attackDamage);
                 damagable.Damage(attackDamage);
+                //damagable.Damage(attackDamage);
                 ApplyKnockback(enemy);
                 PlaySound(hitSound); // 피격 시 효과음 재생
             }
