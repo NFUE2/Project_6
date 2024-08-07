@@ -1,10 +1,11 @@
+using Photon.Pun;
 using UnityEngine;
 using System.Collections;
 
 public class HealAndBoostSkill : SkillBase
 {
     public float healDuration = 5f; // 힐 지속 시간
-    public float healAmount = 10f; // 힐량
+    public float totalHealAmount = 50f; // 총 힐량
     public float statBoostDuration = 10f; // 스탯 강화 지속 시간
     public float defenseBoost = 10f; // 방어력 증가량
     public float healRange = 5f; // 힐 범위
@@ -52,20 +53,19 @@ public class HealAndBoostSkill : SkillBase
         Debug.Log("HealAndBoost 코루틴 시작됨");
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange, playerLayer); // 힐 범위
+        Debug.Log($"힐 범위 내 감지된 오브젝트 수: {hitColliders.Length}");
         int healedPlayers = 0;
 
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Player"))
+            Debug.Log($"감지된 오브젝트: {hitCollider.gameObject.name}");
+
+            PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
+            if (playerCondition != null)
             {
-                MacePlayer player = hitCollider.GetComponent<MacePlayer>();
-                PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
-                if (player != null && playerCondition != null)
-                {
-                    Debug.Log("플레이어 발견, 힐 시작: " + player.name);
-                    StartCoroutine(HealPlayer(playerCondition));
-                    healedPlayers++;
-                }
+                Debug.Log("플레이어 발견, 힐 시작: " + hitCollider.gameObject.name);
+                StartCoroutine(HealPlayer(playerCondition));
+                healedPlayers++;
             }
         }
 
@@ -82,17 +82,18 @@ public class HealAndBoostSkill : SkillBase
     private IEnumerator HealPlayer(PlayerCondition playerCondition)
     {
         float startTime = Time.time;
+        float healPerSecond = totalHealAmount / healDuration; // 초당 힐량
         Debug.Log("HealPlayer 코루틴 시작됨, 플레이어: " + playerCondition.name);
 
         while (Time.time - startTime < healDuration)
         {
             // 힐량 계산 및 적용
-            playerCondition.Heal(healAmount * Time.deltaTime);
-            Debug.Log($"힐량: {healAmount * Time.deltaTime}, 현재 체력: {playerCondition.currentHealth}");
+            float healThisFrame = healPerSecond * Time.deltaTime;
+            playerCondition.photonView.RPC(nameof(PlayerCondition.HealRPC), RpcTarget.All, healThisFrame);
             yield return null;
         }
 
-        Debug.Log("힐 종료, 플레이어: " + playerCondition.name);
+        Debug.Log("힐 종료, 플레이어: " + playerCondition.name + ", 최종 체력: " + playerCondition.currentHealth);
     }
 
     private IEnumerator BoostDefense(int healedPlayers)
