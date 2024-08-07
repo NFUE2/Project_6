@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using System.Collections;
 
@@ -88,8 +89,7 @@ public class HealAndBoostSkill : SkillBase
         {
             // 힐량 계산 및 적용
             float healThisFrame = healPerSecond * Time.deltaTime;
-            playerCondition.Heal(healThisFrame);
-            Debug.Log($"힐량: {healThisFrame}, 플레이어: {playerCondition.name}, 현재 체력: {playerCondition.currentHealth}");
+            playerCondition.photonView.RPC(nameof(PlayerCondition.HealRPC), RpcTarget.All, healThisFrame);
             yield return null;
         }
 
