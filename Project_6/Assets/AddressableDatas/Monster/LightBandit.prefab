@@ -306,7 +306,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Move
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Attack
   - Type: 9
     SynchronizeType: 1

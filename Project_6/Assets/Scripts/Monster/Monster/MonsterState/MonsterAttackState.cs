@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System;
 using System.Diagnostics;
 using UnityEngine;
-public class MonsterAttackState : MonsterBaseState
+public class MonsterAttackState : MonsterBaseState 
 {
     //MonsterAttack attack;
     float lastAttackTime = -float.MaxValue;
@@ -72,11 +73,11 @@ public class MonsterAttackState : MonsterBaseState
 
         if (check && info.normalizedTime >= 1.5f)
         {
+
             isAttacking = false;
             StopAnimation(stateMachine.controller.animationData.attack);
         }
     }
-
 
     //public void Attack() //애니메이션 이벤트용
     //{

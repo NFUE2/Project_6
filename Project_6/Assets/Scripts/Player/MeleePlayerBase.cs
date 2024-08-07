@@ -45,10 +45,13 @@ public abstract class MeleePlayerBase : PlayerBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            IDamagable damagable = enemy.GetComponent<IDamagable>();
+            //IDamagable damagable = enemy.GetComponent<IDamagable>();
+            MonsterCondition damagable = enemy.GetComponent<MonsterCondition>();
+
             if (damagable != null)
             {
-                damagable.TakeDamage(attackDamage);
+                //damagable.TakeDamage(attackDamage);
+                damagable.Damage(attackDamage);
                 ApplyKnockback(enemy);
                 PlaySound(hitSound); // 피격 시 효과음 재생
             }
