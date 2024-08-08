@@ -9,7 +9,7 @@ public class OptionUI : MonoBehaviour
     {
         PhotonNetwork.Disconnect();
         //PhotonNetwork.LoadLevel(0);
-        SceneManager.instance.LoadScene(Scene.Intro);
+        SceneControl.instance.LoadScene(SceneType.Intro);
         SoundManager.instance.ChangeBGM(BGMList.Intro);
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-enum SceneType
+enum Scenename
 {
     intro,
     Main
@@ -59,10 +59,10 @@ public class P_Network : MonoBehaviourPunCallbacks
         RoomOptions options = new RoomOptions { MaxPlayers = 4 };
         PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, null, null, $"Test", options);
         //PhotonNetwork.JoinRandomOrCreateRoom();
-        StartCoroutine(SceneChaneCheck(ClientState.Joined,SceneType.Main));
+        StartCoroutine(SceneChaneCheck(ClientState.Joined,Scenename.Main));
     }
 
-    IEnumerator SceneChaneCheck(ClientState state,SceneType target)
+    IEnumerator SceneChaneCheck(ClientState state, Scenename target)
     {
         ClientState curState = PhotonNetwork.NetworkClientState;
 

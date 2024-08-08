@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 141743129}
   - component: {fileID: 141743128}
+  - component: {fileID: 141743130}
   m_Layer: 0
   m_Name: LoadingScene
   m_TagString: Untagged
@@ -249,6 +250,7 @@ MonoBehaviour:
   text: {fileID: 1010366645}
   slider: {fileID: 1765526127}
   dataManager: {fileID: 1861236962}
+  loadingPanel: {fileID: 1283168499}
 --- !u!4 &141743129
 Transform:
   m_ObjectHideFlags: 0
@@ -261,9 +263,32 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1283168503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &141743130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141743127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &168985567
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +900,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 960, y: 540}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -920,7 +945,7 @@ RectTransform:
   - {fileID: 1468941996}
   - {fileID: 1765526126}
   - {fileID: 830035131}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 141743129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1149,6 +1174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6103347309845714226, guid: 4fc01ffe5c76eb14ebd1671816bb0759, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1010366645}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1170,7 +1199,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 119000564}
-  - {fileID: 1283168503}
   - {fileID: 571691364}
   - {fileID: 1861236961}
   - {fileID: 141743129}

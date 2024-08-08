@@ -24,7 +24,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             b.interactable = false;
 
         //PhotonNetwork.LoadLevel(1);
-        SceneManager.instance.LoadScene(Scene.Loading);
+        SceneControl.instance.LoadScene(SceneType.Loading);
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 

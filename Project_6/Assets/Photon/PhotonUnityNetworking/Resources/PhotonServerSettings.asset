@@ -67,6 +67,9 @@ MonoBehaviour:
   - SetParentRPC
   - Destroy
   - Damage
+  - IsLoadRPC
+  - SetBool
+  - IsReady
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

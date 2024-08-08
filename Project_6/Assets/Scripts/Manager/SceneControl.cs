@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Scene
+public enum SceneType
 {
     Intro,
     Loading,
@@ -11,9 +11,9 @@ public enum Scene
     Outro,
 }
 
-public class SceneManager : Singleton<SceneManager>
+public class SceneControl : Singleton<SceneControl>
 {
-    public void LoadScene(Scene scene)
+    public void LoadScene(SceneType scene)
     {
         PhotonNetwork.LoadLevel((int)scene);
     }

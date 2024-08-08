@@ -235,7 +235,7 @@ public class NetworkManager : PunSingleton<NetworkManager>
             if (index == 1)
             {
                 //PhotonNetwork.LoadLevel(0);
-                SceneManager.instance.LoadScene(Scene.Intro);
+                SceneControl.instance.LoadScene(SceneType.Intro);
                 SoundManager.instance.ChangeBGM(BGMList.Intro);
             }
 
