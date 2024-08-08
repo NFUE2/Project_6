@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IntroPopup : UIBase
 {
     public Button[] buttons;
+    public GameObject networkPanel, panelExitButton;
+    public TextMeshProUGUI infoText;
 
-    private void SendButtons()
+    private void SetNetworkManager()
     {
+        NetworkManager.Instance.networkPanel = networkPanel;
+        NetworkManager.Instance.panelExitButton = panelExitButton;
+        NetworkManager.Instance.infoText = infoText;
         NetworkManager.Instance.buttons = buttons;
     }
 
@@ -17,7 +23,7 @@ public class IntroPopup : UIBase
         switch(str)
         {
             case "Play":
-                SendButtons();
+                SetNetworkManager();
                 NetworkManager.Instance.OnClickEnterServer();
                 UIManager.Instance.Show<LobbyUI>();
                 break;
