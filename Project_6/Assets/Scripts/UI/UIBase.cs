@@ -18,6 +18,7 @@ public abstract class UIBase : MonoBehaviour
 
         var canvasScaler = newCanvasObject.gameObject.AddComponent<CanvasScaler>();
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
         canvasScaler.referenceResolution = new Vector2(UIManager.ScreenWidth, UIManager.ScreenHeight);
         newCanvasObject.gameObject.AddComponent<GraphicRaycaster>();
 

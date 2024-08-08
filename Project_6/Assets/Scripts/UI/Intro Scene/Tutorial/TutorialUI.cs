@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialUI : MonoBehaviour
+public class TutorialUI : UIBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public void GoToMain()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Hide();
+        UIManager.Instance.Show<IntroPopup>();
     }
 }

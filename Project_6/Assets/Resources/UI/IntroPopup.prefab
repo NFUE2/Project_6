@@ -1199,7 +1199,7 @@ GameObject:
   - component: {fileID: 2972813108402776091}
   - component: {fileID: 2683359729721175839}
   m_Layer: 5
-  m_Name: Quit_Button
+  m_Name: Tutorial_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1306,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2972813108402776091}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2604355598718334529}
+        m_TargetAssemblyTypeName: IntroPopup, Assembly-CSharp
+        m_MethodName: OnClickButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tutorial
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9173074400287940746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,7 +1384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC8C\uC784 \uC885\uB8CC"
+  m_text: "\uC870\uC791\uBC95"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 19737fd0af515134ab90b73632f31618, type: 2}
   m_sharedMaterial: {fileID: -6951897998898681431, guid: 19737fd0af515134ab90b73632f31618, type: 2}

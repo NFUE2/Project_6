@@ -13,8 +13,8 @@ public class IntroPopup : UIBase
             case "Option":
                 UIManager.Instance.Show<OptionUI>();
                 break;
-            case "Exit":
-                Debug.Log("게임 종료");
+            case "Tutorial":
+                UIManager.Instance.Show<TutorialUI>();
                 break;
         }
     }
