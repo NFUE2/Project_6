@@ -16,8 +16,8 @@ public abstract class MeleePlayerBase : PlayerBase
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
-        animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        animator = GetComponentInChildren<Animator>();
     }
 
     public override void Attack()

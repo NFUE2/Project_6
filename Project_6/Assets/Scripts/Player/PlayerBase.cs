@@ -23,7 +23,6 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
     protected PlayerDataSO attackTime; // 공격 시간 간격 -> PlayerDataSO에서 받아서 사용
     protected float lastAttackTime;  // 마지막 공격 시간
 
-
     public void SetLastEActionTime(float time)
     {
         lastEActionTime = time;
