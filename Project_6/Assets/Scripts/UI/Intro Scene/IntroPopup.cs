@@ -9,6 +9,7 @@ public class IntroPopup : UIBase
         switch(str)
         {
             case "Play":
+                UIManager.Instance.Show<LobbyUI>();
                 break;
             case "Option":
                 UIManager.Instance.Show<OptionUI>();
