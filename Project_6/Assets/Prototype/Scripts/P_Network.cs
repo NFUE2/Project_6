@@ -5,19 +5,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-<<<<<<< Updated upstream
-enum SceneType
-{
-    intro,
-    Main
-}
-=======
+
 //enum Scenename
 //{
 //    intro,
 //    Main
 //}
->>>>>>> Stashed changes
 
 //public class P_Network : MonoBehaviourPunCallbacks
 //{
@@ -62,19 +55,6 @@ enum SceneType
 //        if (PhotonNetwork.InRoom) count.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
 //    }
 
-<<<<<<< Updated upstream
-    public void JoinRoom()
-    {
-        RoomOptions options = new RoomOptions { MaxPlayers = 4 };
-        PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, null, null, $"Test", options);
-        //PhotonNetwork.JoinRandomOrCreateRoom();
-        StartCoroutine(SceneChaneCheck(ClientState.Joined,SceneType.Main));
-    }
-
-    IEnumerator SceneChaneCheck(ClientState state,SceneType target)
-    {
-        ClientState curState = PhotonNetwork.NetworkClientState;
-=======
 //    public void JoinRoom()
 //    {
 //        RoomOptions options = new RoomOptions { MaxPlayers = 4 };
@@ -86,7 +66,6 @@ enum SceneType
 //    IEnumerator SceneChaneCheck(ClientState state, Scenename target)
 //    {
 //        ClientState curState = PhotonNetwork.NetworkClientState;
->>>>>>> Stashed changes
 
 //        while (curState != state)
 //        {
@@ -94,12 +73,7 @@ enum SceneType
 //            yield return null;
 //        }
 
-<<<<<<< Updated upstream
-        PhotonNetwork.LoadLevel(/*(int)target*/1);
-    }
-}
-=======
+
 //        //PhotonNetwork.LoadLevel(/*(int)target*/1);
 //    }
 //}
->>>>>>> Stashed changes
