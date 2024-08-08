@@ -5,18 +5,11 @@ using UnityEngine;
 
 public class Statue : NPCBase
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void Interaction()
     {
-        interactionUI.SetActive(true);
+        GameObject player = GameManager.instance.player;
 
-        if(collision.TryGetComponent(out PhotonView pv) && pv.IsMine &&Input.GetKeyDown(KeyCode.F))
-        {
-            
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        interactionUI.SetActive(false);
+        if(player.TryGetComponent(out PlayerCondition p))
+            p.Heal(p.maxHealth);
     }
 }
