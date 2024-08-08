@@ -90,7 +90,7 @@ public class TentaclypseAttackController : BossAttackController
         for (int i = 0; i < 5; i++)
         {
             int bulletCount = Random.Range(10, 20);
-            int speed = 50;
+            int speed = 80;
             float angle = 360 / bulletCount;
             for (int j = 0; j < bulletCount; j++)
             {
@@ -226,7 +226,7 @@ public class TentaclypseAttackController : BossAttackController
         for (int i = 0; i < 3; i++)
         {
             int bulletCount = Random.Range(7, 14);
-            int speed = 50;
+            int speed = 80;
             float angle = 360 / bulletCount;
             for (int j = 0; j < bulletCount; j++)
             {
