@@ -1053,6 +1053,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  buttons:
+  - {fileID: 3935484359000869011}
+  - {fileID: 6502261019019952314}
+  - {fileID: 2683359729721175839}
 --- !u!1 &7660430289482238056
 GameObject:
   m_ObjectHideFlags: 0
