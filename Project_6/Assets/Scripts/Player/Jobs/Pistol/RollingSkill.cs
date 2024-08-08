@@ -12,6 +12,7 @@ public class RollingSkill : SkillBase
     private bool isInvincible = false; // 무적 상태인지 여부
     private AudioSource audioSource;
     private Vector3 targetPosition;
+    private Rigidbody2D rb2d; // Rigidbody2D 컴포넌트
 
     void Start()
     {
@@ -22,6 +23,13 @@ public class RollingSkill : SkillBase
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Rigidbody2D 컴포넌트 가져오기
+        rb2d = GetComponent<Rigidbody2D>();
+        if (rb2d == null)
+        {
+            rb2d = gameObject.AddComponent<Rigidbody2D>();
         }
     }
 
@@ -59,17 +67,26 @@ public class RollingSkill : SkillBase
         // 롤링 효과음 재생
         PlayRollingSound();
 
-        // Lerp를 사용하여 부드럽게 이동
+        // Rigidbody2D의 중력을 활성화
+        rb2d.gravityScale = 1;
+
+        // 트랜스폼을 이용하여 목표 위치로 부드럽게 이동
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
         while (Time.time < startTime + rollingDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, (Time.time - startTime) / rollingDuration);
+            // 목표 위치로 트랜스폼 이동
+            Vector3 newPosition = Vector3.Lerp(startPosition, targetPosition, (Time.time - startTime) / rollingDuration);
+            rb2d.MovePosition(newPosition); // MovePosition을 사용하여 부드럽게 이동
+
             yield return null;
         }
 
-        transform.position = targetPosition; // 최종 위치 설정
+        // 롤링 종료 시 위치를 최종 목표 위치로 설정
+        rb2d.MovePosition(targetPosition);
+        rb2d.gravityScale = 1; // 중력 유지
+
         Debug.Log("RollingSkill: Rolling ended.");
 
         isRolling = false;

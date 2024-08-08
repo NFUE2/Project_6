@@ -31,7 +31,7 @@ public class PlayerInput : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         if (rb == null)
         {
