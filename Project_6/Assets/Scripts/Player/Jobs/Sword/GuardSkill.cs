@@ -9,19 +9,22 @@ public class GuardSkill : SkillBase, IDamagable
     public PlayerDataSO PlayerData;
     public float DamageReduction;
 
-    private Animator animator;
-    private PlayerCondition playerCondition;
-    private float originalDamageReduction;
-
+    public GameObject guardParticleEffectObject; // 파티클 효과가 포함된 게임 오브젝트
     public AudioClip guardSound; // 방어 성공 시 효과음 추가
     private AudioSource audioSource; // AudioSource 컴포넌트 추가
+    private PlayerCondition playerCondition;
+    private float originalDamageReduction;
 
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
-        animator = GetComponent<Animator>(); // Animator 컴포넌트 가져오기
         playerCondition = GetComponent<PlayerCondition>(); // PlayerCondition 컴포넌트 가져오기
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+
+        if (guardParticleEffectObject != null)
+        {
+            guardParticleEffectObject.SetActive(false); // 초기에는 파티클 오브젝트 비활성화
+        }
     }
 
     public override void UseSkill()
@@ -44,7 +47,12 @@ public class GuardSkill : SkillBase, IDamagable
         IsGuard = true;
         SaveOriginalStats();
         ApplyGuardStats();
-        animator.SetBool("IsGuard", true); // 가드 애니메이션 시작
+
+        if (guardParticleEffectObject != null)
+        {
+            guardParticleEffectObject.SetActive(true); // 파티클 효과 게임 오브젝트 활성화
+        }
+
         Invoke("ExitGuardEvent", GuardDuration); // 가드 시간 이벤트 설정
     }
 
@@ -53,7 +61,12 @@ public class GuardSkill : SkillBase, IDamagable
         Debug.Log("가드 종료");
         IsGuard = false;
         RestoreOriginalStats();
-        animator.SetBool("IsGuard", false); // 가드 애니메이션 종료
+
+        if (guardParticleEffectObject != null)
+        {
+            guardParticleEffectObject.SetActive(false); // 파티클 효과 게임 오브젝트 비활성화
+        }
+
         lastActionTime = Time.time;
     }
 
