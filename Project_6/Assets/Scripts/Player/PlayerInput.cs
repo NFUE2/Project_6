@@ -45,10 +45,17 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        Movement();
-        CheckGrounded();
-        UpdateAnimation();
-        RotateTowardsMouse();
+        if (!isDead)
+        {
+            Movement();
+            CheckGrounded();
+            UpdateAnimation();
+            RotateTowardsMouse();
+        }
+        else
+        {
+            Movement(); // 죽은 상태에서 움직임은 가능하게 함
+        }
     }
 
     private void Movement()
@@ -81,11 +88,10 @@ public class PlayerInput : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (animator != null)
+        if (animator != null && !isDead)
         {
             bool isWalking = moveInput.x != 0;
 
-            // 공중에 있을 때 점프 애니메이션
             if (!isGrounded)
             {
                 animator.SetBool("IsJump", true);
@@ -116,12 +122,10 @@ public class PlayerInput : MonoBehaviour
                     animator.SetBool("IsRun", false);
                 }
 
-                // 이동이 없을 때 아이들 상태로 전환
                 animator.SetBool("IsIdle", !isWalking);
             }
         }
     }
-
 
     private void RotateTowardsMouse()
     {
@@ -139,20 +143,15 @@ public class PlayerInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (isDead)
+        if (!isDead)
         {
-            return;
+            moveInput = context.ReadValue<Vector2>();
         }
-        moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (context.performed)
+        if (!isDead && context.performed)
         {
             Jump();
         }
@@ -160,20 +159,18 @@ public class PlayerInput : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (isDead)
+        if (!isDead)
         {
-            return;
+            isRunning = context.ReadValueAsButton();
         }
-        isRunning = context.ReadValueAsButton();
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (isDead)
+        if (!isDead)
         {
-            return;
+            lookInput = context.ReadValue<Vector2>();
         }
-        lookInput = context.ReadValue<Vector2>(); // 마우스 위치 입력 받기
     }
 
     public Vector2 GetMousePosition()
@@ -183,11 +180,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (context.performed)
+        if (!isDead && context.performed)
         {
             player.Attack();
         }
@@ -195,11 +188,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillQ(InputAction.CallbackContext context)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (context.performed)
+        if (!isDead && context.performed)
         {
             player.UseSkillQ();
         }
@@ -207,11 +196,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillE(InputAction.CallbackContext context)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (context.performed)
+        if (!isDead && context.performed)
         {
             player.UseSkillE();
         }
