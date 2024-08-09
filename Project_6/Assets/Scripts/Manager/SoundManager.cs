@@ -33,17 +33,4 @@ public class SoundManager : Singleton<SoundManager>
     {
         EFF.PlayOneShot(clip);
     }
-
-    public AudioSource GetAudioSource(string sourceType)
-    {
-        switch (sourceType)
-        {
-            case "BGM":
-                return BGM;
-            case "EFF":
-                return EFF;
-            default:
-                return null;
-        }
-    }
 }
