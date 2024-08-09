@@ -60,8 +60,8 @@ public class StackSkill : SkillBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.transform.TryGetComponent(out IDamagable m))
-                m.TakeDamage(damage);
+            if (enemy.transform.TryGetComponent(out IPunDamagable m))
+                m.Damage(damage);
             //enemy.GetComponent<IDamagable>()?.TakeDamage(damage);
         }
     }

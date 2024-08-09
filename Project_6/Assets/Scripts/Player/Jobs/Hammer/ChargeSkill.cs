@@ -87,8 +87,8 @@ public class ChargeSkill : SkillBase
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                if (enemy.TryGetComponent(out IDamagable e))
-                    e.TakeDamage(currentDamage);
+                if (enemy.TryGetComponent(out IPunDamagable e))
+                    e.Damage(currentDamage);
 
                 //enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
             }
