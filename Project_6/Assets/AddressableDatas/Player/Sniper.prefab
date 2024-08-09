@@ -4239,7 +4239,7 @@ MonoBehaviour:
   animator: {fileID: 6517589482241482080}
   attackPrefab: {fileID: 6038683907410269147, guid: aadd7501b0fb81142bf27537763c9f95, type: 3}
   attackPoint: {fileID: 647886758516887363}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: c4b832f9616cf7849a09ad8b30943013, type: 3}
   targetSkill: {fileID: 2331201405768803008}
   grenadeSkill: {fileID: 3862817364363722950}
 --- !u!114 &2331201405768803008
@@ -4256,16 +4256,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   targetMarkerPrefab: {fileID: 965910934545324556, guid: 4aca31b86f700704cb9d94df96c561ba, type: 3}
-  skillDamage: 10
+  skillDamage: 20
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   targetingRange: 10
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
   maxTargets: 3
-  hitSound: {fileID: 0}
-  useSkillSound: {fileID: 0}
-  missSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 2f46e7d33f5047b4e9e0823d102630cf, type: 3}
+  useSkillSound: {fileID: 8300000, guid: 47790f04364bc24419e07e0159e57e57, type: 3}
+  missSound: {fileID: 8300000, guid: fb3495811bff04a43b342c9fb16d8ddd, type: 3}
 --- !u!114 &3862817364363722950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4282,7 +4282,7 @@ MonoBehaviour:
   rifleGrenade: {fileID: 536658925977434239, guid: 25347988974882e46aadd1f3f522e440, type: 3}
   attackPoint: {fileID: 647886758516887363}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: c4b832f9616cf7849a09ad8b30943013, type: 3}
 --- !u!1 &9058362148974309219
 GameObject:
   m_ObjectHideFlags: 0

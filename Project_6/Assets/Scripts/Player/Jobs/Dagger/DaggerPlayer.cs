@@ -1,7 +1,6 @@
 using Photon.Pun;
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using UnityEngine;
 
 public class DaggerPlayer : MeleePlayerBase
 {
@@ -19,39 +18,34 @@ public class DaggerPlayer : MeleePlayerBase
 
     public override void Attack()
     {
-        if (isAttacking) return; // 공격 중이거나 쿨다운 중인 경우 공격 불가
-        isAttacking = true;
-        animator.SetTrigger("IsAttack");
-        StartCoroutine(AttackCooldown());
+        // 기본 공격 로직 실행 (상속된 Attack 메서드 사용)
+        base.Attack();
+
+        // 스택 증가 로직 추가
+        StartCoroutine(StackIncreaseCheck());
     }
 
-    // 애니메이션 이벤트에서 호출될 메서드
-    public new void PerformAttack()
+    private IEnumerator StackIncreaseCheck()
     {
-        StartCoroutine(PerformAttackWithStackCheck());
-    }
+        // 공격이 끝날 때까지 기다림
+        yield return new WaitForSeconds(attackCooldown);
 
-    private IEnumerator PerformAttackWithStackCheck()
-    {
-        yield return new WaitForSeconds(0.1f); // 공격 애니메이션의 타이밍에 맞춰 대기
-
+        // 공격 범위 내 적을 다시 확인하고 스택 증가 처리
         Vector2 attackPosition = CalculateAttackPosition();
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
 
-        bool hasIncreasedStack = false; // 스택이 이미 증가했는지 확인하는 플래그
+        bool hasIncreasedStack = false;
 
         foreach (Collider2D enemy in hitEnemies)
         {
             var damagable = enemy.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeDamage(attackDamage);
-                ApplyKnockback(enemy); // 넉백 적용
-
+                // 첫 번째로 감지된 적에 대해 스택을 증가시킴
                 if (!hasIncreasedStack)
                 {
-                    stackSkill.IncreaseStack(); // 적이 데미지를 입었을 때만 스택 증가
-                    hasIncreasedStack = true; // 스택이 한 번 증가했음을 표시
+                    stackSkill.IncreaseStack();
+                    hasIncreasedStack = true;
                 }
             }
         }

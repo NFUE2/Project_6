@@ -9,7 +9,7 @@ public class DashSkill : SkillBase
     public Transform playerTransform;
     public LayerMask enemyLayer;
     public PlayerDataSO PlayerData;
-    public float damage = 10f; // 데미지 값 추가
+    public int damage = 10; // 데미지 값 추가
     public AudioClip dashSound; // 대시 효과음 추가
     private AudioSource audioSource;
 
@@ -67,22 +67,31 @@ public class DashSkill : SkillBase
 
     private void DealDamageToEnemiesOnPath(Vector3 startPosition, Vector3 endPosition)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, endPosition - startPosition, dashDistance, enemyLayer);
+        // 박스의 중심을 대시 시작과 끝의 중간 지점으로 설정
+        Vector2 boxCenter = (startPosition + endPosition) / 2;
+        // 박스의 크기를 대시 거리만큼 길게 설정하고 높이(또는 너비)를 넉넉하게 설정
+        Vector2 boxSize = new Vector2(dashDistance, 1f); // 1f는 높이(또는 너비), 필요에 따라 조정 가능
+        Vector2 direction = endPosition - startPosition;
+
+        // BoxCastAll로 적을 감지
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(boxCenter, boxSize, 0f, direction, dashDistance, enemyLayer);
         foreach (var hit in hits)
         {
-            //if(hit.collider.TryGetComponent(out IDamagable m))
             if (hit.collider.TryGetComponent(out IPunDamagable m))
             {
-                //m.TakeDamage(damage);
+                Debug.Log($"Dealing damage to: {hit.collider.name}");
                 m.Damage(damage);
             }
-            //IDamagable enemy = hit.collider.GetComponent<IDamagable>();
-            //if (enemy != null)
-            //{
-            //    enemy.TakeDamage(damage);
-            //    Debug.Log($"적 {hit.collider.name}에게 데미지 {damage}!");
-            //}
         }
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector2 boxCenter = (transform.position + transform.position + transform.right * dashDistance) / 2;
+        Vector2 boxSize = new Vector2(dashDistance, 1f); // 1f는 높이(또는 너비)
+        Gizmos.DrawWireCube(boxCenter, boxSize);
+    }
+
+
 }
 

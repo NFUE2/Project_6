@@ -2002,8 +2002,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  laserSound: {fileID: 0}
-  impactEffectPrefab: {fileID: 0}
+  laserSound: {fileID: 8300000, guid: 85b6d867193aa01428934ba4e9c2d84f, type: 3}
+  impactEffectPrefab: {fileID: 2865595404649841647, guid: 2bd46c3902071804bace048d983e8422, type: 3}
 --- !u!120 &5927466752670515892
 LineRenderer:
   serializedVersion: 2
