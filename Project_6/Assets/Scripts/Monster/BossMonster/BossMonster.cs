@@ -29,7 +29,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
             //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
 
             //photonView.RPC(nameof(BossDie),RpcTarget.All);
-            BossDie();
+            if(photonView.IsMine) BossDie();
         }
         else
         {
