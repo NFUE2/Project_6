@@ -3772,7 +3772,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8348767084602959552}
   - {fileID: 1646592590866569336}
-  sceneViewId: 0
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &8348767084602959552
@@ -3843,7 +3843,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.35}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3854,7 +3854,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.7}
   m_EdgeRadius: 0
 --- !u!50 &9190360161886165023
 Rigidbody2D:
@@ -4001,7 +4001,7 @@ MonoBehaviour:
     m_Bits: 0
   attackCooldown: 1
   attackSize: {x: 1, y: 1}
-  attackOffset: {x: -1, y: 0.5}
+  attackOffset: {x: -0.7, y: 0.5}
   knockbackForce: 5
   attackSound: {fileID: 0}
   hitSound: {fileID: 0}
@@ -4043,7 +4043,7 @@ MonoBehaviour:
   damageRate: 10
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   attackSize: {x: 1, y: 1}
-  attackOffset: {x: -1, y: 0.5}
+  attackOffset: {x: -0.7, y: 0.5}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

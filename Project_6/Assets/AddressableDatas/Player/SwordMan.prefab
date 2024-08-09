@@ -3825,11 +3825,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  GuardDuration: 1
+  GuardDuration: 3
   DefenseBoostDuringGuard: 50
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   DamageReduction: 0
-  guardParticleEffectObject: {fileID: 0}
+  guardParticleEffectObject: {fileID: 4823530309318575359, guid: 029ef1eef72fb7d4d87d26b08baf68a5, type: 3}
   guardSound: {fileID: 8300000, guid: f60c71440a78c7b4f99800ee49860f03, type: 3}
 --- !u!114 &2269725357822401461
 MonoBehaviour:
@@ -4122,7 +4122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.35}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4133,7 +4133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.7}
   m_EdgeRadius: 0
 --- !u!50 &9190360161886165023
 Rigidbody2D:

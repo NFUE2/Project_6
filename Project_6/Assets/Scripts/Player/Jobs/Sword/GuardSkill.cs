@@ -15,6 +15,8 @@ public class GuardSkill : SkillBase, IDamagable
     private PlayerCondition playerCondition;
     private float originalDamageReduction;
 
+    private ParticleSystem guardParticleSystem;
+
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
@@ -23,6 +25,14 @@ public class GuardSkill : SkillBase, IDamagable
 
         if (guardParticleEffectObject != null)
         {
+            guardParticleSystem = guardParticleEffectObject.GetComponent<ParticleSystem>();
+            if (guardParticleSystem != null)
+            {
+                var mainModule = guardParticleSystem.main;
+                mainModule.loop = false; // 파티클 루프 해제
+                mainModule.startLifetime = GuardDuration; // 파티클의 수명을 가드 지속 시간과 일치시킴
+            }
+
             guardParticleEffectObject.SetActive(false); // 초기에는 파티클 오브젝트 비활성화
         }
     }
@@ -51,6 +61,7 @@ public class GuardSkill : SkillBase, IDamagable
         if (guardParticleEffectObject != null)
         {
             guardParticleEffectObject.SetActive(true); // 파티클 효과 게임 오브젝트 활성화
+            guardParticleSystem.Play(); // 파티클 재생
         }
 
         Invoke("ExitGuardEvent", GuardDuration); // 가드 시간 이벤트 설정
@@ -64,6 +75,7 @@ public class GuardSkill : SkillBase, IDamagable
 
         if (guardParticleEffectObject != null)
         {
+            guardParticleSystem.Stop(); // 파티클 정지
             guardParticleEffectObject.SetActive(false); // 파티클 효과 게임 오브젝트 비활성화
         }
 

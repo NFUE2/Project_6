@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1602830502068134567
 Transform:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.4392157}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0.2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -923,7 +923,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -973,8 +973,66 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 0
-    m_Bursts: []
+    m_BurstCount: 1
+    m_Bursts:
+    - serializedVersion: 2
+      time: 0
+      countCurve:
+        serializedVersion: 2
+        minMaxState: 0
+        scalar: 1
+        minScalar: 30
+        maxCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        minCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      cycleCount: 1
+      repeatInterval: 1
+      probability: 1
   SizeModule:
     enabled: 0
     curve:
@@ -1478,7 +1536,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    speedRange: {x: 0, y: 1}
+    speedRange: {x: 0, y: 13}
     tilesX: 1
     tilesY: 1
     animationType: 0
@@ -1487,17 +1545,20 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 1780823138, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -915622298, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -1561239140, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -2111254652, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -374585420, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: 505536256, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -538035328, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: 1586071067, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -1929843912, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -861714598, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
-    - sprite: {fileID: -681989286, guid: ed70c367727da004db9bbe28a8b50d4b, type: 3}
+    - sprite: {fileID: -45369969, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1010848338, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -250717671, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 805857686, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1233204624, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1507179142, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 21338615, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1289085816, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1151977428, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 1811629619, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 377661259, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 1398874844, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: -1252793459, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
+    - sprite: {fileID: 487620703, guid: 3453fa720e30c3e448cc7e4323a8765f, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -3822,12 +3883,7 @@ ParticleSystem:
   SubModule:
     serializedVersion: 2
     enabled: 0
-    subEmitters:
-    - serializedVersion: 3
-      emitter: {fileID: 0}
-      type: 0
-      properties: 0
-      emitProbability: 1
+    subEmitters: []
   LightsModule:
     enabled: 0
     ratio: 0
