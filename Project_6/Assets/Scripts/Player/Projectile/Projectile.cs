@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviourPun
     {
         //if (direction != Vector2.zero) // 방향이 설정되어 있을 때만 업데이트합니다.
         //{
-            transform.position += (Vector3)transform.right * speed * Time.deltaTime;
+            transform.position += transform.right * speed * Time.deltaTime;
         //}
     }
 

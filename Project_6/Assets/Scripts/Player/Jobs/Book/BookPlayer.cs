@@ -81,11 +81,11 @@ public class BookPlayer : RangedPlayerBase
         Vector3 direction = (targetPosition - projectile.transform.position).normalized;
 
         // Projectile 클래스의 SetDirection 메서드 호출
-        Projectile projectileComponent = projectile.GetComponent<Projectile>();
-        if (projectileComponent != null)
-        {
-            projectileComponent.SetDirection(direction);
-        }
+        //Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        //if (projectileComponent != null)
+        //{
+        //    projectileComponent.SetDirection(direction);
+        //}
 
         StartCoroutine(MoveProjectile(projectile, targetPosition));
     }

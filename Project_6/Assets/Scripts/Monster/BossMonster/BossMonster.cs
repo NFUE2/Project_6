@@ -28,7 +28,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
             // »ç¸Á Ã³¸®
             //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
 
-            if(PhotonNetwork.IsMasterClient) photonView.RPC(nameof(BossDie), RpcTarget.All);
+            photonView.RPC(nameof(BossDie), RpcTarget.All);
             //BossDie();
         }
         else
