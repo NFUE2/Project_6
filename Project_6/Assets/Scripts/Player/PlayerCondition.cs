@@ -66,10 +66,17 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     [PunRPC]
     public void HealRPC(float amount)
     {
+        if (input.isDead)
+        {
+            Debug.Log("플레이어가 죽어서 힐이 안됩니다.");
+            return; // 플레이어가 죽었으면 힐하지 않음
+        }
+
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
         UpdateHealthBar();
     }
+
 
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
     {
