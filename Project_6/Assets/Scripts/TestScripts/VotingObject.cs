@@ -50,6 +50,10 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject g = collision.gameObject;
+
+        if (!GameManager.instance.players.Contains(g)) return;
+
         playerCount++;
         if (playerCount == curPlayersCount)
         {
