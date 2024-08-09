@@ -32,15 +32,6 @@ public class PlayerInput : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody2D 컴포넌트가 없습니다.");
-        }
-        if (animator == null)
-        {
-            Debug.LogError("Animator 컴포넌트가 없습니다.");
-        }
     }
 
     private void Update()

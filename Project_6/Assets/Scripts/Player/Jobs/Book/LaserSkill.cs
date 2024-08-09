@@ -29,7 +29,6 @@ public class LaserSkill : SkillBase
         // LineRenderer 설정
         if (laserRendererCore == null || laserRendererEdge == null)
         {
-            Debug.LogError("LineRenderer가 할당되지 않았습니다. 인스펙터에서 설정하세요.");
             return;
         }
         SetupLineRenderer(laserRendererCore, Color.white, Color.white);
@@ -78,13 +77,7 @@ public class LaserSkill : SkillBase
         if (laserSound != null)
         {
             audioSource.PlayOneShot(laserSound);
-            Debug.Log("레이저 효과음 재생: " + laserSound.name);
         }
-        else
-        {
-            Debug.LogError("laserSound가 할당되지 않았습니다.");
-        }
-
         // 레이저 방향 설정
         Vector3 mousePosition = Input.mousePosition; // 마우스 위치
         mousePosition.z = Camera.main.nearClipPlane; // 카메라 근접 평면 설정

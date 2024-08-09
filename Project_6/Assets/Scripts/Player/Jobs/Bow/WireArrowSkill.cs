@@ -23,7 +23,6 @@ public class WireArrowSkill : SkillBase
         if (Time.time - lastActionTime < cooldownDuration) return;
 
         lastActionTime = Time.time;
-        Debug.Log("Wire Arrow Skill 사용됨");
 
         PlaySkillSound(); // 스킬 사용 시 효과음 재생
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -45,10 +44,6 @@ public class WireArrowSkill : SkillBase
             {
                 Physics2D.IgnoreCollision(go.GetComponent<Collider2D>(), playerCollider);
             }
-        }
-        else
-        {
-            Debug.LogError("Bow_WireArrow 컴포넌트를 찾을 수 없습니다.");
         }
     }
 

@@ -68,16 +68,10 @@ public class Bow_WireArrow : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("충돌 발생: " + collision.gameObject.name);
-
         if (((1 << collision.collider.gameObject.layer) & ignoreLayers) != 0)
         {
-            Debug.Log("무시할 오브젝트와 충돌: " + collision.gameObject.name);
             return;
         }
-
-        Debug.Log("충돌한 오브젝트: " + collision.gameObject.name);
-
         isCollision = true;
         rb.velocity = Vector2.zero;
     }

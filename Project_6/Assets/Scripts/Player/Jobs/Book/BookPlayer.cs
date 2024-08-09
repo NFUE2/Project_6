@@ -30,13 +30,8 @@ public class BookPlayer : RangedPlayerBase
 
         if (closestTarget != null)
         {
-            Debug.Log("타겟 공격!");
             LaunchProjectile(closestTarget);
             lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log("범위 내 타겟 없음.");
         }
     }
 
@@ -56,11 +51,8 @@ public class BookPlayer : RangedPlayerBase
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        Debug.Log($"찾은 타겟 수: {hitColliders.Length}");
-
         foreach (Collider2D hitCollider in hitColliders)
         {
-            Debug.Log($"충돌한 객체: {hitCollider.gameObject.name}, 레이어: {hitCollider.gameObject.layer}");
             if (hitCollider.transform == transform) continue;
 
             float distance = Vector3.Distance(position, hitCollider.transform.position);

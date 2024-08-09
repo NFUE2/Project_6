@@ -15,7 +15,6 @@ public class TakeDamageWithInvincibility : MonoBehaviour, IDamagable
     {
         if (rollingSkill != null && rollingSkill.IsInvincible())
         {
-            Debug.Log("Player is invincible and takes no damage.");
             return;
         }
 

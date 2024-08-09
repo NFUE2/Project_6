@@ -52,7 +52,6 @@ public class DaggerPlayer : MeleePlayerBase
                 {
                     stackSkill.IncreaseStack(); // 적이 데미지를 입었을 때만 스택 증가
                     hasIncreasedStack = true; // 스택이 한 번 증가했음을 표시
-                    Debug.Log("스택 증가: " + stackSkill.currentStack);
                 }
             }
         }

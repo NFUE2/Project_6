@@ -29,7 +29,6 @@ public class MaceChargeSkill : SkillBase
     {
         if (PlayerData == null)
         {
-            Debug.LogWarning("PlayerDataSO is not assigned!");
             return;
         }
 
@@ -109,7 +108,6 @@ public class MaceChargeSkill : SkillBase
                     {
                         Vector2 forceDirection = (hitCollider.transform.position - transform.position).normalized;
                         enemyRb.AddForce(forceDirection * dashSpeed, ForceMode2D.Impulse); // 대쉬 속도에 맞춰 밀기
-                        Debug.Log("적 밀림");
                     }
                 }
             }

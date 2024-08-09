@@ -45,7 +45,6 @@ public class RiflePlayer : RangedPlayerBase
 
     public override void UseSkillQ()
     {
-        Debug.Log("UseSkillQ 호출됨"); // 디버그 메시지 추가
         isTargeting = true; // 타겟팅 모드 활성화
         targetingStartTime = Time.time; // 타겟팅 모드 시작 시간 설정
         targetSkill.UseSkill();

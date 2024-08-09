@@ -36,10 +36,6 @@ public class StackSkill : SkillBase
             currentStack = 0;
             lastActionTime = Time.time;
         }
-        else
-        {
-            Debug.Log($"스택이 부족합니다. 현재 스택 : {currentStack}");
-        }
     }
 
     private void PlaySkillSound()
@@ -53,7 +49,6 @@ public class StackSkill : SkillBase
     private void DealDamageWithStack()
     {
         int totalDamage = currentStack * damagePerStack;
-        Debug.Log($"스택 {currentStack}개를 사용하여 {totalDamage}의 데미지를 입혔습니다.");
 
         DealDamageToEnemies(totalDamage);
     }
@@ -68,7 +63,6 @@ public class StackSkill : SkillBase
             if (enemy.transform.TryGetComponent(out IDamagable m))
                 m.TakeDamage(damage);
             //enemy.GetComponent<IDamagable>()?.TakeDamage(damage);
-            //Debug.Log($"적 {enemy.name}에게 {damage}의 데미지를 입혔습니다.");
         }
     }
 
@@ -93,7 +87,6 @@ public class StackSkill : SkillBase
         {
             currentStack = maxStack;
         }
-        Debug.Log($"스택 증가! 현재 스택 : {currentStack}");
     }
 
     private void OnDrawGizmosSelected()

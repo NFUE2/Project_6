@@ -68,7 +68,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     {
         if (input.isDead)
         {
-            Debug.Log("플레이어가 죽어서 힐이 안됩니다.");
             return; // 플레이어가 죽었으면 힐하지 않음
         }
 
@@ -96,7 +95,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void Die()
     {
-        Debug.Log("Player died!");
         input.isDead = true;
         MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
@@ -119,7 +117,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     public void ModifyDefense(float amount)
     {
         PlayerData.playerdefense += amount;
-        Debug.Log("Defense modified by: " + amount + ", current defense: " + PlayerData.playerdefense);
     }
 
     private void PlaySound(AudioClip clip)

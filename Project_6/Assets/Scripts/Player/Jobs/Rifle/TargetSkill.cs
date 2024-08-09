@@ -43,7 +43,6 @@ public class TargetSkill : SkillBase
         // 스킬이 아직 쿨다운 중인지 확인합니다.
         if (Time.time - lastActionTime < cooldownDuration)
         {
-            Debug.Log("스킬이 쿨다운 중입니다.");
             return;
         }
 

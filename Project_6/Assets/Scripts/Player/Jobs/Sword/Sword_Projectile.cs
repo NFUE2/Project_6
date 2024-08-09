@@ -34,7 +34,6 @@ public class Sword_Projectile : MonoBehaviour
             //target.TakeDamage(data.damage);
             target.Damage(data.damage);
 
-            Debug.Log("Hit detected! Playing hit effects."); // 디버그 로그 추가
             PlayHitEffects(collision.transform.position); // 적중 시 효과 재생
             //Destroy(gameObject);
             PhotonNetwork.Destroy(gameObject);
@@ -46,14 +45,8 @@ public class Sword_Projectile : MonoBehaviour
         // 적중 시 효과음 재생
         if (hitSound != null && audioSource != null)
         {
-            Debug.Log("Playing hit sound."); // 디버그 로그 추가
             audioSource.PlayOneShot(hitSound);
         }
-        else
-        {
-            Debug.LogWarning("Hit sound or audio source is null.");
-        }
-
         // 적중 시 파티클 효과 생성
         if (hitEffect != null)
         {

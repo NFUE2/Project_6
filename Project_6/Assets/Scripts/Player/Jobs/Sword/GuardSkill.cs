@@ -46,8 +46,6 @@ public class GuardSkill : SkillBase, IDamagable
         else
         {
             if (Time.time - lastActionTime < cooldownDuration) return; // Q 스킬 쿨타임 체크
-
-            Debug.Log("Q 스킬 사용");
             EnterGuard();
         }
     }
@@ -69,7 +67,6 @@ public class GuardSkill : SkillBase, IDamagable
 
     private void ExitGuard()
     {
-        Debug.Log("가드 종료");
         IsGuard = false;
         RestoreOriginalStats();
 

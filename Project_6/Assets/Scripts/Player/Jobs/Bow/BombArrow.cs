@@ -88,10 +88,6 @@ public class BombArrow : MonoBehaviour
         {
             audioSource.PlayOneShot(explosionSound);
         }
-        else
-        {
-            Debug.LogError("explosionSound 또는 audioSource가 할당되지 않았습니다.");
-        }
 
         // 폭발 반경 내의 적에게 데미지 입힘
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -105,7 +101,6 @@ public class BombArrow : MonoBehaviour
                 if (damagable != null)
                 {
                     damagable.Damage(damage);
-                    Debug.Log($"적 {hit.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
                 }
             }
         }
