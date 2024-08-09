@@ -52,7 +52,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable
     protected void BossDie()
     {
         GameManager.instance.StageClear();
-        BossBattleManager.instance.DestroyBoss(true);
+        BossBattleManager.instance.DestroyBoss();
     }
 
     public void Damage(float damage)
