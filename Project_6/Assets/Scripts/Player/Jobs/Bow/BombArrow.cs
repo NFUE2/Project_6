@@ -57,7 +57,7 @@ public class BombArrow : MonoBehaviourPun
         if (IsOffScreen())
         {
             //Destroy(gameObject);
-            if (PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -108,7 +108,7 @@ public class BombArrow : MonoBehaviourPun
 
         // È­»ì ÆÄ±«
         //Destroy(gameObject);
-        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
