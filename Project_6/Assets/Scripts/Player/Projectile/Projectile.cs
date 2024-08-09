@@ -78,6 +78,6 @@ public class Projectile : MonoBehaviour
         }
 
         // 투사체 파괴
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
