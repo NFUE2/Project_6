@@ -39,19 +39,14 @@ public class GrenadeSkill : SkillBase
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
 
         // 수류탄 프리팹을 플레이어의 공격 지점에 인스턴스화합니다.
-        //GameObject grenadeInstance = Instantiate(rifleGrenade, attackPoint.position, Quaternion.identity);
-        float angle = Mathf.Atan2(mousePosition.y,mousePosition.x) * Mathf.Rad2Deg;
-        GameObject grenadeInstance = PhotonNetwork.Instantiate(rifleGrenade.name, attackPoint.position, Quaternion.Euler(0,0, angle));
+        GameObject grenadeInstance = PhotonNetwork.Instantiate(rifleGrenade.name, attackPoint.position, Quaternion.identity);
 
-        // 수류탄의 방향을 설정합니다.
-        //grenadeInstance.GetComponent<Grenade>().SetDirection(attackDirection);
-
-        // 수류탄의 속도를 설정합니다.
-        //Rigidbody2D rb = grenadeInstance.GetComponent<Rigidbody2D>();
-        //if (rb != null)
-        //{
-        //    rb.velocity = attackDirection * 10f;
-        //}
+        // 수류탄의 방향 설정
+        Grenade grenade = grenadeInstance.GetComponent<Grenade>();
+        if (grenade != null)
+        {
+            grenade.SetDirection(attackDirection);
+        }
 
         // 발사 효과음 재생
         if (fireSound != null)

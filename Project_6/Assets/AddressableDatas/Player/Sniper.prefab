@@ -1970,7 +1970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801168adc07546c45b2d20ad575dac4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 647886758516887363}
 --- !u!1 &5214911579473623411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,7 +4014,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3846347453314382489}
   - {fileID: 3500148656245504216}
-  sceneViewId: 0
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3846347453314382489
