@@ -50,7 +50,7 @@ public abstract class MeleePlayerBase : PlayerBase
 
             if (damagable != null)
             {
-                //damagable.TakeDamage(attackDamage);
+                damagable.TakeDamage(attackDamage);
                 damagable.Damage(attackDamage);
                 ApplyKnockback(enemy);
                 PlaySound(hitSound); // 피격 시 효과음 재생
