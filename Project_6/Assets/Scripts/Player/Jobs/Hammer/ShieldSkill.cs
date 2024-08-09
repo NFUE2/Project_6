@@ -33,7 +33,7 @@ public class ShieldSkill : SkillBase
         Vector3 shieldPosition = transform.position + direction * shieldDistance;
 
         // 로컬에서 방패 생성
-        createdShield = PhotonNetwork.Instantiate(shieldPrefab.name, shieldPosition, Quaternion.identity);
+        createdShield = PhotonNetwork.Instantiate(shieldPrefab.name, transform.position, Quaternion.identity);
 
         int index = GameManager.instance.players.IndexOf(gameObject);
 
@@ -41,19 +41,19 @@ public class ShieldSkill : SkillBase
             s.SetParent(index);
 
         // 방패 방향 설정
-        if (direction == Vector3.left)
-        {
-            createdShield.transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else
-        {
-            createdShield.transform.localScale = new Vector3(1, 1, 1);
-        }
+        //if (direction == Vector3.left)
+        //{
+        //    createdShield.transform.localScale = new Vector3(-1, 1, 1);
+        //}
+        //else
+        //{
+        //    createdShield.transform.localScale = new Vector3(1, 1, 1);
+        //}
 
         PlayShieldSound(); // 방패 생성 시 효과음 재생
 
-        if (followCoroutine != null) StopCoroutine(followCoroutine);
-        followCoroutine = StartCoroutine(FollowPlayer());
+        //if (followCoroutine != null) StopCoroutine(followCoroutine);
+        //followCoroutine = StartCoroutine(FollowPlayer());
 
         lastActionTime = Time.time;
 
@@ -66,30 +66,30 @@ public class ShieldSkill : SkillBase
         return Time.time - lastActionTime >= cooldownDuration;
     }
 
-    private IEnumerator FollowPlayer()
-    {
-        while (createdShield != null)
-        {
-            // 마우스 위치를 기준으로 방패 생성 방향 결정
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 direction = (mousePosition.x < transform.position.x) ? Vector3.left : Vector3.right;
+    //private IEnumerator FollowPlayer()
+    //{
+    //    while (createdShield != null)
+    //    {
+    //        // 마우스 위치를 기준으로 방패 생성 방향 결정
+    //        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //        Vector3 direction = (mousePosition.x < transform.position.x) ? Vector3.left : Vector3.right;
 
-            Vector3 shieldPosition = transform.position + direction * shieldDistance;
-            createdShield.transform.position = shieldPosition;
+    //        Vector3 shieldPosition = transform.position + direction * shieldDistance;
+    //        createdShield.transform.position = shieldPosition;
 
-            // 방패 방향 설정
-            if (direction == Vector3.left)
-            {
-                createdShield.transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                createdShield.transform.localScale = new Vector3(1, 1, 1);
-            }
+    //        // 방패 방향 설정
+    //        if (direction == Vector3.left)
+    //        {
+    //            createdShield.transform.localScale = new Vector3(-1, 1, 1);
+    //        }
+    //        else
+    //        {
+    //            createdShield.transform.localScale = new Vector3(1, 1, 1);
+    //        }
 
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 
     private IEnumerator DestroyShieldAfterTime()
     {

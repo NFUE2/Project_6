@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public abstract class SkillBase : MonoBehaviour
 {
     protected float lastActionTime;
     public TextMeshProUGUI cooldownText;
+    //public Image coolTime;
     protected float cooldownDuration;
 
     public void SetCooldownText(TextMeshProUGUI text)
@@ -27,6 +29,7 @@ public abstract class SkillBase : MonoBehaviour
             }
         }
     }
+
 
     private void Update()
     {

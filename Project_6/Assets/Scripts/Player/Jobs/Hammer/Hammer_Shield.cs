@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Linq.Expressions;
 
 public class Hammer_Shield : MonoBehaviourPun
 {
@@ -49,5 +50,6 @@ public class Hammer_Shield : MonoBehaviourPun
     public void SetParentRPC(int index)
     {
         transform.SetParent(GameManager.instance.players[index].transform);
+        transform.localPosition = Vector3.zero;
     }
 }
