@@ -57,7 +57,7 @@ public class MonsterBaseState : IState
         Vector2 myPos = ((Vector2)myTransform.position + controller.offsetPos);
 
         Vector2 dir = targetPos - myPos;
-        float distance = stateMachine.controller.data.attackDistance;
+        float distance = stateMachine.controller.data.attackDistance / 2;
 
         return Mathf.Abs(dir.x) > distance;
     }
