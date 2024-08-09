@@ -2819,6 +2819,7 @@ GameObject:
   - component: {fileID: 222078652441862621}
   - component: {fileID: 1646592590866569336}
   - component: {fileID: 3033351421535832741}
+  - component: {fileID: 8875699946161810554}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -2908,6 +2909,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: IsDie
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsCharging
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -2923,6 +2927,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd377335d64d834f9e1aff1352046b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8875699946161810554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6914662361705912298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45bb38aa45cba34c9ab20a97fcb4bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
+  maxChargingTime: 3
+  damage: 30
+  damageRate: 10
+  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  attackSize: {x: 1, y: 1}
+  attackOffset: {x: -0.7, y: 0.5}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  hammerImpactEffect: {fileID: 0}
+  hammerImpactSound: {fileID: 0}
 --- !u!1 &7021573611365236410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,7 +3584,6 @@ GameObject:
   - component: {fileID: 8940245367979463514}
   - component: {fileID: 7205045408271842499}
   - component: {fileID: 4833616089676288180}
-  - component: {fileID: 6738894798626623050}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Player
@@ -4019,7 +4046,7 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   hitSound: {fileID: 0}
   shieldSkill: {fileID: 4833616089676288180}
-  chargeSkill: {fileID: 6738894798626623050}
+  chargeSkill: {fileID: 8875699946161810554}
 --- !u!114 &4833616089676288180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4034,34 +4061,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   ShieldDuration: 3
-  shieldPrefab: {fileID: 9139348047338328184, guid: 0cd40a53fe4c09a49b2eb478fc46ac7c, type: 3}
+  shieldPrefab: {fileID: 8220456939829933817, guid: a5115eb0c28578e4fa45b61de2f3fe10, type: 3}
   shieldDistance: 1
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   shieldSound: {fileID: 0}
---- !u!114 &6738894798626623050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8746762248365668030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45bb38aa45cba34c9ab20a97fcb4bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownText: {fileID: 0}
-  maxChargingTime: 3
-  damage: 30
-  damageRate: 10
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  attackSize: {x: 1, y: 1}
-  attackOffset: {x: -0.7, y: 0.5}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  hammerImpactEffect: {fileID: 0}
-  hammerImpactSound: {fileID: 0}
 --- !u!1 &8798604630830911418
 GameObject:
   m_ObjectHideFlags: 0

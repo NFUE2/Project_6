@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801168adc07546c45b2d20ad575dac4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 5226708908227198370}
 --- !u!1 &438548055891747363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,10 +4163,10 @@ MonoBehaviour:
   animator: {fileID: 579804143904161667}
   attackPrefab: {fileID: 6038683907410269147, guid: 089daa8578ffc534db05cbcbb688d9c8, type: 3}
   attackPoint: {fileID: 5226708908227198370}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
   fanningSkill: {fileID: 2510063869997530770}
   rollingSkill: {fileID: 5441892144449027086}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: 8aeac243f7a1559478bfb13e47abc953, type: 3}
 --- !u!114 &5441892144449027086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4213,7 +4213,7 @@ MonoBehaviour:
   attackPoint: {fileID: 5226708908227198370}
   attackPrefab: {fileID: 6038683907410269147, guid: 089daa8578ffc534db05cbcbb688d9c8, type: 3}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  firingSound: {fileID: 0}
+  firingSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
 --- !u!1 &8642911373237775056
 GameObject:
   m_ObjectHideFlags: 0

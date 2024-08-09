@@ -540,7 +540,7 @@ MonoBehaviour:
   animator: {fileID: 84350946389803228}
   attackPrefab: {fileID: 8906174536271126433, guid: 6e1989e52ea03804aab62d059b2870aa, type: 3}
   attackPoint: {fileID: 5096834606558841716}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
   wireArrowSkill: {fileID: 1161066313930406838}
   bombArrowSkill: {fileID: 3711234748753326623}
 --- !u!114 &3711234748753326623
@@ -559,7 +559,7 @@ MonoBehaviour:
   bombArrow: {fileID: 4780719402759027790, guid: ddf8c07d38a44094a9ddec1edfe475ce, type: 3}
   fireAngle: 15
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!114 &1161066313930406838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   wireArrow: {fileID: 4652639966666034163, guid: d6262c3149bcb8d4aa9c835670e71169, type: 3}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  skillSound: {fileID: 0}
+  skillSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!1 &321551034309331916
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,7 +4546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458938277285225393, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6885581324735708281, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Sprite

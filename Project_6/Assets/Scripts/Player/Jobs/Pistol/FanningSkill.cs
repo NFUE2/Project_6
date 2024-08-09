@@ -42,7 +42,7 @@ public class FanningSkill : SkillBase
             Vector2 fireDirection = (mousePos - (Vector2)transform.position).normalized;
             float fireAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg + Random.Range(-3f, 3f);
 
-            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0, 0, fireAngle));
+            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, fireAngle));
             Projectile projectile = go.GetComponent<Projectile>();
             if (projectile != null)
             {
