@@ -4,7 +4,7 @@ using TMPro;
 public class GuardSkill : SkillBase, IDamagable
 {
     public bool IsGuard { get; private set; }
-    public float GuardDuration = 1.0f; // 가드 지속 시간
+    public float GuardDuration = 3.0f; // 가드 지속 시간
     public float DefenseBoostDuringGuard = 50f; // 가드 중 방어력 증가량
     public PlayerDataSO PlayerData;
     public float DamageReduction;
