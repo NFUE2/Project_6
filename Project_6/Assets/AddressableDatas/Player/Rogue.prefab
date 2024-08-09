@@ -2987,6 +2987,7 @@ GameObject:
   - component: {fileID: 1110681064586697961}
   - component: {fileID: 3457821574828540220}
   - component: {fileID: 2921700412241113319}
+  - component: {fileID: 880839939587459092}
   m_Layer: 6
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -3043,6 +3044,42 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &880839939587459092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524913361429258026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsIdle
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsWalk
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsRun
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsJump
+  - Type: 9
+    SynchronizeType: 1
+    Name: IsAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: IsDie
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &7715526864372053821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,7 +3772,6 @@ GameObject:
   - component: {fileID: 8260653451151650232}
   - component: {fileID: 3933325964912910256}
   - component: {fileID: 8348767084602959552}
-  - component: {fileID: 2264767301911397470}
   - component: {fileID: 3795127851594661215}
   - component: {fileID: 5641511133670813660}
   - component: {fileID: 9190360161886165023}
@@ -3970,7 +4006,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8348767084602959552}
-  - {fileID: 2264767301911397470}
+  - {fileID: 880839939587459092}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3990,45 +4026,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &2264767301911397470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8746762248365668030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsIdle
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsWalk
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsRun
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsJump
-  - Type: 9
-    SynchronizeType: 1
-    Name: IsAttack
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsGuard
-  - Type: 9
-    SynchronizeType: 1
-    Name: IsDie
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!114 &3795127851594661215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4043,12 +4040,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   components:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2224472953690284361}
+  - {fileID: 8883530123643855291}
+  - {fileID: 9190360161886165023}
   gameObjects:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8281296139359838566}
+  - {fileID: 2952426780507417900}
 --- !u!61 &5641511133670813660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4488,6 +4485,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1917665126606023040, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fd5608ef9594da2468b331dc6c3bb014, type: 3}
     - target: {fileID: 5531077860410013324, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_FillAmount
       value: 1
@@ -4496,11 +4497,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6885581324735708281, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 21592c412b411e046a93680d2af4fa45, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+--- !u!1 &2952426780507417900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6458938277285225393, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_PrefabInstance: {fileID: 8168371559522422429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4438777531071002641 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5531077860410013324, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
