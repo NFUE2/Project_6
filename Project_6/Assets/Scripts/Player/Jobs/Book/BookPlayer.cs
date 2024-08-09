@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class BookPlayer : RangedPlayerBase
 {
@@ -68,7 +69,6 @@ public class BookPlayer : RangedPlayerBase
 
     private void LaunchProjectile(Transform target)
     {
-        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
         Vector3 targetPosition = target.position;
 
         // 타겟의 콜라이더가 있는 경우 콜라이더의 오프셋을 추가
@@ -78,7 +78,7 @@ public class BookPlayer : RangedPlayerBase
             targetPosition = targetCollider.bounds.center;
         }
 
-        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
+        Vector3 direction = (targetPosition - transform.position).normalized;
 
         // Projectile 클래스의 SetDirection 메서드 호출
         //Projectile projectileComponent = projectile.GetComponent<Projectile>();
@@ -86,6 +86,8 @@ public class BookPlayer : RangedPlayerBase
         //{
         //    projectileComponent.SetDirection(direction);
         //}
+        float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
+        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0,0,angle));
 
         StartCoroutine(MoveProjectile(projectile, targetPosition));
     }

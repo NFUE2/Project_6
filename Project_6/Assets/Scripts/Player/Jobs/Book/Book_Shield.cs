@@ -21,6 +21,6 @@ public class Book_Shield : MonoBehaviourPun
     public void SetParentRPC(int index)
     {
         transform.SetParent(GameManager.instance.players[index].transform);
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0,0.35f,0f);
     }
 }
