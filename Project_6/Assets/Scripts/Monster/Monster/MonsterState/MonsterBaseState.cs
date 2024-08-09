@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class MonsterBaseState : IState
@@ -17,18 +18,18 @@ public class MonsterBaseState : IState
 
     public virtual void HandleInput() { }
 
-    protected void StartAnimation(int animaotrHash)
+    protected void StartAnimation(int animatorHash)
     {
-        stateMachine.controller.animator.SetBool(animaotrHash, true);
+        stateMachine.controller.animator.SetBool(animatorHash, true);
     }
-    protected void StartTriggerAnimation(int animaotrHash)
+    protected void StartTriggerAnimation(int animatorHash)
     {
-        stateMachine.controller.animator.SetTrigger(animaotrHash);
+        stateMachine.controller.animator.SetTrigger(animatorHash);
     }
 
-    protected void StopAnimation(int animaotrHash)
+    protected void StopAnimation(int animatorHash)
     {
-        stateMachine.controller.animator.SetBool(animaotrHash, false);
+        stateMachine.controller.animator.SetBool(animatorHash, false);
     }
 
     public float TargetDistance()
@@ -47,6 +48,20 @@ public class MonsterBaseState : IState
         return Vector2.Distance(targetPos, myPos);
     }
 
+    public bool isTrackable()
+    {
+        MonsterController controller = stateMachine.controller;
+        Transform myTransform = controller.transform;
+
+        Vector2 targetPos = controller.target.position;
+        Vector2 myPos = ((Vector2)myTransform.position + controller.offsetPos);
+
+        Vector2 dir = targetPos - myPos;
+        float distance = stateMachine.controller.data.attackDistance / 2;
+
+        return Mathf.Abs(dir.x) > distance;
+    }
+
     public Vector2 TargetDirection()
     {
         Vector2 targetPos = stateMachine.controller.target.position;
@@ -59,6 +74,8 @@ public class MonsterBaseState : IState
     {
         stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
         //Debug.Log(stateMachine.controller.data.isRight ^ TargetDirection().x > 0);
-        stateMachine.controller.transform.localScale = stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
+        stateMachine.controller.ui.localScale =  
+        stateMachine.controller.transform.localScale = 
+        stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
     }
 }

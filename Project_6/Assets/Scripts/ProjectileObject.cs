@@ -1,10 +1,12 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProjectileObject : MonoBehaviour
+public class ProjectileObject : MonoBehaviourPun
 {
     public ProjectileDataSO data;
 
@@ -21,7 +23,14 @@ public class ProjectileObject : MonoBehaviour
         if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
-            Destroy(gameObject);
+            //if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
+            photonView.RPC(nameof(Destroy),RpcTarget.MasterClient);
         }
+    }
+
+    [PunRPC]
+    private void Destroy()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

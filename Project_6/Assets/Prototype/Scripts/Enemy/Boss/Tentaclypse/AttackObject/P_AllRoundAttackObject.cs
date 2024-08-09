@@ -1,17 +1,17 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class P_AllRoundAttackObject : MonoBehaviour
+public class P_AllRoundAttackObject : MonoBehaviour,IPunInstantiateMagicCallback
 {
     private float keepingTime = 15;
     private float curTime = 0;
 
-    PhotonView pv;
+    //PhotonView pv;
 
-    private void Start()
-    {
-        pv = GetComponent<PhotonView>();
-    }
+    //private void Start()
+    //{
+    //    //pv = GetComponent<PhotonView>();
+    //}
 
     private void Update()
     {
@@ -32,8 +32,8 @@ public class P_AllRoundAttackObject : MonoBehaviour
             {
                 float damage = BossBattleManager.Instance.boss.attackPower;
                 player.TakeDamage(damage);
-                DestroyObject();
             }
+            DestroyObject();
             //Destroy(gameObject);
             //(º¹¿ø)pv.RPC("DestroyObject", RpcTarget.All);
 
@@ -50,7 +50,12 @@ public class P_AllRoundAttackObject : MonoBehaviour
     [PunRPC]
     private void DestroyObject()
     {
-        Destroy(gameObject);
-        //PhotonNetwork.Destroy(gameObject);
+        //Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
     }
 }

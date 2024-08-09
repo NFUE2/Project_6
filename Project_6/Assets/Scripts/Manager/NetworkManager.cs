@@ -6,16 +6,17 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NetworkManager : PunSingleton<NetworkManager>
 {
     public GameObject networkPanel, panelExitButton;//,lobby; //상태변화 안내패널, 닫기버튼
     public TextMeshProUGUI infoText; //한글이 안되서 주석처리, 상태변화 메세지 표시
-    //public Text infoText; //
+    //public Text infoText;
 
     //public TMP_InputField roomInputField; //한글이 안되서 주석처리
-    public TextMeshProUGUI state; //현재 포톤 접속상태 확인, 에디터에서만 사용
+    //public TextMeshProUGUI state; //현재 포톤 접속상태 확인, 에디터에서만 사용
 
     //현재 상태를 나타내는 메세지들
     public readonly string connectServerMessage = "서버에 접속중입니다.";
@@ -27,6 +28,8 @@ public class NetworkManager : PunSingleton<NetworkManager>
 
     public string curChoiceRoom;
 
+    public Button[] buttons;
+
     public override void Awake()
     {
         base.Awake();
@@ -37,13 +40,16 @@ public class NetworkManager : PunSingleton<NetworkManager>
 
     private void Update()
     {
-#if UNITY_EDITOR
-        state.text = PhotonNetwork.NetworkClientState.ToString();
-#endif
+//#if UNITY_EDITOR
+//        state.text = PhotonNetwork.NetworkClientState.ToString();
+//#endif
     }
 
     public void OnClickEnterServer()
     {
+        foreach (var b in buttons)
+            b.interactable = false;
+
         StartCoroutine(ChangeState(
             connectServerMessage,
             ClientState.ConnectedToMasterServer,
@@ -85,10 +91,10 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //}
     
     //네트워크매니저 처리
-    public void OnClickDisconnect()
-    {
-        PhotonNetwork.Disconnect();
-    }
+    //public void OnClickDisconnect()
+    //{
+    //    PhotonNetwork.Disconnect();
+    //}
 
     //public bool JoinRoom() //로비 매니저로 이관
     //{
@@ -166,6 +172,14 @@ public class NetworkManager : PunSingleton<NetworkManager>
         //Debug.Log("마스터 접속 성공");
         OnJoinLobby(); //마스터서버 접속되면 로비로 접속
     }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+
+        foreach (var b in buttons)
+            b.interactable = true;
+    }
+
     #endregion
 
     #region LobbyCallbacks
@@ -205,16 +219,29 @@ public class NetworkManager : PunSingleton<NetworkManager>
     //}
 
     ////다른플레이어가 방에 입장했을때
-    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    //{
-    //    base.OnPlayerEnteredRoom(newPlayer);
-    //}
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+    }
 
     ////다른플레이어가 방을 나갔을때
-    //public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    //{
-    //    base.OnPlayerLeftRoom(otherPlayer);
-    //}
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        if (otherPlayer.ActorNumber == 1)
+        {
+            int index = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+            if (index == 1)
+            {
+                //PhotonNetwork.LoadLevel(0);
+                SceneControl.instance.LoadScene(SceneType.Intro);
+                SoundManager.instance.ChangeBGM(BGMList.Intro);
+            }
+
+            PhotonNetwork.LeaveRoom();
+        }
+    }
 
     ////방장 변경되었을때
     //public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)

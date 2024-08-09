@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 //public enum MonsterAttackType
@@ -8,7 +9,7 @@ using UnityEngine;
 //}
 
 //[RequireComponent(typeof(PhotonView),typeof(Rigidbody2D),typeof(Animator))]
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
 {
     [Header("EnemyData")]
     public EnemyDataSO data;
@@ -20,6 +21,8 @@ public class MonsterController : MonoBehaviour
     public MonsterCondition condition;
     public bool isRight;
 
+    //public MonsterStageList stage;
+
     //[Header("AttackType")]
     //public MonsterAttackType type;
 
@@ -27,6 +30,7 @@ public class MonsterController : MonoBehaviour
     //public LayerMask targetLayer;
 
     MonsterStateMachine stateMachine;
+    public RectTransform ui;
 
     [field : Header("Animation")]
     [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
@@ -75,10 +79,21 @@ public class MonsterController : MonoBehaviour
     public void Disable()
     {
         gameObject.SetActive(false);
+        target = null;
     }
 
     private void ComponentToggle()
     {
-        col.enabled = !col.enabled;
+        col.enabled = condition.curHP == 0 ? false : true;
+
+        rigid.constraints = condition.curHP == 0 ?
+            RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    //생성될때 작동하는 함수
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        //transform.SetParent(GameManager.instance.enemyList);
+        transform.SetParent(GameManager.instance.SpawnStage());
     }
 }

@@ -13,7 +13,7 @@ public class MonsterIdleState : MonsterBaseState
     {
         base.Enter();
         StartAnimation(stateMachine.controller.animationData.idle);
-        players = TestGameManager.instance.players;//게임 매니저에서 가져오기
+        players = GameManager.instance.players;//게임 매니저에서 가져오기
     }
 
     public override void Exit()
@@ -36,10 +36,11 @@ public class MonsterIdleState : MonsterBaseState
             if (distance < stateMachine.controller.data.searchDistance)
             {
                 stateMachine.controller.target = p.transform;
-                stateMachine.ChangeState(stateMachine.trackState);
+                if(isTrackable()) stateMachine.ChangeState(stateMachine.trackState);
+
+                if (distance < stateMachine.controller.data.attackDistance)
+                    stateMachine.ChangeState(stateMachine.attackState);
             }
         }
     }
-
-
 }

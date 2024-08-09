@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BossBattleManager : Singleton<BossBattleManager>
 {
-    public GameObject bossMonster;
+    public GameObject[] bossMonsters = new GameObject[2];
     public GameObject spawnedBoss;
     public BossMonster boss;
     public BossAttackController attackController;
@@ -24,23 +24,14 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
-        if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        //if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
-    }
-
-    private void Start()
-    {
-        GetPlayers();
-        SpawnBossMonster();
-        isAttacking = false;
     }
 
     private void Update()
     {
         if(spawnedBoss != null && bossStateMachine != null)
         {
-            
-            
             if(players != null)
             {
                 if (targetPlayer != null)
@@ -89,13 +80,25 @@ public class BossBattleManager : Singleton<BossBattleManager>
         return Vector3.Distance(targetPlayer.transform.position, spawnedBoss.transform.position);
     }
 
-    private void SpawnBossMonster() // 보스 소환
+    public void SpawnBossMonster(int index,Vector3 spawnPos) // 보스 소환
     {
+        GetPlayers();
+        isAttacking = false;
         //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
-        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonster.name, transform.position, Quaternion.identity);
+        
+        spawnedBoss = PhotonNetwork.Instantiate(bossMonsters[index].name, spawnPos, Quaternion.identity);
+        switch (index)
+        {
+            case 0:
+                attackCoolDown = 6;
+                break;
+            case 1:
+                attackCoolDown = 3;
+                break;  
+        }
         boss = spawnedBoss.GetComponent<BossMonster>();
         attackController = spawnedBoss.GetComponent<BossAttackController>();
-        if (boss != null && bossStateMachine == null)
+        if (boss != null)
         {
             CreateBossMonsterStateMachine(boss);  
         }
@@ -144,9 +147,9 @@ public class BossBattleManager : Singleton<BossBattleManager>
         //Destroy(bossMonster);
         spawnedBoss.SetActive(false);
         foreach(GameObject g in bossEndObject)
-            g.SetActive(!g.activeInHierarchy);
+            g.SetActive(true);
 
-        TestGameManager.instance.cam.target = TestGameManager.instance.player.transform;
+        //GameManager.instance.cam.target = GameManager.instance.player.transform;
     }
 }
     // 보스 소환 및 FSM 생성

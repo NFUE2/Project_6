@@ -21,9 +21,9 @@ TagManager:
   - Bullet
   - Wall
   - Ground
-  - 
-  - 
-  - 
+  - Projectile
+  - TargetMarker
+  - NPC
   - 
   - 
   - 

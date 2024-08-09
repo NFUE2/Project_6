@@ -20,3 +20,4 @@ MonoBehaviour:
   coolTime: 0
   lastActionTime: 0
   isQuickAction: 0
+  image: {fileID: 21300000, guid: fd5608ef9594da2468b331dc6c3bb014, type: 3}

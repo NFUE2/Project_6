@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_Dispenser : MonoBehaviour
+public class P_Dispenser : MonoBehaviour,IPunInstantiateMagicCallback
 {
     private float targetTime = 5f;
     private float curTime = 0;
-    PhotonView pv;
+    //PhotonView pv;
 
-    private void Start()
-    {
-        pv = GetComponent<PhotonView>();
+    //private void Start()
+    //{
+    //    pv = GetComponent<PhotonView>();
 
-    }
+    //}
 
     void Update()
     {
@@ -30,5 +30,10 @@ public class P_Dispenser : MonoBehaviour
     {
         //PhotonNetwork.Destroy(gameObject);
         Destroy(gameObject);
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        transform.SetParent(BossBattleManager.Instance.spawnedBoss.transform);
     }
 }

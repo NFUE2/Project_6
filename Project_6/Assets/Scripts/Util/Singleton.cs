@@ -26,8 +26,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
             for (int i = 1; i < objects.Length; i++)
             {
-                if (Application.isPlaying) Destroy(objects[i]);
-                else DestroyImmediate(objects[i]);
+                if (Application.isPlaying) Destroy(objects[i].gameObject);
+                else DestroyImmediate(objects[i].gameObject);
             }
         }
         else

@@ -4,36 +4,38 @@ public class BurningFieldHitBox : HitBox
 {
     private float timeSinceLastTriggerStay = 0f;
     private float triggerStayInterval = 0.25f;
+    private float curCoolDown;
+    private float damageCoolDown = 1f;
 
     private void OnEnable()
     {
         curDuration = 0;
         duration = 5f;
+        curCoolDown = 1f;
     }
 
     private void Update()
     {
         curDuration += Time.deltaTime;
+        curCoolDown += Time.deltaTime;
         if (curDuration >= duration)
         {
             Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(Time.time >= timeSinceLastTriggerStay + triggerStayInterval)
+        if(curCoolDown >= damageCoolDown)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            curCoolDown = 0;
+            Collider2D[] hit = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0);
+            foreach (Collider2D col in hit)
             {
-                Debug.Log($"{collision.gameObject.name}이 불장판에 의해 도트 데미지를 입고 있습니다.");
-                //if(collision.TryGetComponent<IDamagable>(out IDamagable P))
-                //{
-                //    float damage = BossBattleManager.Instance.boss.attackPower * 0.1f;
-                //    P.TakeDamage(damage);
-                //}
-                timeSinceLastTriggerStay = Time.time;
+                if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                {
+                    float damage = 5;
+                    P.TakeDamage(damage);
+                }
             }
         }
     }
+
+    
 }

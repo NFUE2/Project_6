@@ -19,4 +19,5 @@ MonoBehaviour:
   coolTime: 0
   lastActionTime: 0
   isQuickAction: 0
+  image: {fileID: 21300000, guid: c4dab62f27aa63442b6b0265988e4319, type: 3}
   projectile: {fileID: 0}

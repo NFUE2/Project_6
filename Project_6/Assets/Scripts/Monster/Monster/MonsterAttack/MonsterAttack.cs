@@ -11,6 +11,7 @@ public abstract class MonsterAttack : MonoBehaviour
     //protected float damage;
     public LayerMask target;
     public AudioClip attackClip;
+    public abstract void Attack();
 
     //protected MonsterAttack(MonsterStateMachine stateMachine)
     //{
@@ -32,10 +33,6 @@ public abstract class MonsterAttack : MonoBehaviour
     //    this.state = state;
     //}
 
-    public virtual void Attack()
-    {
-        SoundManager.instance.Shot(attackClip);
-    }
         
     public int Direction()
     {
@@ -46,6 +43,12 @@ public abstract class MonsterAttack : MonoBehaviour
     public Vector2 Direction(Vector2 fire, Vector2 target)
     {
         return (target - fire).normalized;
+    }
+
+    protected void AttackClip()
+    {
+        SoundManager.instance.Shot(attackClip);
+
     }
     //public void ExitAttack()
     //{
