@@ -4505,7 +4505,7 @@ PrefabInstance:
     - target: {fileID: 1917665126606023040, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 266fddaf559e6324cbf09e589c667c8f, type: 3}
+      objectReference: {fileID: 21300000, guid: 1af0eb1ed57264146937be66f366ea43, type: 3}
     - target: {fileID: 5531077860410013324, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_FillAmount
       value: 1
@@ -4517,7 +4517,7 @@ PrefabInstance:
     - target: {fileID: 6885581324735708281, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 142f423b47873fd45990e767952782ef, type: 3}
+      objectReference: {fileID: 21300000, guid: 266fddaf559e6324cbf09e589c667c8f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
