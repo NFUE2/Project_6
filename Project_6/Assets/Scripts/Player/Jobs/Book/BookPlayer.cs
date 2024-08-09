@@ -89,24 +89,24 @@ public class BookPlayer : RangedPlayerBase
         float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
         GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0,0,angle));
 
-        StartCoroutine(MoveProjectile(projectile, targetPosition));
+        //StartCoroutine(MoveProjectile(projectile, targetPosition));
     }
 
-    private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
-    {
-        while (projectile != null)
-        {
-            Vector3 direction = (targetPosition - projectile.transform.position).normalized;
-            projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
+    //private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
+    //{
+    //    while (projectile != null)
+    //    {
+    //        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
+    //        projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
 
-            // 목표물과의 거리 체크
-            if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
-            {
-                // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
-                Destroy(projectile);
-            }
+    //        // 목표물과의 거리 체크
+    //        if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
+    //        {
+    //            // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
+    //            Destroy(projectile);
+    //        }
 
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 }
