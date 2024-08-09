@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class BombArrow : MonoBehaviour
+public class BombArrow : MonoBehaviourPun
 {
     public float speed = 15f; // 화살 속도
     private Vector2 direction; // 화살 방향
@@ -107,7 +107,7 @@ public class BombArrow : MonoBehaviour
 
         // 화살 파괴
         //Destroy(gameObject);
-        PhotonNetwork.Destroy(gameObject);
+        if(photonView.IsMine)PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

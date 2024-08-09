@@ -47,11 +47,11 @@ public abstract class RangedPlayerBase : PlayerBase
         float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
 
-        Projectile proj = projectile.GetComponent<Projectile>();
-        if (proj != null)
-        {
-            proj.SetDirection(attackDirection); // 투사체의 방향 설정
-        }
+        //Projectile proj = projectile.GetComponent<Projectile>();
+        //if (proj != null)
+        //{
+        //    proj.SetDirection(attackDirection); // 투사체의 방향 설정
+        //}
 
         // 공격 효과음 재생
         PlayAttackSound();

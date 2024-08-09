@@ -43,11 +43,11 @@ public class FanningSkill : SkillBase
             float fireAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg + Random.Range(-3f, 3f);
 
             GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, fireAngle));
-            Projectile projectile = go.GetComponent<Projectile>();
-            if (projectile != null)
-            {
-                projectile.SetDirection(fireDirection);
-            }
+            //Projectile projectile = go.GetComponent<Projectile>();
+            //if (projectile != null)
+            //{
+            //    projectile.SetDirection(fireDirection);
+            //}
 
             // 발사 효과음 재생
             PlayFiringSound();
