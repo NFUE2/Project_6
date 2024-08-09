@@ -27,22 +27,24 @@ public class WireArrowSkill : SkillBase
 
         PlaySkillSound(); // 스킬 사용 시 효과음 재생
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        mousePos.z = 0; // 2D 게임이므로 Z축을 0으로 설정
+        Vector2 direction = (mousePos - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        //GameObject go = Instantiate(wireArrow, transform.position, Quaternion.identity);
-        GameObject go = PhotonNetwork.Instantiate("Prefabs/" + wireArrow.name, transform.position, Quaternion.Euler(0,0,angle));
-
-
-        //mousePos.z = 0; // 2D 게임이므로 Z축을 0으로 설정
-        //Vector2 direction = (mousePos - transform.position).normalized;
-
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //go.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        GameObject go = PhotonNetwork.Instantiate(wireArrow.name, transform.position, Quaternion.identity);
 
         Bow_WireArrow wireArrowComponent = go.GetComponent<Bow_WireArrow>();
         if (wireArrowComponent != null)
         {
             wireArrowComponent.player = transform;
+            wireArrowComponent.SetDirection(direction);
+
+            // 플레이어와 화살의 충돌을 무시하도록 설정
+            Collider2D playerCollider = transform.GetComponent<Collider2D>();
+            if (playerCollider != null)
+            {
+                Physics2D.IgnoreCollision(go.GetComponent<Collider2D>(), playerCollider);
+            }
         }
         else
         {

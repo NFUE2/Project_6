@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System;
 using System.Diagnostics;
 using UnityEngine;
-public class MonsterAttackState : MonsterBaseState
+public class MonsterAttackState : MonsterBaseState 
 {
     //MonsterAttack attack;
     float lastAttackTime = -float.MaxValue;
@@ -40,7 +41,6 @@ public class MonsterAttackState : MonsterBaseState
     {
         base.HandleInput();
 
-
         if (!isAttacking && TargetDistance() > stateMachine.controller.data.attackDistance)
         {
             stateMachine.ChangeState(stateMachine.trackState);
@@ -49,11 +49,10 @@ public class MonsterAttackState : MonsterBaseState
         if (!isAttacking && Time.time - lastAttackTime >= stateMachine.controller.data.attackTime)
         {
             Aim();
+            StartAnimation(stateMachine.controller.animationData.attack);
 
             isAttacking = true;
             lastAttackTime = Time.time;
-            StartAnimation(stateMachine.controller.animationData.attack);
-
             //StartTriggerAnimation(stateMachine.controller.animationData.attack);
             //StopAnimation(stateMachine.controller.animationData.attack);
             //attack.Attack();
@@ -70,14 +69,15 @@ public class MonsterAttackState : MonsterBaseState
     {
         Animator animator = stateMachine.controller.animator;
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        
-        if (info.normalizedTime >= 1.5f)
+        bool check = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
+
+        if (check && info.normalizedTime >= 1.5f)
         {
+
             isAttacking = false;
             StopAnimation(stateMachine.controller.animationData.attack);
         }
     }
-
 
     //public void Attack() //애니메이션 이벤트용
     //{

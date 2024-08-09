@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCallback
+public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCallback,IPunDamagable
 {
     public float maxHp { get; set; }
     public float attackPower { get; set; }
@@ -53,5 +53,16 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
     {
         GameManager.instance.StageClear();
         BossBattleManager.instance.DestroyBoss();
+    }
+
+    public void Damage(float damage)
+    {
+        photonView.RPC(nameof(DamageRPC), RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    public void DamageRPC(float damage)
+    {
+        TakeDamage(damage);
     }
 }

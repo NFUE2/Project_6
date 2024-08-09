@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LaserSkill : SkillBase
 {
@@ -15,6 +16,8 @@ public class LaserSkill : SkillBase
     public AudioClip laserSound;      // 레이저 효과음
     public GameObject impactEffectPrefab; // 충돌 시 생성할 파티클 효과 프리팹
     private AudioSource audioSource;  // 오디오 소스
+
+    private List<GameObject> activeImpactEffects = new List<GameObject>();
 
     private void Start()
     {
@@ -89,66 +92,111 @@ public class LaserSkill : SkillBase
         Vector3 direction = (worldMousePosition - transform.position).normalized; // 레이저 방향 계산
 
         Ray ray = new Ray(transform.position, direction); // 레이저 레이 생성
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, Mathf.Infinity, enemyLayer); // 2D 레이저와 충돌한 모든 객체 감지
 
         laserRendererCore.SetPosition(0, transform.position); // 레이저 시작점 설정
         laserRendererEdge.SetPosition(0, transform.position);
         Vector3 laserEndPoint = transform.position + direction * 100; // 기본 레이저 끝점 설정
+
+        HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
+
+        float t = 0;
+        while (t < laserExpandTime)
+        {
+            t += Time.deltaTime;
+            float width = Mathf.Lerp(laserWidth, maxLaserWidth, t / laserExpandTime);
+            laserRendererCore.startWidth = width;
+            laserRendererCore.endWidth = width;
+            laserRendererEdge.startWidth = width + 0.05f;
+            laserRendererEdge.endWidth = width + 0.05f;
+
+            UpdateLaserPositions(ray, ref laserEndPoint, hitEnemies);
+
+            yield return null;
+        }
+
+        // 레이저 지속 시간 동안 고정된 위치 유지
+        while (Time.time - startTime < laserDuration)
+        {
+            // 레이저의 시작점과 방향 고정
+            UpdateLaserPositions(ray, ref laserEndPoint, hitEnemies, false);
+            yield return null;
+        }
+
+        // 레이저 줄어드는 효과
+        t = 0;
+        while (t < laserExpandTime)
+        {
+            t += Time.deltaTime;
+            float width = Mathf.Lerp(maxLaserWidth, laserWidth, t / laserExpandTime);
+            laserRendererCore.startWidth = width;
+            laserRendererCore.endWidth = width;
+            laserRendererEdge.startWidth = width + 0.05f;
+            laserRendererEdge.endWidth = width + 0.05f;
+
+            UpdateLaserPositions(ray, ref laserEndPoint, hitEnemies, false);
+
+            yield return null;
+        }
+
+        laserRendererCore.enabled = false; // 레이저 중심부 렌더러 비활성화
+        laserRendererEdge.enabled = false; // 레이저 테두리 렌더러 비활성화
+
+        // 남아있는 모든 파티클 효과 제거
+        foreach (var effect in activeImpactEffects)
+        {
+            if (effect != null)
+            {
+                Destroy(effect);
+            }
+        }
+        activeImpactEffects.Clear();
+    }
+
+    private void UpdateLaserPositions(Ray ray, ref Vector3 laserEndPoint, HashSet<GameObject> hitEnemies, bool updateRayDirection = true)
+    {
+        if (updateRayDirection)
+        {
+            ray.direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        }
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity, enemyLayer); // 2D 레이저와 충돌한 모든 객체 감지
 
         if (hits.Length > 0)
         {
             laserEndPoint = hits[hits.Length - 1].point; // 마지막 충돌점으로 레이저 끝점 설정
 
             // 충돌 지점에 파티클 효과 생성
-            if (impactEffectPrefab != null)
+            foreach (var hit in hits)
             {
-                Instantiate(impactEffectPrefab, laserEndPoint, Quaternion.identity);
+                if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    GameObject enemy = hit.collider.gameObject;
+                    if (!hitEnemies.Contains(enemy))
+                    {
+                        hitEnemies.Add(enemy);
+
+                        if (impactEffectPrefab != null)
+                        {
+                            GameObject impactEffect = Instantiate(impactEffectPrefab, hit.point, Quaternion.identity);
+                            activeImpactEffects.Add(impactEffect);
+                            Destroy(impactEffect, 2f); // 2초 후에 파티클 효과 파괴
+                        }
+                    }
+
+                    //if (hit.transform.TryGetComponent(out IDamagable damagable))
+                    //{
+                    //    damagable.TakeDamage(laserDamage);
+                    //}
+
+                    if (hit.transform.TryGetComponent(out IPunDamagable damagable))
+                    {
+                        damagable.Damage(laserDamage);
+                    }
+                }
             }
         }
 
         laserRendererCore.SetPosition(1, laserEndPoint); // 레이저 끝점 설정
         laserRendererEdge.SetPosition(1, laserEndPoint);
-
-        // 레이저 확장 효과
-        float t = 0;
-        while (t < 1)
-        {
-            t += Time.deltaTime / laserExpandTime; // 빠르게 확장
-            float width = Mathf.Lerp(laserWidth, maxLaserWidth, t);
-            laserRendererCore.startWidth = width;
-            laserRendererCore.endWidth = width;
-            laserRendererEdge.startWidth = width + 0.05f;
-            laserRendererEdge.endWidth = width + 0.05f;
-            yield return null; // 한 프레임 대기
-        }
-
-        // 레이저 지속 시간 동안 고정된 위치 유지
-        while (Time.time - startTime < laserDuration)
-        {
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                {
-                    //IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    //if (damagable != null)
-                    if(hit.transform.TryGetComponent(out MonsterCondition damagable))
-                    {
-                        //damagable.TakeDamage(laserDamage); // 적에게 피해 적용
-                        damagable.Damage(laserDamage);
-                        //Debug.Log($"적 {hit.collider.gameObject.name}에게 {laserDamage}의 피해를 입혔습니다.");
-
-                        // 충돌 지점에 파티클 효과 생성
-                        if (impactEffectPrefab != null)
-                        {
-                            Instantiate(impactEffectPrefab, hit.point, Quaternion.identity);
-                        }
-                    }
-                }
-            }
-            yield return null; // 한 프레임 대기
-        }
-
-        laserRendererCore.enabled = false; // 레이저 중심부 렌더러 비활성화
-        laserRendererEdge.enabled = false; // 레이저 테두리 렌더러 비활성화
     }
 }

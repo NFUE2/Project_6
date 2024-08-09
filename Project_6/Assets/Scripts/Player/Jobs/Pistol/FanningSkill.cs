@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
-using UnityEngine.InputSystem;
 
 public class FanningSkill : SkillBase
 {
@@ -39,21 +38,21 @@ public class FanningSkill : SkillBase
 
         for (int i = 0; i < 6; i++)
         {
-            //float fireAngle = Random.Range(-3f, 3f);
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float fireAngle = Random.Range(-3f, 3f) + Mathf.Atan2(mousePos.y,mousePos.x) * Mathf.Rad2Deg;
+            Vector2 fireDirection = (mousePos - (Vector2)transform.position).normalized;
+            float fireAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg + Random.Range(-3f, 3f);
 
-            Vector2 direction = (mousePos - (Vector2)transform.position).normalized;
+            GameObject go = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0, 0, fireAngle));
+            Projectile projectile = go.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.SetDirection(fireDirection);
+            }
 
-            // 약간의 위치 오프셋을 추가하여 투사체가 겹치지 않도록 합니다.
-            //Vector3 offset = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
-            //GameObject go = Instantiate(attackPrefab, transform.position + offset, Quaternion.identity);
-            //go.GetComponent<Projectile>().SetDirection(Quaternion.Euler(0, 0, fireAngle) * direction);
-            GameObject go = PhotonNetwork.Instantiate("Prefabs/" + attackPrefab.name, transform.position,Quaternion.Euler(0, 0, fireAngle));
             // 발사 효과음 재생
             PlayFiringSound();
 
-            Debug.Log($"Projectile {i + 1} fired at direction {direction}");
+            Debug.Log($"Projectile {i + 1} fired at direction {fireDirection}");
 
             yield return new WaitForSeconds(0.1f);
         }

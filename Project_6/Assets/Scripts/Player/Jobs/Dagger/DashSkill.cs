@@ -70,8 +70,10 @@ public class DashSkill : SkillBase
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, endPosition - startPosition, dashDistance, enemyLayer);
         foreach (var hit in hits)
         {
-            if(hit.collider.TryGetComponent(out MonsterCondition m))
+            //if(hit.collider.TryGetComponent(out IDamagable m))
+            if (hit.collider.TryGetComponent(out IPunDamagable m))
             {
+                //m.TakeDamage(damage);
                 m.Damage(damage);
             }
             //IDamagable enemy = hit.collider.GetComponent<IDamagable>();

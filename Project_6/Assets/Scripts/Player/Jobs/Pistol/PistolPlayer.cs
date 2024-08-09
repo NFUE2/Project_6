@@ -37,8 +37,8 @@ public class PistolPlayer : RangedPlayerBase
     {
         if (!isAttackCooldown && CanAttack() && !isUsingSkill)
         {
-            // RangedPlayerBase의 Attack 메서드를 호출하여 공격을 수행
-            base.Attack();
+            base.Attack(); // 기본 공격 로직 호출
+
             attackCount++;
             Debug.Log($"Attack {attackCount}: Performed an attack.");
 
@@ -63,6 +63,7 @@ public class PistolPlayer : RangedPlayerBase
         if (isAttackCooldown && Time.time - lastAttackTime >= cooldownDuration)
         {
             isAttackCooldown = false;
+            attackCount = 0; // 공격 카운트를 초기화
             Debug.Log("Cooldown complete: You can attack again.");
         }
     }
@@ -92,7 +93,6 @@ public class PistolPlayer : RangedPlayerBase
             yield return null;
         }
 
-        // 스킬이 끝난 후 완전히 장전된 상태로 설정
         attackCount = 0;
         isAttackCooldown = false;
         lastAttackTime = Time.time;

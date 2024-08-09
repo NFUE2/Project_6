@@ -42,7 +42,7 @@ public class GrenadeSkill : SkillBase
         // 수류탄 프리팹을 플레이어의 공격 지점에 인스턴스화합니다.
         //GameObject grenadeInstance = Instantiate(rifleGrenade, attackPoint.position, Quaternion.identity);
         float angle = Mathf.Atan2(mousePosition.y,mousePosition.x) * Mathf.Rad2Deg;
-        GameObject grenadeInstance = PhotonNetwork.Instantiate("Prefabs/" + rifleGrenade.name, attackPoint.position, Quaternion.Euler(0,0, angle));
+        GameObject grenadeInstance = PhotonNetwork.Instantiate(rifleGrenade.name, attackPoint.position, Quaternion.Euler(0,0, angle));
 
         // 수류탄의 방향을 설정합니다.
         //grenadeInstance.GetComponent<Grenade>().SetDirection(attackDirection);

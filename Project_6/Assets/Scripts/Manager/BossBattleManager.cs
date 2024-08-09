@@ -86,7 +86,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         isAttacking = false;
         //spawnedBoss = Instantiate(bossMonster, transform.position,Quaternion.identity);
         
-        spawnedBoss = PhotonNetwork.Instantiate("Boss/" + bossMonsters[index].name, spawnPos, Quaternion.identity);
+        spawnedBoss = PhotonNetwork.Instantiate(bossMonsters[index].name, spawnPos, Quaternion.identity);
         switch (index)
         {
             case 0:

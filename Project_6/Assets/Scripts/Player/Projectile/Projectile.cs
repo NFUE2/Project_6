@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -11,14 +12,9 @@ public class Projectile : MonoBehaviour
     public AudioClip explosionSound; // 폭발 효과음
     private AudioSource audioSource; // 오디오 소스 컴포넌트
 
-    private Rigidbody2D rb;
-
-    void Start()
+    void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.isKinematic = true; // 투사체가 물리 엔진의 영향을 받지 않도록 설정
-
-        // 오디오 소스 컴포넌트 가져오기 또는 추가하기
+        // 오디오 소스 컴포넌트를 캐싱합니다.
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -29,29 +25,37 @@ public class Projectile : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
-        // 투사체를 방향으로 회전시킴
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 180; // 각도를 조정하여 투사체가 올바른 방향으로 향하도록 함
+
+        // 투사체를 방향으로 회전시킵니다.
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        if (direction != Vector2.zero) // 방향이 설정되어 있을 때만 업데이트합니다.
+        {
+            transform.position += (Vector3)direction * speed * Time.deltaTime;
+        }
     }
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            IDamagable damagable = collision.GetComponent<IDamagable>();
+            //IDamagable damagable = collision.GetComponent<IDamagable>();
+            IPunDamagable damagable = collision.GetComponent<IPunDamagable>();
+
             if (damagable != null)
             {
-                damagable.TakeDamage(damage);
+                //damagable.TakeDamage(damage);
+                damagable.Damage(damage);
+
                 Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
             }
             Explode();

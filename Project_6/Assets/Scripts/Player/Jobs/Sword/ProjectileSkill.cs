@@ -24,7 +24,7 @@ public class ProjectileSkill : SkillBase
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         // 투사체 생성
-        GameObject projectile = PhotonNetwork.Instantiate("Prefabs/" + projectilePrefab.name, attackPoint.position, Quaternion.Euler(0,0,angle));
+        GameObject projectile = PhotonNetwork.Instantiate(projectilePrefab.name, attackPoint.position, Quaternion.Euler(0,0,angle));
         //projectile.transform.localEulerAngles = new Vector3(0, 0, angle);
         // projectile.GetComponent<Projectile>().SetDirection(dir); // 투사체 방향 설정
 

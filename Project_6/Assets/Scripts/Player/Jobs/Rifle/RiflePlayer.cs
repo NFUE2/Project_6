@@ -1,8 +1,6 @@
 using Photon.Pun;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RiflePlayer : RangedPlayerBase
 {
@@ -61,7 +59,8 @@ public class RiflePlayer : RangedPlayerBase
     public override void Attack()
     {
         if (isTargeting) return; // 타겟팅 모드일 때 공격 무시
-        base.Attack();
+
+        base.Attack(); // 기본 공격 로직 호출
     }
 
     public void SetTargeting(bool targeting)

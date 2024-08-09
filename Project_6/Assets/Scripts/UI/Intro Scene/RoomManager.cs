@@ -18,23 +18,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void OnClickGameStart()
     {
-        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
+        //photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
 
         foreach(var b in buttons)
             b.interactable = false;
 
-        PhotonNetwork.LoadLevel(1);
+        //PhotonNetwork.LoadLevel(1);
+        SceneControl.instance.LoadScene(SceneType.Loading);
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
         //SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
-    [PunRPC]
-    void ChangeClipRPC()
-    {
-        SoundManager.instance.ChangeBGM(BGMList.Town);
-    }
+    //[PunRPC]
+    //void ChangeClipRPC()
+    //{
+    //    SoundManager.instance.ChangeBGM(BGMList.Town);
+    //}
 
     public override void OnJoinedRoom()
     {
@@ -51,17 +52,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         if (playerListEntries == null) playerListEntries = new Dictionary<int, GameObject>();
 
-        foreach(Photon.Realtime.Player p in PhotonNetwork.PlayerList)
+        for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
+            Player p = PhotonNetwork.PlayerList[i];
             GameObject go = Instantiate(playerPrefab);
             go.transform.parent = playerList;
             //go.GetComponentInChildren<TextMeshProUGUI>().text += p.ActorNumber;
-            go.GetComponentInChildren<TextMeshProUGUI>().text += PhotonNetwork.CurrentRoom.PlayerCount;
+            go.GetComponentInChildren<TextMeshProUGUI>().text += (i + 1).ToString();
 
             if (p == PhotonNetwork.LocalPlayer) go.GetComponent<RoomPlayer>().IsMine();
 
             playerListEntries.Add(p.ActorNumber, go);
         }
+
+        //foreach(Player p in PhotonNetwork.PlayerList)
+        //{
+        //    GameObject go = Instantiate(playerPrefab);
+        //    go.transform.parent = playerList;
+        //    //go.GetComponentInChildren<TextMeshProUGUI>().text += p.ActorNumber;
+        //    go.GetComponentInChildren<TextMeshProUGUI>().text += PhotonNetwork.CurrentRoom.PlayerCount;
+
+        //    if (p == PhotonNetwork.LocalPlayer) go.GetComponent<RoomPlayer>().IsMine();
+
+        //    playerListEntries.Add(p.ActorNumber, go);
+        //}
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)

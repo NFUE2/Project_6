@@ -10,7 +10,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     public PlayerDataSO PlayerData;
     public PlayerInput input;
     public Image healthBarImage;
-    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     public AudioClip hitSound;
     private AudioSource audioSource;
     public GameObject hitEffectPrefab;
@@ -21,23 +21,22 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
 
     void Update()
     {
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
     {
         float damageAfterDefense;
-        if (PlayerData !=  null)
+        if (PlayerData != null)
         {
-
             damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
         }
         else
@@ -45,11 +44,10 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             damageAfterDefense = Mathf.Max(damage, 0);
         }
         currentHealth -= damageAfterDefense;
-        //Debug.Log("Player took damage: " + damageAfterDefense + ", current health: " + currentHealth);
 
         PlaySound(hitSound);
         PlayHitEffect();
-        if(healthBarImage != null)
+        if (healthBarImage != null)
         {
             UpdateHealthBar();
         }
@@ -62,14 +60,15 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public void Heal(float amount)
     {
-        photonView.RPC(nameof(HealRPC),RpcTarget.All, amount);
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
+        photonView.RPC(nameof(HealRPC), RpcTarget.All, amount);
     }
 
     [PunRPC]
     public void HealRPC(float amount)
     {
         currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 체력 범위 제한
+        UpdateHealthBar();
     }
 
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
@@ -82,17 +81,33 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void UpdateHealthBar()
     {
+        if (!photonView.IsMine) return;
+
         float healthRatio = currentHealth / maxHealth;
         healthBarImage.fillAmount = healthRatio;
-        //Debug.Log("Health updated: " + currentHealth + "/" + maxHealth + " (" + healthRatio + ")");
     }
 
     void Die()
     {
         Debug.Log("Player died!");
         input.isDead = true;
-        animator.SetTrigger("ISDie");
+        MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
+
+    private void MakePlayerTransparent()
+    {
+        // 플레이어와 모든 자식 오브젝트의 SpriteRenderer를 가져옴
+        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        // 각 SpriteRenderer의 색상을 변경하여 반투명하게 설정
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+        {
+            Color color = spriteRenderer.color;
+            color.a = 0.5f; // 알파 값을 낮춰 반투명 상태로 만듦
+            spriteRenderer.color = color;
+        }
+    }
+
 
     public void ModifyDefense(float amount)
     {

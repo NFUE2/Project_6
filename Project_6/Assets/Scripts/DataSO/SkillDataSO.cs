@@ -9,4 +9,6 @@ public class SkillDataSO : ObjectSO
     public float lastActionTime;
 
     public bool isQuickAction;
+
+    public Sprite image;
 }

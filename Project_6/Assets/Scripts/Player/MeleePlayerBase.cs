@@ -16,8 +16,8 @@ public abstract class MeleePlayerBase : PlayerBase
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
-        animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        animator = GetComponentInChildren<Animator>();
     }
 
     public override void Attack()
@@ -33,8 +33,6 @@ public abstract class MeleePlayerBase : PlayerBase
         isAttacking = false; // 쿨다운이 끝나면 isAttacking을 false로 설정
     }
 
-
-
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
@@ -45,10 +43,13 @@ public abstract class MeleePlayerBase : PlayerBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            IDamagable damagable = enemy.GetComponent<IDamagable>();
+            //IDamagable damagable = enemy.GetComponent<IDamagable>();
+            IPunDamagable damagable = enemy.GetComponent<IPunDamagable>();
+
             if (damagable != null)
             {
-                damagable.TakeDamage(attackDamage);
+                damagable.Damage(attackDamage);
+                //damagable.Damage(attackDamage);
                 ApplyKnockback(enemy);
                 PlaySound(hitSound); // 피격 시 효과음 재생
             }
