@@ -48,7 +48,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable
     //    }
     //}
 
-    //[PunRPC]
+    [PunRPC]
     protected void BossDie()
     {
         GameManager.instance.StageClear();
