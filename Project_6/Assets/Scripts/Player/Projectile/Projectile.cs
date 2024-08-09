@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviourPun
 
     private void OnBecameInvisible()
     {
-        if(photonView.IsMine)PhotonNetwork.Destroy(gameObject);
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,6 +78,6 @@ public class Projectile : MonoBehaviourPun
         }
 
         // Åõ»çÃ¼ ÆÄ±«
-        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
     }
 }

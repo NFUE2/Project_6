@@ -56,7 +56,8 @@ public class BombArrow : MonoBehaviourPun
         // 화살이 화면 밖으로 나가면 파괴
         if (IsOffScreen())
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            if (PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -107,7 +108,7 @@ public class BombArrow : MonoBehaviourPun
 
         // 화살 파괴
         //Destroy(gameObject);
-        if(photonView.IsMine)PhotonNetwork.Destroy(gameObject);
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
