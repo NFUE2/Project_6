@@ -15,7 +15,6 @@ public class RazorHitBox : HitBox
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"{collision.gameObject.name}가 레이저에 피격되었습니다.");
             if (collision.TryGetComponent<IDamagable>(out IDamagable P))
             {
                 float damage = BossBattleManager.Instance.boss.attackPower * 1.25f;

@@ -34,7 +34,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
         int countOfMeleeAttack = 3;
         int countOfDistanceAttack = 2;
         float distanceToTarget = BossBattleManager.Instance.distanceToTarget;
-        Debug.Log(distanceToTarget);
         if(distanceToTarget > 7)
         {
             int index = Random.Range(0, countOfDistanceAttack);
@@ -122,7 +121,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
     
     private void EnableSwingHitBox()
     {
-        Debug.Log(BossBattleManager.Instance.targetPlayer);
         if(transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
         {
             //swingHitBoxLeft.SetActive(true);
@@ -226,7 +224,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         if(chargePassCount == 0)
         {
-            Debug.Log("Â÷Áö");
             chargePassCount++;
             BossBattleManager.Instance.ToggleIsAttacking();
             bossCollider.enabled = false;
