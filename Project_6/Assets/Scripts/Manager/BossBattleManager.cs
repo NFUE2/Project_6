@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -143,9 +144,9 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public void DestroyBoss()
     {
-        Debug.Log(1);
-        //Destroy(bossMonster);
-        spawnedBoss.SetActive(false);
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(spawnedBoss);
+        //spawnedBoss.SetActive(false);
+
         foreach(GameObject g in bossEndObject)
             g.SetActive(true);
 

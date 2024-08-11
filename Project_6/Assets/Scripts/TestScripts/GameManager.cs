@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public enum MonsterStageList
 {
     Stage1,
@@ -15,6 +15,8 @@ public class GameManager : Singleton<GameManager>
     public List<GameObject> players = new List<GameObject>();
 
     public GameObject[] maps; //만들어야하는 맵들
+
+    int dieCount;
 
     //수정하고싶은곳=================
     public int cleaStageCount;
@@ -63,7 +65,6 @@ public class GameManager : Singleton<GameManager>
 
     public void StageClear()
     {
-
         cleaStageCount++;
 
         if (cleaStageCount == maps.Length) SceneControl.instance.LoadScene(SceneType.Outro);
@@ -72,5 +73,24 @@ public class GameManager : Singleton<GameManager>
 
         stage.Dequeue();
         SetNextStage();
+    }
+
+    public void PlayerDie()
+    {
+        dieCount++;
+
+        if(dieCount == PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            dieCount = 0;
+
+            stage.Peek().gameObject.SetActive(false);
+
+            player.transform.position = town.startTransform.position;
+            cam.target = town.CameraPos;
+            SoundManager.instance.ChangeBGM(BGMList.Town);
+
+            if (player.TryGetComponent(out PlayerCondition p))
+                p.Resurrection();
+        }
     }
 }

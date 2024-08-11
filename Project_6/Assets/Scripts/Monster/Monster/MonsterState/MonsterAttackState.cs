@@ -1,6 +1,3 @@
-using Photon.Pun;
-using System;
-using System.Diagnostics;
 using UnityEngine;
 public class MonsterAttackState : MonsterBaseState 
 {
@@ -78,6 +75,8 @@ public class MonsterAttackState : MonsterBaseState
             StopAnimation(stateMachine.controller.animationData.attack);
         }
     }
+
+    
 
     //public void Attack() //애니메이션 이벤트용
     //{

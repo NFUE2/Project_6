@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,8 +97,12 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     void Die()
     {
         input.isDead = true;
+        photonView.RPC(nameof(DieRpc),RpcTarget.All);
         MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
+
+
+    [PunRPC] void DieRpc() => GameManager.instance.PlayerDie();
 
     private void MakePlayerTransparent()
     {
@@ -108,7 +113,8 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)
         {
             Color color = spriteRenderer.color;
-            color.a = 0.5f; // 알파 값을 낮춰 반투명 상태로 만듦
+
+            color.a = currentHealth <= 0? 0.5f : 1.0f; // 알파 값을 낮춰 반투명 상태로 만듦
             spriteRenderer.color = color;
         }
     }
@@ -134,5 +140,13 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             GameObject effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             Destroy(effect, 1.0f);
         }
+    }
+
+    public void Resurrection()
+    {
+        currentHealth = maxHealth;
+        UpdateHealthBar();
+        input.isDead = false;
+        MakePlayerTransparent();
     }
 }
