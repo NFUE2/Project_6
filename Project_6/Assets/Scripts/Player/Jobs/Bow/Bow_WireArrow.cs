@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class Bow_WireArrow : MonoBehaviour
+public class Bow_WireArrow : MonoBehaviourPun
 {
     public float arrowSpeed = 20f; // 화살 속도
     public float wireSpeed = 10f; // 와이어 속도
@@ -78,6 +78,6 @@ public class Bow_WireArrow : MonoBehaviour
 
     private void DestroyObject()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 }

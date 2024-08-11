@@ -50,8 +50,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     public GameObject Get(string name) { return pool[name].Get(); }
     public void Release(string name,GameObject g) => pool[name].Release(g);
 
-    private void Start()
-    {
-        if(PhotonNetwork.IsMasterClient) DataManager.instance.PoolDataLoad();
-    }
+    //private void Start()
+    //{
+    //    if(PhotonNetwork.IsMasterClient) DataManager.instance.PoolDataLoad();
+    //}
 }

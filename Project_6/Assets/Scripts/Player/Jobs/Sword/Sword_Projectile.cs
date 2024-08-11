@@ -2,7 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class Sword_Projectile : MonoBehaviour
+public class Sword_Projectile : MonoBehaviourPun
 {
     public ProjectileDataSO data;
     public AudioClip hitSound; // 적중 시 효과음 추가
@@ -36,7 +36,7 @@ public class Sword_Projectile : MonoBehaviour
 
             PlayHitEffects(collision.transform.position); // 적중 시 효과 재생
             //Destroy(gameObject);
-            PhotonNetwork.Destroy(gameObject);
+            if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
         }
     }
 

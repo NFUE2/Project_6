@@ -39,10 +39,10 @@ public class Projectile : MonoBehaviourPun
         //}
     }
 
-    private void OnBecameInvisible()
-    {
-        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    //if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

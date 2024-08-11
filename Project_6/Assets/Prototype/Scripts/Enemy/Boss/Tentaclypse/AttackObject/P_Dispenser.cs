@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_Dispenser : MonoBehaviour,IPunInstantiateMagicCallback
+public class P_Dispenser : MonoBehaviourPun,IPunInstantiateMagicCallback
 {
     private float targetTime = 5f;
     private float curTime = 0;
@@ -25,11 +25,11 @@ public class P_Dispenser : MonoBehaviour,IPunInstantiateMagicCallback
             //(º¹¿ø)pv.RPC("DestroyObject", RpcTarget.All);
         }
     }
-    [PunRPC]
+    //[PunRPC]
     private void DestroyObject()
     {
-        //PhotonNetwork.Destroy(gameObject);
-        Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)

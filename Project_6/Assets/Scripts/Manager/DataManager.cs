@@ -39,18 +39,18 @@ public class DataManager : Singleton<DataManager>
         return true;
     }
 
-    public async void PoolDataLoad()
-    {
-        var data = await Addressables.LoadAssetAsync<TextAsset>("Data").Task;
+    //public async void PoolDataLoad()
+    //{
+    //    var data = await Addressables.LoadAssetAsync<TextAsset>("Data").Task;
 
-        ObjectPoolData d = JsonUtility.FromJson<ObjectPoolData>(data.ToString());
+    //    ObjectPoolData d = JsonUtility.FromJson<ObjectPoolData>(data.ToString());
 
-        foreach (var pd in d.data)
-        {
-            ObjectPool pool = new ObjectPool(pd);
-            ObjectPoolManager.instance.pool[pd.name] = pool;
-        }
-    }
+    //    foreach (var pd in d.data)
+    //    {
+    //        ObjectPool pool = new ObjectPool(pd);
+    //        ObjectPoolManager.instance.pool[pd.name] = pool;
+    //    }
+    //}
 
     //public async Task<bool> DataLoad()
     //{
