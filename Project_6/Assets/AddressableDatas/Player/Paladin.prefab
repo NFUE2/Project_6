@@ -1824,7 +1824,7 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   dashDuration: 0.5
-  dashSpeed: 10
+  dashSpeed: 30
   bossLayer:
     serializedVersion: 2
     m_Bits: 0
