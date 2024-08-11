@@ -48,7 +48,7 @@ public class MonsterBaseState : IState
         return Vector2.Distance(targetPos, myPos);
     }
 
-    public bool isTrackable()
+    public bool IsTrackable()
     {
         MonsterController controller = stateMachine.controller;
         Transform myTransform = controller.transform;
@@ -59,7 +59,7 @@ public class MonsterBaseState : IState
         Vector2 dir = targetPos - myPos;
         float distance = stateMachine.controller.data.attackDistance / 2;
 
-        return Mathf.Abs(dir.x) > distance;
+        return Mathf.Abs(dir.x) >= distance;
     }
 
     public Vector2 TargetDirection()

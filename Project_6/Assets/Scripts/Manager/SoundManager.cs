@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 public enum BGMList
 {
@@ -11,26 +10,36 @@ public enum BGMList
     Stage2Boss,
 }
 
+public enum SourceType
+{
+    BGM,
+    SFX,
+}
+
 public class SoundManager : Singleton<SoundManager>
 {
-    public AudioSource BGM,EFF;
+    public AudioSource[] audios;
     public AudioClip[] clipBGM;
-
-    //public override void Awake()
-    //{
-    //    base.Awake();
-    //    //ChangeBGM(BGMList.Intro);
-    //}
 
     public void ChangeBGM(BGMList b)
     {
-        //Debug.Log(1);
-        BGM.clip = clipBGM[(int)b];
-        BGM.Play();
+        audios[(int)SourceType.BGM].clip = clipBGM[(int)b];
+        audios[(int)SourceType.BGM].Play();
     }
 
     public void Shot(AudioClip clip)
     {
-        EFF.PlayOneShot(clip);
+        audios[(int)SourceType.SFX].PlayOneShot(clip);
     }
+
+    public void SetVolume(SourceType type,float value)
+    {
+        audios[(int)type].volume = value;
+    }
+
+    //private void SetVolume()
+    //{
+    //    for(int i = 0; i < sources.Length; i++)
+    //        sources[i].volume = DataManager.instance.data.volums[i];
+    //}
 }
