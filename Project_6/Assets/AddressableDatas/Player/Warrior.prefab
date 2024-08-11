@@ -2819,6 +2819,7 @@ GameObject:
   - component: {fileID: 222078652441862621}
   - component: {fileID: 1646592590866569336}
   - component: {fileID: 3033351421535832741}
+  - component: {fileID: 8164795199048138552}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -2924,6 +2925,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bd377335d64d834f9e1aff1352046b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8164795199048138552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6914662361705912298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd6c3274eb1a564f8e438cae6bb6d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7021573611365236410
@@ -4038,7 +4051,7 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   ShieldDuration: 3
   shieldPrefab: {fileID: 8220456939829933817, guid: a5115eb0c28578e4fa45b61de2f3fe10, type: 3}
-  shieldDistance: -1.5
+  shieldDistance: 2
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   shieldSound: {fileID: 0}
 --- !u!114 &2603718513585877556
