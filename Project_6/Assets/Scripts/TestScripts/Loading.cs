@@ -49,10 +49,9 @@ public class Loading : MonoBehaviourPun
     private async void LoadAsset()
     {
         isLoad = await DataManager.instance.DataLoad();
-         
+
         photonView.RPC(nameof(IsReady), RpcTarget.All);
     }
-
 
     [PunRPC] private void IsReady() { isReady++; } 
     private bool AllReady()  { return isReady == PhotonNetwork.CurrentRoom.PlayerCount; }

@@ -13,7 +13,7 @@ public class MonsterIdleState : MonsterBaseState
     {
         base.Enter();
         StartAnimation(stateMachine.controller.animationData.idle);
-        players = GameManager.instance.players;//게임 매니저에서 가져오기
+        if(GameManager.instance != null) players = GameManager.instance.players;//게임 매니저에서 가져오기
     }
 
     public override void Exit()
