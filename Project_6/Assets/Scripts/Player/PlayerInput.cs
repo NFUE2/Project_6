@@ -36,35 +36,20 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (!isDead)
-        {
-            Movement();
-            CheckGrounded();
-            UpdateAnimation();
-            RotateTowardsMouse();
-        }
-        else
-        {
-            Movement(); // 죽은 상태에서 움직임은 가능하게 함
-        }
+        Movement();         // 죽은 상태에서도 이동 가능
+        CheckGrounded();    // 땅에 닿았는지 체크
+        UpdateAnimation();  // 애니메이션 업데이트
+        RotateTowardsMouse(); // 죽은 상태에서도 마우스 회전 가능
     }
 
     private void Movement()
     {
-        if (isDead)
-        {
-            return;
-        }
         float speed = isRunning ? playerdata.runSpeed : playerdata.walkSpeed;
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
     }
 
     private void Jump()
     {
-        if (isDead)
-        {
-            return;
-        }
         if (isGrounded)
         {
             rb.AddForce(Vector2.up * playerdata.jumpForce, ForceMode2D.Impulse);
@@ -79,7 +64,7 @@ public class PlayerInput : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (animator != null && !isDead)
+        if (animator != null)
         {
             bool isWalking = moveInput.x != 0;
 
@@ -120,10 +105,6 @@ public class PlayerInput : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        if (isDead)
-        {
-            return;
-        }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(lookInput);
         mousePosition.z = 0;
 
@@ -142,7 +123,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!isDead && context.performed)
+        if (context.performed)
         {
             Jump();
         }
