@@ -21,7 +21,7 @@ MonoBehaviour:
   attackTime: 0
   attackDamage: 15
   deffenceDamage: 0
-  jumpForce: 6
+  jumpForce: 7
   SkillQCooldown: 10
   SkillECooldown: 8
   attackCooldown: 1

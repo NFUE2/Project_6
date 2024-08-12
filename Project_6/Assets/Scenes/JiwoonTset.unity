@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 714492354989758925, guid: 215ea1a8ed7bfd5468111f10d17322c6, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3626820633198834523, guid: 215ea1a8ed7bfd5468111f10d17322c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -188,6 +192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3933325964912910256, guid: dcc8f87c7d91fde4988962e738013ab6, type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4298058945709228138, guid: dcc8f87c7d91fde4988962e738013ab6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -721,6 +729,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 236003066068444115, guid: ec544684e5666c04dba5056c2de78a82, type: 3}
+      propertyPath: defenseBoost
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3104868809133284485, guid: ec544684e5666c04dba5056c2de78a82, type: 3}
       propertyPath: m_Name
       value: Paladin
@@ -1701,6 +1713,10 @@ PrefabInstance:
     - target: {fileID: 4202713088028986587, guid: 78194e2563948e94c8f82a3db8c333dd, type: 3}
       propertyPath: m_Name
       value: Wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381647602887560332, guid: 78194e2563948e94c8f82a3db8c333dd, type: 3}
+      propertyPath: sceneViewId
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8581488535931746162, guid: 78194e2563948e94c8f82a3db8c333dd, type: 3}
       propertyPath: m_LocalPosition.x

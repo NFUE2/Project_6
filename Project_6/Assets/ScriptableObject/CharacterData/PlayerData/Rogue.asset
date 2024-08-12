@@ -16,7 +16,7 @@ MonoBehaviour:
   name: "\uC554\uC0B4\uC790"
   info: "\uC9E7\uC740 \uB2E8\uB3C4\uB85C \uC801\uC758 \uAE09\uC18C\uB97C \uACF5\uACA9\uD558\uC5EC
     \uD070 \uB370\uBBF8\uC9C0\uB97C \uC785\uD788\uB294 \uC554\uC0B4\uC790."
-  maxHP: 80
+  maxHP: 70
   moveSpeed: 0
   attackTime: 0
   attackDamage: 10
