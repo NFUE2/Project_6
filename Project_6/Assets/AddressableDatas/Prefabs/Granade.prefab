@@ -59,8 +59,8 @@ MonoBehaviour:
     m_Bits: 8
   explosionSound: {fileID: 8300000, guid: 36b4f0f1c0c5bf3419fa43f8028b8abd, type: 3}
   burningSound: {fileID: 8300000, guid: 1f29330d54741074bbe04e4593898fa4, type: 3}
-  explosionEffect: {fileID: 1495976278256840263, guid: a648936cf9d5c044d8425df3d51634c8, type: 3}
-  burningEffect: {fileID: 5590152926264239787, guid: 6dcbfec083af3c44698ca36e5122eccc, type: 3}
+  explosionEffect: {fileID: 0}
+  burningEffect: {fileID: 8361434659506452054, guid: 961ffa8fe8204d04ba145ccbee22d47c, type: 3}
 --- !u!212 &3807605065525202874
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -289,7 +289,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -1072850889082808864}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
