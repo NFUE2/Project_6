@@ -45,6 +45,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
             BossBattleManager.instance.spawnedBoss = gameObject;
             BossBattleManager.instance.attackController = GetComponent<BossAttackController>();
             BossBattleManager.instance.bossAnimator = GetComponent<Animator>();
+            BossBattleManager.instance.bossStateMachine = GetComponent<BossStateMachine>();
         }
     }
 

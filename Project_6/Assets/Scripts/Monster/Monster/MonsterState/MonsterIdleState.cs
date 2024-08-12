@@ -32,9 +32,9 @@ public class MonsterIdleState : MonsterBaseState
         foreach(GameObject player in players)
         {
             float distance = Vector2.Distance(player.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
-            player.TryGetComponent(out PlayerInput p);
+            
 
-            if (!p.isDead && distance < stateMachine.controller.data.searchDistance)
+            if (player.TryGetComponent(out PlayerInput p) && !p.isDead && distance < stateMachine.controller.data.searchDistance)
             {
                 stateMachine.controller.target = player.transform;
                 if(IsTrackable()) stateMachine.ChangeState(stateMachine.trackState);
