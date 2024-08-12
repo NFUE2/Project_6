@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviourPun
                 //damagable.TakeDamage(damage);
                 damagable.Damage(damage);
 
-                Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
+                //Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
             }
             Explode();
         }

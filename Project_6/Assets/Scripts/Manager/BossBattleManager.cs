@@ -23,6 +23,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
+        players = new List<GameObject>();
         //if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
     }
@@ -111,7 +112,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         }
         else
         {
-            Debug.Log("BossMonster 스크립트 로드 에러");
+            //Debug.Log("BossMonster 스크립트 로드 에러");p
         }
     }
 
@@ -130,8 +131,8 @@ public class BossBattleManager : Singleton<BossBattleManager>
         //    players.Add(p);
         //}
 
-
-        players = GameManager.instance.players;
+        foreach (var p in GameManager.instance.players)
+            players.Add(p);
     }
 
     public void ToggleIsAttacking()
@@ -139,12 +140,12 @@ public class BossBattleManager : Singleton<BossBattleManager>
         if (isAttacking)
         {
             isAttacking = false;
-            Debug.Log($"토글 {isAttacking}");
+            //Debug.Log($"토글 {isAttacking}");
         }
         else if(!isAttacking)
         {
             isAttacking = true;
-            Debug.Log($"토글 {isAttacking}");
+            //Debug.Log($"토글 {isAttacking}");
         }
     }
 

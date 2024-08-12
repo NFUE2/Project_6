@@ -23,7 +23,7 @@ public class MovableBoss : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient) return;
 
         var isAttacking = BossBattleManager.Instance.isAttacking;
-        Debug.Log(isAttacking);
+        //Debug.Log(isAttacking);
         if (isAttacking == false && BossBattleManager.Instance.targetPlayer != null)
         {
             if(animator.GetBool("isWalk") == false)

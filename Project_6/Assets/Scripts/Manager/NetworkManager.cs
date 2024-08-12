@@ -262,8 +262,8 @@ public class NetworkManager : PunSingleton<NetworkManager>
     {
         base.OnCreateRoomFailed(returnCode, message);
         StopAllCoroutines();
-        Debug.Log(returnCode);
-        Debug.Log(message);
+        //Debug.Log(returnCode);
+        //Debug.Log(message);
         FailTextInfo($"{createRoomFailMessage}\n\n{ErrorMessage(returnCode)}");
     }
 
