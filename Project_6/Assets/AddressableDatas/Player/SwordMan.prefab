@@ -3811,6 +3811,7 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
   hitSound: {fileID: 8300000, guid: f694f65744d838847bf0bf0f25899972, type: 3}
+  hitEffectPrefab: {fileID: 0}
   guardSkill: {fileID: 8030321767033109922}
   projectileSkill: {fileID: 2269725357822401461}
 --- !u!114 &8030321767033109922
@@ -4031,7 +4032,7 @@ MonoBehaviour:
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 7124091863274714388}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
-  hitEffectPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &3933325964912910256
 MonoBehaviour:

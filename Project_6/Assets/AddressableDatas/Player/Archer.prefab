@@ -290,8 +290,8 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 6109480950032101510}
   healthBarImage: {fileID: 3548272555964695671}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 51130d2fcfe038247950f8ab53f443a2, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &5002148267779281587
 MonoBehaviour:

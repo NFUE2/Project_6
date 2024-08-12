@@ -4253,6 +4253,7 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
+  hitEffectPrefab: {fileID: 0}
   dashSkill: {fileID: 4825308176832394675}
   stackSkill: {fileID: 6522800500231870091}
 --- !u!114 &4825308176832394675
