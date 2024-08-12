@@ -15,9 +15,9 @@ public class HealItem : ItemBase<UsedItemDataSO>, IUsableItem
         else
         {
             PlayerCondition con = GameManager.instance.player.GetComponent<PlayerCondition>();
-            float value = con.maxHealth * (data.value / 100);
+            //float value = con.maxHealth * (data.value / 100);
 
-            p.TakeHeal(value);
+            //p.TakeHeal(value);
         }
     }
 }
