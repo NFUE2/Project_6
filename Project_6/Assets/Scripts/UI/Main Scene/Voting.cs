@@ -25,6 +25,12 @@ public class Voting : MonoBehaviourPun
     private void OnEnable()
     {
         ResetButton(true);
+        GameManager.instance.player.GetComponent<PlayerInput>().enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.player.GetComponent<PlayerInput>().enabled = true;
     }
 
     void ResetButton(bool active)
