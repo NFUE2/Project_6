@@ -72,7 +72,10 @@ public class BossBattleManager : Singleton<BossBattleManager>
                     bossStateMachine.ChangeState(bossStateMachine.IdleState);
                     if(targetPlayer == null)
                     {
-                        targetPlayer = players[Random.Range(0, players.Count)];
+                        if (players.Count > 0)
+                        {
+                            targetPlayer = players[Random.Range(0, players.Count)];
+                        }
                     }
                 }
             }
