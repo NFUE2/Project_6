@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,6 +69,11 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 else if (targetPlayer == null)
                 {
                     distanceToTarget = -1;
+                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    if(targetPlayer == null)
+                    {
+                        targetPlayer = players[Random.Range(0, players.Count)];
+                    }
                 }
             }
         }
