@@ -119,13 +119,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         // List로 관리합니다. Player 사망 시 List에서 요소 제거해야 하므로
         // Player 스크립트에서 싱글톤 접근하여 Remove 해야합니다.
-        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            players.Add(p);
-        }
+        //foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        //{
+        //    players.Add(p);
+        //}
 
 
-        //players = TestGameManager.instance.players;(복원)
+        players = GameManager.instance.players;
     }
 
     public void ToggleIsAttacking()
