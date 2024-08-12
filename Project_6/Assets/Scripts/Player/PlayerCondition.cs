@@ -25,17 +25,15 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        //UpdateHealthBar();
     }
 
     void Update()
     {
-        // UpdateHealthBar(); // 필요 시 활성화
+        // 필요 시 추가 업데이트 로직
     }
 
     public void TakeDamage(float damage)
     {
-        // 플레이어가 이미 죽은 상태라면 데미지를 적용하지 않음
         if (input.isDead)
         {
             return;
@@ -64,7 +62,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             Die();
         }
     }
-
 
     public void Heal(float amount)
     {
@@ -110,7 +107,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     [PunRPC]
     void DieRpc()
     {
-        if(photonView.IsMine) GameManager.instance.PlayerDie();
+        if (photonView.IsMine) GameManager.instance.PlayerDie();
     }
 
     private void MakePlayerTransparent()
@@ -126,7 +123,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             spriteRenderer.color = color;
         }
     }
-
 
     public void ModifyDefense(float amount)
     {
