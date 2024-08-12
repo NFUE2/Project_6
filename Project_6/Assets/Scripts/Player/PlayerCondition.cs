@@ -99,13 +99,13 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void Die()
     {
-        input.isDead = true;
         if (photonView.IsMine) photonView.RPC(nameof(DieRpc), RpcTarget.All);
     }
 
     [PunRPC]
     void DieRpc()
     {
+        input.isDead = true;
         GameManager.instance.PlayerDie();
         MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
@@ -119,7 +119,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)
         {
             Color color = spriteRenderer.color;
-            color.a = currentHealth <= 0 ? 0.5f : 1.0f; // 알파 값을 낮춰 반투명 상태로 만듦
+            color.a = input.isDead ? 0.5f : 1.0f; // 알파 값을 낮춰 반투명 상태로 만듦
             spriteRenderer.color = color;
         }
     }

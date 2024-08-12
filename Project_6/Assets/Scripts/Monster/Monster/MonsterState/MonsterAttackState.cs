@@ -59,6 +59,8 @@ public class MonsterAttackState : MonsterBaseState
 
         if(PlayerisDie())
         {
+            isAttacking = false;
+            StopAnimation(stateMachine.controller.animationData.attack);
             stateMachine.controller.target = null;
             stateMachine.ChangeState(stateMachine.idleState);
         }
