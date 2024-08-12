@@ -54,6 +54,8 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 
         if (!GameManager.instance.players.Contains(g)) return;
 
+        Debug.Log($"현재 플레이어 : {playerCount}");
+
         playerCount++;
         if (playerCount == curPlayersCount)
         {

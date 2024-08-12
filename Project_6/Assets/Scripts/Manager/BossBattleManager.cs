@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,6 +69,14 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 else if (targetPlayer == null)
                 {
                     distanceToTarget = -1;
+                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    if(targetPlayer == null)
+                    {
+                        if (players.Count > 0)
+                        {
+                            targetPlayer = players[Random.Range(0, players.Count)];
+                        }
+                    }
                 }
             }
         }
@@ -144,6 +150,8 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public void DestroyBoss()
     {
+        targetPlayer = null;
+        players.Clear();
         if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(spawnedBoss);
         //spawnedBoss.SetActive(false);
 

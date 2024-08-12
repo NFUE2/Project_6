@@ -25,7 +25,11 @@ public class Voting : MonoBehaviourPun
     private void OnEnable()
     {
         ResetButton(true);
-        GameManager.instance.player.GetComponent<PlayerInput>().enabled = false;
+
+        GameObject player = GameManager.instance.player;
+
+        player.GetComponent<PlayerInput>().enabled = false;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     private void OnDisable()
