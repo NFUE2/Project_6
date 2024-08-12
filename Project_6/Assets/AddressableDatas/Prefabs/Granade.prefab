@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  radius: 3
+  radius: 2.5
   dotDuration: 3
   speed: 15
   enemyLayerMask:
@@ -291,7 +291,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -1072850889082808864}
-  sceneViewId: 0
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &-1072850889082808864
