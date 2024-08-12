@@ -546,6 +546,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3753247065642757853, guid: 337e0f852629596478cbdbceae8aa334, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4344841348996427021, guid: 337e0f852629596478cbdbceae8aa334, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -606,6 +610,10 @@ PrefabInstance:
     - target: {fileID: 3104868809133284485, guid: ec544684e5666c04dba5056c2de78a82, type: 3}
       propertyPath: m_Name
       value: Paladin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439577458616861708, guid: ec544684e5666c04dba5056c2de78a82, type: 3}
+      propertyPath: sceneViewId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6136985481471857236, guid: ec544684e5666c04dba5056c2de78a82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -888,6 +896,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3933325964912910256, guid: d5b4ff064dd54da4b9825ef00fa1f112, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4298058945709228138, guid: d5b4ff064dd54da4b9825ef00fa1f112, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -988,6 +1000,10 @@ PrefabInstance:
     - target: {fileID: 1968069409769048728, guid: 85509ee3cea4d0e4b9ae233e4e5b96cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002148267779281587, guid: 85509ee3cea4d0e4b9ae233e4e5b96cb, type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1629,6 +1645,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3933325964912910256, guid: 3045dfc5fe2b53a4ba652f449271612c, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4298058945709228138, guid: 3045dfc5fe2b53a4ba652f449271612c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
