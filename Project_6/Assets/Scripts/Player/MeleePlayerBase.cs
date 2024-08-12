@@ -54,7 +54,7 @@ public abstract class MeleePlayerBase : PlayerBase
                 PlaySound(hitSound); // 피격 시 효과음 재생
 
                 // 파티클 효과 생성
-                Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
+                if(hitEffectPrefab != null) Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
             }
         }
 
