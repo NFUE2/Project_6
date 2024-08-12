@@ -101,13 +101,13 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     {
         input.isDead = true;
         if (photonView.IsMine) photonView.RPC(nameof(DieRpc), RpcTarget.All);
-        MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
 
     [PunRPC]
     void DieRpc()
     {
         GameManager.instance.PlayerDie();
+        MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
 
     private void MakePlayerTransparent()
@@ -148,8 +148,14 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public void Resurrection()
     {
-        currentHealth = maxHealth;
+        photonView.RPC(nameof(ResurrectionRPC),RpcTarget.All);
         UpdateHealthBar();
+    }
+
+    [PunRPC]
+    private void ResurrectionRPC()
+    {
+        currentHealth = maxHealth;
         input.isDead = false;
         MakePlayerTransparent();
     }
