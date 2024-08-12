@@ -19,8 +19,10 @@ public class BookPlayer : RangedPlayerBase
 
     private void Start()
     {
-        bookshieldSkill.SetCooldownText(qCooldownText);
-        laserSkill.SetCooldownText(eCooldownText);
+        //bookshieldSkill.SetCooldownText(qCooldownText);
+        //laserSkill.SetCooldownText(eCooldownText);
+        bookshieldSkill.SetCooldownImage(qCooldownImage);
+        laserSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void Attack()

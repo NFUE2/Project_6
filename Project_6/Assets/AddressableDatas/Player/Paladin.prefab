@@ -1794,8 +1794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  qCooldownText: {fileID: 2146154962264575865}
-  eCooldownText: {fileID: 1184899189216932093}
+  qCooldownImage: {fileID: 2944593867304363961}
+  eCooldownImage: {fileID: 3105178059363983400}
   animator: {fileID: 6875099469381461375}
   attackDamage: 10
   enemyLayer:
@@ -1822,6 +1822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
+  cooldownImage: {fileID: 3105178059363983400}
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   dashDuration: 0.5
   dashSpeed: 30
@@ -1849,6 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
+  cooldownImage: {fileID: 2944593867304363961}
   healDuration: 5
   totalHealAmount: 50
   statBoostDuration: 10
@@ -4528,26 +4530,26 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1694630360464439370, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1471760121715251870}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1184899189216932093 stripped
+--- !u!114 &2944593867304363961 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 296434384620235363, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4373543401045638439, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1471760121715251870}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2146154962264575865 stripped
+--- !u!114 &3105178059363983400 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 694700692200527335, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4574374049627929270, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1471760121715251870}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5606555114990876975 stripped

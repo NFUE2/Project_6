@@ -76,7 +76,7 @@ public class TargetSkill : SkillBase
         lastActionTime = Time.time;
 
         // 쿨다운 텍스트를 업데이트합니다.
-        UpdateCooldownText();
+        UpdateCooldownImage();
 
         // 타겟팅 모드 활성화
         riflePlayer.SetTargeting(true);

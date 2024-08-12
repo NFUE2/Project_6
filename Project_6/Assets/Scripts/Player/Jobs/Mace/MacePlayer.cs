@@ -14,8 +14,10 @@ public class MacePlayer : MeleePlayerBase
 
     private void Start()
     {
-        healAndBoostSkill.SetCooldownText(qCooldownText);
-        maceChargeSkill.SetCooldownText(eCooldownText);
+        //healAndBoostSkill.SetCooldownText(qCooldownText);
+        //maceChargeSkill.SetCooldownText(eCooldownText);
+        healAndBoostSkill.SetCooldownImage(qCooldownImage);
+        maceChargeSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void UseSkillQ()
