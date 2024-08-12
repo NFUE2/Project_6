@@ -1726,7 +1726,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4240847762656035667}
   - {fileID: 8601247927827047331}
-  sceneViewId: 5
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4240847762656035667
@@ -1999,7 +1999,6 @@ MonoBehaviour:
   laserDamage: 10
   laserWidth: 0.1
   maxLaserWidth: 0.5
-  laserExpandTime: 0.1
   laserRendererCore: {fileID: 6467133581712384365}
   laserRendererEdge: {fileID: 3178271506397542564}
   enemyLayer:
@@ -3772,7 +3771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7061303336290485854}
   - component: {fileID: 6467133581712384365}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: laserRendererCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3815,7 +3814,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: c99407688f44f0f4fb891325edeed4d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4606,7 +4605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023627043278898173}
   - component: {fileID: 3178271506397542564}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: laserRendererEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4649,7 +4648,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d03ee838048d73847aed62769c7877e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
