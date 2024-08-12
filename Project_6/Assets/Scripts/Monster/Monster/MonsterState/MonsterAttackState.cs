@@ -56,6 +56,12 @@ public class MonsterAttackState : MonsterBaseState
         }
 
         if(isAttacking) GetNomalizeTime();
+
+        if(PlayerisDie())
+        {
+            stateMachine.controller.target = null;
+            stateMachine.ChangeState(stateMachine.idleState);
+        }
         //else
         //    lastAttackTime += Time.deltaTime;
         //멀어지면 다시 추적

@@ -29,13 +29,14 @@ public class MonsterIdleState : MonsterBaseState
 
     private void PlayerSearch()
     {
-        foreach(GameObject p in players)
+        foreach(GameObject player in players)
         {
-            float distance = Vector2.Distance(p.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
+            float distance = Vector2.Distance(player.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
+            player.TryGetComponent(out PlayerInput p);
 
-            if (distance < stateMachine.controller.data.searchDistance)
+            if (!p.isDead && distance < stateMachine.controller.data.searchDistance)
             {
-                stateMachine.controller.target = p.transform;
+                stateMachine.controller.target = player.transform;
                 if(IsTrackable()) stateMachine.ChangeState(stateMachine.trackState);
 
                 if (distance < stateMachine.controller.data.attackDistance)

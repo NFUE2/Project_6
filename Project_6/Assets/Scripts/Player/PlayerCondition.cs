@@ -101,7 +101,10 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     }
 
     [PunRPC]
-    void DieRpc() => GameManager.instance.PlayerDie();
+    void DieRpc()
+    {
+        if(photonView.IsMine) GameManager.instance.PlayerDie();
+    }
 
     private void MakePlayerTransparent()
     {
