@@ -150,6 +150,8 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public void DestroyBoss()
     {
+        targetPlayer = null;
+        players.Clear();
         if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(spawnedBoss);
         //spawnedBoss.SetActive(false);
 
