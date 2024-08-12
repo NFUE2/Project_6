@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   player: {fileID: 5621945526719801880}
   groundCheck: {fileID: 2487854554747743862}
   groundCheckRadius: 0.1
@@ -1545,14 +1545,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   input: {fileID: 5356950079704350747}
   healthBarImage: {fileID: 6390300051597978642}
   hitSound: {fileID: 8300000, guid: 51130d2fcfe038247950f8ab53f443a2, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &5439577458616861708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc15a64d2fda364b8d652b289c72b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   qCooldownImage: {fileID: 2944593867304363961}
   eCooldownImage: {fileID: 3105178059363983400}
   animator: {fileID: 6875099469381461375}
@@ -1806,7 +1806,6 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
   healAndBoostSkill: {fileID: 236003066068444115}
   maceChargeSkill: {fileID: 4359650018410976990}
 --- !u!114 &4359650018410976990
@@ -1823,8 +1822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   cooldownImage: {fileID: 3105178059363983400}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  dashDuration: 0.2
+  PlayerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
+  dashDuration: 0.1
   dashSpeed: 20
   bossLayer:
     serializedVersion: 2
@@ -1832,7 +1831,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  dashDamage: 20
+  dashDamage: 50
   reducedDamageDuringDash: 0.5
   damageReduction: 0
   skillSound: {fileID: 0}
@@ -1852,14 +1851,14 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   cooldownImage: {fileID: 2944593867304363961}
   healDuration: 5
-  totalHealAmount: 50
+  totalHealAmount: 30
   statBoostDuration: 10
   defenseBoost: 10
   healRange: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   PlayerCondition: {fileID: 8848089825747710676}
   skillSound: {fileID: 0}
 --- !u!1 &3186447340830632415
