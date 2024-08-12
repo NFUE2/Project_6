@@ -1726,7 +1726,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4240847762656035667}
   - {fileID: 8601247927827047331}
-  sceneViewId: 5
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4240847762656035667
@@ -1760,7 +1760,6 @@ MonoBehaviour:
   type: 1
   components:
   - {fileID: 8536333347607610226}
-  - {fileID: 1132607944479200655}
   - {fileID: 6945365624703547530}
   gameObjects:
   - {fileID: 7277586159690957610}

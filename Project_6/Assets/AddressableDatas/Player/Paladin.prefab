@@ -1608,7 +1608,6 @@ MonoBehaviour:
   type: 1
   components:
   - {fileID: 2340133861823988647}
-  - {fileID: 5356950079704350747}
   - {fileID: 8784679368743811546}
   gameObjects:
   - {fileID: 5606555114990876975}

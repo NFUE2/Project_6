@@ -1,7 +1,9 @@
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviourPun
 {
     [Header("move_Data")]
     protected Vector2 moveInput;
@@ -35,6 +37,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine) return;
         Movement();         // 죽은 상태에서도 이동 가능
         CheckGrounded();    // 땅에 닿았는지 체크
         UpdateAnimation();  // 애니메이션 업데이트

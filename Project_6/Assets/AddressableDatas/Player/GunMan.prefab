@@ -3972,7 +3972,6 @@ MonoBehaviour:
   type: 1
   components:
   - {fileID: 3750137803945037143}
-  - {fileID: 5589319150714124445}
   - {fileID: 151301419556344795}
   gameObjects:
   - {fileID: 1068263373497550147}

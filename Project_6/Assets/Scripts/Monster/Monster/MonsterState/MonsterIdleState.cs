@@ -33,7 +33,6 @@ public class MonsterIdleState : MonsterBaseState
         {
             float distance = Vector2.Distance(player.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
             
-
             if (player.TryGetComponent(out PlayerInput p) && !p.isDead && distance < stateMachine.controller.data.searchDistance)
             {
                 stateMachine.controller.target = player.transform;

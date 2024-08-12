@@ -100,14 +100,14 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     void Die()
     {
         input.isDead = true;
-        photonView.RPC(nameof(DieRpc), RpcTarget.All);
+        if (photonView.IsMine) photonView.RPC(nameof(DieRpc), RpcTarget.All);
         MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
 
     [PunRPC]
     void DieRpc()
     {
-        if (photonView.IsMine) GameManager.instance.PlayerDie();
+        GameManager.instance.PlayerDie();
     }
 
     private void MakePlayerTransparent()
