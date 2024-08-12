@@ -35,6 +35,12 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public void TakeDamage(float damage)
     {
+        // 플레이어가 이미 죽은 상태라면 데미지를 적용하지 않음
+        if (input.isDead)
+        {
+            return;
+        }
+
         float damageAfterDefense;
         if (PlayerData != null)
         {
@@ -58,6 +64,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             Die();
         }
     }
+
 
     public void Heal(float amount)
     {
@@ -108,8 +115,8 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     private void MakePlayerTransparent()
     {
-        // 플레이어와 모든 자식 오브젝트의 SpriteRenderer를 가져옴
-        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        // 현재 오브젝트와 모든 자식 오브젝트의 SpriteRenderer를 가져옴
+        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
 
         // 각 SpriteRenderer의 색상을 변경하여 반투명하게 설정
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)
@@ -119,6 +126,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             spriteRenderer.color = color;
         }
     }
+
 
     public void ModifyDefense(float amount)
     {
