@@ -3914,8 +3914,8 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 5589319150714124445}
   healthBarImage: {fileID: 4134159575381251956}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &3753247065642757853
 MonoBehaviour:
@@ -4183,7 +4183,7 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   rollingDistance: 5
   rollingDuration: 0.5
-  rollingSound: {fileID: 0}
+  rollingSound: {fileID: 8300000, guid: 8aeac243f7a1559478bfb13e47abc953, type: 3}
 --- !u!114 &6901107365178775678
 MonoBehaviour:
   m_ObjectHideFlags: 0

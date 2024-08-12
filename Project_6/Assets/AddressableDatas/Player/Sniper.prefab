@@ -3990,8 +3990,8 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 7091315668424874106}
   healthBarImage: {fileID: 8328250545319872238}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &714492354989758925
 MonoBehaviour:
@@ -4014,7 +4014,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3846347453314382489}
   - {fileID: 3500148656245504216}
-  sceneViewId: 0
+  sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3846347453314382489

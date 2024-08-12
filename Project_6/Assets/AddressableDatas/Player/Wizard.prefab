@@ -1702,8 +1702,8 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 1132607944479200655}
   healthBarImage: {fileID: 8187467345517319703}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 51130d2fcfe038247950f8ab53f443a2, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &5381647602887560332
 MonoBehaviour:
@@ -1950,7 +1950,7 @@ MonoBehaviour:
   animator: {fileID: 9180609015842025285}
   attackPrefab: {fileID: 4784781078324220614, guid: 833b66433ae2e4c4fa5b567d7aba70cf, type: 3}
   attackPoint: {fileID: 4919750423448290811}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 48cef49a56f984142a71b31b9fa874ad, type: 3}
   bookshieldSkill: {fileID: 2002247320582678583}
   laserSkill: {fileID: 6453873899193097556}
   attackRange: 3
@@ -1979,7 +1979,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  shieldSound: {fileID: 0}
+  shieldSound: {fileID: 8300000, guid: cd5e0573085ba624b9467e134e000ce9, type: 3}
 --- !u!114 &6453873899193097556
 MonoBehaviour:
   m_ObjectHideFlags: 0

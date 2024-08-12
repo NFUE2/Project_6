@@ -3777,8 +3777,8 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 6086093507618967446}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
 --- !u!114 &3933325964912910256
 MonoBehaviour:
@@ -3801,7 +3801,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8348767084602959552}
   - {fileID: 1646592590866569336}
-  sceneViewId: 0
+  sceneViewId: 8
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &8348767084602959552
@@ -4031,8 +4031,9 @@ MonoBehaviour:
   attackSize: {x: 1, y: 1}
   attackOffset: {x: -0.7, y: 0.5}
   knockbackForce: 5
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
+  hitEffectPrefab: {fileID: 0}
   shieldSkill: {fileID: 4833616089676288180}
   chargeSkill: {fileID: 2603718513585877556}
 --- !u!114 &4833616089676288180
@@ -4078,7 +4079,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   hammerImpactEffect: {fileID: 0}
-  hammerImpactSound: {fileID: 0}
+  hammerImpactSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
 --- !u!1 &8798604630830911418
 GameObject:
   m_ObjectHideFlags: 0

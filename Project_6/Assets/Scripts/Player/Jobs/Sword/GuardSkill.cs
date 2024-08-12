@@ -3,24 +3,30 @@ using UnityEngine;
 public class GuardSkill : SkillBase, IDamagable
 {
     public bool IsGuard { get; private set; }
-    public float GuardDuration = 3.0f; // 가드 지속 시간
-    public float DefenseBoostDuringGuard = 50f; // 가드 중 방어력 증가량
+    public float GuardDuration = 3.0f;
+    public float DefenseBoostDuringGuard = 50f;
     public PlayerDataSO PlayerData;
     public float DamageReduction;
 
-    public GameObject guardParticleEffectPrefab; // 파티클 효과 프리팹
-    public AudioClip guardSound; // 방어 성공 시 효과음 추가
-    private AudioSource audioSource; // AudioSource 컴포넌트
+    public GameObject guardParticleEffectPrefab;
+    public AudioClip guardSound;
+    private AudioSource audioSource;
     private PlayerCondition playerCondition;
     private float originalDamageReduction;
 
-    private GameObject guardParticleEffectInstance; // 생성된 파티클 오브젝트 인스턴스
+    private GameObject guardParticleEffectInstance;
+
+    public Material outlineMaterial; // 윤곽선 셰이더 머티리얼
+    private Material originalMaterial;
+    private Renderer playerRenderer;
 
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
-        playerCondition = GetComponent<PlayerCondition>(); // PlayerCondition 컴포넌트 가져오기
-        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        playerCondition = GetComponent<PlayerCondition>();
+        audioSource = GetComponent<AudioSource>();
+        playerRenderer = GetComponent<Renderer>(); // 플레이어의 렌더러 가져오기
+        originalMaterial = playerRenderer.material; // 원래 머티리얼 저장
     }
 
     public override void UseSkill()
@@ -31,7 +37,7 @@ public class GuardSkill : SkillBase, IDamagable
         }
         else
         {
-            if (Time.time - lastActionTime < cooldownDuration) return; // Q 스킬 쿨타임 체크
+            if (Time.time - lastActionTime < cooldownDuration) return;
             EnterGuard();
         }
     }
@@ -44,24 +50,17 @@ public class GuardSkill : SkillBase, IDamagable
 
         if (guardParticleEffectPrefab != null)
         {
-            // 파티클 효과 생성 및 플레이어 위치에 맞게 배치
             guardParticleEffectInstance = Instantiate(guardParticleEffectPrefab, transform.position, Quaternion.identity);
-            guardParticleEffectInstance.transform.SetParent(transform); // 플레이어를 부모로 설정
-
-            // 플레이어의 중심에 위치시킴
-            var playerRenderer = GetComponent<Renderer>();
-            if (playerRenderer != null)
-            {
-                guardParticleEffectInstance.transform.localPosition = playerRenderer.bounds.center - transform.position;
-            }
-            else
-            {
-                // renderer가 없는 경우, transform 중심에 위치
-                guardParticleEffectInstance.transform.localPosition = Vector3.zero;
-            }
+            guardParticleEffectInstance.transform.SetParent(transform);
         }
 
-        Invoke("ExitGuardEvent", GuardDuration); // 가드 지속 시간 후 이벤트 설정
+        // 윤곽선 셰이더 적용
+        if (outlineMaterial != null)
+        {
+            playerRenderer.material = outlineMaterial;
+        }
+
+        Invoke("ExitGuardEvent", GuardDuration);
     }
 
     private void ExitGuard()
@@ -71,8 +70,11 @@ public class GuardSkill : SkillBase, IDamagable
 
         if (guardParticleEffectInstance != null)
         {
-            Destroy(guardParticleEffectInstance); // 파티클 오브젝트 제거
+            Destroy(guardParticleEffectInstance);
         }
+
+        // 원래 셰이더로 복원
+        playerRenderer.material = originalMaterial;
 
         lastActionTime = Time.time;
     }
@@ -84,25 +86,25 @@ public class GuardSkill : SkillBase, IDamagable
 
     private void SaveOriginalStats()
     {
-        originalDamageReduction = DamageReduction; // 현재 데미지 감소 비율 저장
+        originalDamageReduction = DamageReduction;
     }
 
     private void ApplyGuardStats()
     {
-        playerCondition.ModifyDefense(DefenseBoostDuringGuard); // 방어력 증가 적용
+        playerCondition.ModifyDefense(DefenseBoostDuringGuard);
     }
 
     private void RestoreOriginalStats()
     {
-        playerCondition.ModifyDefense(-DefenseBoostDuringGuard); // 방어력 복원
-        DamageReduction = originalDamageReduction; // 데미지 감소 비율 복원
+        playerCondition.ModifyDefense(-DefenseBoostDuringGuard);
+        DamageReduction = originalDamageReduction;
     }
 
     public void PlayGuardSound()
     {
         if (guardSound != null && audioSource != null)
         {
-            audioSource.PlayOneShot(guardSound); // 방어 성공 시 효과음 재생
+            audioSource.PlayOneShot(guardSound);
         }
     }
 
@@ -110,13 +112,10 @@ public class GuardSkill : SkillBase, IDamagable
     {
         if (IsGuard)
         {
-            // 방어 중일 때 데미지 효과음 재생
             PlayGuardSound();
-            // 방어 중일 때 데미지 무시
         }
         else
         {
-            // 방어 중이 아닐 때는 기본 데미지 처리 로직 호출
             playerCondition.TakeDamage(damage);
         }
     }
