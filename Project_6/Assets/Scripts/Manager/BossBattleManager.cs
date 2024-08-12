@@ -38,39 +38,39 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 if (targetPlayer != null)
                 {
                     distanceToTarget = CalcDistance();
+                    if (boss.currentHp <= 0)
+                    {
+                        if (bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
+                        {
+                            bossStateMachine.ChangeState(bossStateMachine.DieState);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        if (isAttacking == false)
+                        {
+                            curCoolDown += Time.deltaTime;
+                        }
+                        if (isFirst)
+                        {
+                            isFirst = false;
+                            bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                        }
+                        else
+                        {
+                            if (curCoolDown >= attackCoolDown && isAttacking == false)
+                            {
+                                bossStateMachine.ChangeState(bossStateMachine.AttackState);
+                                curCoolDown = 0;
+                            }
+                        }
+                    }
+
                 }
                 else if (targetPlayer == null)
                 {
                     distanceToTarget = -1;
-                }
-
-                if (boss.currentHp <= 0)
-                {
-                    if(bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
-                    {
-                        bossStateMachine.ChangeState(bossStateMachine.DieState);
-                    }
-                    return;
-                }
-                else
-                {
-                    if (isAttacking == false)
-                    {
-                        curCoolDown += Time.deltaTime;
-                    }
-                    if (isFirst)
-                    {
-                        isFirst = false;
-                        bossStateMachine.ChangeState(bossStateMachine.IdleState);
-                    }
-                    else
-                    {
-                        if (curCoolDown >= attackCoolDown && isAttacking == false)
-                        {
-                            bossStateMachine.ChangeState(bossStateMachine.AttackState);
-                            curCoolDown = 0;
-                        }
-                    }
                 }
             }
         }

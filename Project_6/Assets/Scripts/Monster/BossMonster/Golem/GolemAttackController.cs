@@ -48,7 +48,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     break;
             }
         }
-        else if(distanceToTarget <= 7)
+        else if(distanceToTarget <= 7 && distanceToTarget > -1)
         {
             int index = Random.Range(0, countOfMeleeAttack);
             switch (index)
@@ -63,6 +63,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     Charge();
                     break;
             }
+        }
+        else if(distanceToTarget == -1)
+        {
+            BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
         }
     }
 
