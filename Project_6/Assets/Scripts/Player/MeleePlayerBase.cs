@@ -13,7 +13,7 @@ public abstract class MeleePlayerBase : PlayerBase
     public AudioClip attackSound; // 공격 시 효과음
     public AudioClip hitSound; // 피격 시 효과음
     private AudioSource audioSource; // 오디오 소스
-    public GameObject hitEffectPrefab; // 히트 효과를 위한 파티클 시스템 프리팹
+    //public GameObject hitEffectPrefab; // 히트 효과를 위한 파티클 시스템 프리팹
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
@@ -54,7 +54,7 @@ public abstract class MeleePlayerBase : PlayerBase
                 PlaySound(hitSound); // 피격 시 효과음 재생
 
                 // 파티클 효과 생성
-                Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
+                //Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
             }
         }
 

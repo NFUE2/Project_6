@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 {
-    public float maxHealth = 100f;
-    public float currentHealth;
-
     public PlayerDataSO PlayerData;
     public PlayerInput input;
     public Image healthBarImage;
@@ -19,8 +16,12 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     private Rigidbody2D rb;
     public float knockbackForce = 5f;
 
+    private float maxHealth;
+    private float currentHealth;
+
     void Start()
     {
+        maxHealth = PlayerData.maxHP;
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();

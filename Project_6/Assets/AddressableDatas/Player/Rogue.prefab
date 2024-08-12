@@ -3971,7 +3971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   player: {fileID: 2997727097517265977}
   groundCheck: {fileID: 3377354756236232052}
   groundCheckRadius: 0.1
@@ -3991,14 +3991,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 4438777531071002641}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 0
+  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4239,7 +4239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6038d1ec238104449abbebec05ef18ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   qCooldownImage: {fileID: 5614317661596480442}
   eCooldownImage: {fileID: 5629660413075043371}
   animator: {fileID: 2921700412241113319}
@@ -4253,7 +4253,6 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
-  hitEffectPrefab: {fileID: 0}
   dashSkill: {fileID: 4825308176832394675}
   stackSkill: {fileID: 6522800500231870091}
 --- !u!114 &4825308176832394675
@@ -4276,8 +4275,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  damage: 10
+  PlayerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
+  damage: 30
   dashSound: {fileID: 8300000, guid: 3bbd66eae21f635479a9ef6450accc28, type: 3}
 --- !u!114 &6522800500231870091
 MonoBehaviour:
@@ -4297,7 +4296,7 @@ MonoBehaviour:
   maxStack: 10
   damagePerStack: 10
   stackText: {fileID: 0}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

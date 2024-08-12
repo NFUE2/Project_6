@@ -3797,7 +3797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   qCooldownImage: {fileID: 1346153263068446399}
   eCooldownImage: {fileID: 1253405021441046830}
   animator: {fileID: 5179917898985751293}
@@ -3811,7 +3811,6 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
   hitSound: {fileID: 8300000, guid: f694f65744d838847bf0bf0f25899972, type: 3}
-  hitEffectPrefab: {fileID: 0}
   guardSkill: {fileID: 8030321767033109922}
   projectileSkill: {fileID: 2269725357822401461}
 --- !u!114 &8030321767033109922
@@ -3830,10 +3829,11 @@ MonoBehaviour:
   cooldownImage: {fileID: 1346153263068446399}
   GuardDuration: 3
   DefenseBoostDuringGuard: 50
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   DamageReduction: 0
   guardParticleEffectPrefab: {fileID: 4823530309318575359, guid: 029ef1eef72fb7d4d87d26b08baf68a5, type: 3}
   guardSound: {fileID: 8300000, guid: f60c71440a78c7b4f99800ee49860f03, type: 3}
+  outlineMaterial: {fileID: 2100000, guid: c99407688f44f0f4fb891325edeed4d6, type: 2}
 --- !u!114 &2269725357822401461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3850,7 +3850,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 1253405021441046830}
   projectilePrefab: {fileID: 2881983839906218615, guid: 3e9fe1f7a329eac4e944c062a2b6d580, type: 3}
   attackPoint: {fileID: 1333203476495510599}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   shootSound: {fileID: 8300000, guid: a46d6a83c93d1624cbfa28f6c1a59701, type: 3}
 --- !u!114 &2224472953690284361
 MonoBehaviour:
@@ -4006,7 +4006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   player: {fileID: 183300651321169467}
   groundCheck: {fileID: 3377354756236232052}
   groundCheckRadius: 0.1
@@ -4026,14 +4026,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 7124091863274714388}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0

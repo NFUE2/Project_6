@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   player: {fileID: 5535542504141788762}
   groundCheck: {fileID: 7508323470118002058}
   groundCheckRadius: 0.1
@@ -285,14 +285,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   input: {fileID: 6109480950032101510}
   healthBarImage: {fileID: 3548272555964695671}
   hitSound: {fileID: 8300000, guid: 51130d2fcfe038247950f8ab53f443a2, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &5002148267779281587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0f7a5adbdde20438b595d8bd78d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   qCooldownImage: {fileID: 4705799370574598108}
   eCooldownImage: {fileID: 4793195472671557709}
   animator: {fileID: 84350946389803228}
@@ -559,7 +559,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 4793195472671557709}
   bombArrow: {fileID: 4780719402759027790, guid: ddf8c07d38a44094a9ddec1edfe475ce, type: 3}
   fireAngle: 15
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   fireSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!114 &1161066313930406838
 MonoBehaviour:
@@ -576,7 +576,7 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   cooldownImage: {fileID: 4705799370574598108}
   wireArrow: {fileID: 4652639966666034163, guid: d6262c3149bcb8d4aa9c835670e71169, type: 3}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   skillSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
 --- !u!1 &321551034309331916
 GameObject:

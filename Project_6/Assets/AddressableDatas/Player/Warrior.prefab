@@ -3752,7 +3752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   player: {fileID: 7205045408271842499}
   groundCheck: {fileID: 3377354756236232052}
   groundCheckRadius: 0.1
@@ -3772,14 +3772,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 6086093507618967446}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3801,7 +3801,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8348767084602959552}
   - {fileID: 1646592590866569336}
-  sceneViewId: 8
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &8348767084602959552
@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b19c6c328713340a9c62a1ab217a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   qCooldownImage: {fileID: 2595622889250128957}
   eCooldownImage: {fileID: 2868515029536392108}
   animator: {fileID: 222078652441862621}
@@ -4034,7 +4034,6 @@ MonoBehaviour:
   knockbackForce: 5
   attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
   shieldSkill: {fileID: 4833616089676288180}
   chargeSkill: {fileID: 2603718513585877556}
 --- !u!114 &4833616089676288180
@@ -4054,7 +4053,7 @@ MonoBehaviour:
   ShieldDuration: 3
   shieldPrefab: {fileID: 8220456939829933817, guid: a5115eb0c28578e4fa45b61de2f3fe10, type: 3}
   shieldDistance: 2
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   shieldSound: {fileID: 0}
 --- !u!114 &2603718513585877556
 MonoBehaviour:
@@ -4073,7 +4072,7 @@ MonoBehaviour:
   maxChargingTime: 3
   damage: 30
   damageRate: 10
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   attackSize: {x: 1, y: 1}
   attackOffset: {x: -0.7, y: 0.5}
   enemyLayer:
