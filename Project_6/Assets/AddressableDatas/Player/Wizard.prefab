@@ -1703,8 +1703,6 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 51130d2fcfe038247950f8ab53f443a2, type: 3}
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
-  maxHealth: 100
-  currentHealth: 0
 --- !u!114 &5381647602887560332
 MonoBehaviour:
   m_ObjectHideFlags: 0
