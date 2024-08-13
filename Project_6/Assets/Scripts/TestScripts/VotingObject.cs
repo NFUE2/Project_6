@@ -25,8 +25,7 @@ public class DestinationData
     public BGMList bgm;
 }
 
-[RequireComponent(typeof(PhotonView))]
-public class VotingObject : MonoBehaviourPun//, IPunObservable
+public class VotingObject : MonoBehaviour//, IPunObservable
 {
     public int playerCount = 0, curPlayersCount;
     public DestinationData data;
@@ -53,6 +52,8 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
         GameObject g = collision.gameObject;
 
         if (!GameManager.instance.players.Contains(g)) return;
+
+        //Debug.Log($"현재 플레이어 : {playerCount}");
 
         playerCount++;
         if (playerCount == curPlayersCount)

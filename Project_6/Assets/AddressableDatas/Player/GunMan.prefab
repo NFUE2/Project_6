@@ -3889,7 +3889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   player: {fileID: 8318275278528164768}
   groundCheck: {fileID: 1111631820787710435}
   groundCheckRadius: 0.1
@@ -3909,14 +3909,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   input: {fileID: 5589319150714124445}
   healthBarImage: {fileID: 4134159575381251956}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &3753247065642757853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3972,7 +3972,6 @@ MonoBehaviour:
   type: 1
   components:
   - {fileID: 3750137803945037143}
-  - {fileID: 5589319150714124445}
   - {fileID: 151301419556344795}
   gameObjects:
   - {fileID: 1068263373497550147}
@@ -4157,9 +4156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a05d8bc5c8d5f429265c94b4d64ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  qCooldownText: {fileID: 8951248002785326111}
-  eCooldownText: {fileID: 8178554206842850203}
+  playerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
+  qCooldownImage: {fileID: 5272827538541976799}
+  eCooldownImage: {fileID: 5397101048428190542}
   animator: {fileID: 579804143904161667}
   attackPrefab: {fileID: 6038683907410269147, guid: 089daa8578ffc534db05cbcbb688d9c8, type: 3}
   attackPoint: {fileID: 5226708908227198370}
@@ -4180,10 +4179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  cooldownImage: {fileID: 0}
+  PlayerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   rollingDistance: 5
   rollingDuration: 0.5
-  rollingSound: {fileID: 0}
+  rollingSound: {fileID: 8300000, guid: 8aeac243f7a1559478bfb13e47abc953, type: 3}
 --- !u!114 &6901107365178775678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4210,9 +4210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
+  cooldownImage: {fileID: 5272827538541976799}
   attackPoint: {fileID: 5226708908227198370}
   attackPrefab: {fileID: 6038683907410269147, guid: 089daa8578ffc534db05cbcbb688d9c8, type: 3}
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   firingSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
 --- !u!1 &8642911373237775056
 GameObject:
@@ -4583,6 +4584,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 057aa0a7a6a7ebf47ba640c2e60d3523, type: 3}
+    - target: {fileID: 3974201190146778006, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436427727859436551, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5531077860410013324, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_FillAmount
       value: 1
@@ -4616,30 +4625,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5272827538541976799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4373543401045638439, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_PrefabInstance: {fileID: 8474976496768066040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5397101048428190542 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4574374049627929270, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_PrefabInstance: {fileID: 8474976496768066040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7068860779297380786 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1694630360464439370, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 8474976496768066040}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8178554206842850203 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 296434384620235363, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
-  m_PrefabInstance: {fileID: 8474976496768066040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8951248002785326111 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 694700692200527335, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
-  m_PrefabInstance: {fileID: 8474976496768066040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

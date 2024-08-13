@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class P_AllRoundAttackObject : MonoBehaviour,IPunInstantiateMagicCallback
+public class P_AllRoundAttackObject : MonoBehaviourPun,IPunInstantiateMagicCallback
 {
     private float keepingTime = 15;
     private float curTime = 0;
@@ -47,11 +47,11 @@ public class P_AllRoundAttackObject : MonoBehaviour,IPunInstantiateMagicCallback
        // }
     }
 
-    [PunRPC]
+    //[PunRPC]
     private void DestroyObject()
     {
         //Destroy(gameObject);
-        PhotonNetwork.Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)

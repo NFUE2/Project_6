@@ -58,6 +58,6 @@ public class GrenadeSkill : SkillBase
         lastActionTime = Time.time;
 
         // 쿨다운 텍스트를 업데이트합니다.
-        UpdateCooldownText();
+        UpdateCooldownImage();
     }
 }

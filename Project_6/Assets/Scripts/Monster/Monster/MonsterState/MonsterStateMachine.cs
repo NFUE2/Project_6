@@ -27,6 +27,7 @@ public class MonsterStateMachine : StateMachine
     private void Spawn()
     {
         ChangeState(idleState);
+        attackState.isAttacking = false;
     }
 
     private void Die()

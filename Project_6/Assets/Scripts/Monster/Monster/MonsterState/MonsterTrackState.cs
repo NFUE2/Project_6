@@ -41,7 +41,7 @@ public class MonsterTrackState : MonsterBaseState
         {
             stateMachine.ChangeState(stateMachine.attackState);
         }
-        else if(!isTrackable() || distance > stateMachine.controller.data.searchDistance)
+        else if(!IsTrackable() || distance > stateMachine.controller.data.searchDistance)
         {
             stateMachine.ChangeState(stateMachine.idleState);
         }

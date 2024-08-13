@@ -1,8 +1,9 @@
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviourPun
 {
     [Header("move_Data")]
     protected Vector2 moveInput;
@@ -25,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     [Header("Mouse_Data")]
     protected Vector2 lookInput; // 마우스 위치 저장 변수
 
-    [Header("Input On/Off Controll")]
+    [Header("Input On/Off Control")]
     public bool isDead = false;
 
     protected virtual void Start()
@@ -36,35 +37,21 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (!isDead)
-        {
-            Movement();
-            CheckGrounded();
-            UpdateAnimation();
-            RotateTowardsMouse();
-        }
-        else
-        {
-            Movement(); // 죽은 상태에서 움직임은 가능하게 함
-        }
+        if (!photonView.IsMine) return;
+        Movement();         // 죽은 상태에서도 이동 가능
+        CheckGrounded();    // 땅에 닿았는지 체크
+        UpdateAnimation();  // 애니메이션 업데이트
+        RotateTowardsMouse(); // 죽은 상태에서도 마우스 회전 가능
     }
 
     private void Movement()
     {
-        if (isDead)
-        {
-            return;
-        }
         float speed = isRunning ? playerdata.runSpeed : playerdata.walkSpeed;
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
     }
 
     private void Jump()
     {
-        if (isDead)
-        {
-            return;
-        }
         if (isGrounded)
         {
             rb.AddForce(Vector2.up * playerdata.jumpForce, ForceMode2D.Impulse);
@@ -79,7 +66,7 @@ public class PlayerInput : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (animator != null && !isDead)
+        if (animator != null)
         {
             bool isWalking = moveInput.x != 0;
 
@@ -120,10 +107,6 @@ public class PlayerInput : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        if (isDead)
-        {
-            return;
-        }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(lookInput);
         mousePosition.z = 0;
 
@@ -134,15 +117,13 @@ public class PlayerInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!isDead)
-        {
-            moveInput = context.ReadValue<Vector2>();
-        }
+        // 이동 입력은 죽은 상태에서도 가능
+        moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!isDead && context.performed)
+        if (context.performed)
         {
             Jump();
         }
@@ -150,27 +131,19 @@ public class PlayerInput : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (!isDead)
-        {
-            isRunning = context.ReadValueAsButton();
-        }
+        // 달리기 입력도 죽은 상태에서 가능
+        isRunning = context.ReadValueAsButton();
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (!isDead)
-        {
-            lookInput = context.ReadValue<Vector2>();
-        }
-    }
-
-    public Vector2 GetMousePosition()
-    {
-        return lookInput;
+        // 마우스 방향 전환도 죽은 상태에서 가능
+        lookInput = context.ReadValue<Vector2>();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        // 공격은 죽은 상태에서 불가능
         if (!isDead && context.performed)
         {
             player.Attack();
@@ -179,6 +152,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillQ(InputAction.CallbackContext context)
     {
+        // 스킬 Q는 죽은 상태에서 불가능
         if (!isDead && context.performed)
         {
             player.UseSkillQ();
@@ -187,9 +161,15 @@ public class PlayerInput : MonoBehaviour
 
     public void OnSkillE(InputAction.CallbackContext context)
     {
+        // 스킬 E는 죽은 상태에서 불가능
         if (!isDead && context.performed)
         {
             player.UseSkillE();
         }
+    }
+
+    public Vector2 GetMousePosition()
+    {
+        return lookInput;
     }
 }

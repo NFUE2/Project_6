@@ -16,8 +16,11 @@ public class RiflePlayer : RangedPlayerBase
 
     private void Start()
     {
-        targetSkill.SetCooldownText(qCooldownText);
-        grenadeSkill.SetCooldownText(eCooldownText);
+        //targetSkill.SetCooldownText(qCooldownText);
+        //grenadeSkill.SetCooldownText(eCooldownText);
+
+        targetSkill.SetCooldownImage(qCooldownImage);
+        grenadeSkill.SetCooldownImage(eCooldownImage);
 
         // TargetSkill에 RiflePlayer 참조를 전달하여 타겟팅 모드 설정
         targetSkill.Initialize(this);

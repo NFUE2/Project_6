@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 10
+  damage: 15
   offScreenMargin: 0.5
   explosionEffect: {fileID: 3142795443215796759, guid: 84816262658c57641b769b23304fe50f, type: 3}
   explosionLifetime: 2

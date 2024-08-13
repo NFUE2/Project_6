@@ -1,12 +1,10 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 {
-    public float maxHealth = 100f;
-    public float currentHealth;
-
     public PlayerDataSO PlayerData;
     public PlayerInput input;
     public Image healthBarImage;
@@ -18,22 +16,30 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     private Rigidbody2D rb;
     public float knockbackForce = 5f;
 
+    public float maxHealth;
+    private float currentHealth;
+
     void Start()
     {
+        maxHealth = PlayerData.maxHP;
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        //UpdateHealthBar();
     }
 
     void Update()
     {
-        //UpdateHealthBar();
+        // 필요 시 추가 업데이트 로직
     }
 
     public void TakeDamage(float damage)
     {
+        if (input.isDead)
+        {
+            return;
+        }
+
         float damageAfterDefense;
         if (PlayerData != null)
         {
@@ -76,7 +82,6 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         UpdateHealthBar();
     }
 
-
     public void ApplyKnockback(Vector2 knockbackDirection, float knockbackForce)
     {
         if (rb != null)
@@ -95,24 +100,30 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     void Die()
     {
+        if (photonView.IsMine) photonView.RPC(nameof(DieRpc), RpcTarget.All);
+    }
+
+    [PunRPC]
+    void DieRpc()
+    {
         input.isDead = true;
+        GameManager.instance.PlayerDie();
         MakePlayerTransparent(); // 플레이어를 반투명하게 만들기
     }
 
     private void MakePlayerTransparent()
     {
-        // 플레이어와 모든 자식 오브젝트의 SpriteRenderer를 가져옴
-        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        // 현재 오브젝트와 모든 자식 오브젝트의 SpriteRenderer를 가져옴
+        SpriteRenderer[] spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
 
         // 각 SpriteRenderer의 색상을 변경하여 반투명하게 설정
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)
         {
             Color color = spriteRenderer.color;
-            color.a = 0.5f; // 알파 값을 낮춰 반투명 상태로 만듦
+            color.a = input.isDead ? 0.5f : 1.0f; // 알파 값을 낮춰 반투명 상태로 만듦
             spriteRenderer.color = color;
         }
     }
-
 
     public void ModifyDefense(float amount)
     {
@@ -134,5 +145,19 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
             GameObject effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             Destroy(effect, 1.0f);
         }
+    }
+
+    public void Resurrection()
+    {
+        photonView.RPC(nameof(ResurrectionRPC),RpcTarget.All);
+        UpdateHealthBar();
+    }
+
+    [PunRPC]
+    private void ResurrectionRPC()
+    {
+        currentHealth = maxHealth;
+        input.isDead = false;
+        MakePlayerTransparent();
     }
 }

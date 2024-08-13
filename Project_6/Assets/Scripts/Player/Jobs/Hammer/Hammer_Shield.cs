@@ -1,6 +1,5 @@
 using UnityEngine;
 using Photon.Pun;
-using System.Linq.Expressions;
 
 public class Hammer_Shield : MonoBehaviourPun
 {
@@ -39,17 +38,5 @@ public class Hammer_Shield : MonoBehaviourPun
             // 피격 효과 재생
             PlayHitEffects();
         }
-    }
-
-    public void SetParent(int index)
-    {
-        photonView.RPC(nameof(SetParentRPC), RpcTarget.All, index);
-    }
-
-    [PunRPC]
-    public void SetParentRPC(int index)
-    {
-        transform.SetParent(GameManager.instance.players[index].transform);
-        transform.localPosition = Vector3.zero;
     }
 }

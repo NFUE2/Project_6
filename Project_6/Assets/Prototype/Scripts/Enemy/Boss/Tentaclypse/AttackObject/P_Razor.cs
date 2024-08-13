@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_Razor : MonoBehaviour, IPunInstantiateMagicCallback
+public class P_Razor : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     private bool isAttackable = false;
     private float stateChangeTime = 0.75f;
@@ -74,11 +74,11 @@ public class P_Razor : MonoBehaviour, IPunInstantiateMagicCallback
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     private void DestroyObject()
     {
         //PhotonNetwork.Destroy(gameObject);
-        Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   name: Golem
   info: 
-  maxHP: 5000
+  maxHP: 500
   moveSpeed: 1
   attackTime: 5
   attackDamage: 20

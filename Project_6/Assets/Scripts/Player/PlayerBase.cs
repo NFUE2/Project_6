@@ -1,13 +1,16 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     public PlayerDataSO playerData;
 
-    public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    //public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    //public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public Image qCooldownImage;
+    public Image eCooldownImage;
     public abstract void Attack();
     public abstract void UseSkillQ();
     public abstract void UseSkillE();

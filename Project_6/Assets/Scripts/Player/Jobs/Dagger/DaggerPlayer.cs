@@ -12,8 +12,10 @@ public class DaggerPlayer : MeleePlayerBase
 
     private void Start()
     {
-        dashSkill.SetCooldownText(qCooldownText);
-        stackSkill.SetCooldownText(eCooldownText);
+        //dashSkill.SetCooldownText(qCooldownText);
+        //stackSkill.SetCooldownText(eCooldownText);
+        dashSkill.SetCooldownImage(qCooldownImage);
+        stackSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void Attack()

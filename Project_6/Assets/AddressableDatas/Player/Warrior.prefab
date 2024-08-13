@@ -2819,7 +2819,7 @@ GameObject:
   - component: {fileID: 222078652441862621}
   - component: {fileID: 1646592590866569336}
   - component: {fileID: 3033351421535832741}
-  - component: {fileID: 8875699946161810554}
+  - component: {fileID: 8164795199048138552}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -2927,7 +2927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd377335d64d834f9e1aff1352046b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8875699946161810554
+--- !u!114 &8164795199048138552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2936,21 +2936,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6914662361705912298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45bb38aa45cba34c9ab20a97fcb4bdd, type: 3}
+  m_Script: {fileID: 11500000, guid: ecd6c3274eb1a564f8e438cae6bb6d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownText: {fileID: 0}
-  maxChargingTime: 3
-  damage: 30
-  damageRate: 10
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  attackSize: {x: 1, y: 1}
-  attackOffset: {x: -0.7, y: 0.5}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  hammerImpactEffect: {fileID: 0}
-  hammerImpactSound: {fileID: 0}
 --- !u!1 &7021573611365236410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,6 +3572,7 @@ GameObject:
   - component: {fileID: 8940245367979463514}
   - component: {fileID: 7205045408271842499}
   - component: {fileID: 4833616089676288180}
+  - component: {fileID: 2603718513585877556}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Player
@@ -3763,7 +3752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerdata: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  playerdata: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   player: {fileID: 7205045408271842499}
   groundCheck: {fileID: 3377354756236232052}
   groundCheckRadius: 0.1
@@ -3783,14 +3772,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784d50a1fa6939c43829b3d96217c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 6086093507618967446}
-  hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
+  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3845,7 +3834,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   components:
-  - {fileID: 8883530123643855291}
   - {fileID: 2224472953690284361}
   - {fileID: 9190360161886165023}
   gameObjects:
@@ -4031,22 +4019,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b19c6c328713340a9c62a1ab217a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
-  qCooldownText: {fileID: 1229589727487732989}
-  eCooldownText: {fileID: 2065276799066346361}
+  playerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
+  qCooldownImage: {fileID: 2595622889250128957}
+  eCooldownImage: {fileID: 2868515029536392108}
   animator: {fileID: 222078652441862621}
   attackDamage: 10
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   attackCooldown: 1
   attackSize: {x: 1, y: 1}
   attackOffset: {x: -0.7, y: 0.5}
   knockbackForce: 5
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
   shieldSkill: {fileID: 4833616089676288180}
-  chargeSkill: {fileID: 8875699946161810554}
+  chargeSkill: {fileID: 2603718513585877556}
 --- !u!114 &4833616089676288180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4060,11 +4048,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
+  cooldownImage: {fileID: 2595622889250128957}
   ShieldDuration: 3
   shieldPrefab: {fileID: 8220456939829933817, guid: a5115eb0c28578e4fa45b61de2f3fe10, type: 3}
-  shieldDistance: 1
-  PlayerData: {fileID: 11400000, guid: d97d16f8f23d2db4b834055ddb32e485, type: 2}
+  shieldDistance: 2
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
   shieldSound: {fileID: 0}
+--- !u!114 &2603718513585877556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746762248365668030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45bb38aa45cba34c9ab20a97fcb4bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownText: {fileID: 0}
+  cooldownImage: {fileID: 2868515029536392108}
+  maxChargingTime: 3
+  damage: 30
+  damageRate: 10
+  PlayerData: {fileID: 11400000, guid: 347fafb4c5a6e2843bf7a125246ae44c, type: 2}
+  attackSize: {x: 1, y: 1}
+  attackOffset: {x: -0.7, y: 0.5}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  hammerImpactEffect: {fileID: 0}
+  hammerImpactSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
 --- !u!1 &8798604630830911418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4499,7 +4513,7 @@ PrefabInstance:
     - target: {fileID: 1917665126606023040, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c4dab62f27aa63442b6b0265988e4319, type: 3}
+      objectReference: {fileID: 21300000, guid: 1af0eb1ed57264146937be66f366ea43, type: 3}
     - target: {fileID: 5531077860410013324, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_FillAmount
       value: 1
@@ -4511,7 +4525,7 @@ PrefabInstance:
     - target: {fileID: 6885581324735708281, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1af0eb1ed57264146937be66f366ea43, type: 3}
+      objectReference: {fileID: 21300000, guid: c4dab62f27aa63442b6b0265988e4319, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4522,26 +4536,26 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1694630360464439370, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1780175085105363226}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1229589727487732989 stripped
+--- !u!114 &2595622889250128957 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 694700692200527335, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4373543401045638439, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1780175085105363226}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2065276799066346361 stripped
+--- !u!114 &2868515029536392108 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 296434384620235363, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4574374049627929270, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
   m_PrefabInstance: {fileID: 1780175085105363226}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4690131682856458923 stripped

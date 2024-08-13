@@ -29,7 +29,6 @@ public class HealAndBoostSkill : SkillBase
     {
         if (Time.time - lastActionTime < cooldownDuration)
         {
-            Debug.Log("스킬 쿨타임이 아직 끝나지 않음");
             return;
         }
 
@@ -49,7 +48,6 @@ public class HealAndBoostSkill : SkillBase
     private IEnumerator HealAndBoost()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange, playerLayer); // 힐 범위
-        Debug.Log($"힐 범위 내 감지된 오브젝트 수: {hitColliders.Length}");
         int healedPlayers = 0;
 
         foreach (var hitCollider in hitColliders)
@@ -57,7 +55,6 @@ public class HealAndBoostSkill : SkillBase
             PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
             if (playerCondition != null)
             {
-                Debug.Log("플레이어 발견, 힐 시작: " + hitCollider.gameObject.name);
                 StartCoroutine(HealPlayer(playerCondition));
                 healedPlayers++;
             }

@@ -12,8 +12,10 @@ public class HammerPlayer : MeleePlayerBase
 
     private void Start()
     {
-        shieldSkill.SetCooldownText(qCooldownText);
-        chargeSkill.SetCooldownText(eCooldownText);
+        //shieldSkill.SetCooldownText(qCooldownText);
+        //chargeSkill.SetCooldownText(eCooldownText);
+        shieldSkill.SetCooldownImage(qCooldownImage);
+        chargeSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void UseSkillQ()

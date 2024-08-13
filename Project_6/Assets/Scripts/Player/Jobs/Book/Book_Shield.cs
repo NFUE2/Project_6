@@ -8,7 +8,8 @@ public class Book_Shield : MonoBehaviourPun
     {
         if (collision.CompareTag("EnemyAttack"))
         {
-            Destroy(collision.gameObject);
+            if (photonView.IsMine) PhotonNetwork.Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
         }
     }
 

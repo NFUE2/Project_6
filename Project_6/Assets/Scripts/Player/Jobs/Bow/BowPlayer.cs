@@ -12,8 +12,10 @@ public class BowPlayer : RangedPlayerBase
 
     private void Start()
     {
-        wireArrowSkill.SetCooldownText(qCooldownText);
-        bombArrowSkill.SetCooldownText(eCooldownText);
+        //wireArrowSkill.SetCooldownText(qCooldownText);
+        //bombArrowSkill.SetCooldownText(eCooldownText);
+        wireArrowSkill.SetCooldownImage(qCooldownImage);
+        bombArrowSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void UseSkillQ()

@@ -22,8 +22,11 @@ public class PistolPlayer : RangedPlayerBase
 
     private void Start()
     {
-        fanningSkill.SetCooldownText(qCooldownText);
-        rollingSkill.SetCooldownText(eCooldownText);
+        //fanningSkill.SetCooldownText(qCooldownText);
+        //rollingSkill.SetCooldownText(eCooldownText);
+
+        fanningSkill.SetCooldownImage(qCooldownImage);
+        rollingSkill.SetCooldownImage(eCooldownImage);
 
         // 오디오 소스 컴포넌트 가져오기 또는 추가하기
         audioSource = GetComponent<AudioSource>();

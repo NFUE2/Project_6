@@ -16,9 +16,15 @@ MonoBehaviour:
   name: "\uD314\uB77C\uB518"
   info: "\uB454\uAE30\uC640 \uBC29\uD328\uB85C \uC801\uC744 \uC12C\uBA78\uD558\uB294
     \uC131\uC2A4\uB7EC\uC6B4 \uBE5B\uC758 \uC218\uD638\uC790."
-  maxHP: 0
+  maxHP: 100
   moveSpeed: 0
   attackTime: 0
-  attackDamage: 0
+  attackDamage: 15
   deffenceDamage: 0
-  jumpForce: 0
+  jumpForce: 7
+  SkillQCooldown: 10
+  SkillECooldown: 8
+  attackCooldown: 1
+  walkSpeed: 2
+  runSpeed: 4
+  playerdefense: 0

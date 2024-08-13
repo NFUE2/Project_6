@@ -10,6 +10,6 @@ public class Statue : NPCBase
         GameObject player = GameManager.instance.player;
 
         if(player.TryGetComponent(out PlayerCondition p))
-            p.Heal(p.maxHealth);
+            p.Heal(p.PlayerData.maxHP);
     }
 }
