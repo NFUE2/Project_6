@@ -72,8 +72,8 @@ public class BookShieldSkill : SkillBase
 
         if (player != null)
         {
-            float originalDefense = PlayerData.playerdefense;
-            PlayerData.playerdefense += 50; // 방어막 적용 시 방어력 증가 (예: 50)
+            float originalDefense = PlayerData.defence;
+            PlayerData.defence += 50; // 방어막 적용 시 방어력 증가 (예: 50)
 
             // 보호막 효과음 재생
             if (shieldSound != null && audioSource != null)
@@ -89,7 +89,7 @@ public class BookShieldSkill : SkillBase
             yield return new WaitForSeconds(shieldDuration);
 
             // 보호막 종료 후 방어력 원래대로 복원
-            PlayerData.playerdefense = originalDefense;
+            PlayerData.defence = originalDefense;
             PhotonNetwork.Destroy(shield);
         }
     }

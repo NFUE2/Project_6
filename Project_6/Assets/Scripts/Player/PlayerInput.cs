@@ -46,7 +46,7 @@ public class PlayerInput : MonoBehaviourPun
 
     private void Movement()
     {
-        float speed = isRunning ? playerdata.runSpeed : playerdata.walkSpeed;
+        float speed = isRunning ? playerdata.moveSpeed * 1.5f : playerdata.moveSpeed;
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
     }
 
