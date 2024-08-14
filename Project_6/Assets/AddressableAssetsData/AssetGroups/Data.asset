@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  m_GroupName: Data
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d07b91d6b7f0f2a4583b92bd68764e61
+  m_SerializeEntries:
+  - m_GUID: b58609a2fd1941f409be897e636d6217
+    m_Address: Assets/AddressableDatas/ObjectPoolData.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Data
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 597e31504d99ba94199ac7556473e509, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: cba860bab352c4c43a79dfaf1336f3fe, type: 2}
+    - {fileID: 11400000, guid: 051c271b981d95e4da86fb852efb6fba, type: 2}

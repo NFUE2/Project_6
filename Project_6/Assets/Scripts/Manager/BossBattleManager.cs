@@ -1,5 +1,4 @@
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +23,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
 
     public override void Awake()
     {
+        players = new List<GameObject>();
         //if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient) Destroy(gameObject);
         base.Awake();
     }
@@ -37,37 +37,45 @@ public class BossBattleManager : Singleton<BossBattleManager>
                 if (targetPlayer != null)
                 {
                     distanceToTarget = CalcDistance();
+                    if (boss.currentHp <= 0)
+                    {
+                        if (bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
+                        {
+                            bossStateMachine.ChangeState(bossStateMachine.DieState);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        if (isAttacking == false)
+                        {
+                            curCoolDown += Time.deltaTime;
+                        }
+                        if (isFirst)
+                        {
+                            isFirst = false;
+                            bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                        }
+                        else
+                        {
+                            if (curCoolDown >= attackCoolDown && isAttacking == false)
+                            {
+                                bossStateMachine.ChangeState(bossStateMachine.AttackState);
+                                curCoolDown = 0;
+                            }
+                        }
+                    }
+
                 }
                 else if (targetPlayer == null)
                 {
                     distanceToTarget = -1;
-                }
-
-                if (boss.currentHp <= 0)
-                {
-                    if(bossStateMachine.GetCurrentState() != bossStateMachine.DieState)
+                    bossStateMachine.ChangeState(bossStateMachine.IdleState);
+                    if(targetPlayer == null)
                     {
-                        bossStateMachine.ChangeState(bossStateMachine.DieState);
-                    }
-                    return;
-                }
-                else
-                {
-                    if (isAttacking == false)
-                    {
-                        curCoolDown += Time.deltaTime;
-                    }
-                    if (isFirst)
-                    {
-                        isFirst = false;
-                        bossStateMachine.ChangeState(bossStateMachine.IdleState);
-                    }
-                    else
-                    {
-                        if (curCoolDown >= attackCoolDown && isAttacking == false)
+                        if (players.Count > 0)
                         {
-                            bossStateMachine.ChangeState(bossStateMachine.AttackState);
-                            curCoolDown = 0;
+                            targetPlayer = players[Random.Range(0, players.Count)];
                         }
                     }
                 }
@@ -104,7 +112,7 @@ public class BossBattleManager : Singleton<BossBattleManager>
         }
         else
         {
-            Debug.Log("BossMonster 스크립트 로드 에러");
+            //Debug.Log("BossMonster 스크립트 로드 에러");p
         }
     }
 
@@ -118,13 +126,13 @@ public class BossBattleManager : Singleton<BossBattleManager>
     {
         // List로 관리합니다. Player 사망 시 List에서 요소 제거해야 하므로
         // Player 스크립트에서 싱글톤 접근하여 Remove 해야합니다.
-        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
-        {
+        //foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        //{
+        //    players.Add(p);
+        //}
+
+        foreach (var p in GameManager.instance.players)
             players.Add(p);
-        }
-
-
-        //players = TestGameManager.instance.players;(복원)
     }
 
     public void ToggleIsAttacking()
@@ -132,20 +140,22 @@ public class BossBattleManager : Singleton<BossBattleManager>
         if (isAttacking)
         {
             isAttacking = false;
-            Debug.Log($"토글 {isAttacking}");
+            //Debug.Log($"토글 {isAttacking}");
         }
         else if(!isAttacking)
         {
             isAttacking = true;
-            Debug.Log($"토글 {isAttacking}");
+            //Debug.Log($"토글 {isAttacking}");
         }
     }
 
     public void DestroyBoss()
     {
-        Debug.Log(1);
-        //Destroy(bossMonster);
-        spawnedBoss.SetActive(false);
+        targetPlayer = null;
+        players.Clear();
+        if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(spawnedBoss);
+        //spawnedBoss.SetActive(false);
+
         foreach(GameObject g in bossEndObject)
             g.SetActive(true);
 

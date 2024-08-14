@@ -43,7 +43,6 @@ public class TargetSkill : SkillBase
         // 스킬이 아직 쿨다운 중인지 확인합니다.
         if (Time.time - lastActionTime < cooldownDuration)
         {
-            Debug.Log("스킬이 쿨다운 중입니다.");
             return;
         }
 
@@ -77,7 +76,7 @@ public class TargetSkill : SkillBase
         lastActionTime = Time.time;
 
         // 쿨다운 텍스트를 업데이트합니다.
-        UpdateCooldownText();
+        UpdateCooldownImage();
 
         // 타겟팅 모드 활성화
         riflePlayer.SetTargeting(true);
@@ -127,8 +126,10 @@ public class TargetSkill : SkillBase
     public void OnTargetClicked(GameObject target)
     {
         // 적에게 데미지를 입힙니다.
-        if (target.TryGetComponent(out MonsterCondition m))
+        //if (target.TryGetComponent(out IDamagable m))
+        if (target.TryGetComponent(out IPunDamagable m))
         {
+            //m.TakeDamage(skillDamage);
             m.Damage(skillDamage);
         }
 

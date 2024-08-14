@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCallback
+public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstantiateMagicCallback
 {
     public float maxHp { get; set; }
     public float attackPower { get; set; }
@@ -28,8 +28,8 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
             // »ç¸Á Ã³¸®
             //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
 
-            //photonView.RPC(nameof(BossDie),RpcTarget.All);
-            BossDie();
+            if(photonView.IsMine) photonView.RPC(nameof(BossDie), RpcTarget.All);
+            //BossDie();
         }
         else
         {
@@ -39,19 +39,31 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        if(!PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             BossBattleManager.instance.boss = this;
             BossBattleManager.instance.spawnedBoss = gameObject;
             BossBattleManager.instance.attackController = GetComponent<BossAttackController>();
             BossBattleManager.instance.bossAnimator = GetComponent<Animator>();
+            BossBattleManager.instance.bossStateMachine = GetComponent<BossStateMachine>();
         }
     }
 
-    //[PunRPC]
+    [PunRPC]
     protected void BossDie()
     {
         GameManager.instance.StageClear();
         BossBattleManager.instance.DestroyBoss();
+    }
+
+    public void Damage(float damage)
+    {
+        photonView.RPC(nameof(DamageRPC), RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    public void DamageRPC(float damage)
+    {
+        TakeDamage(damage);
     }
 }

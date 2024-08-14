@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviourPun
 {
     public float speed = 15f; // 투사체의 속도
     private Vector2 direction; // 투사체의 방향
@@ -33,26 +33,30 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (direction != Vector2.zero) // 방향이 설정되어 있을 때만 업데이트합니다.
-        {
-            transform.position += (Vector3)direction * speed * Time.deltaTime;
-        }
+        //if (direction != Vector2.zero) // 방향이 설정되어 있을 때만 업데이트합니다.
+        //{
+            transform.position += transform.right * speed * Time.deltaTime;
+        //}
     }
 
-    private void OnBecameInvisible()
-    {
-        PhotonNetwork.Destroy(gameObject);
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    //if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            IDamagable damagable = collision.GetComponent<IDamagable>();
+            //IDamagable damagable = collision.GetComponent<IDamagable>();
+            IPunDamagable damagable = collision.GetComponent<IPunDamagable>();
+
             if (damagable != null)
             {
-                damagable.TakeDamage(damage);
-                Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
+                //damagable.TakeDamage(damage);
+                damagable.Damage(damage);
+
+                //Debug.Log($"적 {collision.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
             }
             Explode();
         }
@@ -74,6 +78,6 @@ public class Projectile : MonoBehaviour
         }
 
         // 투사체 파괴
-        Destroy(gameObject);
+        if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 }

@@ -29,7 +29,6 @@ public class MaceChargeSkill : SkillBase
     {
         if (PlayerData == null)
         {
-            Debug.LogWarning("PlayerDataSO is not assigned!");
             return;
         }
 
@@ -82,7 +81,9 @@ public class MaceChargeSkill : SkillBase
 
         while (Time.time - startTime < dashDuration)
         {
-            transform.Translate(dashDirection * dashSpeed * Time.deltaTime);
+            // 벽에 끼지 않도록 Rigidbody2D를 사용한 이동
+            Vector2 newPosition = rb.position + dashDirection * dashSpeed * Time.deltaTime;
+            rb.MovePosition(newPosition);
 
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, targetLayer);
 
@@ -90,10 +91,9 @@ public class MaceChargeSkill : SkillBase
             {
                 if (hitEnemies.Contains(hitCollider)) continue;
 
-                if (hitCollider.TryGetComponent(out MonsterCondition enemy))
+                if (hitCollider.TryGetComponent(out IPunDamagable enemy))
                 {
                     enemy.Damage(dashDamage);
-                    //enemy.TakeDamage(dashDamage);
                     PlayHitSound(); // 적에게 부딪쳤을 때 효과음 재생
                     hitEnemies.Add(hitCollider);
                 }
@@ -109,7 +109,6 @@ public class MaceChargeSkill : SkillBase
                     {
                         Vector2 forceDirection = (hitCollider.transform.position - transform.position).normalized;
                         enemyRb.AddForce(forceDirection * dashSpeed, ForceMode2D.Impulse); // 대쉬 속도에 맞춰 밀기
-                        Debug.Log("적 밀림");
                     }
                 }
             }
@@ -128,5 +127,6 @@ public class MaceChargeSkill : SkillBase
 
         hitEnemies.Clear();
     }
+
 }
 

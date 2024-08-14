@@ -18,23 +18,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void OnClickGameStart()
     {
-        photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
+        //photonView.RPC(nameof(ChangeClipRPC), RpcTarget.All);
 
         foreach(var b in buttons)
             b.interactable = false;
 
-        PhotonNetwork.LoadLevel(1);
+        //PhotonNetwork.LoadLevel(1);
+        SceneControl.instance.LoadScene(SceneType.Loading);
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
         //SoundManager.instance.ChangeBGM(BGMList.Town);
     }
 
-    [PunRPC]
-    void ChangeClipRPC()
-    {
-        SoundManager.instance.ChangeBGM(BGMList.Town);
-    }
+    //[PunRPC]
+    //void ChangeClipRPC()
+    //{
+    //    SoundManager.instance.ChangeBGM(BGMList.Town);
+    //}
 
     public override void OnJoinedRoom()
     {

@@ -106,7 +106,6 @@ public class FireBallHitBox : MonoBehaviour, IPunInstantiateMagicCallback // ¿œπ
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"{collision.gameObject.name}∞° ««∞›µ ");
             if (collision.TryGetComponent<IDamagable>(out IDamagable P) && collision.TryGetComponent<IKnockBackable>(out IKnockBackable K))
             {
                 

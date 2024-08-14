@@ -13,11 +13,12 @@ public abstract class MeleePlayerBase : PlayerBase
     public AudioClip attackSound; // 공격 시 효과음
     public AudioClip hitSound; // 피격 시 효과음
     private AudioSource audioSource; // 오디오 소스
+    public GameObject hitEffectPrefab; // 히트 효과를 위한 파티클 시스템 프리팹
 
     protected void Awake() // 최상위 클래스에서 호출되도록 설정
     {
-        animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        animator = GetComponentInChildren<Animator>();
     }
 
     public override void Attack()
@@ -27,13 +28,12 @@ public abstract class MeleePlayerBase : PlayerBase
         animator.SetTrigger("IsAttack");
         StartCoroutine(AttackCooldown());
     }
+
     protected IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
     {
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false; // 쿨다운이 끝나면 isAttacking을 false로 설정
     }
-
-
 
     // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
@@ -45,21 +45,21 @@ public abstract class MeleePlayerBase : PlayerBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            //IDamagable damagable = enemy.GetComponent<IDamagable>();
-            MonsterCondition damagable = enemy.GetComponent<MonsterCondition>();
+            IPunDamagable damagable = enemy.GetComponent<IPunDamagable>();
 
             if (damagable != null)
             {
-                //damagable.TakeDamage(attackDamage);
                 damagable.Damage(attackDamage);
                 ApplyKnockback(enemy);
                 PlaySound(hitSound); // 피격 시 효과음 재생
+
+                // 파티클 효과 생성
+                if(hitEffectPrefab != null) Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
             }
         }
 
         PlaySound(attackSound); // 실제 공격 시 효과음 재생
     }
-
 
     protected void ApplyKnockback(Collider2D enemy)
     {

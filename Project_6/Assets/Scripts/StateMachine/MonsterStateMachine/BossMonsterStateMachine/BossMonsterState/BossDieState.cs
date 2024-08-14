@@ -11,7 +11,7 @@ public class BossDieState : BossBaseState
     {
         base.Enter();
         DropReward();
-        BossBattleManager.Instance.DestroyBoss();
+        //BossBattleManager.Instance.DestroyBoss();
     }
 
     public override void Exit() 

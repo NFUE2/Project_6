@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class BookPlayer : RangedPlayerBase
 {
@@ -18,25 +19,22 @@ public class BookPlayer : RangedPlayerBase
 
     private void Start()
     {
-        bookshieldSkill.SetCooldownText(qCooldownText);
-        laserSkill.SetCooldownText(eCooldownText);
+        //bookshieldSkill.SetCooldownText(qCooldownText);
+        //laserSkill.SetCooldownText(eCooldownText);
+        bookshieldSkill.SetCooldownImage(qCooldownImage);
+        laserSkill.SetCooldownImage(eCooldownImage);
     }
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
+        if (Time.time - lastAttackTime < playerData.attackTime) return;
 
         Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
 
         if (closestTarget != null)
         {
-            Debug.Log("타겟 공격!");
             LaunchProjectile(closestTarget);
             lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log("범위 내 타겟 없음.");
         }
     }
 
@@ -56,11 +54,8 @@ public class BookPlayer : RangedPlayerBase
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        Debug.Log($"찾은 타겟 수: {hitColliders.Length}");
-
         foreach (Collider2D hitCollider in hitColliders)
         {
-            Debug.Log($"충돌한 객체: {hitCollider.gameObject.name}, 레이어: {hitCollider.gameObject.layer}");
             if (hitCollider.transform == transform) continue;
 
             float distance = Vector3.Distance(position, hitCollider.transform.position);
@@ -76,7 +71,6 @@ public class BookPlayer : RangedPlayerBase
 
     private void LaunchProjectile(Transform target)
     {
-        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
         Vector3 targetPosition = target.position;
 
         // 타겟의 콜라이더가 있는 경우 콜라이더의 오프셋을 추가
@@ -86,33 +80,35 @@ public class BookPlayer : RangedPlayerBase
             targetPosition = targetCollider.bounds.center;
         }
 
-        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
+        Vector3 direction = (targetPosition - transform.position).normalized;
 
         // Projectile 클래스의 SetDirection 메서드 호출
-        Projectile projectileComponent = projectile.GetComponent<Projectile>();
-        if (projectileComponent != null)
-        {
-            projectileComponent.SetDirection(direction);
-        }
+        //Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        //if (projectileComponent != null)
+        //{
+        //    projectileComponent.SetDirection(direction);
+        //}
+        float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
+        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0,0,angle));
 
-        StartCoroutine(MoveProjectile(projectile, targetPosition));
+        //StartCoroutine(MoveProjectile(projectile, targetPosition));
     }
 
-    private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
-    {
-        while (projectile != null)
-        {
-            Vector3 direction = (targetPosition - projectile.transform.position).normalized;
-            projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
+    //private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
+    //{
+    //    while (projectile != null)
+    //    {
+    //        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
+    //        projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
 
-            // 목표물과의 거리 체크
-            if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
-            {
-                // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
-                Destroy(projectile);
-            }
+    //        // 목표물과의 거리 체크
+    //        if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
+    //        {
+    //            // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
+    //            Destroy(projectile);
+    //        }
 
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 }

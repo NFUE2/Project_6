@@ -1,13 +1,16 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     public PlayerDataSO playerData;
 
-    public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    //public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    //public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    public Image qCooldownImage;
+    public Image eCooldownImage;
     public abstract void Attack();
     public abstract void UseSkillQ();
     public abstract void UseSkillE();
@@ -22,7 +25,6 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
     [Header("Attack")]
     protected PlayerDataSO attackTime; // 공격 시간 간격 -> PlayerDataSO에서 받아서 사용
     protected float lastAttackTime;  // 마지막 공격 시간
-
 
     public void SetLastEActionTime(float time)
     {

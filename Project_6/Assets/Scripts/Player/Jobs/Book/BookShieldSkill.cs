@@ -40,10 +40,6 @@ public class BookShieldSkill : SkillBase
             Transform closestPlayer = GameManager.Instance.players[closestPlayerIndex].transform;
             StartCoroutine(ApplyShield(closestPlayer, closestPlayerIndex));
         }
-        else
-        {
-            Debug.Log("범위 내 플레이어 없음.");
-        }
     }
 
     // 가장 가까운 플레이어의 인덱스를 반환하는 함수
@@ -76,14 +72,13 @@ public class BookShieldSkill : SkillBase
 
         if (player != null)
         {
-            float originalDefense = PlayerData.playerdefense;
-            PlayerData.playerdefense += 50; // 방어막 적용 시 방어력 증가 (예: 50)
+            float originalDefense = PlayerData.defence;
+            PlayerData.defence += 50; // 방어막 적용 시 방어력 증가 (예: 50)
 
             // 보호막 효과음 재생
             if (shieldSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(shieldSound);
-                Debug.Log("보호막 효과음 재생: " + shieldSound.name);
             }
 
             // 보호막 프리팹을 생성하고 타겟에 부착
@@ -94,9 +89,8 @@ public class BookShieldSkill : SkillBase
             yield return new WaitForSeconds(shieldDuration);
 
             // 보호막 종료 후 방어력 원래대로 복원
-            PlayerData.playerdefense = originalDefense;
+            PlayerData.defence = originalDefense;
             PhotonNetwork.Destroy(shield);
-            Debug.Log($"{target.name}의 보호막 종료! 방어력 복원: {PlayerData.playerdefense}");
         }
     }
 }

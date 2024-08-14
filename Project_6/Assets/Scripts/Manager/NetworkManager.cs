@@ -230,11 +230,12 @@ public class NetworkManager : PunSingleton<NetworkManager>
         base.OnPlayerLeftRoom(otherPlayer);
         if (otherPlayer.ActorNumber == 1)
         {
-            int index = SceneManager.GetActiveScene().buildIndex;
+            int index = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
             if (index == 1)
             {
-                PhotonNetwork.LoadLevel(0);
+                //PhotonNetwork.LoadLevel(0);
+                SceneControl.instance.LoadScene(SceneType.Intro);
                 SoundManager.instance.ChangeBGM(BGMList.Intro);
             }
 
@@ -261,8 +262,8 @@ public class NetworkManager : PunSingleton<NetworkManager>
     {
         base.OnCreateRoomFailed(returnCode, message);
         StopAllCoroutines();
-        Debug.Log(returnCode);
-        Debug.Log(message);
+        //Debug.Log(returnCode);
+        //Debug.Log(message);
         FailTextInfo($"{createRoomFailMessage}\n\n{ErrorMessage(returnCode)}");
     }
 

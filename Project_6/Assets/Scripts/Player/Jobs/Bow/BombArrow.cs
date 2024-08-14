@@ -1,6 +1,7 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class BombArrow : MonoBehaviour
+public class BombArrow : MonoBehaviourPun
 {
     public float speed = 15f; // 화살 속도
     private Vector2 direction; // 화살 방향
@@ -55,7 +56,8 @@ public class BombArrow : MonoBehaviour
         // 화살이 화면 밖으로 나가면 파괴
         if (IsOffScreen())
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -87,10 +89,6 @@ public class BombArrow : MonoBehaviour
         {
             audioSource.PlayOneShot(explosionSound);
         }
-        else
-        {
-            Debug.LogError("explosionSound 또는 audioSource가 할당되지 않았습니다.");
-        }
 
         // 폭발 반경 내의 적에게 데미지 입힘
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -98,17 +96,19 @@ public class BombArrow : MonoBehaviour
         {
             if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                IDamagable damagable = hit.GetComponent<IDamagable>();
+                //IDamagable damagable = hit.GetComponent<IDamagable>();
+                IPunDamagable damagable = hit.GetComponent<IPunDamagable>();
+
                 if (damagable != null)
                 {
-                    damagable.TakeDamage(damage);
-                    Debug.Log($"적 {hit.gameObject.name}에게 {damage}의 데미지를 입혔습니다.");
+                    damagable.Damage(damage);
                 }
             }
         }
 
         // 화살 파괴
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

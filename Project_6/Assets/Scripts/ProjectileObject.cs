@@ -23,14 +23,15 @@ public class ProjectileObject : MonoBehaviourPun
         if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
+            Destroy();
             //if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
-            photonView.RPC(nameof(Destroy),RpcTarget.MasterClient);
+            //photonView.RPC(nameof(Destroy),RpcTarget.MasterClient);
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     private void Destroy()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 }

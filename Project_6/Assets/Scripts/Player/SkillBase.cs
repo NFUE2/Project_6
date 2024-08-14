@@ -1,15 +1,23 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public abstract class SkillBase : MonoBehaviour
 {
     protected float lastActionTime;
     public TextMeshProUGUI cooldownText;
-    protected float cooldownDuration;
+    public Image cooldownImage;
+    //public Image coolTime;
+    protected float cooldownDuration; // ÀüÃ¼ ÄðÅ¸ÀÓ
 
     public void SetCooldownText(TextMeshProUGUI text)
     {
         cooldownText = text;
+    }
+
+    public void SetCooldownImage(Image image)
+    {
+        cooldownImage = image;
     }
 
     protected void UpdateCooldownText()
@@ -28,9 +36,27 @@ public abstract class SkillBase : MonoBehaviour
         }
     }
 
+    protected void UpdateCooldownImage()
+    {
+        if(cooldownImage != null)
+        {
+            if(Time.time - lastActionTime >= cooldownDuration)
+            {
+                cooldownImage.fillAmount = 0;
+            }
+            else
+            {
+                float remainingTime = cooldownDuration - (Time.time - lastActionTime);
+                float coolFillAmount = remainingTime / cooldownDuration;
+                cooldownImage.fillAmount = coolFillAmount;
+            }
+        }
+    }
+
+
     private void Update()
     {
-        UpdateCooldownText();
+        UpdateCooldownImage();
     }
 
     public abstract void UseSkill();
