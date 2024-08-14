@@ -6,13 +6,11 @@ public class GuardSkill : SkillBase, IDamagable
     public float GuardDuration = 3.0f;
     public float DefenseBoostDuringGuard = 50f;
     public PlayerDataSO PlayerData;
-    public float DamageReduction;
 
     public GameObject guardParticleEffectPrefab;
     public AudioClip guardSound;
     private AudioSource audioSource;
     private PlayerCondition playerCondition;
-    private float originalDamageReduction;
 
     private GameObject guardParticleEffectInstance;
 
@@ -45,7 +43,6 @@ public class GuardSkill : SkillBase, IDamagable
     private void EnterGuard()
     {
         IsGuard = true;
-        SaveOriginalStats();
         ApplyGuardStats();
 
         if (guardParticleEffectPrefab != null)
@@ -57,7 +54,7 @@ public class GuardSkill : SkillBase, IDamagable
         // À±°û¼± ¼ÎÀÌ´õ Àû¿ë
         if (outlineMaterial != null)
         {
-            playerRenderer.material = outlineMaterial;
+            //playerRenderer.material = outlineMaterial;
         }
 
         Invoke("ExitGuardEvent", GuardDuration);
@@ -83,12 +80,6 @@ public class GuardSkill : SkillBase, IDamagable
     {
         if (IsGuard) ExitGuard();
     }
-
-    private void SaveOriginalStats()
-    {
-        originalDamageReduction = DamageReduction;
-    }
-
     private void ApplyGuardStats()
     {
         playerCondition.ModifyDefense(DefenseBoostDuringGuard);
@@ -97,7 +88,6 @@ public class GuardSkill : SkillBase, IDamagable
     private void RestoreOriginalStats()
     {
         playerCondition.ModifyDefense(-DefenseBoostDuringGuard);
-        DamageReduction = originalDamageReduction;
     }
 
     public void PlayGuardSound()
