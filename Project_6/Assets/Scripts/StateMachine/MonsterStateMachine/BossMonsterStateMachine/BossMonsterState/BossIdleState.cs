@@ -10,8 +10,18 @@ public class BossIdleState : BossBaseState
     public override void Enter()
     {
         base.Enter();
-        BossBattleManager.Instance.isAttacking = false;
-        if (BossBattleManager.Instance.targetPlayer != null)
+
+        // 기존 코드
+        //BossBattleManager.Instance.isAttacking = false;
+        //if (BossBattleManager.Instance.targetPlayer != null)
+        //{
+        //    SetTargetPlayer();
+        //}
+
+
+        // 테스트 전용 코드
+        BossTestManager.Instance.isAttacking = false;
+        if(BossTestManager.Instance.targetPlayer != null)
         {
             SetTargetPlayer();
         }
@@ -24,13 +34,24 @@ public class BossIdleState : BossBaseState
 
     private void SetTargetPlayer()
     {
-        var players = BossBattleManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트
+        // 기존 코드
+        //var players = BossBattleManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트
 
+
+
+        // 테스트 전용 코드
+        var players = BossTestManager.Instance.players;
 
         //var players = TestGameManager.Instance.players; // 싱글톤으로 받아온 플레이어 리스트(복원)
 
 
         int randInt = Random.Range(0, players.Count);
-        BossBattleManager.Instance.targetPlayer = players[randInt];
+
+        //기존 코드
+        //BossBattleManager.Instance.targetPlayer = players[randInt];
+    
+    
+        // 테스트 전용 코드
+        BossTestManager.Instance.targetPlayer = players[randInt];
     }
 }

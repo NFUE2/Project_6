@@ -28,6 +28,11 @@ public class BossTestManager : Singleton<BossTestManager>
         base.Awake();
     }
 
+    private void Start()
+    {
+        SpawnBossMonster();
+    }
+
     private void Update()
     {
         if (spawnedBoss != null && bossStateMachine != null)

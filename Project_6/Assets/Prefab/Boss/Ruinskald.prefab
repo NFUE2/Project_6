@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 854026863375748655}
   - component: {fileID: 9076661728277851903}
   - component: {fileID: 3964296626841199742}
+  - component: {fileID: 642796226397309411}
   m_Layer: 3
   m_Name: Ruinskald
   m_TagString: Boss
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8701123091799272546}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd456d10ab44356418aa0c17bffdb627, type: 3}
   m_Name: 
@@ -238,3 +239,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countOfAttack: 3
+--- !u!114 &642796226397309411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701123091799272546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56da9521e1f8846409175734582fdb80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+  movePositive: 1
