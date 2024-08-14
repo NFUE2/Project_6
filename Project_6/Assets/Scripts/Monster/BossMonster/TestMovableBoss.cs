@@ -24,10 +24,10 @@ public class TestMovableBoss : MonoBehaviour
         //Debug.Log(isAttacking);
         if (isAttacking == false && BossTestManager.Instance.targetPlayer != null)
         {
-            //if (animator.GetBool("isWalk") == false)
-            //{
-            //    animator.SetBool("isWalk", true);
-            //}
+            if (animator.GetBool("isWalk") == false)
+            {
+                animator.SetBool("isWalk", true);
+            }
             Vector3 targetPosition = BossTestManager.Instance.targetPlayer.transform.position;
             float distance = Vector3.Distance(targetPosition, transform.position);
             if (distance > 3f)
@@ -47,17 +47,17 @@ public class TestMovableBoss : MonoBehaviour
                 transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
                 //elapsedTime += Time.deltaTime;
             }
-            //else
-            //{
-            //    animator.SetBool("isWalk", false);
-            //}
+            else
+            {
+                animator.SetBool("isWalk", false);
+            }
         }
         else
         {
-            //if (animator.GetBool("isWalk") == true)
-            //{
-            //    animator.SetBool("isWalk", false);
-            //}
+            if (animator.GetBool("isWalk") == true)
+            {
+                animator.SetBool("isWalk", false);
+            }
         }
     }
 }
