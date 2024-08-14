@@ -17,8 +17,8 @@ public abstract class MeleePlayerBase : PlayerBase
     {
         audioSource = GetComponent<AudioSource>();
         animator = GetComponentInChildren<Animator>();
-        if (cooldownBar != null)
-            cooldownBar.fillAmount = 1f;
+        if (attackCooldownbar != null)
+            attackCooldownbar.fillAmount = 1f;
     }
 
     private void Update()

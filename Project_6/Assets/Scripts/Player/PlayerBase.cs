@@ -21,13 +21,13 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
     public abstract void UseSkillQ();
     public abstract void UseSkillE();
 
-    public Image AttackcooldownBar;
+    public Image attackCooldownbar;
     protected float currentAttackTime;
 
     private void Awake()
     {
         currentAttackTime = playerData.attackTime; // 초기 상태로 설정
-        AttackcooldownBar.fillAmount = 1f; // 쿨타임 바를 초기 상태로 채움
+        attackCooldownbar.fillAmount = 1f; // 쿨타임 바를 초기 상태로 채움
     }
     public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
     {
@@ -41,7 +41,7 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
         if (currentAttackTime < playerData.attackTime)
         {
             currentAttackTime += Time.deltaTime;
-            AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
+            attackCooldownbar.fillAmount = currentAttackTime / playerData.attackTime;
         }
     }
 
