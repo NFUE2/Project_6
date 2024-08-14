@@ -30,7 +30,7 @@ public class DaggerPlayer : MeleePlayerBase
     private IEnumerator StackIncreaseCheck()
     {
         // 공격이 끝날 때까지 기다림
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(playerData.attackTime);
 
         // 공격 범위 내 적을 다시 확인하고 스택 증가 처리
         Vector2 attackPosition = CalculateAttackPosition();

@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class RangedPlayerBase : PlayerBase
 {
@@ -13,33 +14,19 @@ public abstract class RangedPlayerBase : PlayerBase
     {
         // 메인 카메라를 태그로 찾기
         mainCamera = Camera.main;
-        if (mainCamera == null)
-        {
-            
-        }
-
         // AudioSource 컴포넌트 가져오기
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
-    private void Start()
+    private void Update()
     {
-
+        AttackCoolTime(); // 공격 쿨타임 UI 업데이트
     }
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < playerData.attackTime) return;
-        lastAttackTime = Time.time;
-
-        if (mainCamera == null)
-        {
-            return;
-        }
+        if (currentAttackTime < playerData.attackTime) return;
+        currentAttackTime = 0f; // 공격 시 쿨타임 초기화
 
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
@@ -53,20 +40,13 @@ public abstract class RangedPlayerBase : PlayerBase
             proj.SetDirection(attackDirection); // 투사체의 방향 설정
         }
 
-        // 공격 효과음 재생
-        PlayAttackSound();
+        PlayAttackSound(); // 공격 효과음 재생
     }
-
-
     protected void PlayAttackSound()
     {
         if (attackSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(attackSound);
-        }
-        else
-        {
-
         }
     }
 }
