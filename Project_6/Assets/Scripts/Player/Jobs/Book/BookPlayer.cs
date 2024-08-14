@@ -15,7 +15,6 @@ public class BookPlayer : RangedPlayerBase
     [Header("Attack")]
     public float attackRange;
     public LayerMask targetLayer;
-    public float projectileSpeed;
 
     private void Start()
     {

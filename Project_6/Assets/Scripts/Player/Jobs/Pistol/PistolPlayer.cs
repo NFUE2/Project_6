@@ -6,7 +6,7 @@ using System.Collections;
 public class PistolPlayer : RangedPlayerBase
 {
     protected bool isAttackCooldown = false;
-    protected int attackCount = 0;
+    private int attackCount = 0;
     protected float cooldownDuration = 2f;
 
     [Header("Skill Q")]
