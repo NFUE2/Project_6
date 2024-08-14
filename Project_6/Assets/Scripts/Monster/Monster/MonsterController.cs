@@ -54,6 +54,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
         condition.OnDie += ComponentToggle;
         condition.OnSpawn += ComponentToggle;
         condition.OnSpawn += () => searchDistance = data.searchDistance;
+        searchDistance = data.searchDistance;
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
     }

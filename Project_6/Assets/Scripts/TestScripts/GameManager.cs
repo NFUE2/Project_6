@@ -81,6 +81,12 @@ public class GameManager : Singleton<GameManager>
 
         if(dieCount == PhotonNetwork.CurrentRoom.PlayerCount)
         {
+            if (BossBattleManager.instance.spawnedBoss != null)
+            {
+                PhotonNetwork.Destroy(BossBattleManager.instance.spawnedBoss);
+                stage.Peek().monsterList.gameObject.SetActive(true);
+            }
+
             dieCount = 0;
 
             stage.Peek().gameObject.SetActive(false);
