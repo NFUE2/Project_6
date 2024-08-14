@@ -18,6 +18,5 @@ public class SkillInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         field.gameObject.SetActive(false);
-        Debug.Log(1);
     }
 }
