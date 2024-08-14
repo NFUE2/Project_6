@@ -9,7 +9,7 @@ public class GolemBoss : BossMonster
         maxHp = golemData.maxHP;
         currentHp = maxHp;
         attackPower = golemData.attackDamage;
-        defensePower = golemData.deffenceDamage;
+        defensePower = golemData.defence;
         moveSpeed = golemData.moveSpeed;
         // 임시 데이터
         //hpBar.fillAmount = GetFillAmountHP();

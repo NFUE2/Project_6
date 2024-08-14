@@ -84,13 +84,13 @@ public class HealAndBoostSkill : SkillBase
 
     private IEnumerator BoostDefense(int healedPlayers)
     {
-        float originalDefense = PlayerData.playerdefense; // 현재 방어력 저장
+        float originalDefense = PlayerData.defence; // 현재 방어력 저장
 
-        PlayerData.playerdefense += defenseBoost * healedPlayers;
+        PlayerData.defence += defenseBoost * healedPlayers;
 
         yield return new WaitForSeconds(statBoostDuration);
 
-        PlayerData.playerdefense = originalDefense; // 방어력 원상복구
+        PlayerData.defence = originalDefense; // 방어력 원상복구
     }
 
     private void OnDrawGizmos()

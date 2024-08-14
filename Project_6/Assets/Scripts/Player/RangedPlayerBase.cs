@@ -33,7 +33,7 @@ public abstract class RangedPlayerBase : PlayerBase
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
+        if (Time.time - lastAttackTime < playerData.attackTime) return;
         lastAttackTime = Time.time;
 
         if (mainCamera == null)

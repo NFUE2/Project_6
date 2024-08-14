@@ -17,8 +17,8 @@ MonoBehaviour:
   info: "\uC721\uC911\uD55C \uBB34\uAC8C\uC758 \uCEE4\uB2E4\uB780 \uD574\uBA38\uB97C
     \uB4E4\uACE0 \uC801\uC744 \uC555\uB3C4\uD558\uB294 \uC9C1\uC5C5."
   maxHP: 100
-  moveSpeed: 0
-  attackTime: 0
+  moveSpeed: 3
+  attackTime: 1
   attackDamage: 30
   deffenceDamage: 0
   jumpForce: 7

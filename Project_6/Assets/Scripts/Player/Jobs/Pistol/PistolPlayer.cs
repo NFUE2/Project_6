@@ -98,7 +98,7 @@ public class PistolPlayer : RangedPlayerBase
 
     private bool CanAttack()
     {
-        return Time.time - lastAttackTime >= playerData.attackCooldown;
+        return Time.time - lastAttackTime >= playerData.attackTime;
     }
 
     private void StartCooldown()

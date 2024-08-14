@@ -26,7 +26,7 @@ public class BookPlayer : RangedPlayerBase
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
+        if (Time.time - lastAttackTime < playerData.attackTime) return;
 
         Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
 

@@ -21,6 +21,8 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public MonsterCondition condition;
     public bool isRight;
 
+    public float searchDistance { get; private set; }
+
     //public MonsterStageList stage;
 
     //[Header("AttackType")]
@@ -51,7 +53,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
 
         condition.OnDie += ComponentToggle;
         condition.OnSpawn += ComponentToggle;
-
+        condition.OnSpawn += () => searchDistance = data.searchDistance;
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
     }
@@ -73,7 +75,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
 
         //Å½»ö¹üÀ§
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), data.searchDistance);
+        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), stateMachine.controller.searchDistance);
     }
 
     public void Disable()
@@ -81,6 +83,8 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
         gameObject.SetActive(false);
         target = null;
     }
+
+    public void Hit() => searchDistance = 50f;
 
     private void ComponentToggle()
     {
