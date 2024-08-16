@@ -129,8 +129,16 @@ public class PlayerInput : MonoBehaviourPun
 
         Vector3 direction = (mousePosition - transform.position).normalized;
 
-        transform.localScale = direction.x >= 0.01f ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        // 플레이어 캐릭터를 회전시킬 때, UI 레이어를 제외한 오브젝트들만 회전
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.layer != LayerMask.NameToLayer("UI"))  // UI 레이어를 제외
+            {
+                child.localScale = new Vector3(direction.x >= 0.01f ? -1 : 1, 1, 1);
+            }
+        }
     }
+
 
     public void OnMove(InputAction.CallbackContext context)
     {
