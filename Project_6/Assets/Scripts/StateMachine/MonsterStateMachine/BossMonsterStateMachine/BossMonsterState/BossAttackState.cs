@@ -11,10 +11,11 @@ public class BossAttackState : BossBaseState
         //BossBattleManager.Instance.ToggleIsAttacking();
 
         // 기존 코드
-        //BossBattleManager.Instance.attackController.SelectAttack();
+        BossBattleManager.Instance.attackController.SelectAttack();
 
         // 테스트 전용 코드
-        BossTestManager.Instance.attackController.SelectAttack();
+        //
+        //.Instance.attackController.SelectAttack();
     }
 
     public override void Exit() 

@@ -22,6 +22,8 @@ public class TestMovableBoss : MonoBehaviour
     void Update()
     {
         var isAttacking = BossTestManager.Instance.isAttacking;
+        
+
         if(BossTestManager.Instance.targetPlayer != null )
         {
             Vector3 targetPosition = BossTestManager.Instance.targetPlayer.transform.position;
@@ -62,6 +64,10 @@ public class TestMovableBoss : MonoBehaviour
             {
                 animator.SetBool("isWalk", false);
             }
+        }
+        if (speed == 0)
+        {
+            animator.SetBool("isWalk", false);
         }
     }
 }

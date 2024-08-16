@@ -6,7 +6,7 @@ public class SlashHitBox : HitBox
 {
     private void OnEnable()
     {
-        originalSpeed = BossTestManager.Instance.boss.moveSpeed;
+        originalSpeed = BossBattleManager.Instance.boss.moveSpeed;
         mv.speed = 0f;
         duration = 0.3f;
         curDuration = 0;
