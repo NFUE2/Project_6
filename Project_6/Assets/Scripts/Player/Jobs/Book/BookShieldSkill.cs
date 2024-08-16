@@ -40,7 +40,13 @@ public class BookShieldSkill : SkillBase
             Transform closestPlayer = GameManager.Instance.players[closestPlayerIndex].transform;
             StartCoroutine(ApplyShield(closestPlayer, closestPlayerIndex));
         }
+        else
+        {
+            // 다른 플레이어를 찾지 못한 경우 자기 자신에게 방어막 적용
+            StartCoroutine(ApplyShield(transform, GameManager.Instance.players.IndexOf(this.gameObject)));
+        }
     }
+
 
     // 가장 가까운 플레이어의 인덱스를 반환하는 함수
     private int FindClosestPlayerIndex(Vector3 position, float range)

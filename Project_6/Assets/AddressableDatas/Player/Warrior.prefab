@@ -4030,7 +4030,7 @@ MonoBehaviour:
   attackOffset: {x: -0.7, y: 0.5}
   knockbackForce: 5
   hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: 2843f699ef1fffa4f982d28002432dc9, type: 3}
   animator: {fileID: 222078652441862621}
   shieldSkill: {fileID: 4833616089676288180}
   chargeSkill: {fileID: 2603718513585877556}

@@ -4249,7 +4249,7 @@ MonoBehaviour:
   attackOffset: {x: -0.6, y: 0.4}
   knockbackForce: 5
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
-  hitEffectPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: a1a3beda1bd2b1c419a62f4f6c6b75eb, type: 3}
   animator: {fileID: 2921700412241113319}
   dashSkill: {fileID: 4825308176832394675}
   stackSkill: {fileID: 6522800500231870091}
@@ -4293,8 +4293,6 @@ MonoBehaviour:
   currentStack: 0
   maxStack: 10
   damagePerStack: 10
-  stackText: {fileID: 0}
-  PlayerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

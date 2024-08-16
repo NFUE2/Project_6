@@ -1803,7 +1803,7 @@ MonoBehaviour:
   attackOffset: {x: -0.6, y: 0.4}
   knockbackForce: 5
   hitSound: {fileID: 0}
-  hitEffectPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: b4c0034925341e54db1345a5dce20e43, type: 3}
   animator: {fileID: 6875099469381461375}
   healAndBoostSkill: {fileID: 236003066068444115}
   maceChargeSkill: {fileID: 4359650018410976990}

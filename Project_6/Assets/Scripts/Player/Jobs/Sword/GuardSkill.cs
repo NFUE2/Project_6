@@ -7,12 +7,17 @@ public class GuardSkill : SkillBase, IDamagable
     public float DefenseBoostDuringGuard = 50f;
     public PlayerDataSO PlayerData;
 
-    public GameObject guardParticleEffectPrefab;
     public AudioClip guardSound;
     private AudioSource audioSource;
     private PlayerCondition playerCondition;
 
-    private GameObject guardParticleEffectInstance;
+    // 파티클을 생성할 위치
+    public Transform particleSpawnPoint;
+    // 사용할 파티클 프리팹
+    public GameObject guardParticlePrefab;
+
+    // 현재 생성된 파티클 오브젝트
+    private GameObject activeGuardParticle;
 
     void Start()
     {
@@ -38,12 +43,7 @@ public class GuardSkill : SkillBase, IDamagable
     {
         IsGuard = true;
         ApplyGuardStats();
-
-        if (guardParticleEffectPrefab != null)
-        {
-            guardParticleEffectInstance = Instantiate(guardParticleEffectPrefab, transform.position, Quaternion.identity);
-            guardParticleEffectInstance.transform.SetParent(transform);
-        }
+        CreateGuardParticle();  // 파티클 생성
 
         Invoke("ExitGuardEvent", GuardDuration);
     }
@@ -52,11 +52,7 @@ public class GuardSkill : SkillBase, IDamagable
     {
         IsGuard = false;
         RestoreOriginalStats();
-
-        if (guardParticleEffectInstance != null)
-        {
-            Destroy(guardParticleEffectInstance);
-        }
+        DestroyGuardParticle();  // 파티클 파괴
         lastActionTime = Time.time;
     }
 
@@ -64,6 +60,7 @@ public class GuardSkill : SkillBase, IDamagable
     {
         if (IsGuard) ExitGuard();
     }
+
     private void ApplyGuardStats()
     {
         playerCondition.ModifyDefense(DefenseBoostDuringGuard);
@@ -79,6 +76,24 @@ public class GuardSkill : SkillBase, IDamagable
         if (guardSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(guardSound);
+        }
+    }
+
+    // 파티클 오브젝트를 생성하는 메서드
+    private void CreateGuardParticle()
+    {
+        if (guardParticlePrefab != null && particleSpawnPoint != null)
+        {
+            activeGuardParticle = Instantiate(guardParticlePrefab, particleSpawnPoint.position, particleSpawnPoint.rotation, particleSpawnPoint);
+        }
+    }
+
+    // 파티클 오브젝트를 파괴하는 메서드
+    private void DestroyGuardParticle()
+    {
+        if (activeGuardParticle != null)
+        {
+            Destroy(activeGuardParticle);
         }
     }
 

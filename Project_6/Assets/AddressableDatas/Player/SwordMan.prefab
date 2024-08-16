@@ -2710,6 +2710,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c562f92f3b8b435d98ac3b65547b755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7196938915289890394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3630673655252246810}
+  m_Layer: 6
+  m_Name: ShieldIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3630673655252246810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196938915289890394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4298058945709228138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7209305175136541816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,6 +3814,7 @@ Transform:
   - {fileID: 4150916542003575762}
   - {fileID: 3377354756236232052}
   - {fileID: 1333203476495510599}
+  - {fileID: 3630673655252246810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!114 &183300651321169467
@@ -3809,7 +3841,7 @@ MonoBehaviour:
   attackOffset: {x: -1, y: 0.5}
   knockbackForce: 5
   hitSound: {fileID: 8300000, guid: f694f65744d838847bf0bf0f25899972, type: 3}
-  hitEffectPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: 3cf31fe1386c84a48aacd18b13102918, type: 3}
   animator: {fileID: 5179917898985751293}
   guardSkill: {fileID: 8030321767033109922}
   projectileSkill: {fileID: 2269725357822401461}
@@ -3830,8 +3862,9 @@ MonoBehaviour:
   GuardDuration: 3
   DefenseBoostDuringGuard: 50
   PlayerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
-  guardParticleEffectPrefab: {fileID: 4823530309318575359, guid: 029ef1eef72fb7d4d87d26b08baf68a5, type: 3}
   guardSound: {fileID: 8300000, guid: f60c71440a78c7b4f99800ee49860f03, type: 3}
+  particleSpawnPoint: {fileID: 3630673655252246810}
+  guardParticlePrefab: {fileID: 842665308734714816, guid: 3cf31fe1386c84a48aacd18b13102918, type: 3}
 --- !u!114 &2269725357822401461
 MonoBehaviour:
   m_ObjectHideFlags: 0
