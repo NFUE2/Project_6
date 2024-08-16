@@ -20,11 +20,7 @@ MonoBehaviour:
   moveSpeed: 4
   attackTime: 0.3
   attackDamage: 10
-  deffenceDamage: 0
+  defence: 0
   jumpForce: 8
   SkillQCooldown: 6
   SkillECooldown: 8
-  attackCooldown: 0.3
-  walkSpeed: 4
-  runSpeed: 7
-  playerdefense: 0
