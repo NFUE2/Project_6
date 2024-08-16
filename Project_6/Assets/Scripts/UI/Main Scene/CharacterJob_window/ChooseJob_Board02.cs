@@ -24,10 +24,9 @@ public class ChooseJob_Board02 : MonoBehaviourPun
         Character_Info.text = objectSO.info;
         Q_Info.text = Skill_Q.info;
         E_Info.text = Skill_E.info;
-        
 
-        //Skill_Q = ;
-        //Skill_E = ;
+        this.Skill_Q.sprite = Skill_Q.image;
+        this.Skill_E.sprite = Skill_E.image;
     }
     public void ChooseJob(GameObject player, UISlot button)
     {

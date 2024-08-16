@@ -33,7 +33,7 @@ public abstract class NPCBase : MonoBehaviour
     void Active(bool active)
     {
         outline.enabled = active;
-        interactionUI?.SetActive(active);
+        if(interactionUI != null) interactionUI?.SetActive(active);
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

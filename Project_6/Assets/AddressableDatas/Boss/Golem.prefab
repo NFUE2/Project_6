@@ -824,6 +824,7 @@ MonoBehaviour:
   stompAudioClip: {fileID: 8300000, guid: 6b78e905161f1bc4ba461a159e7ebf65, type: 3}
   razorAudioClip: {fileID: 8300000, guid: 8901ca99e4c544241a7f5d3515229d58, type: 3}
   chargePunchAudioClip: {fileID: 0}
+  faintAudioClip: {fileID: 0}
   bossCollider: {fileID: 2459596844110712909}
   chargeCollider: {fileID: 1818960447348982995}
 --- !u!114 &-8486991095086764195

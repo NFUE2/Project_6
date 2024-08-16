@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCallback,IPunDamagable
+public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstantiateMagicCallback
 {
     public float maxHp { get; set; }
     public float attackPower { get; set; }
@@ -19,7 +19,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
 
     public void TakeDamage(float damage)
     {
-        currentHp -= (damage * (defensePower / 100));
+        currentHp -= (damage - (damage * (defensePower / 100)));
         
         if (currentHp <= 0)
         {
@@ -28,27 +28,32 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunInstantiateMagicCall
             // »ç¸Á Ã³¸®
             //BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.DieState);
 
-            //photonView.RPC(nameof(BossDie),RpcTarget.All);
-            BossDie();
+            if(photonView.IsMine) photonView.RPC(nameof(BossDie), RpcTarget.All);
+            //BossDie();
         }
         else
         {
-            hpBar.fillAmount = GetFillAmountHP();
+            if(hpBar != null)
+            {
+                hpBar.fillAmount = GetFillAmountHP();
+            }
+            
         }
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        if(!PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             BossBattleManager.instance.boss = this;
             BossBattleManager.instance.spawnedBoss = gameObject;
             BossBattleManager.instance.attackController = GetComponent<BossAttackController>();
             BossBattleManager.instance.bossAnimator = GetComponent<Animator>();
+            BossBattleManager.instance.bossStateMachine = GetComponent<BossStateMachine>();
         }
     }
 
-    //[PunRPC]
+    [PunRPC]
     protected void BossDie()
     {
         GameManager.instance.StageClear();

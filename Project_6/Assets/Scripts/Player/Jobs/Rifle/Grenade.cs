@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : MonoBehaviourPun
 {
     [Header("Grenade Settings")]
     public float damage = 10f; // 수류탄의 데미지
@@ -54,7 +55,7 @@ public class Grenade : MonoBehaviour
         // 수류탄이 화면 밖으로 나가면 파괴
         if (IsOffScreen())
         {
-            Destroy(gameObject);
+            if(photonView.IsMine) Destroy(gameObject);
         }
     }
 
@@ -154,7 +155,8 @@ public class Grenade : MonoBehaviour
     {
         // 도트 딜 지속 시간이 지난 후 수류탄 오브젝트 파괴
         yield return new WaitForSeconds(dotDuration);
-        Destroy(gameObject);
+        if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+            // Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

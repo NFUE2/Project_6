@@ -8,8 +8,8 @@ public class Book_Shield : MonoBehaviourPun
     {
         if (collision.CompareTag("EnemyAttack"))
         {
-            Destroy(collision.gameObject);
-            Debug.Log("보호막이 적의 공격과 충돌하여 적의 공격을 파괴했습니다.");
+            if (photonView.IsMine) PhotonNetwork.Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
         }
     }
 
@@ -22,6 +22,6 @@ public class Book_Shield : MonoBehaviourPun
     public void SetParentRPC(int index)
     {
         transform.SetParent(GameManager.instance.players[index].transform);
-        transform.position = Vector3.zero;
+        transform.localPosition = new Vector3(0,0.35f,0f);
     }
 }

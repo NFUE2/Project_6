@@ -37,11 +37,8 @@ public class RollingSkill : SkillBase
     {
         if (isRolling || Time.time - lastActionTime < cooldownDuration)
         {
-            Debug.Log("RollingSkill: Cannot use skill, either on cooldown or already rolling.");
             return;
         }
-
-        Debug.Log("RollingSkill: Skill used.");
         StartCoroutine(Rolling());
     }
 
@@ -86,8 +83,6 @@ public class RollingSkill : SkillBase
         // 롤링 종료 시 위치를 최종 목표 위치로 설정
         rb2d.MovePosition(targetPosition);
         rb2d.gravityScale = 1; // 중력 유지
-
-        Debug.Log("RollingSkill: Rolling ended.");
 
         isRolling = false;
         isInvincible = false;

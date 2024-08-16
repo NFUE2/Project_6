@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using System.Collections;
 
 public class StackSkill : SkillBase
@@ -7,38 +6,49 @@ public class StackSkill : SkillBase
     public int currentStack = 0;
     public int maxStack = 10;
     public int damagePerStack = 10;
-    public TextMeshPro stackText;
-    public PlayerDataSO PlayerData;
     public LayerMask enemyLayer;
     public Vector2 attackSize; // 공격 박스 크기
     public Vector2 attackOffset; // 공격 박스 오프셋
     public Animator animator; // Animator 추가
     public AudioClip skillSound; // 스킬 효과음 추가
+
     private AudioSource audioSource;
+    private Transform playerTransform;
 
     private void Start()
     {
-        cooldownDuration = PlayerData.SkillECooldown;
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        audioSource = GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
+        playerTransform = transform;
     }
 
     public override void UseSkill()
     {
-        if (currentStack > 0)
+        if (currentStack > 0 && Time.time - lastActionTime >= cooldownDuration)
         {
-            PlaySkillSound(); // 스킬 사운드 재생
-            animator.SetTrigger("IsAttack"); // 일반 공격 애니메이션 트리거
+            PlaySkillSound();
+            animator.SetTrigger("IsAttack");
             DealDamageWithStack();
             currentStack = 0;
             lastActionTime = Time.time;
         }
-        else
+    }
+
+    public IEnumerator StackIncreaseCheck(float attackTime)
+    {
+        yield return new WaitForSeconds(attackTime);
+
+        Vector2 attackPosition = CalculateAttackPosition();
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
+
+        bool hasIncreasedStack = false;
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log($"스택이 부족합니다. 현재 스택 : {currentStack}");
+            if (enemy.TryGetComponent<IDamagable>(out var damagable) && !hasIncreasedStack)
+            {
+                IncreaseStack();
+                hasIncreasedStack = true;
+            }
         }
     }
 
@@ -53,8 +63,6 @@ public class StackSkill : SkillBase
     private void DealDamageWithStack()
     {
         int totalDamage = currentStack * damagePerStack;
-        Debug.Log($"스택 {currentStack}개를 사용하여 {totalDamage}의 데미지를 입혔습니다.");
-
         DealDamageToEnemies(totalDamage);
     }
 
@@ -65,35 +73,23 @@ public class StackSkill : SkillBase
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.transform.TryGetComponent(out IDamagable m))
-                m.TakeDamage(damage);
-            //enemy.GetComponent<IDamagable>()?.TakeDamage(damage);
-            //Debug.Log($"적 {enemy.name}에게 {damage}의 데미지를 입혔습니다.");
+            if (enemy.transform.TryGetComponent(out IPunDamagable m))
+                m.Damage(damage);
         }
     }
 
     private Vector2 CalculateAttackPosition()
     {
-        Vector2 basePosition = (Vector2)transform.position;
+        Vector2 basePosition = (Vector2)playerTransform.position;
 
-        if (transform.localScale.x < 0)
-        {
-            return basePosition + new Vector2(-attackOffset.x, attackOffset.y); // 왼쪽을 바라볼 때
-        }
-        else
-        {
-            return basePosition + attackOffset; // 오른쪽을 바라볼 때
-        }
+        return playerTransform.localScale.x < 0
+            ? basePosition + new Vector2(-attackOffset.x, attackOffset.y) // 왼쪽을 바라볼 때
+            : basePosition + attackOffset; // 오른쪽을 바라볼 때
     }
 
     public void IncreaseStack()
     {
-        currentStack++;
-        if (currentStack > maxStack)
-        {
-            currentStack = maxStack;
-        }
-        Debug.Log($"스택 증가! 현재 스택 : {currentStack}");
+        currentStack = Mathf.Min(currentStack + 1, maxStack);
     }
 
     private void OnDrawGizmosSelected()
@@ -101,5 +97,11 @@ public class StackSkill : SkillBase
         Gizmos.color = Color.yellow;
         Vector2 attackPosition = CalculateAttackPosition();
         Gizmos.DrawWireCube(attackPosition, attackSize);
+    }
+
+    private void Update()
+    {
+        UpdateCooldownImage();
+        UpdateCooldownText();
     }
 }

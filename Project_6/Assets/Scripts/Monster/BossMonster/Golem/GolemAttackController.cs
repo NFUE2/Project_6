@@ -34,7 +34,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
         int countOfMeleeAttack = 3;
         int countOfDistanceAttack = 2;
         float distanceToTarget = BossBattleManager.Instance.distanceToTarget;
-        Debug.Log(distanceToTarget);
         if(distanceToTarget > 7)
         {
             int index = Random.Range(0, countOfDistanceAttack);
@@ -49,7 +48,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     break;
             }
         }
-        else if(distanceToTarget <= 7)
+        else if(distanceToTarget <= 7 && distanceToTarget > -1)
         {
             int index = Random.Range(0, countOfMeleeAttack);
             switch (index)
@@ -64,6 +63,10 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     Charge();
                     break;
             }
+        }
+        else if(distanceToTarget == -1)
+        {
+            BossBattleManager.Instance.bossStateMachine.ChangeState(BossBattleManager.Instance.bossStateMachine.IdleState);
         }
     }
 
@@ -122,50 +125,52 @@ public class GolemAttackController : BossAttackController, IPunObservable
     
     private void EnableSwingHitBox()
     {
-        Debug.Log(BossBattleManager.Instance.targetPlayer);
-        if(transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
+        if (PhotonNetwork.IsMasterClient)
         {
-            //swingHitBoxLeft.SetActive(true);
-            var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxLeft.transform.position, swingHitBoxLeft.transform.localScale, 0);
-            foreach(Collider2D col in hit)
+            if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
             {
-                if(col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                //swingHitBoxLeft.SetActive(true);
+                var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+                Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxLeft.transform.position, swingHitBoxLeft.transform.localScale, 0);
+                foreach (Collider2D col in hit)
                 {
-                    float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
-                    P.TakeDamage(damage);
-                    Vector2 playerPos = col.transform.position;
-                    Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
-                    K.ApplyKnockback(knockbackDirection, 5);
+                    if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                    {
+                        float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
+                        P.TakeDamage(damage);
+                        Vector2 playerPos = col.transform.position;
+                        Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                        K.ApplyKnockback(knockbackDirection, 5);
+                    }
                 }
             }
-        }
-        else
-        {
-            //swingHitBoxRight.SetActive(true);
-            var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
-            Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxRight.transform.position, swingHitBoxRight.transform.localScale, 0);
-            foreach (Collider2D col in hit)
+            else
             {
-                if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                //swingHitBoxRight.SetActive(true);
+                var bossPos = BossBattleManager.Instance.spawnedBoss.transform.position;
+                Collider2D[] hit = Physics2D.OverlapBoxAll(swingHitBoxRight.transform.position, swingHitBoxRight.transform.localScale, 0);
+                foreach (Collider2D col in hit)
                 {
-                    float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
-                    P.TakeDamage(damage);
-                    Vector2 playerPos = col.transform.position;
-                    Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
-                    K.ApplyKnockback(knockbackDirection, 5);
+                    if (col.TryGetComponent<IDamagable>(out IDamagable P) && col.TryGetComponent<IKnockBackable>(out IKnockBackable K))
+                    {
+                        float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
+                        P.TakeDamage(damage);
+                        Vector2 playerPos = col.transform.position;
+                        Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
+                        K.ApplyKnockback(knockbackDirection, 5);
+                    }
                 }
             }
-        }
-        BossBattleManager.Instance.bossAnimator.SetBool("isSwing", false);
-        additionalAttack = Random.Range(0, 2);
-        if(additionalAttack == 0)
-        {
-            ExitAttack() ;
-        }
-        else
-        {
-            StompReady();
+            BossBattleManager.Instance.bossAnimator.SetBool("isSwing", false);
+            additionalAttack = Random.Range(0, 2);
+            if (additionalAttack == 0)
+            {
+                ExitAttack();
+            }
+            else
+            {
+                StompReady();
+            }
         }
     }
 
@@ -185,18 +190,21 @@ public class GolemAttackController : BossAttackController, IPunObservable
 
     private void EnableRazorHitBox()
     {
-        if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
+        if(PhotonNetwork.IsMasterClient)
         {
-            // y rotation 180 하지 않고 회전
-            razorHitBox.SetActive(true);
-            razorHitBox.transform.rotation = Quaternion.Euler(0, 0, 20);
-            StartCoroutine(RotateRazor());
-        }
-        else
-        {
-            razorHitBox.SetActive(true) ;
-            razorHitBox.transform.rotation = Quaternion.Euler(0, 180, 20);
-            StartCoroutine(RotateRazor());
+            if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
+            {
+                // y rotation 180 하지 않고 회전
+                razorHitBox.SetActive(true);
+                razorHitBox.transform.rotation = Quaternion.Euler(0, 0, 20);
+                StartCoroutine(RotateRazor());
+            }
+            else
+            {
+                razorHitBox.SetActive(true) ;
+                razorHitBox.transform.rotation = Quaternion.Euler(0, 180, 20);
+                StartCoroutine(RotateRazor());
+            }
         }
     }
 
@@ -226,7 +234,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
     {
         if(chargePassCount == 0)
         {
-            Debug.Log("차지");
             chargePassCount++;
             BossBattleManager.Instance.ToggleIsAttacking();
             bossCollider.enabled = false;

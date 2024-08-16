@@ -1,27 +1,29 @@
 using UnityEngine;
-using TMPro;
 
 public class GuardSkill : SkillBase, IDamagable
 {
     public bool IsGuard { get; private set; }
-    public float GuardDuration = 1.0f; // 가드 지속 시간
-    public float DefenseBoostDuringGuard = 50f; // 가드 중 방어력 증가량
+    public float GuardDuration = 3.0f;
+    public float DefenseBoostDuringGuard = 50f;
     public PlayerDataSO PlayerData;
-    public float DamageReduction;
 
-    private Animator animator;
+    public AudioClip guardSound;
+    private AudioSource audioSource;
     private PlayerCondition playerCondition;
-    private float originalDamageReduction;
 
-    public AudioClip guardSound; // 방어 성공 시 효과음 추가
-    private AudioSource audioSource; // AudioSource 컴포넌트 추가
+    // 파티클을 생성할 위치
+    public Transform particleSpawnPoint;
+    // 사용할 파티클 프리팹
+    public GameObject guardParticlePrefab;
+
+    // 현재 생성된 파티클 오브젝트
+    private GameObject activeGuardParticle;
 
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
-        animator = GetComponent<Animator>(); // Animator 컴포넌트 가져오기
-        playerCondition = GetComponent<PlayerCondition>(); // PlayerCondition 컴포넌트 가져오기
-        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        playerCondition = GetComponent<PlayerCondition>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void UseSkill()
@@ -32,9 +34,7 @@ public class GuardSkill : SkillBase, IDamagable
         }
         else
         {
-            if (Time.time - lastActionTime < cooldownDuration) return; // Q 스킬 쿨타임 체크
-
-            Debug.Log("Q 스킬 사용");
+            if (Time.time - lastActionTime < cooldownDuration) return;
             EnterGuard();
         }
     }
@@ -42,18 +42,17 @@ public class GuardSkill : SkillBase, IDamagable
     private void EnterGuard()
     {
         IsGuard = true;
-        SaveOriginalStats();
         ApplyGuardStats();
-        animator.SetBool("IsGuard", true); // 가드 애니메이션 시작
-        Invoke("ExitGuardEvent", GuardDuration); // 가드 시간 이벤트 설정
+        CreateGuardParticle();  // 파티클 생성
+
+        Invoke("ExitGuardEvent", GuardDuration);
     }
 
     private void ExitGuard()
     {
-        Debug.Log("가드 종료");
         IsGuard = false;
         RestoreOriginalStats();
-        animator.SetBool("IsGuard", false); // 가드 애니메이션 종료
+        DestroyGuardParticle();  // 파티클 파괴
         lastActionTime = Time.time;
     }
 
@@ -62,27 +61,39 @@ public class GuardSkill : SkillBase, IDamagable
         if (IsGuard) ExitGuard();
     }
 
-    private void SaveOriginalStats()
-    {
-        originalDamageReduction = DamageReduction; // 현재 데미지 감소 비율 저장
-    }
-
     private void ApplyGuardStats()
     {
-        playerCondition.ModifyDefense(DefenseBoostDuringGuard); // 방어력 증가 적용
+        playerCondition.ModifyDefense(DefenseBoostDuringGuard);
     }
 
     private void RestoreOriginalStats()
     {
-        playerCondition.ModifyDefense(-DefenseBoostDuringGuard); // 방어력 복원
-        DamageReduction = originalDamageReduction; // 데미지 감소 비율 복원
+        playerCondition.ModifyDefense(-DefenseBoostDuringGuard);
     }
 
     public void PlayGuardSound()
     {
         if (guardSound != null && audioSource != null)
         {
-            audioSource.PlayOneShot(guardSound); // 방어 성공 시 효과음 재생
+            audioSource.PlayOneShot(guardSound);
+        }
+    }
+
+    // 파티클 오브젝트를 생성하는 메서드
+    private void CreateGuardParticle()
+    {
+        if (guardParticlePrefab != null && particleSpawnPoint != null)
+        {
+            activeGuardParticle = Instantiate(guardParticlePrefab, particleSpawnPoint.position, particleSpawnPoint.rotation, particleSpawnPoint);
+        }
+    }
+
+    // 파티클 오브젝트를 파괴하는 메서드
+    private void DestroyGuardParticle()
+    {
+        if (activeGuardParticle != null)
+        {
+            Destroy(activeGuardParticle);
         }
     }
 
@@ -90,14 +101,11 @@ public class GuardSkill : SkillBase, IDamagable
     {
         if (IsGuard)
         {
-            // 방어 중일 때 데미지 효과음 재생
             PlayGuardSound();
-            // 데미지를 무시할 수 있지만, 여기서 데미지 처리 로직을 추가할 수 있음
         }
         else
         {
-            // 방어 중이 아닐 때는 기본 데미지 처리 로직을 호출하거나 처리할 수 있음
-            playerCondition.TakeDamage(damage); // 이 부분은 인터페이스 구현에 따라 다름
+            playerCondition.TakeDamage(damage);
         }
     }
 }

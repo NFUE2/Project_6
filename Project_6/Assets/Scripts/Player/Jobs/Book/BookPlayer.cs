@@ -14,29 +14,38 @@ public class BookPlayer : RangedPlayerBase
     [Header("Attack")]
     public float attackRange;
     public LayerMask targetLayer;
-    public float projectileSpeed;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI noTargetText; // 공격 대상이 없을 때 표시될 텍스트
+    private float messageDisplayDuration = 2f; // 메시지가 표시될 시간(초)
 
     private void Start()
     {
-        bookshieldSkill.SetCooldownText(qCooldownText);
-        laserSkill.SetCooldownText(eCooldownText);
+        bookshieldSkill.SetCooldownImage(qCooldownImage);
+        laserSkill.SetCooldownImage(eCooldownImage);
+
+        // 텍스트 메시지를 처음에는 비활성화
+        if (noTargetText != null)
+        {
+            noTargetText.gameObject.SetActive(false);
+        }
     }
 
     public override void Attack()
     {
-        if (Time.time - lastAttackTime < playerData.attackCooldown) return;
+        if (currentAttackTime < playerData.attackTime) return;
 
         Transform closestTarget = FindClosestTarget(transform.position, attackRange, targetLayer);
 
         if (closestTarget != null)
         {
-            Debug.Log("타겟 공격!");
             LaunchProjectile(closestTarget);
-            lastAttackTime = Time.time;
+            currentAttackTime = 0f;
         }
         else
         {
-            Debug.Log("범위 내 타겟 없음.");
+            // 공격 대상이 없을 때 텍스트 메시지 표시
+            ShowNoTargetMessage();
         }
     }
 
@@ -56,11 +65,8 @@ public class BookPlayer : RangedPlayerBase
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        Debug.Log($"찾은 타겟 수: {hitColliders.Length}");
-
         foreach (Collider2D hitCollider in hitColliders)
         {
-            Debug.Log($"충돌한 객체: {hitCollider.gameObject.name}, 레이어: {hitCollider.gameObject.layer}");
             if (hitCollider.transform == transform) continue;
 
             float distance = Vector3.Distance(position, hitCollider.transform.position);
@@ -76,43 +82,37 @@ public class BookPlayer : RangedPlayerBase
 
     private void LaunchProjectile(Transform target)
     {
-        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.identity);
         Vector3 targetPosition = target.position;
 
-        // 타겟의 콜라이더가 있는 경우 콜라이더의 오프셋을 추가
         Collider2D targetCollider = target.GetComponent<Collider2D>();
         if (targetCollider != null)
         {
             targetPosition = targetCollider.bounds.center;
         }
 
-        Vector3 direction = (targetPosition - projectile.transform.position).normalized;
+        Vector3 direction = (targetPosition - transform.position).normalized;
 
-        // Projectile 클래스의 SetDirection 메서드 호출
-        Projectile projectileComponent = projectile.GetComponent<Projectile>();
-        if (projectileComponent != null)
-        {
-            projectileComponent.SetDirection(direction);
-        }
-
-        StartCoroutine(MoveProjectile(projectile, targetPosition));
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, transform.position, Quaternion.Euler(0, 0, angle));
     }
 
-    private IEnumerator MoveProjectile(GameObject projectile, Vector3 targetPosition)
+    private void ShowNoTargetMessage()
     {
-        while (projectile != null)
+        if (noTargetText != null)
         {
-            Vector3 direction = (targetPosition - projectile.transform.position).normalized;
-            projectile.transform.position += direction * projectileSpeed * Time.deltaTime;
+            noTargetText.gameObject.SetActive(true); // 텍스트 활성화
+            noTargetText.text = "No Target in Range!"; // 표시할 메시지
+            StartCoroutine(HideNoTargetMessageAfterDelay());
+        }
+    }
 
-            // 목표물과의 거리 체크
-            if (Vector3.Distance(projectile.transform.position, targetPosition) < 0.1f)
-            {
-                // 충돌 시 처리 로직 추가 (예: 데미지 적용, 투사체 파괴 등)
-                Destroy(projectile);
-            }
-
-            yield return null;
+    private IEnumerator HideNoTargetMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(messageDisplayDuration);
+        if (noTargetText != null)
+        {
+            noTargetText.gameObject.SetActive(false); // 일정 시간 후 텍스트 비활성화
         }
     }
 }
+

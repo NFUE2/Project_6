@@ -23,19 +23,16 @@ public class HealAndBoostSkill : SkillBase
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-        Debug.Log("HealAndBoostSkill 시작됨, 쿨타임 설정: " + cooldownDuration);
     }
 
     public override void UseSkill()
     {
         if (Time.time - lastActionTime < cooldownDuration)
         {
-            Debug.Log("스킬 쿨타임이 아직 끝나지 않음");
             return;
         }
 
         lastActionTime = Time.time;
-        Debug.Log("스킬 사용됨, 현재 시간: " + Time.time);
         PlaySkillSound(); // 스킬 효과음 재생
         StartCoroutine(HealAndBoost());
     }
@@ -50,20 +47,14 @@ public class HealAndBoostSkill : SkillBase
 
     private IEnumerator HealAndBoost()
     {
-        Debug.Log("HealAndBoost 코루틴 시작됨");
-
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange, playerLayer); // 힐 범위
-        Debug.Log($"힐 범위 내 감지된 오브젝트 수: {hitColliders.Length}");
         int healedPlayers = 0;
 
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log($"감지된 오브젝트: {hitCollider.gameObject.name}");
-
             PlayerCondition playerCondition = hitCollider.GetComponent<PlayerCondition>();
             if (playerCondition != null)
             {
-                Debug.Log("플레이어 발견, 힐 시작: " + hitCollider.gameObject.name);
                 StartCoroutine(HealPlayer(playerCondition));
                 healedPlayers++;
             }
@@ -71,19 +62,16 @@ public class HealAndBoostSkill : SkillBase
 
         if (healedPlayers > 0)
         {
-            Debug.Log(healedPlayers + "명의 플레이어가 힐됨, 방어력 증가 시작");
             StartCoroutine(BoostDefense(healedPlayers));
         }
 
         yield return new WaitForSeconds(cooldownDuration);
-        Debug.Log("Q스킬 쿨타임 완료");
     }
 
     private IEnumerator HealPlayer(PlayerCondition playerCondition)
     {
         float startTime = Time.time;
         float healPerSecond = totalHealAmount / healDuration; // 초당 힐량
-        Debug.Log("HealPlayer 코루틴 시작됨, 플레이어: " + playerCondition.name);
 
         while (Time.time - startTime < healDuration)
         {
@@ -92,22 +80,17 @@ public class HealAndBoostSkill : SkillBase
             playerCondition.photonView.RPC(nameof(PlayerCondition.HealRPC), RpcTarget.All, healThisFrame);
             yield return null;
         }
-
-        Debug.Log("힐 종료, 플레이어: " + playerCondition.name + ", 최종 체력: " + playerCondition.currentHealth);
     }
 
     private IEnumerator BoostDefense(int healedPlayers)
     {
-        float originalDefense = PlayerData.playerdefense; // 현재 방어력 저장
-        Debug.Log("BoostDefense 코루틴 시작됨, 원래 방어력: " + originalDefense);
+        float originalDefense = PlayerData.defence; // 현재 방어력 저장
 
-        PlayerData.playerdefense += defenseBoost * healedPlayers;
-        Debug.Log("방어력 증가, 증가량: " + (defenseBoost * healedPlayers));
+        PlayerData.defence += defenseBoost * healedPlayers;
 
         yield return new WaitForSeconds(statBoostDuration);
 
-        PlayerData.playerdefense = originalDefense; // 방어력 원상복구
-        Debug.Log("방어력 원상복구, 현재 방어력: " + PlayerData.playerdefense);
+        PlayerData.defence = originalDefense; // 방어력 원상복구
     }
 
     private void OnDrawGizmos()

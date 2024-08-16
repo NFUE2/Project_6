@@ -318,7 +318,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450060789051069775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -468,7 +468,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -11
+  m_SortingOrder: -31
   m_Sprite: {fileID: 21300000, guid: 3339b7b35cacb3d4289b5510e27a27fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1569,7 +1569,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -4
+  m_SortingOrder: -27
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2148,6 +2148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCount: 0
+  curPlayersCount: 0
   data:
     type: 0
     startTransform: {fileID: 0}
@@ -18200,7 +18202,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4265941315390819955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -18350,7 +18352,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -30
   m_Sprite: {fileID: 21300000, guid: 4796e8161ff82f846b8ce66fbb792645, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18434,7 +18436,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -9
+  m_SortingOrder: -29
   m_Sprite: {fileID: 21300000, guid: b95c055b47d583b4cb2a1fc8ab685c22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -20930,7 +20932,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -9
+  m_SortingOrder: -29
   m_Sprite: {fileID: 21300000, guid: b95c055b47d583b4cb2a1fc8ab685c22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21260,7 +21262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -30
   m_Sprite: {fileID: 21300000, guid: 4796e8161ff82f846b8ce66fbb792645, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21573,7 +21575,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -11
+  m_SortingOrder: -31
   m_Sprite: {fileID: 21300000, guid: 3339b7b35cacb3d4289b5510e27a27fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21783,6 +21785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCount: 0
+  curPlayersCount: 0
   data:
     type: 0
     startTransform: {fileID: 0}
@@ -31251,7 +31255,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -5
+  m_SortingOrder: -28
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -31382,6 +31386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764351ea58ad52a41879beca9f83d0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCount: 0
+  curPlayersCount: 0
   data:
     type: 2
     startTransform: {fileID: 1321224511755126242}

@@ -13,7 +13,7 @@ public class MonsterIdleState : MonsterBaseState
     {
         base.Enter();
         StartAnimation(stateMachine.controller.animationData.idle);
-        players = GameManager.instance.players;//게임 매니저에서 가져오기
+        if(GameManager.instance != null) players = GameManager.instance.players;//게임 매니저에서 가져오기
     }
 
     public override void Exit()
@@ -29,14 +29,14 @@ public class MonsterIdleState : MonsterBaseState
 
     private void PlayerSearch()
     {
-        foreach(GameObject p in players)
+        foreach(GameObject player in players)
         {
-            float distance = Vector2.Distance(p.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
-
-            if (distance < stateMachine.controller.data.searchDistance)
+            float distance = Vector2.Distance(player.transform.position, (Vector3)stateMachine.controller.offsetPos + stateMachine.controller.transform.position);
+            
+            if (player.TryGetComponent(out PlayerInput p) && !p.isDead && distance < stateMachine.controller.searchDistance)
             {
-                stateMachine.controller.target = p.transform;
-                if(isTrackable()) stateMachine.ChangeState(stateMachine.trackState);
+                stateMachine.controller.target = player.transform;
+                if(IsTrackable()) stateMachine.ChangeState(stateMachine.trackState);
 
                 if (distance < stateMachine.controller.data.attackDistance)
                     stateMachine.ChangeState(stateMachine.attackState);

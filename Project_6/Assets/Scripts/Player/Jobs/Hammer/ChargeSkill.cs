@@ -33,7 +33,8 @@ public class ChargeSkill : SkillBase
 
     private void InitializeComponents()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
@@ -54,7 +55,6 @@ public class ChargeSkill : SkillBase
     public override void UseSkill()
     {
         if (isCharging || isAttacking || Time.time - lastActionTime < cooldownDuration) return;
-
         isCharging = true;
         animator.SetBool("IsCharging", true);
         StartCoroutine(Charging());
@@ -73,12 +73,13 @@ public class ChargeSkill : SkillBase
         animator.SetBool("IsCharging", false);
         lastActionTime = Time.time;
         isAttacking = true;
-        animator.SetTrigger("IsAttack"); // 공격 애니메이션 트리거
+        //animator.SetTrigger("IsAttack"); // 공격 애니메이션 트리거
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
-    public void PerformAttack()
+    public void ChargingAttack()
     {
+        Debug.Log("작동");
         if (!isCharging && isAttacking)
         {
             Vector2 attackPosition = CalculateAttackPosition();
@@ -86,8 +87,8 @@ public class ChargeSkill : SkillBase
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                if (enemy.TryGetComponent(out IDamagable e))
-                    e.TakeDamage(currentDamage);
+                if (enemy.TryGetComponent(out IPunDamagable e))
+                    e.Damage(currentDamage);
 
                 //enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
             }

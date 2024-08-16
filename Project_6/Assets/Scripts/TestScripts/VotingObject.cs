@@ -25,10 +25,9 @@ public class DestinationData
     public BGMList bgm;
 }
 
-[RequireComponent(typeof(PhotonView))]
-public class VotingObject : MonoBehaviourPun//, IPunObservable
+public class VotingObject : MonoBehaviour//, IPunObservable
 {
-    int playerCount = 0, curPlayersCount;
+    public int playerCount = 0, curPlayersCount;
     public DestinationData data;
     public GameObject voting;
     public VotingDataSO vdata;
@@ -50,6 +49,12 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject g = collision.gameObject;
+
+        if (!GameManager.instance.players.Contains(g)) return;
+
+        //Debug.Log($"현재 플레이어 : {playerCount}");
+
         playerCount++;
         if (playerCount == curPlayersCount)
         {
@@ -62,6 +67,10 @@ public class VotingObject : MonoBehaviourPun//, IPunObservable
     
     private void OnTriggerExit2D(Collider2D collision)
     {
+        GameObject g = collision.gameObject;
+
+        if (!GameManager.instance.players.Contains(g)) return;
+
         playerCount--;
         voting.SetActive(false);
         voting.GetComponent<Voting>().ResetVote();

@@ -48,7 +48,7 @@ public class MonsterBaseState : IState
         return Vector2.Distance(targetPos, myPos);
     }
 
-    public bool isTrackable()
+    public bool IsTrackable()
     {
         MonsterController controller = stateMachine.controller;
         Transform myTransform = controller.transform;
@@ -57,9 +57,9 @@ public class MonsterBaseState : IState
         Vector2 myPos = ((Vector2)myTransform.position + controller.offsetPos);
 
         Vector2 dir = targetPos - myPos;
-        float distance = stateMachine.controller.data.attackDistance;
+        float distance = stateMachine.controller.data.attackDistance / 2;
 
-        return Mathf.Abs(dir.x) > distance;
+        return !PlayerisDie() && Mathf.Abs(dir.x) >= distance;
     }
 
     public Vector2 TargetDirection()
@@ -77,5 +77,12 @@ public class MonsterBaseState : IState
         stateMachine.controller.ui.localScale =  
         stateMachine.controller.transform.localScale = 
         stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
+    }
+
+    public bool PlayerisDie()
+    {
+        stateMachine.controller.target.TryGetComponent(out PlayerInput p);
+
+        return p.isDead;
     }
 }

@@ -45,9 +45,5 @@ public class BombArrowSkill : SkillBase
         {
             audioSource.PlayOneShot(fireSound);
         }
-        else
-        {
-            Debug.LogError("fireSound 또는 audioSource가 할당되지 않았습니다.");
-        }
     }
 }

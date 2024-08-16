@@ -1,42 +1,73 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
+    [Header("Skill Cooldown UI")]
+    public Image qCooldownImage;
+    public Image eCooldownImage;
+
+    [Header("Player Data")]
     public PlayerDataSO playerData;
 
-    public TextMeshProUGUI qCooldownText; // Q 스킬 쿨타임을 표시하는 UI 텍스트 요소
-    public TextMeshProUGUI eCooldownText; // E 스킬 쿨타임을 표시하는 UI 텍스트 요소
+    [Header("Player Sound")]
+    public AudioClip attackSound;  // 공격 효과음 클립
+    protected AudioSource audioSource;
+
     public abstract void Attack();
     public abstract void UseSkillQ();
     public abstract void UseSkillE();
 
-    [Header("Animation Data")]
-    public Animator animator; // 향후 애니메이션 에셋 추가 =>
+    public Image AttackcooldownBar;
+    protected float currentAttackTime;
 
-    [Header("Skills")]
-    protected float lastQActionTime;  // Q 스킬 마지막 사용 시간
-    protected float lastEActionTime;  // E 스킬 마지막 사용 시간
-
-    [Header("Attack")]
-    protected PlayerDataSO attackTime; // 공격 시간 간격 -> PlayerDataSO에서 받아서 사용
-    protected float lastAttackTime;  // 마지막 공격 시간
-
-    public void SetLastEActionTime(float time)
+    protected virtual void Awake()
     {
-        lastEActionTime = time;
+        currentAttackTime = playerData.attackTime;
+        AttackcooldownBar.fillAmount = 1f;
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public float GetLastEActionTime()
+    private void Update()
     {
-        return lastEActionTime;
+        AttackCoolTime();
+        HandleHealthBarVisibility();
     }
 
     public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         if (photonView.IsMine) GameManager.instance.player = gameObject;
-
         GameManager.instance.players.Add(gameObject);
+    }
+
+    protected void AttackCoolTime()
+    {
+        if (currentAttackTime < playerData.attackTime)
+        {
+            currentAttackTime += Time.deltaTime;
+            AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
+        }
+    }
+
+    private void HandleHealthBarVisibility()
+    {
+        if (AttackcooldownBar.fillAmount >= 1f)
+        {
+            AttackcooldownBar.gameObject.SetActive(false); // 체력바 비활성화
+        }
+        else
+        {
+            AttackcooldownBar.gameObject.SetActive(true); // 체력바 활성화
+        }
+    }
+
+    protected void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            SoundManager.Instance.Shot(clip); // SoundManager를 통해 SFX 재생
+        }
     }
 }

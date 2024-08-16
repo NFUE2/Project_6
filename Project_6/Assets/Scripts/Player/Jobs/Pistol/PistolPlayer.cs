@@ -5,9 +5,8 @@ using System.Collections;
 
 public class PistolPlayer : RangedPlayerBase
 {
-    protected bool isAttackCooldown = false;
-    protected int attackCount = 0;
-    protected float cooldownDuration = 2f;
+    private int attackCount = 0;
+    private float cooldownDuration = 2f;
 
     [Header("Skill Q")]
     [SerializeField] private FanningSkill fanningSkill;
@@ -19,58 +18,67 @@ public class PistolPlayer : RangedPlayerBase
     [SerializeField] private AudioClip reloadSound; // 장전 효과음
 
     private bool isUsingSkill = false;
+    private bool isReloading = false; // 장전 중인지 확인하는 변수
 
     private void Start()
     {
-        fanningSkill.SetCooldownText(qCooldownText);
-        rollingSkill.SetCooldownText(eCooldownText);
+        fanningSkill.SetCooldownImage(qCooldownImage);
+        rollingSkill.SetCooldownImage(eCooldownImage);
 
         // 오디오 소스 컴포넌트 가져오기 또는 추가하기
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        audioSource = GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
     }
 
     public override void Attack()
     {
-        if (!isAttackCooldown && CanAttack() && !isUsingSkill)
+        if (currentAttackTime >= playerData.attackTime && !isUsingSkill && !isReloading)
         {
             base.Attack(); // 기본 공격 로직 호출
 
             attackCount++;
-            Debug.Log($"Attack {attackCount}: Performed an attack.");
 
             if (attackCount >= 6)
             {
-                StartCooldown();
+                StartReload();
             }
-        }
-        else
-        {
-            Debug.Log("Attack is on cooldown or cannot attack yet.");
+            else
+            {
+                currentAttackTime = 0f; // 쿨타임 초기화
+            }
         }
     }
 
     private void Update()
     {
-        UpdateCooldown();
+        UpdateAttackCooldown();
     }
 
-    private void UpdateCooldown()
+    private void UpdateAttackCooldown()
     {
-        if (isAttackCooldown && Time.time - lastAttackTime >= cooldownDuration)
+        if (!isReloading) // 장전 중이 아닐 때만 쿨타임을 업데이트
         {
-            isAttackCooldown = false;
-            attackCount = 0; // 공격 카운트를 초기화
-            Debug.Log("Cooldown complete: You can attack again.");
+            if (currentAttackTime < playerData.attackTime)
+            {
+                currentAttackTime += Time.deltaTime;
+                if (AttackcooldownBar != null)
+                {
+                    AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
+                }
+            }
+        }
+        else
+        {
+            // 장전 중에는 공격 바가 차지 않도록 설정
+            if (AttackcooldownBar != null)
+            {
+                AttackcooldownBar.fillAmount = 0f;
+            }
         }
     }
 
     public override void UseSkillQ()
     {
-        if (!isUsingSkill)
+        if (!isUsingSkill && !isReloading)
         {
             isUsingSkill = true;
             fanningSkill.UseSkill();
@@ -80,7 +88,7 @@ public class PistolPlayer : RangedPlayerBase
 
     public override void UseSkillE()
     {
-        if (!isUsingSkill)
+        if (!isUsingSkill && !isReloading)
         {
             rollingSkill.UseSkill();
         }
@@ -94,23 +102,23 @@ public class PistolPlayer : RangedPlayerBase
         }
 
         attackCount = 0;
-        isAttackCooldown = false;
-        lastAttackTime = Time.time;
+        currentAttackTime = cooldownDuration; // 스킬 완료 시 쿨타임 초기화
         isUsingSkill = false;
-        Debug.Log("Fanning skill complete: Fully reloaded.");
     }
 
-    private bool CanAttack()
+    private void StartReload()
     {
-        return Time.time - lastAttackTime >= playerData.attackCooldown;
-    }
-
-    private void StartCooldown()
-    {
-        isAttackCooldown = true;
-        lastAttackTime = Time.time;
+        isReloading = true;
         PlayReloadSound(); // 장전 시작 시 장전 효과음 재생
-        Debug.Log("Reloading: Attack count reached 6, starting cooldown.");
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        yield return new WaitForSeconds(cooldownDuration); // 장전 시간 기다리기
+        isReloading = false;
+        attackCount = 0; // 공격 카운트 초기화
+        currentAttackTime = 0f; // 공격 쿨타임 초기화
     }
 
     private void PlayReloadSound()
@@ -118,11 +126,6 @@ public class PistolPlayer : RangedPlayerBase
         if (reloadSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(reloadSound);
-            Debug.Log("Reload sound played: " + reloadSound.name);
-        }
-        else
-        {
-            Debug.LogError("reloadSound 또는 audioSource가 할당되지 않았습니다.");
         }
     }
 }

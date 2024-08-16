@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  damage: 10
+  damage: 15
   offScreenMargin: 0.5
   explosionEffect: {fileID: 7830147868276656282, guid: 218d4d47e1e98b2478485031375a4179, type: 3}
   explosionLifetime: 2
@@ -284,7 +284,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -4488756547184885803}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
