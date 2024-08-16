@@ -60,18 +60,18 @@ public class PistolPlayer : RangedPlayerBase
             if (currentAttackTime < playerData.attackTime)
             {
                 currentAttackTime += Time.deltaTime;
-                if (cooldownBar != null)
+                if (AttackcooldownBar != null)
                 {
-                    cooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
+                    AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
                 }
             }
         }
         else
         {
             // 장전 중에는 공격 바가 차지 않도록 설정
-            if (cooldownBar != null)
+            if (AttackcooldownBar != null)
             {
-                cooldownBar.fillAmount = 0f;
+                AttackcooldownBar.fillAmount = 0f;
             }
         }
     }

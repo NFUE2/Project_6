@@ -3916,7 +3916,6 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &3753247065642757853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3985,7 +3984,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8639025122708604968}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98ef4f7a573b5a3469dd5f30ab7137a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4156,13 +4155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a05d8bc5c8d5f429265c94b4d64ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   qCooldownImage: {fileID: 5272827538541976799}
   eCooldownImage: {fileID: 5397101048428190542}
-  animator: {fileID: 579804143904161667}
+  playerData: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
+  attackSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
+  AttackcooldownBar: {fileID: 0}
   attackPrefab: {fileID: 6038683907410269147, guid: 089daa8578ffc534db05cbcbb688d9c8, type: 3}
   attackPoint: {fileID: 5226708908227198370}
-  attackSound: {fileID: 8300000, guid: 2680c7bbcaf2a9a419d74b930765c4c8, type: 3}
   fanningSkill: {fileID: 2510063869997530770}
   rollingSkill: {fileID: 5441892144449027086}
   reloadSound: {fileID: 8300000, guid: 8aeac243f7a1559478bfb13e47abc953, type: 3}

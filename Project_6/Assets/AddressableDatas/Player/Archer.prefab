@@ -292,7 +292,6 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &5002148267779281587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +361,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 241317779052473150}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98ef4f7a573b5a3469dd5f30ab7137a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -533,13 +532,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0f7a5adbdde20438b595d8bd78d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   qCooldownImage: {fileID: 4705799370574598108}
   eCooldownImage: {fileID: 4793195472671557709}
-  animator: {fileID: 84350946389803228}
+  playerData: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
+  attackSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
+  AttackcooldownBar: {fileID: 0}
   attackPrefab: {fileID: 8906174536271126433, guid: 6e1989e52ea03804aab62d059b2870aa, type: 3}
   attackPoint: {fileID: 5096834606558841716}
-  attackSound: {fileID: 8300000, guid: 9be4e408750743148982286ca1eaa76b, type: 3}
   wireArrowSkill: {fileID: 1161066313930406838}
   bombArrowSkill: {fileID: 3711234748753326623}
 --- !u!114 &3711234748753326623

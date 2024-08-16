@@ -3797,20 +3797,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b1c348e090f474d824e7e6d892836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
   qCooldownImage: {fileID: 1346153263068446399}
   eCooldownImage: {fileID: 1253405021441046830}
-  animator: {fileID: 5179917898985751293}
-  attackDamage: 10
+  playerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
+  attackSound: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
+  AttackcooldownBar: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackCooldown: 1
   attackSize: {x: 1, y: 1}
   attackOffset: {x: -1, y: 0.5}
   knockbackForce: 5
-  attackSound: {fileID: 8300000, guid: 2aa29be68ff1d1540b05637c66bbb502, type: 3}
   hitSound: {fileID: 8300000, guid: f694f65744d838847bf0bf0f25899972, type: 3}
+  hitEffectPrefab: {fileID: 0}
+  animator: {fileID: 5179917898985751293}
   guardSkill: {fileID: 8030321767033109922}
   projectileSkill: {fileID: 2269725357822401461}
 --- !u!114 &8030321767033109922
@@ -3830,10 +3830,8 @@ MonoBehaviour:
   GuardDuration: 3
   DefenseBoostDuringGuard: 50
   PlayerData: {fileID: 11400000, guid: 41ae13f24210ae4468a601a3be55ad7b, type: 2}
-  DamageReduction: 0
   guardParticleEffectPrefab: {fileID: 4823530309318575359, guid: 029ef1eef72fb7d4d87d26b08baf68a5, type: 3}
   guardSound: {fileID: 8300000, guid: f60c71440a78c7b4f99800ee49860f03, type: 3}
-  outlineMaterial: {fileID: 2100000, guid: c99407688f44f0f4fb891325edeed4d6, type: 2}
 --- !u!114 &2269725357822401461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4033,7 +4031,6 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4102,7 +4099,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8746762248365668030}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98ef4f7a573b5a3469dd5f30ab7137a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
