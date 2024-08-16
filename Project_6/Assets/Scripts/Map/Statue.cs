@@ -11,5 +11,9 @@ public class Statue : NPCBase
 
         if(player.TryGetComponent(out PlayerCondition p))
             p.Heal(p.maxHealth);
+        {
+            if(p.input.isDead)p.Resurrection();
+            else p.Heal(p.PlayerData.maxHP);
+        }
     }
 }

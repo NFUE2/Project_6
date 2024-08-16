@@ -70,6 +70,10 @@ MonoBehaviour:
   - IsLoadRPC
   - SetBool
   - IsReady
+  - PlayerDie
+  - DieRpc
+  - ResurrectionRPC
+  - SetStageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

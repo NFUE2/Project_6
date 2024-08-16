@@ -1,14 +1,6 @@
-using Photon.Pun.Demo.Cockpit;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
-public enum MonsterStageList
-{
-    Stage1,
-    Stage2,
-    Stage3,
-}
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -23,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     //public Transform[] enemyList; //적들의 생성위치
     //public DestinationData[] nextStage; //다음 스테이지
 
-    Queue<StageData> stage = new Queue<StageData>();
+    public Queue<StageData> stage { get; private set; } /*= new Queue<StageData>() {}*/
 
     Transform enemyList; //적들의 생성위치
     //DestinationData nextStage; //다음 스테이지
@@ -37,30 +29,21 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         cleaStageCount = 0;
+        stage = newQueue<StageData>();
         cam = Camera.main.GetComponent<CameraController>();
 
-        foreach(var m in maps)
+        if(PhotonNetwork.IsMasterClient)
         {
-            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
-            stage.Enqueue(go.GetComponent<StageData>());
-            go.SetActive(false);
+            foreach(var m in maps)
+            {
+                //GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate(m.name, new Vector2(100, 0), Quaternion.identity);
+                //stage.Enqueue(go.GetComponent<StageData>());
+                //go.SetActive(false);
+            }
         }
-
-        SetNextStage();
-        //enemyList = new Transform[maps.Length];
-        //nextStage = new DestinationData[maps.Length];
-
-        //foreach (var m in maps)
-        //{
-        //    GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity); //맵생성
-
-        //    StageData stage = go.GetComponent<StageData>();
-        //    enemyList[(int)stage.stage] = stage.monsterList;
-        //    nextStage[(int)stage.stage] = stage.data;
-
-        //    go.SetActive(false);
-        //}
         //SetNextStage();
+        Debug.Log(stage.Count);
     }
 
     public Transform SpawnStage()
@@ -68,7 +51,7 @@ public class GameManager : Singleton<GameManager>
         return enemyList;
     }
 
-    void SetNextStage()
+    public void SetNextStage()
     {
         if (stage.Count == 0) return;
 

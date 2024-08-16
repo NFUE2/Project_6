@@ -95,5 +95,6 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     {
         //transform.SetParent(GameManager.instance.enemyList);
         transform.SetParent(GameManager.instance.SpawnStage());
+        GameManager.instance.stage.Peek().monsters.Add(gameObject);
     }
 }
