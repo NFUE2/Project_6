@@ -1,11 +1,12 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MovableBoss : MonoBehaviourPun
 {
-    private float speed = 1f; //임시 고정값, 추후 수정
+    public float speed; //임시 고정값, 추후 수정
     public float duration = 2.0f;
     public bool movePositive = true;
     private Animator animator;
@@ -15,7 +16,7 @@ public class MovableBoss : MonoBehaviourPun
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
         animator = GetComponentInParent<Animator>();
-        //speed = BossBattleManager.Instance.boss.moveSpeed; //임시주석처리, 추후 수정
+        speed = BossBattleManager.Instance.boss.moveSpeed; //임시주석처리, 추후 수정
     }
 
     void Update()
@@ -24,6 +25,23 @@ public class MovableBoss : MonoBehaviourPun
 
         var isAttacking = BossBattleManager.Instance.isAttacking;
         //Debug.Log(isAttacking);
+        if(BossBattleManager.Instance.targetPlayer != null )
+        {
+            Vector3 targetPosition = BossBattleManager.Instance.targetPlayer.transform.position;
+            if (targetPosition.x >= this.transform.position.x)
+            {
+                movePositive = true;
+                photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, false);
+                //spriteRenderer.flipX = false;
+            }
+            else
+            {
+                movePositive = false;
+                photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, true);
+                //spriteRenderer.flipX = true;
+            }
+        }
+
         if (isAttacking == false && BossBattleManager.Instance.targetPlayer != null)
         {
             if(animator.GetBool("isWalk") == false)
@@ -35,18 +53,7 @@ public class MovableBoss : MonoBehaviourPun
             if (distance > 3f)
             {
                 
-                if (targetPosition.x >= this.transform.position.x)
-                {
-                    movePositive = true;
-                    photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, false);
-                    //spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    movePositive = false;
-                    photonView.RPC(nameof(FlipXRPC), RpcTarget.AllBuffered, true);
-                    //spriteRenderer.flipX = true;
-                }
+                
                 float direction = movePositive ? 1 : -1;
                 transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
                 //elapsedTime += Time.deltaTime;
@@ -62,6 +69,10 @@ public class MovableBoss : MonoBehaviourPun
             {
                 animator.SetBool("isWalk", false);
             }
+        }
+        if(speed == 0)
+        {
+            animator.SetBool("isWalk", false);
         }
     }
 

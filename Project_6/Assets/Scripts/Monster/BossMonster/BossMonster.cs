@@ -19,7 +19,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
 
     public void TakeDamage(float damage)
     {
-        currentHp -= (damage * (defensePower / 100));
+        currentHp -= (damage - (damage * (defensePower / 100)));
         
         if (currentHp <= 0)
         {
@@ -33,7 +33,11 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
         }
         else
         {
-            hpBar.fillAmount = GetFillAmountHP();
+            if(hpBar != null)
+            {
+                hpBar.fillAmount = GetFillAmountHP();
+            }
+            
         }
     }
 
