@@ -1,11 +1,12 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TestMovableBoss : MonoBehaviour
 {
-    private float speed; //임시 고정값, 추후 수정
+    public float speed; //임시 고정값, 추후 수정
     public float duration = 2.0f;
     public bool movePositive = true;
     private Animator animator;
@@ -21,6 +22,20 @@ public class TestMovableBoss : MonoBehaviour
     void Update()
     {
         var isAttacking = BossTestManager.Instance.isAttacking;
+        if(BossTestManager.Instance.targetPlayer != null )
+        {
+            Vector3 targetPosition = BossTestManager.Instance.targetPlayer.transform.position;
+            if (targetPosition.x >= this.transform.position.x)
+            {
+                movePositive = true;
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                movePositive = false;
+                spriteRenderer.flipX = true;
+            }
+        }
         //Debug.Log(isAttacking);
         if (isAttacking == false && BossTestManager.Instance.targetPlayer != null)
         {
@@ -32,17 +47,6 @@ public class TestMovableBoss : MonoBehaviour
             float distance = Vector3.Distance(targetPosition, transform.position);
             if (distance > 3f)
             {
-
-                if (targetPosition.x >= this.transform.position.x)
-                {
-                    movePositive = true;
-                    spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    movePositive = false;
-                    spriteRenderer.flipX = true;
-                }
                 float direction = movePositive ? 1 : -1;
                 transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
                 //elapsedTime += Time.deltaTime;
