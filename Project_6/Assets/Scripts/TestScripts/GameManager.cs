@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject[] maps; //만들어야하는 맵들
 
+    int dieCount;
+
     //수정하고싶은곳=================
     public int cleaStageCount;
     //public Transform[] enemyList; //적들의 생성위치
@@ -29,7 +31,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         cleaStageCount = 0;
-        stage = newQueue<StageData>();
+        stage = new Queue<StageData>();
         cam = Camera.main.GetComponent<CameraController>();
 
         if(PhotonNetwork.IsMasterClient)
@@ -43,7 +45,6 @@ public class GameManager : Singleton<GameManager>
             }
         }
         //SetNextStage();
-        Debug.Log(stage.Count);
     }
 
     public Transform SpawnStage()
@@ -83,4 +84,29 @@ public class GameManager : Singleton<GameManager>
     //    Destroy(curMap);
     //    SetNextStage();
     //}
+
+    public void PlayerDie()
+    {
+        dieCount++;
+
+        if (dieCount == PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            if (BossBattleManager.instance.spawnedBoss != null)
+            {
+                PhotonNetwork.Destroy(BossBattleManager.instance.spawnedBoss);
+                stage.Peek().monsterList.gameObject.SetActive(true);
+            }
+
+            dieCount = 0;
+
+            stage.Peek().gameObject.SetActive(false);
+
+            player.transform.position = town.startTransform.position;
+            cam.target = town.CameraPos;
+            SoundManager.instance.ChangeBGM(BGMList.Town);
+
+            if (player.TryGetComponent(out PlayerCondition p))
+                p.Resurrection();
+        }
+    }
 }
