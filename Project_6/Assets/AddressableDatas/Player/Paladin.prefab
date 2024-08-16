@@ -1552,7 +1552,6 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &5439577458616861708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,7 +1620,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3104868809133284485}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98ef4f7a573b5a3469dd5f30ab7137a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1792,20 +1791,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc15a64d2fda364b8d652b289c72b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   qCooldownImage: {fileID: 2944593867304363961}
   eCooldownImage: {fileID: 3105178059363983400}
-  animator: {fileID: 6875099469381461375}
-  attackDamage: 10
+  playerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
+  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
+  AttackcooldownBar: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackCooldown: 1
   attackSize: {x: 0.8, y: 0.8}
   attackOffset: {x: -0.6, y: 0.4}
   knockbackForce: 5
-  attackSound: {fileID: 8300000, guid: 1fa911f8e87b45e4c9ed6cbd9775ffd6, type: 3}
   hitSound: {fileID: 0}
+  hitEffectPrefab: {fileID: 0}
+  animator: {fileID: 6875099469381461375}
   healAndBoostSkill: {fileID: 236003066068444115}
   maceChargeSkill: {fileID: 4359650018410976990}
 --- !u!114 &4359650018410976990
@@ -1825,17 +1824,13 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: ba02db3409b5a5445b52e615b9e1e5db, type: 2}
   dashDuration: 0.1
   dashSpeed: 20
-  bossLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  dashDamage: 50
+  defenseBoost: 10
+  skillSound: {fileID: 0}
+  hitSound: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  dashDamage: 50
-  reducedDamageDuringDash: 0.5
-  damageReduction: 0
-  skillSound: {fileID: 0}
-  hitSound: {fileID: 0}
 --- !u!114 &236003066068444115
 MonoBehaviour:
   m_ObjectHideFlags: 0

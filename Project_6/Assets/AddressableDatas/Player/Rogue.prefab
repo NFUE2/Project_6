@@ -3998,7 +3998,6 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
   knockbackForce: 5
   maxHealth: 0
-  currentHealth: 0
 --- !u!114 &3933325964912910256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4067,7 +4066,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8746762248365668030}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98ef4f7a573b5a3469dd5f30ab7137a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4238,20 +4237,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6038d1ec238104449abbebec05ef18ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   qCooldownImage: {fileID: 5614317661596480442}
   eCooldownImage: {fileID: 5629660413075043371}
-  animator: {fileID: 2921700412241113319}
-  attackDamage: 10
+  playerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
+  attackSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
+  AttackcooldownBar: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackCooldown: 1
   attackSize: {x: 0.8, y: 0.8}
   attackOffset: {x: -0.6, y: 0.4}
   knockbackForce: 5
-  attackSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
+  hitEffectPrefab: {fileID: 0}
+  animator: {fileID: 2921700412241113319}
   dashSkill: {fileID: 4825308176832394675}
   stackSkill: {fileID: 6522800500231870091}
 --- !u!114 &4825308176832394675
