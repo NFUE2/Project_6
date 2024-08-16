@@ -8,22 +8,15 @@ public abstract class MeleePlayerBase : PlayerBase
     public Vector2 attackSize;
     public Vector2 attackOffset;
     public float knockbackForce = 5f;
-    public AudioClip attackSound;
     public AudioClip hitSound;
-    private AudioSource audioSource;
     public GameObject hitEffectPrefab;
+    public Animator animator;
 
-    protected void Awake()
+    protected override void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponentInChildren<Animator>();
-        if (attackCooldownbar != null)
-            attackCooldownbar.fillAmount = 1f;
-    }
-
-    private void Update()
-    {
-        AttackCoolTime();
+        currentAttackTime = playerData.attackTime;
+        AttackcooldownBar.fillAmount = 1f;
     }
 
     public override void Attack()
@@ -85,13 +78,5 @@ public abstract class MeleePlayerBase : PlayerBase
         Gizmos.color = Color.red;
         Vector2 attackPosition = CalculateAttackPosition();
         Gizmos.DrawWireCube(attackPosition, attackSize);
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        if (clip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
     }
 }

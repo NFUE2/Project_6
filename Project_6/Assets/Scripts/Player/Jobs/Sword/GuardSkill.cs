@@ -14,17 +14,11 @@ public class GuardSkill : SkillBase, IDamagable
 
     private GameObject guardParticleEffectInstance;
 
-    public Material outlineMaterial; // 윤곽선 셰이더 머티리얼
-    private Material originalMaterial;
-    private Renderer playerRenderer;
-
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
         playerCondition = GetComponent<PlayerCondition>();
         audioSource = GetComponent<AudioSource>();
-        playerRenderer = GetComponent<Renderer>(); // 플레이어의 렌더러 가져오기
-        originalMaterial = playerRenderer.material; // 원래 머티리얼 저장
     }
 
     public override void UseSkill()
@@ -51,12 +45,6 @@ public class GuardSkill : SkillBase, IDamagable
             guardParticleEffectInstance.transform.SetParent(transform);
         }
 
-        // 윤곽선 셰이더 적용
-        if (outlineMaterial != null)
-        {
-            //playerRenderer.material = outlineMaterial;
-        }
-
         Invoke("ExitGuardEvent", GuardDuration);
     }
 
@@ -69,10 +57,6 @@ public class GuardSkill : SkillBase, IDamagable
         {
             Destroy(guardParticleEffectInstance);
         }
-
-        // 원래 셰이더로 복원
-        playerRenderer.material = originalMaterial;
-
         lastActionTime = Time.time;
     }
 
