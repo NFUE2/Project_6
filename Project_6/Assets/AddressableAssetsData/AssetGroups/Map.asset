@@ -21,13 +21,13 @@ MonoBehaviour:
     m_Address: Assets/Prefab/Map/Stage1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Map
+    - Prefab
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6578fbbe2c18be647a27f3db11141e46
     m_Address: Assets/Prefab/Map/Stage2.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Map
+    - Prefab
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 597e31504d99ba94199ac7556473e509, type: 2}
