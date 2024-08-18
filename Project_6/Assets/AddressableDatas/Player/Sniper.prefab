@@ -3966,6 +3966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
   playerdata: {fileID: 11400000, guid: ba939c2d1af4b654a924bf868b8cb8c9, type: 2}
   player: {fileID: 5428669214101044420}
   groundCheck: {fileID: 4858573087506811353}
@@ -4567,6 +4568,10 @@ PrefabInstance:
     - target: {fileID: 8146308265503792880, guid: 110edba8aef621d4ca0c47f988e73b3f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738156831030244241, guid: 110edba8aef621d4ca0c47f988e73b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

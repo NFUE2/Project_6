@@ -12,13 +12,6 @@ public abstract class MeleePlayerBase : PlayerBase
     public GameObject hitEffectPrefab;
     public Animator animator;
 
-    protected override void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        currentAttackTime = playerData.attackTime;
-        AttackcooldownBar.fillAmount = 1f;
-    }
-
     public override void Attack()
     {
         if (currentAttackTime < playerData.attackTime) return;
@@ -62,16 +55,12 @@ public abstract class MeleePlayerBase : PlayerBase
     protected Vector2 CalculateAttackPosition()
     {
         Vector2 basePosition = (Vector2)transform.position;
+        Vector2 direction = playerInput.lookInput.x < 0 ? Vector2.left : Vector2.right; // moveInput 대신 lookInput 사용
 
-        if (transform.localScale.x < 0)
-        {
-            return basePosition + new Vector2(-attackOffset.x, attackOffset.y);
-        }
-        else
-        {
-            return basePosition + attackOffset;
-        }
+        return basePosition + new Vector2(attackOffset.x * direction.x, attackOffset.y);
     }
+
+
 
     private void OnDrawGizmosSelected()
     {

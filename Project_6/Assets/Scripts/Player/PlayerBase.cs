@@ -1,6 +1,7 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallback
@@ -23,8 +24,11 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
     public Image AttackcooldownBar;
     protected float currentAttackTime;
 
+    protected PlayerInput playerInput;
+
     protected virtual void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         currentAttackTime = playerData.attackTime;
         AttackcooldownBar.fillAmount = 1f;
         audioSource = GetComponent<AudioSource>();
@@ -33,7 +37,6 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
     private void Update()
     {
         AttackCoolTime();
-        HandleHealthBarVisibility();
     }
 
     public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
@@ -42,24 +45,21 @@ public abstract class PlayerBase : MonoBehaviourPun, IPunInstantiateMagicCallbac
         GameManager.instance.players.Add(gameObject);
     }
 
-    protected void AttackCoolTime()
+    protected virtual void AttackCoolTime()
     {
         if (currentAttackTime < playerData.attackTime)
         {
             currentAttackTime += Time.deltaTime;
             AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
-        }
-    }
 
-    private void HandleHealthBarVisibility()
-    {
-        if (AttackcooldownBar.fillAmount >= 1f)
-        {
-            AttackcooldownBar.gameObject.SetActive(false); // 체력바 비활성화
+            // 쿨타임 바 활성화
+            AttackcooldownBar.gameObject.SetActive(true);
         }
         else
         {
-            AttackcooldownBar.gameObject.SetActive(true); // 체력바 활성화
+            // 쿨타임이 다 찼을 때 비활성화
+            AttackcooldownBar.gameObject.SetActive(false);
+            currentAttackTime = playerData.attackTime; // 이 부분은 안정성을 위해 추가
         }
     }
 

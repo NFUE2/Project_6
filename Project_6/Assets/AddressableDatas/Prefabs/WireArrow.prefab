@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4230479259184397664}
   - component: {fileID: -5426002220110134905}
   - component: {fileID: 7105236668138447669}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WireArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   wireEndDistance: 1
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!50 &4230479259184397664
 Rigidbody2D:
   serializedVersion: 4

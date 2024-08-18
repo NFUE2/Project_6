@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviourPun
 {
     [Header("move_Data")]
-    protected Vector2 moveInput;
+    public Vector2 moveInput;
     protected bool isRunning;
     private bool isJumping = false;
     private bool jumpRequest = false;
@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviourPun
     public LayerMask groundLayer;
 
     [Header("Mouse_Data")]
-    protected Vector2 lookInput; // 마우스 위치 저장 변수
+    public Vector2 lookInput; // 마우스 위치 저장 변수
 
     [Header("Input On/Off Control")]
     public bool isDead = false;

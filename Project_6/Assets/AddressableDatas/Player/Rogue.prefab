@@ -3972,6 +3972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
   playerdata: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   player: {fileID: 2997727097517265977}
   groundCheck: {fileID: 3377354756236232052}
@@ -4246,8 +4247,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackSize: {x: 0.8, y: 0.8}
-  attackOffset: {x: -0.6, y: 0.4}
+  attackSize: {x: 1, y: 1}
+  attackOffset: {x: -1, y: 0.5}
   knockbackForce: 5
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
   hitEffectPrefab: {fileID: 842665308734714816, guid: a1a3beda1bd2b1c419a62f4f6c6b75eb, type: 3}
@@ -4268,7 +4269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   cooldownImage: {fileID: 5614317661596480442}
-  dashDistance: 5
+  dashDistance: -4
   dashSpeed: 10
   playerTransform: {fileID: 4298058945709228138}
   enemyLayer:

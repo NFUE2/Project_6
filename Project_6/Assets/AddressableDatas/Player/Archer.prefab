@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
   playerdata: {fileID: 11400000, guid: c23646220101e404d88439e14d697fc9, type: 2}
   player: {fileID: 5535542504141788762}
   groundCheck: {fileID: 7508323470118002058}
@@ -273,6 +274,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookInput: {x: 0, y: 0}
   isDead: 0
 --- !u!114 &6337068296467857802
 MonoBehaviour:
