@@ -1,4 +1,4 @@
-# Fixel Adventure 
+# Pixel Adventure 
 
 Fixel Adventure는 다른 플레이어들과 협동하는 멀티 2D 플랫포머RPG입니다.
 
