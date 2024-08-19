@@ -3980,6 +3980,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookInput: {x: 0, y: 0}
   isDead: 0
 --- !u!114 &8260653451151650232
 MonoBehaviour:
@@ -3997,7 +3998,7 @@ MonoBehaviour:
   input: {fileID: 8883530123643855291}
   healthBarImage: {fileID: 4438777531071002641}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
-  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: 57b899ea7ff329241b92a354a3d4a7e9, type: 3}
   knockbackForce: 5
   maxHealth: 0
 --- !u!114 &3933325964912910256
@@ -4248,7 +4249,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackSize: {x: 1, y: 1}
-  attackOffset: {x: -1, y: 0.5}
+  attackOffset: {x: -0.7, y: 0.5}
   knockbackForce: 5
   hitSound: {fileID: 8300000, guid: 07854888e584a314db30cf2d78b34dc8, type: 3}
   hitEffectPrefab: {fileID: 842665308734714816, guid: a1a3beda1bd2b1c419a62f4f6c6b75eb, type: 3}
@@ -4269,8 +4270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownText: {fileID: 0}
   cooldownImage: {fileID: 5614317661596480442}
-  dashDistance: -4
-  dashSpeed: 10
+  dashDistance: 5
+  dashSpeed: 20
   playerTransform: {fileID: 4298058945709228138}
   enemyLayer:
     serializedVersion: 2
@@ -4278,6 +4279,7 @@ MonoBehaviour:
   PlayerData: {fileID: 11400000, guid: 23a7e596fd262fa4e825e8b61c614f8d, type: 2}
   damage: 30
   dashSound: {fileID: 8300000, guid: 3bbd66eae21f635479a9ef6450accc28, type: 3}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: b527589f242a13c4ca62bbe25f1d4471, type: 3}
 --- !u!114 &6522800500231870091
 MonoBehaviour:
   m_ObjectHideFlags: 0

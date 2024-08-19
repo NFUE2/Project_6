@@ -33,7 +33,6 @@ public class ChargeSkill : SkillBase
 
     private void InitializeComponents()
     {
-        //animator = GetComponent<Animator>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         characterController = GetComponent<CharacterController>();
@@ -73,7 +72,6 @@ public class ChargeSkill : SkillBase
         animator.SetBool("IsCharging", false);
         lastActionTime = Time.time;
         isAttacking = true;
-        //animator.SetTrigger("IsAttack"); // 공격 애니메이션 트리거
     }
 
     // 애니메이션 이벤트에서 호출될 메서드
@@ -90,10 +88,10 @@ public class ChargeSkill : SkillBase
                 if (enemy.TryGetComponent(out IPunDamagable e))
                     e.Damage(currentDamage);
 
-                //enemy.GetComponent<IDamagable>()?.TakeDamage(currentDamage);
+                // 파티클 효과 생성
+                SpawnImpactEffect(enemy.transform.position);
             }
 
-            SpawnImpactEffect(attackPosition);
             PlayImpactSound();
 
             currentDamage = damage;
@@ -105,7 +103,10 @@ public class ChargeSkill : SkillBase
     {
         if (hammerImpactEffect != null)
         {
-            GameObject effect = Instantiate(hammerImpactEffect, position, Quaternion.identity);
+            Vector3 effectPosition = position;
+            effectPosition.y += 1f; // 적의 위치보다 약간 위로 파티클 효과를 생성
+
+            GameObject effect = Instantiate(hammerImpactEffect, effectPosition, Quaternion.identity);
             Destroy(effect, 1.0f); // 효과가 1초 후에 사라지도록 설정
         }
     }

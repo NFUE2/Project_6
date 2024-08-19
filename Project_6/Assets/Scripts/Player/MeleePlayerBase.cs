@@ -35,12 +35,19 @@ public abstract class MeleePlayerBase : PlayerBase
                 PlaySound(hitSound);
 
                 if (hitEffectPrefab != null)
-                    Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
+                {
+                    Vector3 effectPosition = enemy.transform.position; // 적의 transform 위치 기준
+                    effectPosition.y += 1f; // Y축으로 약간 위로 이동 (필요에 따라 조정)
+
+                    Instantiate(hitEffectPrefab, effectPosition, Quaternion.identity);
+                }
             }
         }
 
         PlaySound(attackSound);
     }
+
+
 
     protected void ApplyKnockback(Collider2D enemy)
     {
@@ -55,10 +62,15 @@ public abstract class MeleePlayerBase : PlayerBase
     protected Vector2 CalculateAttackPosition()
     {
         Vector2 basePosition = (Vector2)transform.position;
-        Vector2 direction = playerInput.lookInput.x < 0 ? Vector2.left : Vector2.right; // moveInput 대신 lookInput 사용
 
-        return basePosition + new Vector2(attackOffset.x * direction.x, attackOffset.y);
+        // Transform의 localScale을 이용해 방향을 결정
+        float direction = transform.localScale.x < 0 ? -1 : 1;
+
+        return basePosition + new Vector2(attackOffset.x * direction, attackOffset.y);
     }
+
+
+
 
 
 

@@ -15,8 +15,8 @@ public abstract class RangedPlayerBase : PlayerBase
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 attackDirection = (mousePosition - (Vector2)attackPoint.position).normalized;
 
-        // 플레이어의 방향에 따라 발사 방향 수정
-        attackDirection.x *= Mathf.Sign(transform.localScale.x);
+        // 플레이어의 방향과 반대 방향으로 발사 방향 수정
+        attackDirection = new Vector2(Mathf.Abs(attackDirection.x) * -Mathf.Sign(transform.localScale.x), attackDirection.y);
 
         float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
         GameObject projectile = PhotonNetwork.Instantiate(attackPrefab.name, attackPoint.position, Quaternion.Euler(0, 0, angle));
@@ -28,5 +28,7 @@ public abstract class RangedPlayerBase : PlayerBase
 
         PlaySound(attackSound); // 공격 효과음 재생
     }
+
+
 
 }

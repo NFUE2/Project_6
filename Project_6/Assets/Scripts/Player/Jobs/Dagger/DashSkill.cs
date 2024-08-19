@@ -11,6 +11,7 @@ public class DashSkill : SkillBase
     public PlayerDataSO PlayerData;
     public int damage = 10; // 데미지 값 추가
     public AudioClip dashSound; // 대시 효과음 추가
+    public GameObject hitEffectPrefab; // 파티클 효과 프리팹 추가
     private AudioSource audioSource;
 
     private void Start()
@@ -44,9 +45,11 @@ public class DashSkill : SkillBase
     {
         Vector3 startPosition = transform.position;
         Vector3 endPosition;
-        if (playerTransform.localScale.x == 1)
+
+        // 플레이어가 바라보는 방향으로 대시
+        if (playerTransform.localScale.x > 0)
         {
-            endPosition = transform.position + transform.right * -(dashDistance);
+            endPosition = transform.position + transform.right * -dashDistance;
         }
         else
         {
@@ -67,31 +70,35 @@ public class DashSkill : SkillBase
 
     private void DealDamageToEnemiesOnPath(Vector3 startPosition, Vector3 endPosition)
     {
-        // 박스의 중심을 대시 시작과 끝의 중간 지점으로 설정
         Vector2 boxCenter = (startPosition + endPosition) / 2;
-        // 박스의 크기를 대시 거리만큼 길게 설정하고 높이(또는 너비)를 넉넉하게 설정
-        Vector2 boxSize = new Vector2(dashDistance, 1f); // 1f는 높이(또는 너비), 필요에 따라 조정 가능
-        Vector2 direction = endPosition - startPosition;
+        Vector2 boxSize = new Vector2(dashDistance, playerTransform.localScale.y);
+        Vector2 direction = (endPosition - startPosition).normalized;
 
-        // BoxCastAll로 적을 감지
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(boxCenter, boxSize, 0f, direction, dashDistance, enemyLayer);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(startPosition, boxSize, 0f, direction, dashDistance, enemyLayer);
         foreach (var hit in hits)
         {
             if (hit.collider.TryGetComponent(out IPunDamagable m))
             {
                 Debug.Log($"Dealing damage to: {hit.collider.name}");
                 m.Damage(damage);
+
+                // 파티클 효과 생성
+                if (hitEffectPrefab != null)
+                {
+                    Vector3 effectPosition = hit.transform.position; // 적의 transform 위치를 기준으로 함
+                    effectPosition.y += 0.5f; // 적의 위치보다 약간 위로 파티클 효과를 생성
+
+                    Instantiate(hitEffectPrefab, effectPosition, Quaternion.identity);
+                }
             }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Vector2 boxCenter = (transform.position + transform.position + transform.right * dashDistance) / 2;
-        Vector2 boxSize = new Vector2(dashDistance, 1f); // 1f는 높이(또는 너비)
+        Vector2 boxSize = new Vector2(dashDistance, playerTransform.localScale.y); // 1f 대신 플레이어의 높이를 사용
         Gizmos.DrawWireCube(boxCenter, boxSize);
     }
-
-
 }
-

@@ -3974,6 +3974,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookInput: {x: 0, y: 0}
   isDead: 0
 --- !u!114 &7176037921411697752
 MonoBehaviour:
@@ -3991,7 +3992,7 @@ MonoBehaviour:
   input: {fileID: 7091315668424874106}
   healthBarImage: {fileID: 8328250545319872238}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
-  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: 57b899ea7ff329241b92a354a3d4a7e9, type: 3}
   knockbackForce: 5
   maxHealth: 100
 --- !u!114 &714492354989758925
