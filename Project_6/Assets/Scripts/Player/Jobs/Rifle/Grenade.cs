@@ -67,7 +67,8 @@ public class Grenade : MonoBehaviourPun
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((1 << collision.gameObject.layer) & enemyLayerMask) != 0)
+        // 충돌한 오브젝트의 레이어가 "Enemy"인지 확인
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             // 적과 충돌 시 속도 0으로 설정하여 멈춤
             direction = Vector2.zero;
