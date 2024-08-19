@@ -51,6 +51,13 @@ public abstract class MeleePlayerBase : PlayerBase
 
     protected void ApplyKnockback(Collider2D enemy)
     {
+        // 적이 "boss" 태그를 가지고 있는지 확인
+        if (enemy.CompareTag("boss"))
+        {
+            // "boss" 태그를 가진 적은 넉백을 적용하지 않음
+            return;
+        }
+
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -58,6 +65,7 @@ public abstract class MeleePlayerBase : PlayerBase
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         }
     }
+
 
     protected Vector2 CalculateAttackPosition()
     {
