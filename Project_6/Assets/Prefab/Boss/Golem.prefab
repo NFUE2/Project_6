@@ -326,6 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdddb5bebfdf1643a7af56b1ec394bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalSpeed: 0
+  mv: {fileID: -8486991095086764195}
   duration: 0.2
   curDuration: 0
 --- !u!1 &4408024815513723099
@@ -419,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e54bc3a4755554da619f62ea8fe830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalSpeed: 0
+  mv: {fileID: -8486991095086764195}
   duration: 0.2
   curDuration: 0
   burningField: {fileID: 4807170921041474770, guid: 59362509143bd1e4cbc6892e05b7d9c4, type: 3}
@@ -606,7 +610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3258122565700127898
 Transform:
   m_ObjectHideFlags: 0
@@ -816,6 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd456d10ab44356418aa0c17bffdb627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
   duration: 2
   movePositive: 1
 --- !u!95 &6521460933858186365
