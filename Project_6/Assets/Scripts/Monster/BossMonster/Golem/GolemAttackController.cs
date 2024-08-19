@@ -278,7 +278,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     private void ChargePunch()
     {
         SoundManager.Instance.Shot(chargePunchAudioClip);
-        foreach (GameObject P in BossBattleManager.Instance.players)
+        foreach (GameObject P in GameManager.Instance.players)
         {
             PlayerCondition condition = P.GetComponent<PlayerCondition>();
             condition.TakeDamage(BossBattleManager.Instance.boss.attackPower);
