@@ -50,29 +50,24 @@ public class PistolPlayer : RangedPlayerBase
 
     private void Update()
     {
-        UpdateAttackCooldown();
+        // 부모 클래스의 AttackCoolTime 메서드를 호출하여 쿨타임 관리
+        AttackCoolTime();
     }
 
-    private void UpdateAttackCooldown()
+    protected override void AttackCoolTime()
     {
-        if (!isReloading) // 장전 중이 아닐 때만 쿨타임을 업데이트
+        if (isReloading)
         {
-            if (currentAttackTime < playerData.attackTime)
-            {
-                currentAttackTime += Time.deltaTime;
-                if (AttackcooldownBar != null)
-                {
-                    AttackcooldownBar.fillAmount = currentAttackTime / playerData.attackTime;
-                }
-            }
-        }
-        else
-        {
-            // 장전 중에는 공격 바가 차지 않도록 설정
+            // 장전 중일 때 쿨타임 바를 0으로 유지
             if (AttackcooldownBar != null)
             {
                 AttackcooldownBar.fillAmount = 0f;
             }
+        }
+        else
+        {
+            // 기본적인 쿨타임 로직 적용
+            base.AttackCoolTime();
         }
     }
 
@@ -118,7 +113,13 @@ public class PistolPlayer : RangedPlayerBase
         yield return new WaitForSeconds(cooldownDuration); // 장전 시간 기다리기
         isReloading = false;
         attackCount = 0; // 공격 카운트 초기화
-        currentAttackTime = 0f; // 공격 쿨타임 초기화
+        currentAttackTime = playerData.attackTime; // 공격 쿨타임 초기화 (쿨타임바가 다시 채워지도록)
+
+        // 쿨타임 바가 다시 채워지도록 설정
+        if (AttackcooldownBar != null)
+        {
+            AttackcooldownBar.fillAmount = 1f;
+        }
     }
 
     private void PlayReloadSound()

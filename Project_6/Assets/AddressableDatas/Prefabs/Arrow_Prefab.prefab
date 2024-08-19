@@ -103,9 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 20
-  explosionEffect: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  explosionEffect: {fileID: 842665308734714816, guid: 4c0be466031f75c4f94e839e9a5c647f, type: 3}
   explosionLifetime: 2
-  explosionSound: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: 9969317ad6093c64ebfbe8f878f4b145, type: 3}
   lifetime: 5
 --- !u!61 &5888516051725560018
 BoxCollider2D:

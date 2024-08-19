@@ -3890,6 +3890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bada76acb05ed174b934cca66c898323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
   playerdata: {fileID: 11400000, guid: 1332d964ac8d195468a9279cfce6ffaa, type: 2}
   player: {fileID: 8318275278528164768}
   groundCheck: {fileID: 1111631820787710435}
@@ -3897,6 +3898,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  lookInput: {x: 0, y: 0}
   isDead: 0
 --- !u!114 &2247212799136747621
 MonoBehaviour:
@@ -3914,7 +3916,7 @@ MonoBehaviour:
   input: {fileID: 5589319150714124445}
   healthBarImage: {fileID: 4134159575381251956}
   hitSound: {fileID: 8300000, guid: 8b6bcb49161debe4796a6cb21ff4c74e, type: 3}
-  hitEffectPrefab: {fileID: 2085440161002684930, guid: 0a9b2f2b4ac581e4ab61940dc09e3037, type: 3}
+  hitEffectPrefab: {fileID: 842665308734714816, guid: 57b899ea7ff329241b92a354a3d4a7e9, type: 3}
   knockbackForce: 5
   maxHealth: 100
 --- !u!114 &3753247065642757853

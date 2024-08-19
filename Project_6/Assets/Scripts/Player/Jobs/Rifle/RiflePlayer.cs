@@ -28,6 +28,7 @@ public class RiflePlayer : RangedPlayerBase
 
     private void Update()
     {
+        AttackCoolTime();
         // 타겟팅 모드에서 마우스 클릭을 감지하여 타겟이 없는 곳을 클릭하면 타겟팅 모드 종료
         if (isTargeting && Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -61,9 +62,9 @@ public class RiflePlayer : RangedPlayerBase
     public override void Attack()
     {
         if (isTargeting) return; // 타겟팅 모드일 때 공격 무시
-
         base.Attack(); // 기본 공격 로직 호출
     }
+
 
     public void SetTargeting(bool targeting)
     {
