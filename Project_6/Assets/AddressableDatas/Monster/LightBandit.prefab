@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 339136405699963841}
   m_Father: {fileID: 6978996956651350157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2147971724774055416
@@ -190,7 +191,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 339136405699963841}
   - {fileID: 4501987421899583455}
   - {fileID: 2400311177160766841}
   m_Father: {fileID: 0}
@@ -213,6 +213,7 @@ MonoBehaviour:
   offsetPos: {x: 0, y: 0}
   condition: {fileID: 7296760512843229738}
   isRight: 0
+  charcater: {fileID: 2400311177160766841}
   <animationData>k__BackingField:
     idleParameterName: Idle
     moveParameterName: Move
@@ -375,7 +376,7 @@ Transform:
   m_LocalScale: {x: 0.85, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6978996956651350157}
+  m_Father: {fileID: 2400311177160766841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3005803615882833933
 SpriteRenderer:

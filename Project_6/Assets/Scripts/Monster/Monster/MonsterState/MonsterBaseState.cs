@@ -74,7 +74,7 @@ public class MonsterBaseState : IState
     public void Aim()
     {
         stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
-        stateMachine.controller.transform.localScale =
+        stateMachine.controller.charcater.localScale =
         stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
     }
 

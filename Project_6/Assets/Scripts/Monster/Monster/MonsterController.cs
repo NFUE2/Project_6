@@ -20,6 +20,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public Vector2 offsetPos;
     public MonsterCondition condition;
     public bool isRight;
+    public Transform charcater;
 
     public float searchDistance { get; private set; }
 
