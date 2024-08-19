@@ -38,7 +38,7 @@ public abstract class NPCBase : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        Active(true);
+        if(collision.gameObject == GameManager.instance.player) Active(true);
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
