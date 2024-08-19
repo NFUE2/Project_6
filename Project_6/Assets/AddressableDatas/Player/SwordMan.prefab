@@ -2485,7 +2485,6 @@ GameObject:
   - component: {fileID: 5179917898985751293}
   - component: {fileID: 7885103686696753366}
   - component: {fileID: 6151579448883979235}
-  - component: {fileID: 4411342333548114366}
   m_Layer: 6
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -2576,27 +2575,11 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsDie
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: IsGuard
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!114 &4411342333548114366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6634888632019732112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
 --- !u!1 &6772265462499625354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3806,7 +3789,7 @@ GameObject:
   - component: {fileID: 5641511133670813660}
   - component: {fileID: 9190360161886165023}
   - component: {fileID: 8940245367979463514}
-  - component: {fileID: -1483300446748006711}
+  - component: {fileID: 5629033602586259524}
   m_Layer: 6
   m_Name: SwordMan
   m_TagString: Player
@@ -4103,8 +4086,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 5629033602586259524}
   - {fileID: 6151579448883979235}
-  - {fileID: 4411342333548114366}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4295,7 +4278,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1483300446748006711
+--- !u!114 &5629033602586259524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4309,7 +4292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!1 &9059846520384753200
 GameObject:
