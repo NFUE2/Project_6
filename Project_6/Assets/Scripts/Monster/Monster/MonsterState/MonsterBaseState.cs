@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class MonsterBaseState : IState
@@ -73,9 +74,7 @@ public class MonsterBaseState : IState
     public void Aim()
     {
         stateMachine.controller.isRight = !(stateMachine.controller.data.isRight ^ TargetDirection().x > 0) ? true : false;
-        //Debug.Log(stateMachine.controller.data.isRight ^ TargetDirection().x > 0);
-        stateMachine.controller.ui.localScale =  
-        stateMachine.controller.transform.localScale = 
+        stateMachine.controller.transform.localScale =
         stateMachine.controller.isRight ? Vector3.one : new Vector3(-1, 1, 1);
     }
 
@@ -84,5 +83,20 @@ public class MonsterBaseState : IState
         stateMachine.controller.target.TryGetComponent(out PlayerInput p);
 
         return p.isDead;
+    }
+
+    protected bool GetNomalizeTime(string tag,float time)
+    {
+        Animator animator = stateMachine.controller.animator;
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+        bool check = animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
+
+        Debug.Log(info.normalizedTime);
+        if (check && info.normalizedTime >= 1.5f)
+        {
+            //StopAnimation(hash);
+            return true;
+        }
+        return false;
     }
 }

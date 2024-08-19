@@ -12,4 +12,12 @@ public class MonsterDieState : MonsterBaseState
         base.Enter();
         StartTriggerAnimation(stateMachine.controller.animationData.die);
     }
+
+    public override void HandleInput()
+    {
+        base.HandleInput();
+
+        if(GetNomalizeTime("Die",1.0f))
+            stateMachine.controller.Disable();
+    }
 }

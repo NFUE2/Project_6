@@ -21,7 +21,7 @@ public abstract class MonsterAttack : MonoBehaviour
 
     private void Awake()
     {
-        controller = GetComponent<MonsterController>();
+        controller = GetComponentInParent<MonsterController>();
         data = controller.data;
 
         //attackTime = controller.data.attackTime;
