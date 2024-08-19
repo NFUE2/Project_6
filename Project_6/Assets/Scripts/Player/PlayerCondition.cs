@@ -17,7 +17,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     public float knockbackForce = 5f;
 
     public float maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
     void Start()
     {
