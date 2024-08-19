@@ -87,7 +87,7 @@ public class BombArrow : MonoBehaviourPun
         // 폭발 효과음 재생
         if (explosionSound != null && audioSource != null)
         {
-            audioSource.PlayOneShot(explosionSound);
+            SoundManager.Instance.Shot(explosionSound);
         }
 
         // 폭발 반경 내의 적에게 데미지 입힘
