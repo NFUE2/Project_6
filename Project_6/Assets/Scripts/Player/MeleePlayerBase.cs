@@ -52,7 +52,7 @@ public abstract class MeleePlayerBase : PlayerBase
     protected void ApplyKnockback(Collider2D enemy)
     {
         // 적이 "boss" 태그를 가지고 있는지 확인
-        if (enemy.CompareTag("boss"))
+        if (enemy.CompareTag("Boss"))
         {
             // "boss" 태그를 가진 적은 넉백을 적용하지 않음
             return;
