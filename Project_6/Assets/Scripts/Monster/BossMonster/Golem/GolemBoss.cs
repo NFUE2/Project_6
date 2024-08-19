@@ -6,7 +6,7 @@ public class GolemBoss : BossMonster
     {
         // 데이터SO에서 스탯 설정
         // 임시 데이터
-        maxHp = golemData.maxHP;
+        maxHp = golemData.maxHP * SetMultiHP();
         currentHp = maxHp;
         attackPower = golemData.attackDamage;
         defensePower = golemData.defence;

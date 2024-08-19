@@ -12,6 +12,25 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
     public Image hpBar;
     public float currentHp;
 
+    public float SetMultiHP()
+    {
+        if(GameManager.Instance.players.Count != 0)
+        {
+            if(GameManager.Instance.players.Count == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return (float)(2 + (0.25 * (GameManager.Instance.players.Count - 2)));
+            }
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     public float GetFillAmountHP()
     {
         return (currentHp / maxHp);

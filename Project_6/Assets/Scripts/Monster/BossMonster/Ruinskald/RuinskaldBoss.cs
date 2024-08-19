@@ -8,7 +8,7 @@ public class RuinskaldBoss : BossMonster
 
     private void Start()
     {
-        maxHp = ruinskaldData.maxHP;
+        maxHp = ruinskaldData.maxHP * SetMultiHP();
         currentHp = maxHp;
         attackPower = ruinskaldData.attackDamage;
         defensePower = ruinskaldData.defence;
