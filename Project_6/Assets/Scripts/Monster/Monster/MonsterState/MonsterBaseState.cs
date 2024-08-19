@@ -91,7 +91,6 @@ public class MonsterBaseState : IState
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
         bool check = animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
 
-        Debug.Log(info.normalizedTime);
         if (check && info.normalizedTime >= 1.5f)
         {
             //StopAnimation(hash);
