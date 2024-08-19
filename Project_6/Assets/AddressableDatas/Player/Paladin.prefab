@@ -1555,6 +1555,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 842665308734714816, guid: 57b899ea7ff329241b92a354a3d4a7e9, type: 3}
   knockbackForce: 5
   maxHealth: 100
+  currentHealth: 0
 --- !u!114 &5439577458616861708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,8 +1851,6 @@ MonoBehaviour:
   cooldownImage: {fileID: 2944593867304363961}
   healDuration: 5
   totalHealAmount: 30
-  statBoostDuration: 10
-  defenseBoost: 10
   healRange: 5
   playerLayer:
     serializedVersion: 2
