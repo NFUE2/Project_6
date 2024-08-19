@@ -3995,6 +3995,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 842665308734714816, guid: 57b899ea7ff329241b92a354a3d4a7e9, type: 3}
   knockbackForce: 5
   maxHealth: 100
+  currentHealth: 0
 --- !u!114 &714492354989758925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4604,6 +4605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3626820633198834523}
     m_Modifications:
+    - target: {fileID: 577174193363513565, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: f1ffbc11375a5c34dbde07a99d51d1c7, type: 2}
     - target: {fileID: 1694630360464439370, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4704,6 +4709,10 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5934807538743571079, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: b5d50d4fb56c5a746a35dcd300b3a102, type: 2}
     - target: {fileID: 6458938277285225393, guid: 683468c611e2a384c8bb95a6d4500c49, type: 3}
       propertyPath: m_Name
       value: PlayerUI
