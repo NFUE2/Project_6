@@ -59,9 +59,9 @@ public class BossIdleState : BossBaseState
 
 
         int randInt = Random.Range(0, targets.Count);
-
+        stateMachine.GetComponent<BossMonster>().SetTarget(randInt);
         //기존 코드
-        BossBattleManager.Instance.targetPlayer = targets[randInt];
+        //BossBattleManager.Instance.targetPlayer = targets[randInt];
     
     
         // 테스트 전용 코드

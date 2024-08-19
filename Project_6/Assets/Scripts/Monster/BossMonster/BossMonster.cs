@@ -89,4 +89,13 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
     {
         TakeDamage(damage);
     }
+
+    public void SetTarget(int index)
+    {
+        photonView.RPC(nameof(SetTargetRPC), RpcTarget.All, index);
+    }
+    public void SetTargetRPC(int index)
+    {
+        BossBattleManager.Instance.targetPlayer = GameManager.instance.players[index];
+    }
 }
