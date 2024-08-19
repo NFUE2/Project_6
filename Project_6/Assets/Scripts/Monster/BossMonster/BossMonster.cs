@@ -94,6 +94,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
     {
         photonView.RPC(nameof(SetTargetRPC), RpcTarget.All, index);
     }
+    [PunRPC]
     public void SetTargetRPC(int index)
     {
         BossBattleManager.Instance.targetPlayer = GameManager.instance.players[index];
