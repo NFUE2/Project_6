@@ -125,8 +125,8 @@ public class GolemAttackController : BossAttackController, IPunObservable
     
     private void EnableSwingHitBox()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+        //if (PhotonNetwork.IsMasterClient)
+        //{
             if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
             {
                 //swingHitBoxLeft.SetActive(true);
@@ -138,9 +138,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     {
                         float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
                         P.TakeDamage(damage);
-                        Vector2 playerPos = col.transform.position;
-                        Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
-                        K.ApplyKnockback(knockbackDirection, 5);
                     }
                 }
             }
@@ -155,9 +152,6 @@ public class GolemAttackController : BossAttackController, IPunObservable
                     {
                         float damage = BossBattleManager.Instance.boss.attackPower * 0.75f;
                         P.TakeDamage(damage);
-                        Vector2 playerPos = col.transform.position;
-                        Vector2 knockbackDirection = bossPos.x < playerPos.x ? new Vector2(1, 0) : new Vector2(-1, 0);
-                        K.ApplyKnockback(knockbackDirection, 5);
                     }
                 }
             }
@@ -171,7 +165,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
             {
                 StompReady();
             }
-        }
+        //}
     }
 
     // ·¹ÀÌÀú
@@ -278,7 +272,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
     private void ChargePunch()
     {
         SoundManager.Instance.Shot(chargePunchAudioClip);
-        foreach (GameObject P in BossBattleManager.Instance.players)
+        foreach (GameObject P in GameManager.Instance.players)
         {
             PlayerCondition condition = P.GetComponent<PlayerCondition>();
             condition.TakeDamage(BossBattleManager.Instance.boss.attackPower);

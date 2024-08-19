@@ -1,12 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public enum MonsterStageList
-{
-    Stage1,
-    Stage2,
-    Stage3,
-}
 
 public class GameManager : Singleton<GameManager>
 {
@@ -23,7 +17,7 @@ public class GameManager : Singleton<GameManager>
     //public Transform[] enemyList; //적들의 생성위치
     //public DestinationData[] nextStage; //다음 스테이지
 
-    Queue<StageData> stage = new Queue<StageData>();
+    public Queue<StageData> stage { get; private set; } /*= new Queue<StageData>() {}*/
 
     Transform enemyList; //적들의 생성위치
     //DestinationData nextStage; //다음 스테이지
@@ -37,16 +31,20 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         cleaStageCount = 0;
+        stage = new Queue<StageData>();
         cam = Camera.main.GetComponent<CameraController>();
 
-        foreach(var m in maps)
+        if(PhotonNetwork.IsMasterClient)
         {
-            GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
-            stage.Enqueue(go.GetComponent<StageData>());
-            go.SetActive(false);
+            foreach(var m in maps)
+            {
+                //GameObject go = Instantiate(m, new Vector2(100, 0), Quaternion.identity);
+                GameObject go = PhotonNetwork.Instantiate(m.name, new Vector2(100, 0), Quaternion.identity);
+                //stage.Enqueue(go.GetComponent<StageData>());
+                //go.SetActive(false);
+            }
         }
-
-        SetNextStage();
+        //SetNextStage();
     }
 
     public Transform SpawnStage()
@@ -54,20 +52,29 @@ public class GameManager : Singleton<GameManager>
         return enemyList;
     }
 
-    void SetNextStage()
+    public void SetNextStage()
     {
-        if (stage.Count == 0) return;
+        if (stage.Count == 0)
+        {
+            SceneControl.instance.LoadScene(SceneType.Outro);
+            return;
+        }
 
         StageData data = stage.Peek();
         enemyList = data.monsterList;
         voting.data = data.data;
+
+        //voting.data = curMap.data;
+        //GameObject go = Instantiate(maps[cleaStageCount], new Vector2(100, 0), Quaternion.identity); ;
+
+        //curMap = go.GetComponent<StageData>();
+        //enemyList = curMap.monsterList;
+        //go.SetActive(false);
     }
 
     public void StageClear()
     {
         cleaStageCount++;
-
-        if (cleaStageCount == maps.Length) SceneControl.instance.LoadScene(SceneType.Outro);
         StageData data = stage.Peek();
         data.returnTown.SetActive(true);
 
@@ -75,12 +82,25 @@ public class GameManager : Singleton<GameManager>
         SetNextStage();
     }
 
+    //public void StageClear()
+    //{
+    //    cleaStageCount++;
+    //    Destroy(curMap);
+    //    SetNextStage();
+    //}
+
     public void PlayerDie()
     {
         dieCount++;
 
-        if(dieCount == PhotonNetwork.CurrentRoom.PlayerCount)
+        if (dieCount == PhotonNetwork.CurrentRoom.PlayerCount)
         {
+            if (BossBattleManager.instance.spawnedBoss != null)
+            {
+                PhotonNetwork.Destroy(BossBattleManager.instance.spawnedBoss);
+                stage.Peek().monsterList.gameObject.SetActive(true);
+            }
+
             dieCount = 0;
 
             stage.Peek().gameObject.SetActive(false);

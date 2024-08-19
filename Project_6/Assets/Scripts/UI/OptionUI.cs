@@ -18,7 +18,7 @@ public class OptionUI : MonoBehaviour
     private void OnEnable()
     {
         for(int i = 0; i < sliders.Length; i++)
-            sliders[i].value = DataManager.instance.data.volums[i];
+            sliders[i].value = DataManager.instance.saveData.volums[i];
     }
 
     private void OnDisable()
@@ -26,7 +26,7 @@ public class OptionUI : MonoBehaviour
         var audios = SoundManager.instance.audios;
 
         for (int i = 0; i < audios.Length; i++)
-            DataManager.instance.data.volums[i] = audios[i].volume;
+            DataManager.instance.saveData.volums[i] = audios[i].volume;
 
         DataManager.instance.Save();
     }

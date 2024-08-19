@@ -6,8 +6,6 @@ public class HealAndBoostSkill : SkillBase
 {
     public float healDuration = 5f; // 힐 지속 시간
     public float totalHealAmount = 50f; // 총 힐량
-    public float statBoostDuration = 10f; // 스탯 강화 지속 시간
-    public float defenseBoost = 10f; // 방어력 증가량
     public float healRange = 5f; // 힐 범위
     public LayerMask playerLayer; // 플레이어 레이어
     public PlayerDataSO PlayerData;
@@ -34,7 +32,7 @@ public class HealAndBoostSkill : SkillBase
 
         lastActionTime = Time.time;
         PlaySkillSound(); // 스킬 효과음 재생
-        StartCoroutine(HealAndBoost());
+        StartCoroutine(Heal());
     }
 
     private void PlaySkillSound()
@@ -45,10 +43,9 @@ public class HealAndBoostSkill : SkillBase
         }
     }
 
-    private IEnumerator HealAndBoost()
+    private IEnumerator Heal()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, healRange, playerLayer); // 힐 범위
-        int healedPlayers = 0;
 
         foreach (var hitCollider in hitColliders)
         {
@@ -56,13 +53,7 @@ public class HealAndBoostSkill : SkillBase
             if (playerCondition != null)
             {
                 StartCoroutine(HealPlayer(playerCondition));
-                healedPlayers++;
             }
-        }
-
-        if (healedPlayers > 0)
-        {
-            StartCoroutine(BoostDefense(healedPlayers));
         }
 
         yield return new WaitForSeconds(cooldownDuration);
@@ -80,17 +71,6 @@ public class HealAndBoostSkill : SkillBase
             playerCondition.photonView.RPC(nameof(PlayerCondition.HealRPC), RpcTarget.All, healThisFrame);
             yield return null;
         }
-    }
-
-    private IEnumerator BoostDefense(int healedPlayers)
-    {
-        float originalDefense = PlayerData.playerdefense; // 현재 방어력 저장
-
-        PlayerData.playerdefense += defenseBoost * healedPlayers;
-
-        yield return new WaitForSeconds(statBoostDuration);
-
-        PlayerData.playerdefense = originalDefense; // 방어력 원상복구
     }
 
     private void OnDrawGizmos()

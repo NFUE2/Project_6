@@ -6,27 +6,24 @@ public class GuardSkill : SkillBase, IDamagable
     public float GuardDuration = 3.0f;
     public float DefenseBoostDuringGuard = 50f;
     public PlayerDataSO PlayerData;
-    public float DamageReduction;
 
-    public GameObject guardParticleEffectPrefab;
     public AudioClip guardSound;
     private AudioSource audioSource;
     private PlayerCondition playerCondition;
-    private float originalDamageReduction;
 
-    private GameObject guardParticleEffectInstance;
+    // 파티클을 생성할 위치
+    public Transform particleSpawnPoint;
+    // 사용할 파티클 프리팹
+    public GameObject guardParticlePrefab;
 
-    public Material outlineMaterial; // 윤곽선 셰이더 머티리얼
-    private Material originalMaterial;
-    private Renderer playerRenderer;
+    // 현재 생성된 파티클 오브젝트
+    private GameObject activeGuardParticle;
 
     void Start()
     {
         cooldownDuration = PlayerData.SkillQCooldown;
         playerCondition = GetComponent<PlayerCondition>();
         audioSource = GetComponent<AudioSource>();
-        playerRenderer = GetComponent<Renderer>(); // 플레이어의 렌더러 가져오기
-        originalMaterial = playerRenderer.material; // 원래 머티리얼 저장
     }
 
     public override void UseSkill()
@@ -45,20 +42,8 @@ public class GuardSkill : SkillBase, IDamagable
     private void EnterGuard()
     {
         IsGuard = true;
-        SaveOriginalStats();
         ApplyGuardStats();
-
-        if (guardParticleEffectPrefab != null)
-        {
-            guardParticleEffectInstance = Instantiate(guardParticleEffectPrefab, transform.position, Quaternion.identity);
-            guardParticleEffectInstance.transform.SetParent(transform);
-        }
-
-        // 윤곽선 셰이더 적용
-        if (outlineMaterial != null)
-        {
-            playerRenderer.material = outlineMaterial;
-        }
+        CreateGuardParticle();  // 파티클 생성
 
         Invoke("ExitGuardEvent", GuardDuration);
     }
@@ -67,26 +52,13 @@ public class GuardSkill : SkillBase, IDamagable
     {
         IsGuard = false;
         RestoreOriginalStats();
-
-        if (guardParticleEffectInstance != null)
-        {
-            Destroy(guardParticleEffectInstance);
-        }
-
-        // 원래 셰이더로 복원
-        playerRenderer.material = originalMaterial;
-
+        DestroyGuardParticle();  // 파티클 파괴
         lastActionTime = Time.time;
     }
 
     private void ExitGuardEvent()
     {
         if (IsGuard) ExitGuard();
-    }
-
-    private void SaveOriginalStats()
-    {
-        originalDamageReduction = DamageReduction;
     }
 
     private void ApplyGuardStats()
@@ -97,7 +69,6 @@ public class GuardSkill : SkillBase, IDamagable
     private void RestoreOriginalStats()
     {
         playerCondition.ModifyDefense(-DefenseBoostDuringGuard);
-        DamageReduction = originalDamageReduction;
     }
 
     public void PlayGuardSound()
@@ -105,6 +76,24 @@ public class GuardSkill : SkillBase, IDamagable
         if (guardSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(guardSound);
+        }
+    }
+
+    // 파티클 오브젝트를 생성하는 메서드
+    private void CreateGuardParticle()
+    {
+        if (guardParticlePrefab != null && particleSpawnPoint != null)
+        {
+            activeGuardParticle = Instantiate(guardParticlePrefab, particleSpawnPoint.position, particleSpawnPoint.rotation, particleSpawnPoint);
+        }
+    }
+
+    // 파티클 오브젝트를 파괴하는 메서드
+    private void DestroyGuardParticle()
+    {
+        if (activeGuardParticle != null)
+        {
+            Destroy(activeGuardParticle);
         }
     }
 

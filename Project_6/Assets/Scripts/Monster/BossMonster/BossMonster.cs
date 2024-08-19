@@ -12,6 +12,25 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
     public Image hpBar;
     public float currentHp;
 
+    public float SetMultiHP()
+    {
+        if(GameManager.Instance.players.Count != 0)
+        {
+            if(GameManager.Instance.players.Count == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return (float)(2 + (0.25 * (GameManager.Instance.players.Count - 2)));
+            }
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     public float GetFillAmountHP()
     {
         return (currentHp / maxHp);
@@ -19,7 +38,7 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
 
     public void TakeDamage(float damage)
     {
-        currentHp -= (damage * (defensePower / 100));
+        currentHp -= (damage - (damage * (defensePower / 100)));
         
         if (currentHp <= 0)
         {
@@ -33,7 +52,11 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
         }
         else
         {
-            hpBar.fillAmount = GetFillAmountHP();
+            if(hpBar != null)
+            {
+                hpBar.fillAmount = GetFillAmountHP();
+            }
+            
         }
     }
 
@@ -65,5 +88,15 @@ public class BossMonster : MonoBehaviourPun, IDamagable,IPunDamagable,IPunInstan
     public void DamageRPC(float damage)
     {
         TakeDamage(damage);
+    }
+
+    public void SetTarget(int index)
+    {
+        photonView.RPC(nameof(SetTargetRPC), RpcTarget.All, index);
+    }
+    [PunRPC]
+    public void SetTargetRPC(int index)
+    {
+        BossBattleManager.Instance.targetPlayer = GameManager.instance.players[index];
     }
 }

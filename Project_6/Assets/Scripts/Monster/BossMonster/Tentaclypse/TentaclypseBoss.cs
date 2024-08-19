@@ -4,10 +4,10 @@ public class TentaclypseBoss : BossMonster
 
     private void Start()
     {
-        maxHp = tentaclypseData.maxHP;
+        maxHp = tentaclypseData.maxHP * SetMultiHP();
         currentHp = maxHp;
         attackPower = tentaclypseData.attackDamage;
-        defensePower = tentaclypseData.deffenceDamage;
+        defensePower = tentaclypseData.defence;
         moveSpeed = tentaclypseData.moveSpeed;
 
         // hpBar.fillAmount = GetFillAmountHP();

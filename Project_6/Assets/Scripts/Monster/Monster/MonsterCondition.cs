@@ -20,7 +20,7 @@ public class MonsterCondition : MonoBehaviourPun,IDamagable, IPunDamagable
     private void Awake()
     {
         controller = GetComponent<MonsterController>();
-        OnSpawn += SetHP;
+        OnSpawn += init;
     }
 
     private void OnEnable()
@@ -32,6 +32,7 @@ public class MonsterCondition : MonoBehaviourPun,IDamagable, IPunDamagable
     {
         GameObject hpParent = hpBar.transform.parent.gameObject;
         hpParent.SetActive(true);
+        controller.Hit();
 
         curHP = Mathf.Clamp(curHP - damage, 0, controller.data.maxHP);
         hpBar.fillAmount = curHP / controller.data.maxHP;
@@ -51,10 +52,7 @@ public class MonsterCondition : MonoBehaviourPun,IDamagable, IPunDamagable
         hpParent.SetActive(false);
     }
 
-    private void SetHP()
-    {
-        curHP = controller.data.maxHP;
-    }
+    private void init() => curHP = controller.data.maxHP;
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     //{

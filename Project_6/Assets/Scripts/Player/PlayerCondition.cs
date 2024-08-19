@@ -17,7 +17,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
     public float knockbackForce = 5f;
 
     public float maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
         float damageAfterDefense;
         if (PlayerData != null)
         {
-            damageAfterDefense = Mathf.Max(damage - PlayerData.playerdefense, 0);
+            damageAfterDefense = Mathf.Max(damage - PlayerData.defence, 0);
         }
         else
         {
@@ -127,7 +127,7 @@ public class PlayerCondition : MonoBehaviourPun, IDamagable, IKnockBackable
 
     public void ModifyDefense(float amount)
     {
-        PlayerData.playerdefense += amount;
+        PlayerData.defence += amount;
     }
 
     private void PlaySound(AudioClip clip)

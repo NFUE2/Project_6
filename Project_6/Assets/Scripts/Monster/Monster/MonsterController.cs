@@ -20,6 +20,9 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public Vector2 offsetPos;
     public MonsterCondition condition;
     public bool isRight;
+    public Transform charcater;
+
+    public float searchDistance { get; private set; }
 
     //public MonsterStageList stage;
 
@@ -30,7 +33,6 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     //public LayerMask targetLayer;
 
     MonsterStateMachine stateMachine;
-    public RectTransform ui;
 
     [field : Header("Animation")]
     [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
@@ -44,14 +46,15 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     {
         rigid = GetComponent<Rigidbody2D>();
         animationData.Initialize();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         stateMachine = new MonsterStateMachine(this);
         col = GetComponent<Collider2D>();
         offsetPos = col.offset;
 
         condition.OnDie += ComponentToggle;
         condition.OnSpawn += ComponentToggle;
-
+        condition.OnSpawn += () => searchDistance = data.searchDistance;
+        searchDistance = data.searchDistance;
         //GetComponent<MonsterCondition>().OnDie += Die;
         //condition.OnDie += Die;
     }
@@ -73,7 +76,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
 
         //Å½»ö¹üÀ§
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), data.searchDistance);
+        Gizmos.DrawWireSphere(((Vector3)newOffset + transform.position), stateMachine.controller.searchDistance);
     }
 
     public void Disable()
@@ -81,6 +84,8 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
         gameObject.SetActive(false);
         target = null;
     }
+
+    public void Hit() => searchDistance = 50f;
 
     private void ComponentToggle()
     {
@@ -95,5 +100,6 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     {
         //transform.SetParent(GameManager.instance.enemyList);
         transform.SetParent(GameManager.instance.SpawnStage());
+        GameManager.instance.stage.Peek().monsters.Add(gameObject);
     }
 }

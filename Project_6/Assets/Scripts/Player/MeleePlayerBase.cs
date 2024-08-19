@@ -1,45 +1,26 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class MeleePlayerBase : PlayerBase
 {
-    public int attackDamage = 10;
     public LayerMask enemyLayer;
-    public float attackCooldown = 1f;  // 공격 쿨타임 설정
-    protected bool isAttacking = false;
-    public Vector2 attackSize; // 공격 박스의 크기
-    public Vector2 attackOffset; // 공격 박스의 오프셋
-    public float knockbackForce = 5f; // 넉백 힘
-    public AudioClip attackSound; // 공격 시 효과음
-    public AudioClip hitSound; // 피격 시 효과음
-    private AudioSource audioSource; // 오디오 소스
-    public GameObject hitEffectPrefab; // 히트 효과를 위한 파티클 시스템 프리팹
-
-    protected void Awake() // 최상위 클래스에서 호출되도록 설정
-    {
-        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
-        animator = GetComponentInChildren<Animator>();
-    }
+    public Vector2 attackSize;
+    public Vector2 attackOffset;
+    public float knockbackForce = 5f;
+    public AudioClip hitSound;
+    public GameObject hitEffectPrefab;
+    public Animator animator;
 
     public override void Attack()
     {
-        if (isAttacking) return;  // 공격 중이 아닌 경우에만 공격
-        isAttacking = true;
+        if (currentAttackTime < playerData.attackTime) return;
+        currentAttackTime = 0f;
         animator.SetTrigger("IsAttack");
-        StartCoroutine(AttackCooldown());
     }
 
-    protected IEnumerator AttackCooldown() // 공격 쿨타임을 위한 코루틴
-    {
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false; // 쿨다운이 끝나면 isAttacking을 false로 설정
-    }
-
-    // 애니메이션 이벤트에서 호출될 메서드
     public void PerformAttack()
     {
-        if (!isAttacking) return; // 공격 중이 아닐 때만 공격 수행
-
         Vector2 attackPosition = CalculateAttackPosition();
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0, enemyLayer);
 
@@ -49,20 +30,34 @@ public abstract class MeleePlayerBase : PlayerBase
 
             if (damagable != null)
             {
-                damagable.Damage(attackDamage);
+                damagable.Damage(playerData.attackDamage);
                 ApplyKnockback(enemy);
-                PlaySound(hitSound); // 피격 시 효과음 재생
+                PlaySound(hitSound);
 
-                // 파티클 효과 생성
-                if(hitEffectPrefab != null) Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
+                if (hitEffectPrefab != null)
+                {
+                    Vector3 effectPosition = enemy.transform.position; // 적의 transform 위치 기준
+                    effectPosition.y += 1f; // Y축으로 약간 위로 이동 (필요에 따라 조정)
+
+                    Instantiate(hitEffectPrefab, effectPosition, Quaternion.identity);
+                }
             }
         }
 
-        PlaySound(attackSound); // 실제 공격 시 효과음 재생
+        PlaySound(attackSound);
     }
+
+
 
     protected void ApplyKnockback(Collider2D enemy)
     {
+        // 적이 "boss" 태그를 가지고 있는지 확인
+        if (enemy.CompareTag("Boss"))
+        {
+            // "boss" 태그를 가진 적은 넉백을 적용하지 않음
+            return;
+        }
+
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -71,32 +66,26 @@ public abstract class MeleePlayerBase : PlayerBase
         }
     }
 
+
     protected Vector2 CalculateAttackPosition()
     {
         Vector2 basePosition = (Vector2)transform.position;
 
-        if (transform.localScale.x < 0)
-        {
-            return basePosition + new Vector2(-attackOffset.x, attackOffset.y); // 왼쪽을 바라볼 때
-        }
-        else
-        {
-            return basePosition + attackOffset; // 오른쪽을 바라볼 때
-        }
+        // Transform의 localScale을 이용해 방향을 결정
+        float direction = transform.localScale.x < 0 ? -1 : 1;
+
+        return basePosition + new Vector2(attackOffset.x * direction, attackOffset.y);
     }
+
+
+
+
+
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Vector2 attackPosition = CalculateAttackPosition();
         Gizmos.DrawWireCube(attackPosition, attackSize);
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        if (clip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
     }
 }

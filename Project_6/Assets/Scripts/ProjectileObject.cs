@@ -9,10 +9,19 @@ using UnityEngine;
 public class ProjectileObject : MonoBehaviourPun
 {
     public ProjectileDataSO data;
+    float durationTime;
+
+    private void Start()
+    {
+        durationTime = 5f;
+    }
 
     private void Update()
     {
+        if (durationTime < 0) DestroyObject();
+
         transform.position += transform.right * data.moveSpeed * Time.deltaTime;
+        durationTime -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,15 +32,15 @@ public class ProjectileObject : MonoBehaviourPun
         if (layerValue == 1 << colLayer && collision.TryGetComponent(out IDamagable target))
         {
             target.TakeDamage(data.damage);
-            Destroy();
+            DestroyObject();
             //if(PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
             //photonView.RPC(nameof(Destroy),RpcTarget.MasterClient);
         }
     }
 
     //[PunRPC]
-    private void Destroy()
+    private void DestroyObject()
     {
-        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   speed: 10
   damage: 30
   explosionRadius: 3
-  explosionEffect: {fileID: 3773713420001135801, guid: 3f7839bd9ed94154abe13e3bce957f7d, type: 3}
+  explosionEffect: {fileID: 5079924064806308910, guid: ea77f43313649904ea5e06bc32c2332e, type: 3}
   explosionSound: {fileID: 8300000, guid: 5857dd4c57444c24f8c7faef26e5384a, type: 3}
 --- !u!212 &500116749243430593
 SpriteRenderer:

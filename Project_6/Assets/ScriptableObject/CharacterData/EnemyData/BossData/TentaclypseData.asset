@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 2
   name: Tentaclypse
   info: Tentaclypse
-  maxHP: 100
+  maxHP: 1000
   moveSpeed: 0
   attackTime: 5
   attackDamage: 10
-  deffenceDamage: 10
+  defence: 0

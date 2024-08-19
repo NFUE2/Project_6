@@ -5,23 +5,7 @@ public class MonsterAttackState : MonsterBaseState
     float lastAttackTime = -float.MaxValue;
     public bool isAttacking = false;
 
-    public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine)
-    {
-        //stateMachine.controller.GetComponent<MonsterAttack>().Initailize(this);
-        //switch (stateMachine.controller.type)
-        //{
-        //    case MonsterAttackType.Single:
-        //        attack = new MonsterSingleAttack(stateMachine);
-        //        break;
-        //    case MonsterAttackType.Multi:
-        //        attack = new MonsterMultiAttack(stateMachine);
-        //        break;
-        //    case MonsterAttackType.Long:
-        //        attack = new MonsterLongAttack(stateMachine);
-        //        break;
-        //}
-        //attack = stateMachine.controller.GetComponent<MonsterAttack>();
-    }
+    public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine) { }
 
     //public override void Enter()
     //{
@@ -55,7 +39,11 @@ public class MonsterAttackState : MonsterBaseState
             //attack.Attack();
         }
 
-        if(isAttacking) GetNomalizeTime();
+        if(isAttacking && GetNomalizeTime("Attack", 1.5f))
+        {
+            isAttacking = false;
+            StopAnimation(stateMachine.controller.animationData.attack);
+        }
 
         if(PlayerisDie())
         {
@@ -70,19 +58,7 @@ public class MonsterAttackState : MonsterBaseState
         /*isAttacking = */
     }
 
-    private void GetNomalizeTime()
-    {
-        Animator animator = stateMachine.controller.animator;
-        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        bool check = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
-
-        if (check && info.normalizedTime >= 1.5f)
-        {
-
-            isAttacking = false;
-            StopAnimation(stateMachine.controller.animationData.attack);
-        }
-    }
+    
 
     
 
