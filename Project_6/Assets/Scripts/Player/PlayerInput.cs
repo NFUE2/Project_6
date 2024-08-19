@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviourPun
 {
     [Header("move_Data")]
-    protected Vector2 moveInput;
+    public Vector2 moveInput;
     protected bool isRunning;
     private bool isJumping = false;
     private bool jumpRequest = false;
@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviourPun
     public LayerMask groundLayer;
 
     [Header("Mouse_Data")]
-    protected Vector2 lookInput; // 마우스 위치 저장 변수
+    public Vector2 lookInput; // 마우스 위치 저장 변수
 
     [Header("Input On/Off Control")]
     public bool isDead = false;
@@ -125,19 +125,34 @@ public class PlayerInput : MonoBehaviourPun
     private void RotateTowardsMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(lookInput);
-        mousePosition.z = 0;
+        mousePosition.z = transform.position.z; // Z 축 값 고정
 
         Vector3 direction = (mousePosition - transform.position).normalized;
 
-        // 플레이어 캐릭터를 회전시킬 때, UI 레이어를 제외한 오브젝트들만 회전
-        foreach (Transform child in transform)
+        // 플레이어의 회전 방향 설정
+        if (direction.x >= 0.01f)
         {
-            if (child.gameObject.layer != LayerMask.NameToLayer("UI"))  // UI 레이어를 제외
-            {
-                child.localScale = new Vector3(direction.x >= 0.01f ? -1 : 1, 1, 1);
-            }
+            transform.localScale = new Vector3(-1, 1, 1); // 오른쪽 바라봄
+        }
+        else if (direction.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(1, 1, 1); // 왼쪽 바라봄
+        }
+
+        // 쿨타임 바 등의 특정 UI 요소는 회전하지 않도록 설정
+        Transform cooldownUI = transform.Find("PlayerAttackUI");
+        if (cooldownUI != null)
+        {
+            cooldownUI.localScale = new Vector3(1 / transform.localScale.x, 1, 1); // UI의 스케일을 반대로 설정
         }
     }
+
+
+
+
+
+
+
 
 
     public void OnMove(InputAction.CallbackContext context)

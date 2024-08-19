@@ -12,13 +12,6 @@ public abstract class MeleePlayerBase : PlayerBase
     public GameObject hitEffectPrefab;
     public Animator animator;
 
-    protected override void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        currentAttackTime = playerData.attackTime;
-        AttackcooldownBar.fillAmount = 1f;
-    }
-
     public override void Attack()
     {
         if (currentAttackTime < playerData.attackTime) return;
@@ -42,12 +35,19 @@ public abstract class MeleePlayerBase : PlayerBase
                 PlaySound(hitSound);
 
                 if (hitEffectPrefab != null)
-                    Instantiate(hitEffectPrefab, enemy.transform.position, Quaternion.identity);
+                {
+                    Vector3 effectPosition = enemy.transform.position; // 적의 transform 위치 기준
+                    effectPosition.y += 1f; // Y축으로 약간 위로 이동 (필요에 따라 조정)
+
+                    Instantiate(hitEffectPrefab, effectPosition, Quaternion.identity);
+                }
             }
         }
 
         PlaySound(attackSound);
     }
+
+
 
     protected void ApplyKnockback(Collider2D enemy)
     {
@@ -63,15 +63,16 @@ public abstract class MeleePlayerBase : PlayerBase
     {
         Vector2 basePosition = (Vector2)transform.position;
 
-        if (transform.localScale.x < 0)
-        {
-            return basePosition + new Vector2(-attackOffset.x, attackOffset.y);
-        }
-        else
-        {
-            return basePosition + attackOffset;
-        }
+        // Transform의 localScale을 이용해 방향을 결정
+        float direction = transform.localScale.x < 0 ? -1 : 1;
+
+        return basePosition + new Vector2(attackOffset.x * direction, attackOffset.y);
     }
+
+
+
+
+
 
     private void OnDrawGizmosSelected()
     {

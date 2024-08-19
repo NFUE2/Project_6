@@ -20,6 +20,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     public Vector2 offsetPos;
     public MonsterCondition condition;
     public bool isRight;
+    public Transform charcater;
 
     public float searchDistance { get; private set; }
 
@@ -32,7 +33,6 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     //public LayerMask targetLayer;
 
     MonsterStateMachine stateMachine;
-    public RectTransform ui;
 
     [field : Header("Animation")]
     [field: SerializeField] public MonsterAnimationData animationData { get; private set; }
@@ -46,7 +46,7 @@ public class MonsterController : MonoBehaviourPun,IPunInstantiateMagicCallback
     {
         rigid = GetComponent<Rigidbody2D>();
         animationData.Initialize();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         stateMachine = new MonsterStateMachine(this);
         col = GetComponent<Collider2D>();
         offsetPos = col.offset;

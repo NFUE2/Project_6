@@ -153,7 +153,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -4355464323545233718}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f742152d53dfd144b83d39673c9fb868, type: 2}
   hitSound: {fileID: 8300000, guid: 868b15fb402c2834083c96f12989df57, type: 3}
-  hitEffect: {fileID: 3142795443215796759, guid: 3f5d01889ef290b429bc70d9850252d2, type: 3}
+  hitEffect: {fileID: 842665308734714816, guid: 86c374f8af98d8a4b891b90ffec53f08, type: 3}
 --- !u!82 &6871901401351656082
 AudioSource:
   m_ObjectHideFlags: 0
