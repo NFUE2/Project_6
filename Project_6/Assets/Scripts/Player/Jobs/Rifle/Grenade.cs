@@ -68,12 +68,9 @@ public class Grenade : MonoBehaviourPun
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 충돌한 오브젝트의 레이어가 "Enemy"인지 확인
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            // 적과 충돌 시 속도 0으로 설정하여 멈춤
             direction = Vector2.zero;
-
-            // 적과 충돌 시 폭발
             Explode();
         }
     }
