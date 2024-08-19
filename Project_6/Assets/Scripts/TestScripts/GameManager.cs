@@ -54,7 +54,11 @@ public class GameManager : Singleton<GameManager>
 
     public void SetNextStage()
     {
-        if (stage.Count == 0) return;
+        if (stage.Count == 0)
+        {
+            SceneControl.instance.LoadScene(SceneType.Outro);
+            return;
+        }
 
         StageData data = stage.Peek();
         enemyList = data.monsterList;

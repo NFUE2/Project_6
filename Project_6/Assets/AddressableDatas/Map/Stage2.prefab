@@ -20835,7 +20835,7 @@ MonoBehaviour:
     activeGameObject:
     - {fileID: 6097850982872855960}
     deactiveGameObject: []
-    bgm: 0
+    bgm: 4
   monsters: []
   returnTown: {fileID: 7839311283382646850}
 --- !u!114 &-4201039756048426510
