@@ -125,8 +125,8 @@ public class GolemAttackController : BossAttackController, IPunObservable
     
     private void EnableSwingHitBox()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+        //if (PhotonNetwork.IsMasterClient)
+        //{
             if (transform.position.x > BossBattleManager.Instance.targetPlayer.transform.position.x)
             {
                 //swingHitBoxLeft.SetActive(true);
@@ -165,7 +165,7 @@ public class GolemAttackController : BossAttackController, IPunObservable
             {
                 StompReady();
             }
-        }
+        //}
     }
 
     // ∑π¿Ã¿˙
