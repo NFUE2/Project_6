@@ -41,9 +41,9 @@ public class DataManager : Singleton<DataManager>
     {
         path = Application.persistentDataPath + "/SaveData.json";
         SaveDataCheck();
-        StartCoroutine(WebDataLoad());
     }
 
+    //어드레서블 데이터 로드
     public async Task<bool> DataLoad()
     {
         DefaultPool defaultPool = PhotonNetwork.PrefabPool as DefaultPool;
@@ -54,6 +54,8 @@ public class DataManager : Singleton<DataManager>
                 defaultPool.ResourceCache.Add(g.name, g);
             }).Task;
 
+            StartCoroutine(WebDataLoad());
+
             return true;
         }
         catch (Exception e)
@@ -62,6 +64,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
+    #region Web Data Load
     private IEnumerator WebDataLoad()
     {
         for(int i = 0; i < sheetPaths.Length; i++)
@@ -71,7 +74,12 @@ public class DataManager : Singleton<DataManager>
 
             string data = www.downloadHandler.text;
 
-            LoadCSV<PlayerDataSO>(data);
+            switch(i)
+            {
+                case 0:
+                LoadCSV<PlayerDataSO>(data);
+                    break;
+            }
         }
     }
 
@@ -124,18 +132,7 @@ public class DataManager : Singleton<DataManager>
             }
         }
     }
-   
-    public void SetData<T>(string[] data) where T : ObjectSO
-    {
-
-        //for (int j = 1; j < data.Length; j++)
-        //{
-        //    //string[] value = data[i].Split(",");
-        //    //int id = int.Parse(value[0]);
-
-        //    //dataBase[id] = new T(value);
-        //}
-    }
+    #endregion
 
     public T GetData<T>(int id) where T : ObjectSO
     {
@@ -144,6 +141,7 @@ public class DataManager : Singleton<DataManager>
         return null;
     }
 
+    #region SaveData
     void SaveDataCheck()
     {
         if (!File.Exists(path))
@@ -166,6 +164,7 @@ public class DataManager : Singleton<DataManager>
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(path, json);
     }
+    #endregion
 
     //public async void PoolDataLoad()
     //{
@@ -178,29 +177,5 @@ public class DataManager : Singleton<DataManager>
     //        ObjectPool pool = new ObjectPool(pd);
     //        ObjectPoolManager.instance.pool[pd.name] = pool;
     //    }
-    //}
-
-    //public async Task<bool> DataLoad()
-    //{
-    //    DefaultPool defaultPool = PhotonNetwork.PrefabPool as DefaultPool;
-
-    //    foreach (var p in prefab)
-    //    {
-    //        Task<GameObject> task = p.LoadAssetAsync<GameObject>().Task;
-
-    //        //GameObject g = await p.LoadAssetAsync<GameObject>().Task;
-
-    //        await task;
-
-    //        //if (!defaultPool.ResourceCache.ContainsKey(task.Result.name))
-    //        defaultPool.ResourceCache.Add(task.Result.name, task.Result);
-
-    //        ObjectPool obj = new ObjectPool(task.Result.name, 1);
-    //        ObjectPoolManager.instance.pool[task.Result.name] = obj;
-
-    //        await Task.Run(() => {  });
-    //    }
-
-    //    return true;
     //}
 }
