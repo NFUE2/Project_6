@@ -1,7 +1,6 @@
 # Pixel Adventure 
 
 Pixel Adventure는 다른 플레이어들과 협동하는 멀티 2D 플랫포머RPG입니다.
-8명 특수한 스킬을 가진 플레이들 중에서 골라 
 
 
 
